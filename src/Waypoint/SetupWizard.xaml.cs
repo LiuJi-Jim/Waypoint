@@ -892,6 +892,7 @@ public partial class SetupWizard : FormWindow
             case SetupOutcome.Finished:
                 Remember(checkout);
                 _settings.SetupClient = null;
+                _settings.GameSettingsOffered = _settings.GameSettingsOffered || HasClient(checkout);
                 _settings.Save();
                 var settings = ClientSettings.Read(Path.Combine(checkout, "Client"));
                 bool ready = settings.Kind == ClientSettingsKind.Separate && ClientSettings.IsPredictive(settings.ConfigFile);

@@ -143,12 +143,7 @@ public partial class SetupTab : UserControl
     async void SeparateSettings(object sender, RoutedEventArgs e)
     {
         var owner = Window.GetWindow(this);
-        var settings = ClientSettings.Read("Client");
-        string found = settings.Kind == ClientSettingsKind.Unknown
-            ? L.Text("Waypoint can't tell what else uses this client's settings.") + " " + ClientSettings.WhyUnknown(Path.GetFullPath("Client"), ClientSettings.IsLink("Client"))
-            : L.Text("LocalExile shares its settings and saved login with your normal Path of Exile.");
-        string change = L.Text("LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Network Mode set to Predictive. Your normal game's files are not changed.", ClientSettings.OwnFolderPath);
-        if (!Dialog.Ask(owner, DialogKind.Info, L.Text("Use separate game settings"), found + "\n\n" + change, L.Text("Use separate settings"), L.Text("Cancel"))) return;
+        if (!Dialog.Ask(owner, DialogKind.Info, L.Text("Use separate game settings"), ClientSettings.Explain("Client"), L.Text("Use separate settings"), L.Text("Cancel"))) return;
         try { await _shared.RunExclusiveAsync(L.Text("Game settings"), () => Task.Run(() => ClientSettings.UseOwn("Client"))); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {

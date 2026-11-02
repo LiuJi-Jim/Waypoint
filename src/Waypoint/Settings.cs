@@ -57,6 +57,8 @@ sealed class Settings
     public bool StopServicesOnExit { get; set; }
     /// <summary>Ask each time the window closes.</summary>
     public bool AlwaysAskOnClose { get; set; }
+    /// <summary>Play has offered game settings of LocalExile's own, or the guide has dealt with them: they are not offered again.</summary>
+    public bool GameSettingsOffered { get; set; }
     /// <summary>The client the setup guide copies from, kept so that a stopped setup goes on from the same one.</summary>
     public string? SetupClient { get; set; }
     /// <summary>Pull requests from forks the player agreed to run (asked once each).</summary>

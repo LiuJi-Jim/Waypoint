@@ -121,6 +121,17 @@ public class ClientSettingsTests : IDisposable
     }
 
     [Fact]
+    public void Play_offers_once_to_a_whole_client_without_settings_of_its_own()
+    {
+        Assert.False(ClientSettings.ShouldOffer(Client, offered: false, Documents));
+        File.WriteAllText(Path.Combine(Client, "Content.ggpk"), "stand-in");
+        Assert.True(ClientSettings.ShouldOffer(Client, offered: false, Documents));
+        Assert.False(ClientSettings.ShouldOffer(Client, offered: true, Documents));
+        ClientSettings.UseOwn(Client, Documents);
+        Assert.False(ClientSettings.ShouldOffer(Client, offered: false, Documents));
+    }
+
+    [Fact]
     public void No_network_mode_is_no_answer()
     {
         Assert.Null(ClientSettings.NetworkMode(Shared));

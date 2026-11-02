@@ -39,6 +39,7 @@
                     </StackPanel>
                 </StackPanel>
             </Border>
+            <l:SettingsOffer x:Name="Offer" />
             <TextBlock x:Name="FolderText" Style="{StaticResource Shell.Secondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,24,0,0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4,0,0">
                 <Button Style="{StaticResource QuietLink}" Visibility="Visible" Content="{l:Loc 'Change folder…'}" Margin="0,0,16,0" Click="ChangeFolderClicked" />

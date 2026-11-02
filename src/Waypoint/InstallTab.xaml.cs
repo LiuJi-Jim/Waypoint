@@ -45,6 +45,7 @@ public partial class InstallTab : UserControl
     {
         _shared = shared;
         if (!Repo.IsInstall) return;
+        Offer.Attach(shared.Settings);
         StepList.ItemsSource = _steps;
         shared.Monitor.Sampled += _ => Dispatcher.BeginInvoke(Show);
         shared.LiveRunning += _ => Dispatcher.BeginInvoke(Show);
@@ -82,6 +83,7 @@ public partial class InstallTab : UserControl
         FolderText.Text = Folder;
         Elapsed.Text = _working ? L.Text("Running for {0}", _clock.Elapsed.ToString(@"m\:ss")) : "";
         VersionText.Text = LocalExileReleases.Installed(Folder) is { } version ? L.Text("LocalExile {0}", version) : "";
+        Offer.Show(!busy && !AnythingRunning && !needsSetup);
     }
 
     void MainClicked(object sender, RoutedEventArgs e)

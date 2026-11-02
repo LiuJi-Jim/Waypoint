@@ -64,6 +64,19 @@ public static class ClientSettings
         ? L.Text("This client is a link to {0}, and anything else started from that folder would use the same settings.", Path.TrimEndingDirectorySeparator(ClientLocator.RealPath(client)))
         : L.Text("Its config.json could not be read. It is kept beside the new one as config.json.old.");
 
+    /// <summary>What separate settings would change for this client, for a player deciding.</summary>
+    public static string Explain(string client)
+    {
+        string found = Read(client).Kind == ClientSettingsKind.Unknown
+            ? L.Text("Waypoint can't tell what else uses this client's settings.") + " " + WhyUnknown(Path.GetFullPath(client), IsLink(client))
+            : L.Text("LocalExile shares its settings and saved login with your normal Path of Exile.");
+        return found + "\n\n" + L.Text("LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Network Mode set to Predictive. Your normal game's files are not changed.", OwnFolderPath);
+    }
+
+    /// <summary>A setup with a whole client that has no settings of its own, and has not been offered them.</summary>
+    public static bool ShouldOffer(string client, bool offered, string? documents = null) =>
+        !offered && File.Exists(Path.Combine(client, "Content.ggpk")) && Read(client, documents).Kind != ClientSettingsKind.Separate;
+
     /// <summary>The network mode in a settings file; null when it names none or cannot be read.</summary>
     public static string? NetworkMode(string configFile)
     {

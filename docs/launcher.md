@@ -428,8 +428,10 @@ with `networking_type=predictive`, so the player no longer sets the network mode
 kept, with only that line changed. The shared files are only ever read. `config.json` is written last, so a stop leaves the
 client as it was, and other keys in it stay; one that can't be parsed is kept as `config.json.old`.
 
-An existing setup changes only when the player asks: Setup's **Use separate game settings…**, shown until they are separate. The
-Linux guide has no such step: a Linux client runs in a Wine prefix of its own, with its own Documents.
+An existing setup changes only when the player asks: Setup's **Use separate game settings…**, shown until they are separate, and
+Play's card, which a Simple mode player or a release sees once (`SettingsOffer`, remembered in `GameSettingsOffered`). Either
+answer ends the card, and a guide that finished with a client counts as answered. The Linux guide has no such step: a Linux
+client runs in a Wine prefix of its own, with its own Documents.
 
 On Linux (`src/Waypoint.Linux/Views/SetupWizard.axaml`) the guide is the same, with what running there takes. The release route
 also passes through the Tools page, which lists umu-launcher (or a runner named in `Game_CLIENT_RUNNER`): `LocalExile.exe` runs
