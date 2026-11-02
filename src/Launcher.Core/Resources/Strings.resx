@@ -597,6 +597,9 @@
   <data name="Text_1c98b88e71b9" xml:space="preserve">
     <value>Close Waypoint completely.</value>
   </data>
+  <data name="Text_1cb3a13595dc" xml:space="preserve">
+    <value>game settings are separate ({0})</value>
+  </data>
   <data name="Text_1d0a51791fe2" xml:space="preserve">
     <value>Going back to the version you had</value>
   </data>
@@ -620,6 +623,9 @@
   </data>
   <data name="Text_1e38f7b99036" xml:space="preserve">
     <value>Requested checkout</value>
+  </data>
+  <data name="Text_1edce696fe4f" xml:space="preserve">
+    <value>Leave this client as it is</value>
   </data>
   <data name="Text_1f330a2da345" xml:space="preserve">
     <value>{0} stash tab</value>
@@ -798,6 +804,9 @@
   <data name="Text_26639e783252" xml:space="preserve">
     <value>Change account</value>
   </data>
+  <data name="Text_26776921d6a2" xml:space="preserve">
+    <value>Guided setup → Use separate game settings…</value>
+  </data>
   <data name="Text_26a5b26009b2" xml:space="preserve">
     <value>Current checkout</value>
   </data>
@@ -806,6 +815,9 @@
   </data>
   <data xml:space="preserve" name="Text_271962fab9d7">
     <value>Preparing client</value>
+  </data>
+  <data name="Text_2718304a70c3" xml:space="preserve">
+    <value>Game settings were not changed</value>
   </data>
   <data name="Text_272776a0df04" xml:space="preserve">
     <value>QUALITY</value>
@@ -1758,6 +1770,12 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_5634c7509b09">
     <value>Automatic backups run before branch/PR activation, builds, Gateway startup/restart, game-data reload, mod changes and save restore. A failed backup blocks the change. Mod history records choices, manifest versions, DLL fingerprints and the last confirmed runtime report. Restoring saves does not switch source, client files, login keys or game-data overrides. Restoring mod choices never installs DLLs or replaces saves. Last launched Gateway is recorded by Waypoint; outside launches and every hot edit are not tracked.</value>
   </data>
+  <data name="Text_55b612083b47" xml:space="preserve">
+    <value>Gives LocalExile its own settings and saved login, so your normal game keeps its own</value>
+  </data>
+  <data name="Text_55f68b111c40" xml:space="preserve">
+    <value>Give LocalExile its own game settings, so your normal game keeps its own.</value>
+  </data>
   <data name="Text_564570edcef7" xml:space="preserve">
     <value>The Gateway runs under dotnet watch, so saved code edits apply with the game still running; off passes -NoHotReload</value>
   </data>
@@ -1792,6 +1810,9 @@ Current saves are unchanged. This backup will no longer be available to restore.
   </data>
   <data xml:space="preserve" name="Text_58fc561ca474">
     <value>Install extraction dependency</value>
+  </data>
+  <data name="Text_5899382b7399" xml:space="preserve">
+    <value>Its config.json could not be read. It is kept beside the new one as config.json.old.</value>
   </data>
   <data name="Text_591889ac42e0" xml:space="preserve">
     <value>Open logs</value>
@@ -1843,6 +1864,9 @@ Current saves are unchanged. This backup will no longer be available to restore.
   </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Choose a local branch, a fetched remote branch or an upstream PR. Switching stops owned servers, backs up saves and builds the revision. Close the game first; press Play afterward.</value>
+  </data>
+  <data name="Text_5c1a1026eda3" xml:space="preserve">
+    <value>Everything is in place. Press Play in Waypoint to start the servers and the game. LocalExile has its own game settings, so your normal Path of Exile keeps its own.</value>
   </data>
   <data name="Text_5c55fea32942" xml:space="preserve">
     <value>The item data could not be read: {0}</value>
@@ -2159,6 +2183,12 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6952069f9d84" xml:space="preserve">
     <value>level {0}</value>
   </data>
+  <data name="Text_6979ababfdcb" xml:space="preserve">
+    <value>LocalExile keeps its own graphics, keys and saved login in {0}, and starts with the network mode it needs. Your normal game's settings are only read, once, as a starting point.</value>
+  </data>
+  <data name="Text_697e044feb96" xml:space="preserve">
+    <value>Waypoint can't tell what else uses this client's settings.</value>
+  </data>
   <data name="Text_69886b8fc27b" xml:space="preserve">
     <value>Looking for LocalExile on this PC…</value>
   </data>
@@ -2260,6 +2290,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_6f20e73b9302" xml:space="preserve">
     <value>Prefixes</value>
+  </data>
+  <data name="Text_6f32b22fe74f" xml:space="preserve">
+    <value>Nothing changes. If this client shares its settings with your normal game, you set Network Mode to Predictive in the game yourself.</value>
   </data>
   <data name="Text_6f3c603b812d" xml:space="preserve">
     <value>SERVICE</value>
@@ -2446,6 +2479,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_78f253f7422a" xml:space="preserve">
     <value>login keys (step 4)</value>
+  </data>
+  <data name="Text_791b3d3434ac" xml:space="preserve">
+    <value>Use separate LocalExile settings (recommended)</value>
   </data>
   <data name="Text_79448e892acc" xml:space="preserve">
     <value>Auth and Patch</value>
@@ -2981,6 +3017,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data xml:space="preserve" name="Text_9575a529260a">
     <value>Appearance and accessibility</value>
   </data>
+  <data name="Text_94fac69c8653" xml:space="preserve">
+    <value>Give LocalExile its own game settings</value>
+  </data>
   <data name="Text_95784099d97d" xml:space="preserve">
     <value>{0} is still running</value>
   </data>
@@ -3140,6 +3179,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data xml:space="preserve" name="Text_9c2f5c362587">
     <value>Create a local game account</value>
+  </data>
+  <data name="Text_9c0f7a91cfa6" xml:space="preserve">
+    <value>game settings are shared with your normal game</value>
   </data>
   <data name="Text_9c384372f6be" xml:space="preserve">
     <value>Capture stopped. Existing files were kept.</value>
@@ -3462,6 +3504,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_a920c446a52e" xml:space="preserve">
     <value>Pointing the client at your PC</value>
   </data>
+  <data name="Text_a951cee7f57d" xml:space="preserve">
+    <value>LocalExile shares its settings and saved login with your normal Path of Exile.</value>
+  </data>
   <data name="Text_a9666e46fd95" xml:space="preserve">
     <value>{0} (pid {1}) closed</value>
   </data>
@@ -3726,6 +3771,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_b77c7a041298">
     <value>Restoring saves</value>
   </data>
+  <data name="Text_b77a85ad8d91" xml:space="preserve">
+    <value>LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Network Mode set to Predictive. Your normal game's files are not changed.</value>
+  </data>
   <data name="Text_b7b159728e5f" xml:space="preserve">
     <value>Node.js or Tools\ooz\node_modules missing (step 7)</value>
   </data>
@@ -3779,6 +3827,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_b9bd06a6286b" xml:space="preserve">
     <value>install Node.js, then: cd Tools\ooz; npm install</value>
+  </data>
+  <data name="Text_b9d5ec6bc16f" xml:space="preserve">
+    <value>This client is a link to {0}, and anything else started from that folder would use the same settings.</value>
   </data>
   <data name="Text_b9f4f560cff4" xml:space="preserve">
     <value>A pull request that is not in the open list: its head is fetched from GitHub by number</value>
@@ -3924,6 +3975,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_c242571e0f75" xml:space="preserve">
     <value>{0} (copy)</value>
   </data>
+  <data name="Text_c29d9392b89a" xml:space="preserve">
+    <value>Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. LocalExile has its own game settings, so your normal Path of Exile keeps its own.</value>
+  </data>
   <data name="Text_c29f3cadd717" xml:space="preserve">
     <value>Minimizing to tray always keeps services running. This choice applies to a full exit.</value>
   </data>
@@ -4031,6 +4085,9 @@ Steam layout and a newer official client are unsupported. The launcher does not 
   </data>
   <data xml:space="preserve" name="Text_c7ece59b9c12">
     <value>Create local account</value>
+  </data>
+  <data name="Text_c7c78e5406ce" xml:space="preserve">
+    <value>Use separate game settings…</value>
   </data>
   <data name="Text_c7f937836f5d" xml:space="preserve">
     <value>Choose</value>
@@ -4234,6 +4291,9 @@ Client: {2}</value>
   </data>
   <data name="Text_d17cf3164169" xml:space="preserve">
     <value>Use a LocalExile folder I already have</value>
+  </data>
+  <data name="Text_d1a286ac991d" xml:space="preserve">
+    <value>game settings: Waypoint can't tell what else uses them</value>
   </data>
   <data name="Text_d1cbffcbd10b" xml:space="preserve">
     <value>the release's .sha256 holds no SHA-256</value>
@@ -4635,6 +4695,9 @@ Dependencies: {2}
   <data xml:space="preserve" name="Text_e62daa01ba01">
     <value>Choose and check a workspace to see its backups.</value>
   </data>
+  <data name="Text_e6128fcc2b1e" xml:space="preserve">
+    <value>Use separate settings</value>
+  </data>
   <data name="Text_e64a3e6ff925" xml:space="preserve">
     <value>Area layout capture</value>
   </data>
@@ -4874,6 +4937,9 @@ Dependencies: {2}
   </data>
   <data name="Text_f142fc186288" xml:space="preserve">
     <value>Already prepared for LocalExile</value>
+  </data>
+  <data name="Text_f18e2bb0aa10" xml:space="preserve">
+    <value>Use separate game settings</value>
   </data>
   <data name="Text_f1fd5ed417a0" xml:space="preserve">
     <value>MB, working set</value>
@@ -5178,6 +5244,9 @@ Mods at backup: </value>
   </data>
   <data xml:space="preserve" name="Text_fed12611d2d8">
     <value>Ocean</value>
+  </data>
+  <data name="Text_fece8604a2c2" xml:space="preserve">
+    <value>Game settings</value>
   </data>
   <data name="Text_feddcf308625" xml:space="preserve">
     <value>Rarity</value>

@@ -294,8 +294,9 @@ A link to a section Simple mode's list lacks (a log, from a failure) shows that 
   turns off MSBuild's reused nodes for it, the fix the server's troubleshooting table names for a script that never
   returns. It takes the script's end from the process's exit, not from the end of its output.
 - The **Setup** list checks the server's one-time steps (**Guided setup** opens the Setup section): the client copy, the keys, the patched client, the gateway
-  list, the extracted data, Node and ooz, whether the checkout has the launcher hooks, the Predictive network mode in
-  `production_Config.ini`, and Python with Frida. **Game data** runs `extract-data.ps1 -List`.
+  list, the extracted data, Node and ooz, whether the checkout has the launcher hooks, whether the game settings are separate
+  from the normal game's, the Predictive network mode in the settings file this client really uses, and Python with Frida.
+  **Game data** runs `extract-data.ps1 -List`.
 - The services are found by process: a hot-reloaded Gateway by its own `GameServer.Gateway.exe` (rather than the
   `dotnet watch` around it), the other servers and a Gateway without hot reload by `GameServer.<Name>.dll` on a dotnet
   command line, the client by `Game.patched.exe`, the recorder by `walkmaps.py`. A port that listens without such a
@@ -410,6 +411,25 @@ or by hand, and that state is a normal one:
 A requirement that is met shows no action, so Setup offers nothing that has nothing to do.
 
 The player's own install is only ever read.
+
+**LocalExile gets game settings of its own.** Retail, Steam and Epic all use `production_Config.ini` and
+`production_login.credentials` in `Documents\My Games\Path of Exile`, and so does any client whose folder has no `config.json`
+naming other files. A client started by LocalExile, from either a checkout or a release, starts in `Client`, so a
+`config.json` there decides (`ClientSettings`):
+
+| What Waypoint finds in `Client` | The guide |
+|---|---|
+| A folder of its own, naming no other file | Adds **Give LocalExile its own game settings**: `LocalExile\production_Config.ini` and `LocalExile\production_login.credentials` |
+| A `config.json` naming another file | Leaves it: the player has chosen |
+| A link, or a `config.json` it can't read | Asks on **Game settings**: anything else started from a linked folder would use the same settings. Leaving it changes nothing |
+
+A new settings file starts as a copy of the shared one without its `[LOGIN]` section, or empty on a PC that never ran the game,
+with `networking_type=predictive`, so the player no longer sets the network mode by hand. A file that already exists there is
+kept, with only that line changed. The shared files are only ever read. `config.json` is written last, so a stop leaves the
+client as it was, and other keys in it stay; one that can't be parsed is kept as `config.json.old`.
+
+An existing setup changes only when the player asks: Setup's **Use separate game settings…**, shown until they are separate. The
+Linux guide has no such step: a Linux client runs in a Wine prefix of its own, with its own Documents.
 
 On Linux (`src/Waypoint.Linux/Views/SetupWizard.axaml`) the guide is the same, with what running there takes. The release route
 also passes through the Tools page, which lists umu-launcher (or a runner named in `Game_CLIENT_RUNNER`): `LocalExile.exe` runs

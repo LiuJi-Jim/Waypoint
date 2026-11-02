@@ -33,8 +33,27 @@ static class SetupChecks
             NetworkMode(),
             Frida(),
         };
+#if WINDOWS
+        // A Linux client has a Wine prefix of its own, so nothing is shared there.
+        if (Directory.Exists("Client")) checks.Insert(checks.Count - 2, GameSettings());
+#endif
         return checks;
     }
+
+#if WINDOWS
+    /// <summary>Whether LocalExile can change what the player's normal game uses (ClientSettings).</summary>
+    static SetupCheck GameSettings()
+    {
+        var settings = ClientSettings.Read("Client");
+        string hint = L.Text("Guided setup → Use separate game settings…");
+        return settings.Kind switch
+        {
+            ClientSettingsKind.Separate => new(true, L.Text("game settings are separate ({0})", Path.GetRelativePath(ClientSettings.Documents, settings.ConfigFile))),
+            ClientSettingsKind.Shared => new(null, L.Text("game settings are shared with your normal game"), hint),
+            _ => new(null, L.Text("game settings: Waypoint can't tell what else uses them"), hint),
+        };
+    }
+#endif
 
     /// <summary>The server checkout has what the launcher drives it with (live.ps1 -Stop, the Gateway's commands and
     /// values, the dev host's accounts; they came together).</summary>
@@ -55,10 +74,8 @@ static class SetupChecks
     {
         string hint = L.Text("Esc → Options → Game → Network Mode → Predictive, then log out to the character screen and Play again");
         if (!System.IO.File.Exists(Repo.ClientConfig)) return new(null, L.Text("network mode not set yet: set Predictive in game"), hint);
-        string? mode = System.IO.File.ReadLines(Repo.ClientConfig)
-            .Select(l => l.Trim()).FirstOrDefault(l => l.StartsWith("networking_type=", StringComparison.OrdinalIgnoreCase))?.Split('=', 2)[1];
-        return string.Equals(mode, "predictive", StringComparison.OrdinalIgnoreCase)
-            ? new(true, L.Text("network mode Predictive")) : new(false, L.Text("network mode is {0}: the character won't move", mode ?? "auto"), hint);
+        return ClientSettings.IsPredictive(Repo.ClientConfig)
+            ? new(true, L.Text("network mode Predictive")) : new(false, L.Text("network mode is {0}: the character won't move", ClientSettings.NetworkMode(Repo.ClientConfig) ?? "auto"), hint);
     }
 
     static SetupCheck Frida()

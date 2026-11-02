@@ -597,6 +597,9 @@
   <data name="Text_1c98b88e71b9" xml:space="preserve">
     <value>Полностью закрыть Waypoint.</value>
   </data>
+  <data name="Text_1cb3a13595dc" xml:space="preserve">
+    <value>настройки игры отдельные ({0})</value>
+  </data>
   <data name="Text_1d0a51791fe2" xml:space="preserve">
     <value>Возвращаем прежнюю версию</value>
   </data>
@@ -620,6 +623,9 @@
   </data>
   <data name="Text_1e38f7b99036" xml:space="preserve">
     <value>Запрошенный репозиторий</value>
+  </data>
+  <data name="Text_1edce696fe4f" xml:space="preserve">
+    <value>Оставить этот клиент как есть</value>
   </data>
   <data name="Text_1f330a2da345" xml:space="preserve">
     <value>Вкладка тайника: {0}</value>
@@ -798,6 +804,9 @@
   <data name="Text_26639e783252" xml:space="preserve">
     <value>Изменить аккаунт</value>
   </data>
+  <data name="Text_26776921d6a2" xml:space="preserve">
+    <value>Пошаговая подготовка → Использовать отдельные настройки игры…</value>
+  </data>
   <data name="Text_26a5b26009b2" xml:space="preserve">
     <value>Текущий репозиторий</value>
   </data>
@@ -806,6 +815,9 @@
   </data>
   <data xml:space="preserve" name="Text_271962fab9d7">
     <value>Подготовка клиента</value>
+  </data>
+  <data name="Text_2718304a70c3" xml:space="preserve">
+    <value>Настройки игры не изменены</value>
   </data>
   <data name="Text_272776a0df04" xml:space="preserve">
     <value>КАЧЕСТВО</value>
@@ -1758,6 +1770,12 @@
   <data xml:space="preserve" name="Text_5634c7509b09">
     <value>Автоматические копии создаются перед переключением ветки/PR, сборкой, запуском/перезапуском Gateway, перезагрузкой игровых данных, изменением модов и восстановлением сохранений. Ошибка копирования блокирует изменение. В историю модов входят выбор модов, версии манифестов, отпечатки DLL и последний подтверждённый отчёт. Восстановление сохранений не меняет исходники, клиент, ключи входа и переопределения игровых данных. Восстановление выбора модов не устанавливает DLL и не заменяет сохранения. Waypoint записывает ревизию последнего запущенного Gateway; внешние запуски и каждое горячее изменение не отслеживаются.</value>
   </data>
+  <data name="Text_55b612083b47" xml:space="preserve">
+    <value>Даёт LocalExile собственные настройки и сохранённый вход, а у вашей обычной игры остаются свои</value>
+  </data>
+  <data name="Text_55f68b111c40" xml:space="preserve">
+    <value>Дать LocalExile собственные настройки игры, а у вашей обычной игры останутся свои.</value>
+  </data>
   <data name="Text_564570edcef7" xml:space="preserve">
     <value>Gateway работает под dotnet watch, поэтому сохранённые изменения кода применяются прямо во время игры; при выключении передаётся -NoHotReload</value>
   </data>
@@ -1792,6 +1810,9 @@
   </data>
   <data xml:space="preserve" name="Text_58fc561ca474">
     <value>Установить распаковщик</value>
+  </data>
+  <data name="Text_5899382b7399" xml:space="preserve">
+    <value>Его файл config.json не удалось прочитать. Он останется рядом с новым как config.json.old.</value>
   </data>
   <data name="Text_591889ac42e0" xml:space="preserve">
     <value>Открыть журналы</value>
@@ -1843,6 +1864,9 @@
   </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Выберите локальную ветку, полученную удалённую ветку или PR LocalExile. Переключение останавливает службы этой установки, создаёт копию сохранений и собирает выбранную ревизию. Сначала закройте игру; затем нажмите «Играть».</value>
+  </data>
+  <data name="Text_5c1a1026eda3" xml:space="preserve">
+    <value>Всё на месте. Нажмите «Играть» в Waypoint, чтобы запустить серверы и игру. У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
   </data>
   <data name="Text_5c55fea32942" xml:space="preserve">
     <value>Не удалось прочитать данные предметов: {0}</value>
@@ -2159,6 +2183,12 @@
   <data name="Text_6952069f9d84" xml:space="preserve">
     <value>уровень {0}</value>
   </data>
+  <data name="Text_6979ababfdcb" xml:space="preserve">
+    <value>LocalExile хранит свою графику, клавиши и сохранённый вход в {0} и сразу использует нужный сетевой режим. Настройки вашей обычной игры только читаются, один раз, как отправная точка.</value>
+  </data>
+  <data name="Text_697e044feb96" xml:space="preserve">
+    <value>Waypoint не может определить, что ещё использует настройки этого клиента.</value>
+  </data>
   <data name="Text_69886b8fc27b" xml:space="preserve">
     <value>Поиск LocalExile на этом ПК…</value>
   </data>
@@ -2260,6 +2290,9 @@
   </data>
   <data name="Text_6f20e73b9302" xml:space="preserve">
     <value>Префиксы</value>
+  </data>
+  <data name="Text_6f32b22fe74f" xml:space="preserve">
+    <value>Ничего не меняется. Если этот клиент использует настройки вашей обычной игры, выберите в игре Network Mode → Predictive сами.</value>
   </data>
   <data name="Text_6f3c603b812d" xml:space="preserve">
     <value>СЛУЖБА</value>
@@ -2446,6 +2479,9 @@
   </data>
   <data name="Text_78f253f7422a" xml:space="preserve">
     <value>ключи входа (шаг 4)</value>
+  </data>
+  <data name="Text_791b3d3434ac" xml:space="preserve">
+    <value>Использовать отдельные настройки LocalExile (рекомендуется)</value>
   </data>
   <data name="Text_79448e892acc" xml:space="preserve">
     <value>Auth и Patch</value>
@@ -2981,6 +3017,9 @@
   <data xml:space="preserve" name="Text_9575a529260a">
     <value>Оформление и доступность</value>
   </data>
+  <data name="Text_94fac69c8653" xml:space="preserve">
+    <value>Дать LocalExile собственные настройки игры</value>
+  </data>
   <data name="Text_95784099d97d" xml:space="preserve">
     <value>{0} ещё выполняется</value>
   </data>
@@ -3140,6 +3179,9 @@
   </data>
   <data xml:space="preserve" name="Text_9c2f5c362587">
     <value>Создание локальной учётной записи</value>
+  </data>
+  <data name="Text_9c0f7a91cfa6" xml:space="preserve">
+    <value>настройки игры общие с вашей обычной игрой</value>
   </data>
   <data name="Text_9c384372f6be" xml:space="preserve">
     <value>Запись остановлена. Существующие файлы сохранены.</value>
@@ -3462,6 +3504,9 @@
   <data name="Text_a920c446a52e" xml:space="preserve">
     <value>Настройка клиента на этот компьютер</value>
   </data>
+  <data name="Text_a951cee7f57d" xml:space="preserve">
+    <value>LocalExile использует те же настройки и сохранённый вход, что и ваша обычная Path of Exile.</value>
+  </data>
   <data name="Text_a9666e46fd95" xml:space="preserve">
     <value>{0} (PID {1}): закрыто</value>
   </data>
@@ -3726,6 +3771,9 @@
   <data xml:space="preserve" name="Text_b77c7a041298">
     <value>Восстановление сохранений</value>
   </data>
+  <data name="Text_b77a85ad8d91" xml:space="preserve">
+    <value>LocalExile получит собственные в {0}: это копия ваших обычных настроек без данных для входа, с Network Mode → Predictive. Файлы вашей обычной игры не изменятся.</value>
+  </data>
   <data name="Text_b7b159728e5f" xml:space="preserve">
     <value>нет Node.js или Tools\ooz\node_modules (шаг 7)</value>
   </data>
@@ -3779,6 +3827,9 @@
   </data>
   <data name="Text_b9bd06a6286b" xml:space="preserve">
     <value>установите Node.js, затем: cd Tools\ooz; npm install</value>
+  </data>
+  <data name="Text_b9d5ec6bc16f" xml:space="preserve">
+    <value>Этот клиент — ссылка на {0}, и всё, что запускается из этой папки, будет использовать те же настройки.</value>
   </data>
   <data name="Text_b9f4f560cff4" xml:space="preserve">
     <value>Запрос на слияние не из списка открытых: его HEAD будет получен с GitHub по номеру</value>
@@ -3924,6 +3975,9 @@
   <data name="Text_c242571e0f75" xml:space="preserve">
     <value>{0} (копия)</value>
   </data>
+  <data name="Text_c29d9392b89a" xml:space="preserve">
+    <value>Всё готово. Нажмите «Играть» в Waypoint, чтобы запустить игру. Войдите с учётной записью: её имя вводится в поле Email. У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
+  </data>
   <data name="Text_c29f3cadd717" xml:space="preserve">
     <value>При сворачивании в трей службы всегда продолжают работать. Этот выбор применяется только при полном выходе.</value>
   </data>
@@ -4031,6 +4085,9 @@
   </data>
   <data xml:space="preserve" name="Text_c7ece59b9c12">
     <value>Создать учётную запись</value>
+  </data>
+  <data name="Text_c7c78e5406ce" xml:space="preserve">
+    <value>Использовать отдельные настройки игры…</value>
   </data>
   <data name="Text_c7f937836f5d" xml:space="preserve">
     <value>Выбор</value>
@@ -4234,6 +4291,9 @@
   </data>
   <data name="Text_d17cf3164169" xml:space="preserve">
     <value>Использовать уже имеющуюся папку LocalExile</value>
+  </data>
+  <data name="Text_d1a286ac991d" xml:space="preserve">
+    <value>настройки игры: Waypoint не может определить, что ещё их использует</value>
   </data>
   <data name="Text_d1cbffcbd10b" xml:space="preserve">
     <value>в файле .sha256 выпуска нет SHA-256</value>
@@ -4635,6 +4695,9 @@
   <data xml:space="preserve" name="Text_e62daa01ba01">
     <value>Выберите и проверьте рабочую папку, чтобы увидеть её копии.</value>
   </data>
+  <data name="Text_e6128fcc2b1e" xml:space="preserve">
+    <value>Использовать отдельные настройки</value>
+  </data>
   <data name="Text_e64a3e6ff925" xml:space="preserve">
     <value>Запись планировки областей</value>
   </data>
@@ -4874,6 +4937,9 @@
   </data>
   <data name="Text_f142fc186288" xml:space="preserve">
     <value>Уже подготовлен для LocalExile</value>
+  </data>
+  <data name="Text_f18e2bb0aa10" xml:space="preserve">
+    <value>Использовать отдельные настройки игры</value>
   </data>
   <data name="Text_f1fd5ed417a0" xml:space="preserve">
     <value>МБ, рабочий набор</value>
@@ -5178,6 +5244,9 @@
   </data>
   <data xml:space="preserve" name="Text_fed12611d2d8">
     <value>Океан</value>
+  </data>
+  <data name="Text_fece8604a2c2" xml:space="preserve">
+    <value>Настройки игры</value>
   </data>
   <data name="Text_feddcf308625" xml:space="preserve">
     <value>Редкость</value>

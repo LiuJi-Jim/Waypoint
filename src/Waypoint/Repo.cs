@@ -113,10 +113,9 @@ static class Repo
     public static string Python => File.Exists(Platform.VenvPython(".")) ? Path.GetFullPath(Platform.VenvPython(".")) : Platform.Python;
 #endif
 
-    /// <summary>The client's own settings; GettingStarted step 10 needs networking_type=predictive there.</summary>
+    /// <summary>The settings file this client uses; GettingStarted step 10 needs networking_type=predictive there.</summary>
 #if WINDOWS
-    public static string ClientConfig => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Path of Exile", "production_Config.ini");
+    public static string ClientConfig => ClientSettings.Read("Client").ConfigFile;
 #else
     public static string ClientConfig => Path.Combine(Environment.GetEnvironmentVariable("WINEPREFIX") is { Length: > 0 } own ? own : Path.GetFullPath(Path.Combine("data", "wine-prefix")),
         "pfx", "drive_c", "users", "steamuser", "Documents", "My Games", "Path of Exile", "production_Config.ini");

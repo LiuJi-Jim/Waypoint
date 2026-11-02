@@ -156,6 +156,17 @@
                     </ListBox>
                 </DockPanel>
 
+                <!-- Asked only when Waypoint cannot tell what a change would reach -->
+                <StackPanel x:Name="SettingsPage" Visibility="Collapsed">
+                    <TextBlock Text="{l:Loc 'Game settings'}" FontSize="{DynamicResource Font18}" FontWeight="SemiBold" />
+                    <TextBlock Text="{l:Loc 'Waypoint can\'t tell what else uses this client\'s settings.'}" TextWrapping="Wrap" Margin="0,6,0,2" />
+                    <TextBlock x:Name="SettingsWhy" Style="{StaticResource Caption}" Margin="0,0,0,10" />
+                    <RadioButton x:Name="OwnSettingsChoice" GroupName="GameSettings" Style="{StaticResource ChoiceRadio}" Content="{l:Loc 'Use separate LocalExile settings (recommended)'}" IsChecked="True" />
+                    <TextBlock x:Name="OwnSettingsNote" Style="{StaticResource Caption}" Margin="27,0,0,8" />
+                    <RadioButton x:Name="LeaveSettings" GroupName="GameSettings" Style="{StaticResource ChoiceRadio}" Content="{l:Loc 'Leave this client as it is'}" />
+                    <TextBlock Text="{l:Loc 'Nothing changes. If this client shares its settings with your normal game, you set Network Mode to Predictive in the game yourself.'}" Style="{StaticResource Caption}" Margin="27,0,0,0" />
+                </StackPanel>
+
                 <!-- What a player on a release wants done with what they have -->
                 <ScrollViewer x:Name="SwitchPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Margin="0,0,8,0">

@@ -4,7 +4,7 @@ namespace Launcher.Core;
 /// <param name="Accounts">The accounts found in the release, negative when they could not be read; <paramref name="Characters"/> the same.</param>
 /// <param name="CopyClientGb">The size of a client copy still to make; 0 when none is.</param>
 public sealed record SwitchChoices(string Copy, string Old, bool Download, bool BringCharacters, int Accounts, int Characters,
-    bool KeepOld, bool TestedVersion, bool GiveItem, bool SharesClient, double CopyClientGb, bool CopyHasSaves);
+    bool KeepOld, bool TestedVersion, bool GiveItem, bool SharesClient, double CopyClientGb, bool CopyHasSaves, bool OwnSettings = false);
 
 /// <summary>A line of "What will happen".</summary>
 public sealed record SwitchLine(string Text, bool Attention = false);
@@ -73,6 +73,7 @@ public static class SwitchToSource
         };
         if (c.SharesClient) lines.Add(new(L.Text("Use the game client of your current LocalExile, so it takes no extra space.")));
         else if (c.CopyClientGb > 0) lines.Add(new(L.Text("Copy the game client, about {0:0} GB.", c.CopyClientGb)));
+        if (c.OwnSettings) lines.Add(new(L.Text("Give LocalExile its own game settings, so your normal game keeps its own.")));
         if (c.BringCharacters)
         {
             lines.Add(new(c.Accounts >= 0 ? L.Text("Copy your accounts and characters. Accounts: {0}. Characters: {1}.", c.Accounts, c.Characters)
