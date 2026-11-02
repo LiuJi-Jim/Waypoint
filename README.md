@@ -60,6 +60,9 @@ Python 3.9+ and Node.js.
 dotnet run --project src/Waypoint.Linux
 ```
 
+Game settings and the saved login are kept in `~/.local/share/LocalExile/wine-prefix`: every LocalExile of yours shares them, they
+stay when an install is deleted, and your normal Path of Exile does not use them.
+
 The ready-to-play route needs a release with a `-linux-x64` zip. Until LocalExile publishes one, the setup guide sets up the
 source code instead. Not on Linux yet: walk maps, the client control bridge (the Console copies commands instead of sending
 them), the item crafter, the tray and the appearance editor.

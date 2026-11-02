@@ -117,7 +117,6 @@ static class Repo
 #if WINDOWS
     public static string ClientConfig => ClientSettings.Read("Client").ConfigFile;
 #else
-    public static string ClientConfig => Path.Combine(Environment.GetEnvironmentVariable("WINEPREFIX") is { Length: > 0 } own ? own : Path.GetFullPath(Path.Combine("data", "wine-prefix")),
-        "pfx", "drive_c", "users", "steamuser", "Documents", "My Games", "Path of Exile", "production_Config.ini");
+    public static string ClientConfig => Path.Combine(Platform.GamePrefix, "drive_c", "users", "steamuser", "Documents", "My Games", "Path of Exile", "production_Config.ini");
 #endif
 }
