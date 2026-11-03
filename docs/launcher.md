@@ -290,11 +290,16 @@ A link to a section Simple mode's list lacks (a log, from a failure) shows that 
   that is already running.
 - **Hot reload** (on by default, as in `live.ps1`): the Gateway runs under `dotnet watch`, and saved edits to its code
   apply with the game still running. Off passes `-NoHotReload` to the runs that start a Gateway.
+- **Lockstep** (off by default, shown only when the checkout's server has `LockstepLink.cs`): the runs that start a Gateway get
+  `Game_LOCKSTEP=1`, so the server serves a client in the Lockstep network mode on this PC. Off removes the variable. It is the
+  server's half only: the game's `networking_type` stays the player's, and a Predictive client plays as before. A running
+  Gateway keeps what it started with, so after a flip Play does a full run instead of starting only the game. A local launch
+  profile that sets `Game_LOCKSTEP` runs later and has the last word: the switch then shows what it says and can't be changed.
 - Only one `live.ps1` runs at a time; the buttons wait while one does (the status strip says so). The launcher runs it with Windows PowerShell and
   turns off MSBuild's reused nodes for it, the fix the server's troubleshooting table names for a script that never
   returns. It takes the script's end from the process's exit, not from the end of its output.
 - The **Setup** list checks the server's one-time steps (**Guided setup** opens the Setup section): the client copy, the keys, the patched client, the gateway
-  list, the extracted data, Node and ooz, whether the checkout has the launcher hooks, the Predictive network mode in
+  list, the extracted data, Node and ooz, whether the checkout has the launcher hooks, the network mode (Predictive, or any while the server serves lockstep) in
   `production_Config.ini`, and Python with Frida. **Game data** runs `extract-data.ps1 -List`.
 - The services are found by process: a hot-reloaded Gateway by its own `GameServer.Gateway.exe` (rather than the
   `dotnet watch` around it), the other servers and a Gateway without hot reload by `GameServer.<Name>.dll` on a dotnet
