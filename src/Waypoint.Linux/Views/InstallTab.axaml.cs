@@ -103,9 +103,11 @@ partial class InstallTab : UserControl
         Show();
     }
 
-    /// <summary>Something changed the install from outside (the setup guide, an update).</summary>
+    /// <summary>Something changed the install from outside (the setup guide, an update). A source checkout has no Install
+    /// section: nothing of it is attached, so there is nothing to show.</summary>
     internal void InstallChanged(Func<string>? note = null)
     {
+        if (!Repo.IsInstall) return;
         _needsSetup = false;
         _failed = false;
         _note = note;
