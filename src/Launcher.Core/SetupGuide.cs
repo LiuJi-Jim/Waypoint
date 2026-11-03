@@ -74,11 +74,28 @@ public static class Prerequisites
     {
         if (!OperatingSystem.IsWindows()) return;
         string current = Environment.GetEnvironmentVariable("PATH") ?? "";
+        string merged = MergedPath(current, new[] { EnvironmentVariableTarget.Machine, EnvironmentVariableTarget.User }
+            .SelectMany(t => (Environment.GetEnvironmentVariable("PATH", t) ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries)));
+        if (merged != current) Environment.SetEnvironmentVariable("PATH", merged);
+    }
+
+    /// <summary>The process's PATH with what the system's has gained since the process started, in front: an installer's entry
+    /// then wins over an older one, such as the Microsoft Store's python shortcut.</summary>
+    public static string MergedPath(string current, IEnumerable<string> system)
+    {
         var known = current.Split(';', StringSplitOptions.RemoveEmptyEntries).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var added = new[] { EnvironmentVariableTarget.Machine, EnvironmentVariableTarget.User }
-            .SelectMany(t => (Environment.GetEnvironmentVariable("PATH", t) ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries))
-            .Where(known.Add).ToArray();
-        if (added.Length > 0) Environment.SetEnvironmentVariable("PATH", current.TrimEnd(';') + ";" + string.Join(';', added));
+        var added = system.Where(known.Add).ToArray();
+        return added.Length == 0 ? current : string.Join(';', added) + ";" + current.TrimStart(';');
+    }
+
+    /// <summary>What Check again does before it looks, and the start once: the PATH read again, and a Python installed without
+    /// its PATH option adopted (<see cref="PythonLookup"/>), so Waypoint need not restart after an install. Windows only:
+    /// elsewhere a package manager's python3 is on PATH from the start.</summary>
+    public static async Task RefreshToolsAsync()
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        RefreshPath();
+        PythonLookup.Adopt(await PythonLookup.FindAsync());
     }
 
     public static async Task<Prerequisite[]> CheckAsync()
@@ -86,24 +103,20 @@ public static class Prerequisites
         RefreshPath();
         var dotnet = ToolProcess.AskAsync("dotnet", "--list-sdks");
         var git = ToolProcess.AskAsync("git", "--version");
-        var python = ToolProcess.AskAsync(Platform.Python, "--version");
+        var python = PythonLookup.FindAsync();
         var node = ToolProcess.AskAsync("node", "--version");
         await Task.WhenAll(dotnet, git, python, node);
+        PythonLookup.Adopt(await python);
         return
         [
             new(".NET 10 SDK", (await dotnet) is { Code: 0 } sdks && HasSdk(sdks.Output), "Install .NET 10 SDK; check with dotnet --list-sdks"),
             new("Git", (await git) is { Code: 0 }, "Git downloads LocalExile and switches its branches"),
-            new("Python", (await python) is { Code: 0 } version && PythonIsNewEnough(version.Output), "Python 3.9+ is required for data extraction"),
+            new("Python", (await python).Usable is not null, PythonLookup.Describe(await python)),
             new("Node.js", (await node) is { Code: 0 }, "Node.js is required for bundle decompression"),
         ];
     }
 
     public static bool HasSdk(string listing) => listing.Split('\n').Any(line => line.TrimStart().StartsWith("10.", StringComparison.Ordinal));
-
-    /// <summary>"Python 3.12.4". The Microsoft Store's alias answers with an advertisement instead, and that is no Python.</summary>
-    public static bool PythonIsNewEnough(string version) =>
-        Regex.Match(version, @"\APython (\d+)\.(\d+)", RegexOptions.CultureInvariant) is { Success: true } match
-        && (int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value)) is var (major, minor) && (major > 3 || major == 3 && minor >= 9);
 }
 
 public enum SetupState { Pending, Running, Done, Skipped, Stopped, Failed }

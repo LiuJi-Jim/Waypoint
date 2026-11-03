@@ -237,6 +237,9 @@
   <data name="Text_0baa876a211d" xml:space="preserve">
     <value>制作过程中，物品会显示在这里。</value>
   </data>
+  <data name="Text_0bf671c970d1" xml:space="preserve">
+    <value>Python {0} 已安装在 {1}，但不在 PATH 中。Waypoint 仍会使用它，供自身和它运行的脚本使用。</value>
+  </data>
   <data name="Text_0c088c4b059d" xml:space="preserve">
     <value>物品等级 {0}</value>
   </data>
@@ -600,9 +603,6 @@
   <data name="Text_1c54b5836312" xml:space="preserve">
     <value>未启动：某个服务器端口仍被占用。</value>
   </data>
-  <data name="Text_1c7e31690f17" xml:space="preserve">
-    <value>从 python.org 安装 Python 3.9 或更高版本，并启用其 PATH 选项。关闭并重新打开启动器，然后点击“重新检查”。Frida 是可选的，普通游戏不需要它。</value>
-  </data>
   <data name="Text_1c839bb4f712" xml:space="preserve">
     <value>重置物品制作器</value>
   </data>
@@ -710,6 +710,9 @@
   </data>
   <data name="Text_223e64b8fc5b" xml:space="preserve">
     <value>首次使用时会自动查找。你也可以在这里重新搜索。</value>
+  </data>
+  <data name="Text_224f3200a70e" xml:space="preserve">
+    <value>从 python.org 安装 Python 3.9 或更高版本，最好勾选“Add python.exe to PATH”，然后点击“再次检查”：Waypoint 会重新读取 PATH，并通过安装程序的注册表项找到未勾选该选项安装的 Python。Frida 是可选的，普通游戏不需要它。</value>
   </data>
   <data name="Text_225ea1a36f00" xml:space="preserve">
     <value>此账号在客户端中保存的凭据需要重新输入。</value>
@@ -891,9 +894,6 @@
   </data>
   <data name="Text_297fba3fb830" xml:space="preserve">
     <value>构建源码模组或安装本地模组即可创建此文件夹。</value>
-  </data>
-  <data name="Text_298493527af6" xml:space="preserve">
-    <value>从 Microsoft 下载页面安装适用于 Windows x64 的 .NET 10 SDK。安装后关闭并重新打开启动器，然后点击“重新检查”。</value>
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>每秒</value>
@@ -1150,6 +1150,9 @@
   </data>
   <data name="Text_3506d661965b" xml:space="preserve">
     <value>重启 Gateway</value>
+  </data>
+  <data name="Text_354dc95ba6ca" xml:space="preserve">
+    <value>PATH 中的 Python 是 {0}；需要 3.9 或更高版本。</value>
   </data>
   <data name="Text_3577169c42d9" xml:space="preserve">
     <value>完成安装前，LocalExile 还无法游玩。你可以稍后再次运行此向导。</value>
@@ -2159,6 +2162,9 @@
   <data name="Text_676796f86246" xml:space="preserve">
     <value>可用空间不足：客户端在此驱动器上还需要 {0:0.#} GB，而可用空间只有 {1:0.#} GB。</value>
   </data>
+  <data name="Text_67b6858a9f80" xml:space="preserve">
+    <value>PATH 中有 Python {0}（{1}）。</value>
+  </data>
   <data name="Text_67bc484430fe" xml:space="preserve">
     <value>随机</value>
   </data>
@@ -2462,6 +2468,9 @@
   <data name="Text_76900f1bfd16" xml:space="preserve">
     <value>返回</value>
   </data>
+  <data name="Text_76b9740eaf62" xml:space="preserve">
+    <value>PATH 中没有 Python。请通过包管理器安装 Python 3.9 或更高版本（python3）。</value>
+  </data>
   <data name="Text_76cde8e5dd63" xml:space="preserve">
     <value>已获取的远程分支</value>
   </data>
@@ -2545,6 +2554,9 @@
   </data>
   <data name="Text_7ab34499cbf7" xml:space="preserve">
     <value>git pull --ff-only：将 {0} 更新为 origin 上的当前状态</value>
+  </data>
+  <data name="Text_7abb1e9b93f9" xml:space="preserve">
+    <value>PATH 中有 Python {0}。</value>
   </data>
   <data name="Text_7ac5b6d5456b" xml:space="preserve">
     <value>显示服务详情</value>
@@ -3116,6 +3128,9 @@
   <data name="Text_9814c443a469" xml:space="preserve">
     <value>退出时会先停止此源码副本的服务，再关闭 Waypoint。如果游戏处于打开状态，你可以取消，或让一切保持运行。</value>
   </data>
+  <data name="Text_98210ede903e" xml:space="preserve">
+    <value>安装 Node.js（LocalExile 的设置指南使用 Node 24），然后点击“再次检查”：Waypoint 会重新读取 PATH，无需重启。</value>
+  </data>
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>从源码构建</value>
   </data>
@@ -3160,6 +3175,9 @@
   </data>
   <data name="Text_9a2ad8cb272e" xml:space="preserve">
     <value>已删除 {0} 个已保存的物品</value>
+  </data>
+  <data name="Text_9a71843838e4" xml:space="preserve">
+    <value>从 Microsoft 的下载页面安装适用于 Windows x64 的 .NET 10 SDK，然后点击“再次检查”：Waypoint 会重新读取 PATH，无需重启。</value>
   </data>
   <data name="Text_9a82f40e3cfb" xml:space="preserve">
     <value>该账号名称已被占用</value>
@@ -3624,6 +3642,9 @@
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>退出 Waypoint 时会停止此源码副本的服务。</value>
   </data>
+  <data name="Text_ae5ced38732e" xml:space="preserve">
+    <value>PATH 中没有 Python。请从 python.org 安装 Python 3.9 或更高版本，并勾选“Add python.exe to PATH”。</value>
+  </data>
   <data name="Text_ae684f70a175" xml:space="preserve">
     <value>采集检查完成。</value>
   </data>
@@ -4047,6 +4068,9 @@
   <data name="Text_c5132d954d7b" xml:space="preserve">
     <value>下次记住此选择</value>
   </data>
+  <data name="Text_c54387284052" xml:space="preserve">
+    <value>回应的是 Microsoft Store 的 python 快捷方式，而不是 Python。请从 python.org 安装 Python 3.9 或更高版本，并勾选“Add python.exe to PATH”。</value>
+  </data>
   <data name="Text_c58597b15074" xml:space="preserve">
     <value>3–32 个字母、数字、_ 或 -</value>
   </data>
@@ -4334,6 +4358,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_d1d87274da84" xml:space="preserve">
     <value>关卡生成</value>
   </data>
+  <data name="Text_d20c20b042c6" xml:space="preserve">
+    <value>PATH 中的 Python 是 {0}；需要 3.9 或更高版本。请从 python.org 安装，并勾选“Add python.exe to PATH”。</value>
+  </data>
   <data name="Text_d22e9e7b8580" xml:space="preserve">
     <value>未构建</value>
   </data>
@@ -4411,9 +4438,6 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_d61fc5870a81" xml:space="preserve">
     <value>在 Gateway 启动、切换源码副本或更改账号之前，生成一份一致的存档副本</value>
-  </data>
-  <data name="Text_d65fad07874f" xml:space="preserve">
-    <value>安装 Node.js（LocalExile 安装指南使用 Node 24）。安装后关闭并重新打开启动器，然后点击“重新检查”。</value>
   </data>
   <data name="Text_d668ffd510be" xml:space="preserve">
     <value>稀有物品名称</value>

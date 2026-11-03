@@ -375,7 +375,13 @@ folder itself. A stop waits out a step that writes the client or the keys. A `ne
 that option, and the run starts again from where it was. **The source code** is everything below.
 
 Until **Start setup** it only looks. It checks .NET 10, Git, Python and Node (a missing one has a button for its download page,
-and **Check again** reads the PATH again, so Waypoint need not restart). It lists the LocalExile checkouts it finds, or offers to
+and **Check again** reads the PATH again, what an installer added in front, so Waypoint need not restart). Python is looked for on
+PATH first and then, on Windows, through the py launcher, the installers' registry entries and python.org's default folders:
+python.org's installer leaves its PATH option unticked, and `python` then answers with the Microsoft Store's shortcut, which is no
+Python. A Python found that way goes first on Waypoint's own PATH, for itself and the scripts it runs (`PythonLookup`; the
+player's PATH is not touched), and the line says which Python was found and where, or that the Store's shortcut answered, or that
+the one on PATH is too old. The start does the same once, as do the Setup and Control sections' **Check again**, so a Python
+installed while Waypoint runs counts without a restart. It lists the LocalExile checkouts it finds, or offers to
 clone upstream into a new or empty folder, with the drive's free space. It lists the clients it finds (other checkouts'
 `Client` folders, what the installers recorded in the registry, the default folders, a time-limited walk of the fixed drives),
 and when there is none it says where it looked. Steam and Epic installs are listed struck out, so a player sees why theirs was
@@ -455,7 +461,8 @@ unqualified Unix path would land on that drive, while `Z:` is the root in every 
 The requirements come from the adapter's inspection, each with what to do about it. **Prepare client** creates what is
 missing from the client copy and keeps what exists (keys, `Game.patched.exe`), and sets the copy's gateway list to localhost.
 **Install dependency** is `npm ci` in `Tools/ooz`. Both want the game and the servers stopped. Each step shows its
-instructions first.
+instructions first. The **Python** requirement runs the Python the extraction would use (the checkout's `.venv`, else the one on
+PATH) and wants a 3.9 or newer, so the Microsoft Store's python shortcut does not count.
 
 ### Mods
 
