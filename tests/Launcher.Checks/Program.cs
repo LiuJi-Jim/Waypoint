@@ -8,6 +8,16 @@ if (OperatingSystem.IsWindows() && args.Length == 2 && args[0] == "--instance-ho
     InstanceChecks.Host(args[1]);
     return 0;
 }
+if (args.Length == 1 && args[0] == "--python")
+{
+    // What the setup guide's Python line rests on, for a look at a machine's own PATH, launcher and registry.
+    var search = await PythonLookup.FindAsync();
+    Console.WriteLine(JsonSerializer.Serialize(search, SettingsStore.JsonOptions));
+    Console.WriteLine(PythonLookup.Describe(search));
+    PythonLookup.Adopt(search);
+    Console.WriteLine("python --version for a process started after that: " + ((await ToolProcess.AskAsync(Platform.Python, "--version"))?.Output ?? "(does not start)"));
+    return search.Usable is null ? 1 : 0;
+}
 if (args.Length == 2 && args[0] == "--accounts")
 {
     var result = await client.RunAsync(new(args[1], UseLocalProfile: false), "QueryAccounts");

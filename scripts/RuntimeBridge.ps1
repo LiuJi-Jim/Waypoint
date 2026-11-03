@@ -189,7 +189,7 @@ function Get-Snapshot {
         @{ Name='Prepared client'; Ready=(Test-Path -LiteralPath $gamePath); Detail='Follow Agents/GettingStarted.md steps 4-5 to prepare Game.patched.exe' },
         @{ Name='Client archive'; Ready=(Test-Path -LiteralPath (At 'Client/Content.ggpk')); Detail='Standalone Content.ggpk is required; Steam layout is unsupported' },
         @{ Name='Login keys'; Ready=(Test-Path -LiteralPath (At 'data/login-keys.json')); Detail='data/login-keys.json must match the prepared client; never regenerate existing keys casually' },
-        @{ Name='Python'; Ready=([bool](Get-Command python -ErrorAction SilentlyContinue)); Detail='Python 3.9+ is required for data extraction' },
+        @{ Name='Python'; Ready=(Test-Python); Detail='Python 3.9+ is required for data extraction' },
         @{ Name='Node.js'; Ready=([bool](Get-Command node -ErrorAction SilentlyContinue)); Detail='Node.js is required for bundle decompression' },
         @{ Name='Bundle decompressor'; Ready=(Test-Path -LiteralPath (At 'Tools/ooz/node_modules/ooz-wasm')); Detail='From Tools/ooz run npm install' }
     )
@@ -233,6 +233,16 @@ function Test-Sdk {
     if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { return $false }
     $sdks = @(& dotnet --list-sdks)
     return [bool]($sdks | Where-Object { $_ -match '^10\.' })
+}
+# The Python the extraction would run (the checkout's .venv, else the one on PATH) must be a 3.9 or newer: a bare Get-Command
+# would also count the Microsoft Store's python shortcut, which is no Python.
+function Test-Python {
+    $python = $null
+    foreach ($candidate in @((At '.venv/Scripts/python.exe'), (At '.venv/bin/python'))) { if (Test-Path -LiteralPath $candidate) { $python = $candidate; break } }
+    if (-not $python) { foreach ($name in 'python', 'python3') { $command = Get-Command $name -ErrorAction SilentlyContinue; if ($command) { $python = $command.Source; break } } }
+    if (-not $python) { return $false }
+    try { & $python -c 'import sys; sys.exit(sys.version_info < (3, 9))' 2>$null | Out-Null } catch { return $false }
+    return $LASTEXITCODE -eq 0
 }
 function New-Service($name, $status, $process, $detail, $ports) {
     $memory = 0; $cpu = 0; $uptime = ''; $started = ''; $processId = 0

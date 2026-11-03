@@ -16,9 +16,26 @@ static class SetupChecks
         await SequenceAsync(check);
         await CloneAsync(root, check);
         check(Prerequisites.HasSdk("8.0.427 [C:\\sdk]\n10.0.403 [C:\\sdk]\n") && !Prerequisites.HasSdk("9.0.320 [C:\\sdk]\n"), "only a .NET 10 SDK counts");
-        check(Prerequisites.PythonIsNewEnough("Python 3.12.4") && !Prerequisites.PythonIsNewEnough("Python 3.8.10") &&
-            !Prerequisites.PythonIsNewEnough("Python was not found; run without arguments to install from the Microsoft Store"),
-            "Python 3.9+ is required, and the Store's alias is not a Python");
+        check(PythonLookup.VersionOf("Python 3.12.4") == new Version(3, 12, 4) && PythonLookup.VersionOf("Python 3.9.0b1") == new Version(3, 9, 0)
+            && PythonLookup.VersionOf("Python was not found; run without arguments to install from the Microsoft Store") is null,
+            "the version is read from python --version, and the Store's shortcut is not a Python");
+        check(PythonLookup.NewEnough(new(3, 9, 0)) && PythonLookup.NewEnough(new(4, 0, 0)) && !PythonLookup.NewEnough(new(3, 8, 10)) && !PythonLookup.NewEnough(new(2, 7, 18)),
+            "Python 3.9+ is required");
+        check(Prerequisites.MergedPath(@"C:\Apps;C:\Users\p\AppData\Local\Microsoft\WindowsApps", [@"C:\Apps", @"C:\Python39", @"c:\apps", @"C:\Python39\Scripts"])
+            == @"C:\Python39;C:\Python39\Scripts;C:\Apps;C:\Users\p\AppData\Local\Microsoft\WindowsApps" && Prerequisites.MergedPath(@"C:\Apps", [@"c:\apps"]) == @"C:\Apps",
+            "a PATH entry an installer added goes in front of the Store's python shortcut, once");
+        check(PythonLookup.AdoptedPath(@"C:\Apps;C:\Python39\;C:\WindowsApps", @"C:\Python39") == @"C:\Python39;C:\Python39\Scripts;C:\Apps;C:\WindowsApps",
+            "an adopted Python's folder and its Scripts go first on PATH, once");
+        var elsewhere = new PythonSearch(new(@"C:\Python39\python.exe", new(3, 9, 13), OnPath: false), null, StoreAlias: true);
+        check(PythonLookup.Describe(elsewhere).Contains("3.9.13") && PythonLookup.Describe(elsewhere).Contains(@"C:\Python39") && !PythonLookup.Describe(elsewhere).Contains("Store")
+            && PythonLookup.Describe(new(new(@"C:\Python312\python.exe", new(3, 12, 4), OnPath: true), new(3, 12, 4), false)).Contains(@"C:\Python312"),
+            "the requirement names the Python found and its folder");
+        check(PythonLookup.Describe(new(null, new(3, 8, 10), false)).Contains("3.8.10") && PythonLookup.Describe(new(null, null, true)) != PythonLookup.Describe(new(null, null, false)),
+            "too old says which version, and the Store's shortcut is told apart from no Python");
+        var search = await PythonLookup.FindAsync();
+        var onPath = await ToolProcess.AskAsync(Platform.Python, "--version");
+        check(onPath is not { Code: 0 } answer || PythonLookup.VersionOf(answer.Output) is not { } version || !PythonLookup.NewEnough(version) || search.Usable is { OnPath: true },
+            "python on PATH is the Python when it is new enough");
     }
 
     static string Client(string root, string name, params (string File, int Bytes)[] files)

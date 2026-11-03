@@ -30,7 +30,7 @@ offers two ways to get LocalExile:
 | A [LocalExile](https://github.com/LocalExile/LocalExile) source checkout | The server Waypoint manages: the folder with `GameServer.slnx` |
 | [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) | Building and running LocalExile |
 | [Git](https://git-scm.com/downloads/win) | Branches and pull requests |
-| [Python 3.9+](https://www.python.org/downloads/windows/) | Data extraction, consistent save backups, the account tools |
+| [Python 3.9+](https://www.python.org/downloads/windows/) | Data extraction, consistent save backups, the account tools. Tick the installer's *Add python.exe to PATH*; Waypoint also finds a Python installed without it |
 | [Node.js](https://nodejs.org/en/download) | The bundle-decompression dependency |
 | Your own standalone PoE **3.29.3b** client | A separate copy in the checkout's `Client` folder; Steam layout and newer clients are unsupported |
 

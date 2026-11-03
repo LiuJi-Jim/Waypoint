@@ -237,6 +237,9 @@
   <data name="Text_0baa876a211d" xml:space="preserve">
     <value>The item shows here as you make it.</value>
   </data>
+  <data name="Text_0bf671c970d1" xml:space="preserve">
+    <value>Python {0} is installed in {1} but not on PATH. Waypoint uses it anyway, for itself and the scripts it runs.</value>
+  </data>
   <data name="Text_0c088c4b059d" xml:space="preserve">
     <value>item level {0}</value>
   </data>
@@ -600,9 +603,6 @@
   <data name="Text_1c54b5836312" xml:space="preserve">
     <value>Not started: a server port is still in use.</value>
   </data>
-  <data xml:space="preserve" name="Text_1c7e31690f17">
-    <value>Install Python 3.9 or newer from python.org with its PATH option enabled. Close and reopen the launcher, then Recheck setup. Frida is optional and is not required for ordinary play.</value>
-  </data>
   <data name="Text_1c839bb4f712" xml:space="preserve">
     <value>Reset the crafter</value>
   </data>
@@ -710,6 +710,9 @@
   </data>
   <data xml:space="preserve" name="Text_223e64b8fc5b">
     <value>Automatic lookup runs on first use. You can also search again here.</value>
+  </data>
+  <data name="Text_224f3200a70e" xml:space="preserve">
+    <value>Install Python 3.9 or newer from python.org, best with 'Add python.exe to PATH' ticked, then Check again: Waypoint reads the PATH again, and finds a Python installed without that option through its installer's registry entry. Frida is optional and is not required for ordinary play.</value>
   </data>
   <data name="Text_225ea1a36f00" xml:space="preserve">
     <value>Saved client credentials for this account will need to be entered again.</value>
@@ -891,9 +894,6 @@ Change location above to choose somewhere else.</value>
   </data>
   <data xml:space="preserve" name="Text_297fba3fb830">
     <value>Build source mods or install a local mod to create this folder.</value>
-  </data>
-  <data xml:space="preserve" name="Text_298493527af6">
-    <value>Install the .NET 10 SDK for Windows x64 from Microsoft's download page. Close and reopen the launcher after installing, then Recheck setup.</value>
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>per s</value>
@@ -1150,6 +1150,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data xml:space="preserve" name="Text_3506d661965b">
     <value>Restart Gateway</value>
+  </data>
+  <data name="Text_354dc95ba6ca" xml:space="preserve">
+    <value>Python {0} is on PATH; 3.9 or newer is needed.</value>
   </data>
   <data name="Text_3577169c42d9" xml:space="preserve">
     <value>LocalExile won't be ready to play until setup is finished. You can run this guide again later.</value>
@@ -2159,6 +2162,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_676796f86246" xml:space="preserve">
     <value>Not enough free space: the client needs {0:0.#} GB more on this drive, and {1:0.#} GB is free.</value>
   </data>
+  <data name="Text_67b6858a9f80" xml:space="preserve">
+    <value>Python {0} is on PATH ({1}).</value>
+  </data>
   <data name="Text_67bc484430fe" xml:space="preserve">
     <value>Random</value>
   </data>
@@ -2462,6 +2468,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_76900f1bfd16" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="Text_76b9740eaf62" xml:space="preserve">
+    <value>Python is not on PATH. Install Python 3.9 or newer (python3) with your package manager.</value>
+  </data>
   <data xml:space="preserve" name="Text_76cde8e5dd63">
     <value>Fetched remote branch</value>
   </data>
@@ -2545,6 +2554,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_7ab34499cbf7" xml:space="preserve">
     <value>git pull --ff-only: {0} as origin has it now</value>
+  </data>
+  <data name="Text_7abb1e9b93f9" xml:space="preserve">
+    <value>Python {0} is on PATH.</value>
   </data>
   <data name="Text_7ac5b6d5456b" xml:space="preserve">
     <value>Show service details</value>
@@ -3116,6 +3128,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_9814c443a469" xml:space="preserve">
     <value>Exit stops this checkout’s services before closing Waypoint. If the game is open, you can cancel or leave everything running.</value>
   </data>
+  <data name="Text_98210ede903e" xml:space="preserve">
+    <value>Install Node.js (the LocalExile setup guide uses Node 24), then Check again: Waypoint reads the PATH again, so it need not restart.</value>
+  </data>
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>Built from source</value>
   </data>
@@ -3160,6 +3175,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_9a2ad8cb272e" xml:space="preserve">
     <value>Deleted {0} saved items</value>
+  </data>
+  <data name="Text_9a71843838e4" xml:space="preserve">
+    <value>Install the .NET 10 SDK for Windows x64 from Microsoft's download page, then Check again: Waypoint reads the PATH again, so it need not restart.</value>
   </data>
   <data name="Text_9a82f40e3cfb" xml:space="preserve">
     <value>that account name is taken</value>
@@ -3624,6 +3642,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>Exiting Waypoint stops this checkout’s services.</value>
   </data>
+  <data name="Text_ae5ced38732e" xml:space="preserve">
+    <value>Python is not on PATH. Install Python 3.9 or newer from python.org and tick 'Add python.exe to PATH'.</value>
+  </data>
   <data name="Text_ae684f70a175" xml:space="preserve">
     <value>CheckCapture completed.</value>
   </data>
@@ -4047,6 +4068,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_c5132d954d7b" xml:space="preserve">
     <value>Remember this for next time</value>
   </data>
+  <data name="Text_c54387284052" xml:space="preserve">
+    <value>The Microsoft Store's python shortcut answered, not a Python. Install Python 3.9 or newer from python.org and tick 'Add python.exe to PATH'.</value>
+  </data>
   <data name="Text_c58597b15074" xml:space="preserve">
     <value>3–32 letters, digits, _ or -</value>
   </data>
@@ -4334,6 +4358,9 @@ Client: {2}</value>
   <data name="Text_d1d87274da84" xml:space="preserve">
     <value>Level generation</value>
   </data>
+  <data name="Text_d20c20b042c6" xml:space="preserve">
+    <value>Python {0} is on PATH; 3.9 or newer is needed. Install it from python.org and tick 'Add python.exe to PATH'.</value>
+  </data>
   <data xml:space="preserve" name="Text_d22e9e7b8580">
     <value>Not built</value>
   </data>
@@ -4411,9 +4438,6 @@ Client: {2}</value>
   </data>
   <data name="Text_d61fc5870a81" xml:space="preserve">
     <value>A consistent copy of the saves before a Gateway start, a checkout switch or an account change</value>
-  </data>
-  <data xml:space="preserve" name="Text_d65fad07874f">
-    <value>Install Node.js (the LocalExile setup guide uses Node 24). Close and reopen the launcher after installing, then Recheck setup.</value>
   </data>
   <data name="Text_d668ffd510be" xml:space="preserve">
     <value>RARE NAME</value>

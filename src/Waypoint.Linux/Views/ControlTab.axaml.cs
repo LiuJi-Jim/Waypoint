@@ -464,7 +464,11 @@ partial class ControlTab : UserControl
         Output.Clear();
     }
 
-    async void CheckSetup(object? sender, RoutedEventArgs e) => await RefreshSetup();
+    async void CheckSetup(object? sender, RoutedEventArgs e)
+    {
+        await Prerequisites.RefreshToolsAsync();
+        await RefreshSetup();
+    }
 
     void OpenGuidedSetup(object? sender, RoutedEventArgs e) => ShowSetupRequested?.Invoke();
 

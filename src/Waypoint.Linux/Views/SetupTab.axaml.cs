@@ -76,7 +76,11 @@ public partial class SetupTab : UserControl
         Empty.IsVisible = rows.Count == 0;
     }
 
-    async void CheckAgain(object? sender, RoutedEventArgs e) => await _shared.Workspace.RefreshAsync();
+    async void CheckAgain(object? sender, RoutedEventArgs e)
+    {
+        await Prerequisites.RefreshToolsAsync();
+        await _shared.Workspace.RefreshAsync();
+    }
 
     /// <summary>Simple mode's way to the guide.</summary>
     internal void OpenSetupGuide() => RunGuide(this, new RoutedEventArgs());

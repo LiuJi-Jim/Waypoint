@@ -237,6 +237,9 @@
   <data name="Text_0baa876a211d" xml:space="preserve">
     <value>Здесь будет виден предмет, пока вы его собираете.</value>
   </data>
+  <data name="Text_0bf671c970d1" xml:space="preserve">
+    <value>Python {0} установлен в {1}, но не добавлен в PATH. Waypoint всё равно использует его — для себя и для запускаемых им скриптов.</value>
+  </data>
   <data name="Text_0c088c4b059d" xml:space="preserve">
     <value>уровень предмета {0}</value>
   </data>
@@ -600,9 +603,6 @@
   <data name="Text_1c54b5836312" xml:space="preserve">
     <value>Не запущено: порт сервера всё ещё занят.</value>
   </data>
-  <data xml:space="preserve" name="Text_1c7e31690f17">
-    <value>Установите Python 3.9 или новее с python.org, включив добавление в PATH. Перезапустите Waypoint и нажмите «Повторить проверку». Frida необязательна и не нужна для обычной игры.</value>
-  </data>
   <data name="Text_1c839bb4f712" xml:space="preserve">
     <value>Сброс конструктора</value>
   </data>
@@ -710,6 +710,9 @@
   </data>
   <data xml:space="preserve" name="Text_223e64b8fc5b">
     <value>При первом запуске выполняется автоматический поиск. Здесь можно запустить его повторно.</value>
+  </data>
+  <data name="Text_224f3200a70e" xml:space="preserve">
+    <value>Установите Python 3.9 или новее с python.org, лучше отметив «Add python.exe to PATH», и нажмите «Проверить снова»: Waypoint заново читает PATH, а Python, установленный без этой опции, находит по записи установщика в реестре. Frida необязательна и не нужна для обычной игры.</value>
   </data>
   <data name="Text_225ea1a36f00" xml:space="preserve">
     <value>Сохранённые данные входа в клиенте для этого аккаунта потребуется ввести заново.</value>
@@ -891,9 +894,6 @@
   </data>
   <data xml:space="preserve" name="Text_297fba3fb830">
     <value>Соберите моды из исходников или установите локальный мод, чтобы создать эту папку.</value>
-  </data>
-  <data xml:space="preserve" name="Text_298493527af6">
-    <value>Установите .NET 10 SDK для Windows x64 со страницы загрузки Microsoft. Перезапустите Waypoint после установки и нажмите «Повторить проверку».</value>
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>в секунду</value>
@@ -1150,6 +1150,9 @@
   </data>
   <data xml:space="preserve" name="Text_3506d661965b">
     <value>Перезапустить Gateway</value>
+  </data>
+  <data name="Text_354dc95ba6ca" xml:space="preserve">
+    <value>В PATH есть Python {0}; нужен 3.9 или новее.</value>
   </data>
   <data name="Text_3577169c42d9" xml:space="preserve">
     <value>Играть в LocalExile можно будет только после завершения настройки. Этот мастер можно запустить снова позже.</value>
@@ -2159,6 +2162,9 @@
   <data name="Text_676796f86246" xml:space="preserve">
     <value>Недостаточно места: клиенту нужно ещё {0:0.#} ГБ на этом диске, а свободно {1:0.#} ГБ.</value>
   </data>
+  <data name="Text_67b6858a9f80" xml:space="preserve">
+    <value>Python {0} есть в PATH ({1}).</value>
+  </data>
   <data name="Text_67bc484430fe" xml:space="preserve">
     <value>Случайно</value>
   </data>
@@ -2462,6 +2468,9 @@
   <data name="Text_76900f1bfd16" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="Text_76b9740eaf62" xml:space="preserve">
+    <value>Python нет в PATH. Установите Python 3.9 или новее (python3) через менеджер пакетов.</value>
+  </data>
   <data xml:space="preserve" name="Text_76cde8e5dd63">
     <value>Полученная удалённая ветка</value>
   </data>
@@ -2545,6 +2554,9 @@
   </data>
   <data name="Text_7ab34499cbf7" xml:space="preserve">
     <value>git pull --ff-only: {0} в текущем состоянии на origin</value>
+  </data>
+  <data name="Text_7abb1e9b93f9" xml:space="preserve">
+    <value>Python {0} есть в PATH.</value>
   </data>
   <data name="Text_7ac5b6d5456b" xml:space="preserve">
     <value>Показать сведения о службе</value>
@@ -3116,6 +3128,9 @@
   <data name="Text_9814c443a469" xml:space="preserve">
     <value>При выходе Waypoint сначала остановит службы этой рабочей копии. Если игра открыта, можно отменить выход или оставить всё работающим.</value>
   </data>
+  <data name="Text_98210ede903e" xml:space="preserve">
+    <value>Установите Node.js (руководство по настройке LocalExile использует Node 24) и нажмите «Проверить снова»: Waypoint заново читает PATH, так что перезапуск не нужен.</value>
+  </data>
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>Сборка из исходников</value>
   </data>
@@ -3160,6 +3175,9 @@
   </data>
   <data name="Text_9a2ad8cb272e" xml:space="preserve">
     <value>Удалено сохранённых предметов: {0}</value>
+  </data>
+  <data name="Text_9a71843838e4" xml:space="preserve">
+    <value>Установите .NET 10 SDK для Windows x64 со страницы загрузки Microsoft и нажмите «Проверить снова»: Waypoint заново читает PATH, так что перезапуск не нужен.</value>
   </data>
   <data name="Text_9a82f40e3cfb" xml:space="preserve">
     <value>это имя аккаунта уже занято</value>
@@ -3624,6 +3642,9 @@
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>При выходе из Waypoint службы этой рабочей копии останавливаются.</value>
   </data>
+  <data name="Text_ae5ced38732e" xml:space="preserve">
+    <value>Python нет в PATH. Установите Python 3.9 или новее с python.org, отметив «Add python.exe to PATH».</value>
+  </data>
   <data name="Text_ae684f70a175" xml:space="preserve">
     <value>Зависимости записи проверены.</value>
   </data>
@@ -4047,6 +4068,9 @@
   <data name="Text_c5132d954d7b" xml:space="preserve">
     <value>Запомнить для следующего раза</value>
   </data>
+  <data name="Text_c54387284052" xml:space="preserve">
+    <value>Вместо Python ответил ярлык python из Microsoft Store. Установите Python 3.9 или новее с python.org, отметив «Add python.exe to PATH».</value>
+  </data>
   <data name="Text_c58597b15074" xml:space="preserve">
     <value>3–32 латинские буквы, цифры, _ или -</value>
   </data>
@@ -4334,6 +4358,9 @@
   <data name="Text_d1d87274da84" xml:space="preserve">
     <value>Генерация</value>
   </data>
+  <data name="Text_d20c20b042c6" xml:space="preserve">
+    <value>В PATH есть Python {0}; нужен 3.9 или новее. Установите его с python.org, отметив «Add python.exe to PATH».</value>
+  </data>
   <data xml:space="preserve" name="Text_d22e9e7b8580">
     <value>Не собран</value>
   </data>
@@ -4411,9 +4438,6 @@
   </data>
   <data name="Text_d61fc5870a81" xml:space="preserve">
     <value>Согласованная копия сохранений перед запуском Gateway, переключением репозитория или изменением аккаунта</value>
-  </data>
-  <data xml:space="preserve" name="Text_d65fad07874f">
-    <value>Установите Node.js (руководство LocalExile использует Node 24). Перезапустите Waypoint после установки и нажмите «Повторить проверку».</value>
   </data>
   <data name="Text_d668ffd510be" xml:space="preserve">
     <value>ИМЯ РЕДКОГО ПРЕДМЕТА</value>
