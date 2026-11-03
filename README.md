@@ -103,7 +103,8 @@ full control over branches and pull requests. Someone coming from an earlier lau
 | **Tools** | The item crafter: any base, rarity, modifiers with their values, sockets and influences; saved items; give it to the character in game |
 | **Settings** | Appearance and accessibility, language, what closing the window does, updates, the checkout |
 
-**English and Russian** are in **Settings → Language**, and switch at once. **Settings → Appearance** has 19 color
+**English, Russian and Simplified Chinese** are in **Settings → Language**, and switch at once; until one is picked,
+Waypoint follows the system's display language. **Settings → Appearance** has 19 color
 schemes in light, dark and system modes, custom colors, reading fonts (OpenDyslexic included), text size, color-vision
 profiles, stronger contrast and focus, and reduced motion: see [appearance](docs/appearance.md).
 

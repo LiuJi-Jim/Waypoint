@@ -17,10 +17,8 @@
 
             <GroupBox Header="{l:Loc 'Language'}">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                        <RadioButton x:Name="English" Content="English" GroupName="Language" Style="{StaticResource ChoiceRadio}" Margin="0,0,20,0" Checked="LanguageChanged" />
-                        <RadioButton x:Name="Russian" Content="Русский" GroupName="Language" Style="{StaticResource ChoiceRadio}" Checked="LanguageChanged" />
-                    </StackPanel>
+                    <!-- One choice per L.Languages, each named in its own language (SettingsTab.Attach). -->
+                    <WrapPanel x:Name="LanguageChoices" Margin="0,0,0,4" />
                     <TextBlock Text="{l:Loc 'This changes Waypoint\'s interface. Repository names, paths, commit hashes, in-game commands and raw logs keep their original text.'}"
                                Style="{StaticResource Shell.Secondary}" TextWrapping="Wrap" />
                 </StackPanel>

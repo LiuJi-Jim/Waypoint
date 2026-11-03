@@ -22,8 +22,8 @@
     <!-- The exe's icon (Explorer, shortcuts). branding\waypoint-master.png is the source; scripts\New-Icon.ps1 makes the
          .ico (16 to 256 px) and the 192 px image the sidebar recolours. -->
     <ApplicationIcon>..\..\branding\app.ico</ApplicationIcon>
-    <!-- English and Russian only: the toolkits' other satellite assemblies stay out of the exe. -->
-    <SatelliteResourceLanguages>en;ru</SatelliteResourceLanguages>
+    <!-- Only Waypoint's interface languages (L.Languages): the toolkits' other satellite assemblies stay out of the exe. -->
+    <SatelliteResourceLanguages>en;ru;zh-CN</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

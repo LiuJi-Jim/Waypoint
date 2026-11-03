@@ -58,7 +58,7 @@
     <value>Дублировать</value>
   </data>
   <data name="Text_02d0aa76b41b" xml:space="preserve">
-    <value>Любой модификатор (без правил)</value>
+    <value>Любое свойство (без правил)</value>
   </data>
   <data name="Text_02f419eca140" xml:space="preserve">
     <value>неизвестная версия</value>
@@ -77,6 +77,9 @@
   </data>
   <data xml:space="preserve" name="Text_03aaf79a604f">
     <value>Остановить серверы</value>
+  </data>
+  <data name="Text_03c9dea7a093" xml:space="preserve">
+    <value>У вас последняя версия.</value>
   </data>
   <data xml:space="preserve" name="Text_03f25d282624">
     <value>data/login-keys.json должен соответствовать готовому клиенту; не пересоздавайте имеющиеся ключи без необходимости</value>
@@ -161,6 +164,9 @@
   </data>
   <data name="Text_090416e6e2e6" xml:space="preserve">
     <value>Записывает планировку каждой области через Frida</value>
+  </data>
+  <data name="Text_092673d5a5c0" xml:space="preserve">
+    <value>Всё готово. Нажмите «Играть» в Waypoint, чтобы запустить игру. Войдите с учётной записью: её имя вводится в поле «Эл. почта» (Email). При первом запуске в игре выберите Настройки → Игра → Режим работы сети → Рассинхронизация (Options → Game → Networking Mode → Predictive).</value>
   </data>
   <data name="Text_092709c82157" xml:space="preserve">
     <value>LocalExile и ваши сохранения вернутся к состоянию до обновления. Прогресс, полученный с тех пор, останется в резервной копии. Обновления приостановятся на неделю.</value>
@@ -293,6 +299,9 @@
   </data>
   <data name="Text_0e2226b5235f" xml:space="preserve">
     <value>Начало</value>
+  </data>
+  <data name="Text_0e23f575981d" xml:space="preserve">
+    <value>Не удалось прочитать список команд. Команду всё равно можно ввести и скопировать.</value>
   </data>
   <data name="Text_0e2a0f489dd2" xml:space="preserve">
     <value>Завершить и продолжить</value>
@@ -631,7 +640,7 @@
     <value>Оставить этот клиент как есть</value>
   </data>
   <data name="Text_1f330a2da345" xml:space="preserve">
-    <value>Вкладка тайника: {0}</value>
+    <value>Секция тайника: {0}</value>
   </data>
   <data name="Text_1f3c387a4c2d" xml:space="preserve">
     <value>Автокопия перед изменением модов</value>
@@ -748,7 +757,7 @@
     <value>Сведения о моде</value>
   </data>
   <data name="Text_2486c7136710" xml:space="preserve">
-    <value>Баз: {0}, модификаторов: {1}. Выберите базу, добавьте модификаторы, затем сохраните предмет или выдайте его персонажу в игре.</value>
+    <value>Баз: {0}, свойств: {1}. Выберите базу, добавьте свойства, затем сохраните предмет или выдайте его персонажу в игре.</value>
   </data>
   <data name="Text_2494bdb5bc46" xml:space="preserve">
     <value>Загрузка аккаунтов…</value>
@@ -816,11 +825,11 @@
   <data xml:space="preserve" name="Text_26c164899bbb">
     <value>не собрано</value>
   </data>
-  <data xml:space="preserve" name="Text_271962fab9d7">
-    <value>Подготовка клиента</value>
-  </data>
   <data name="Text_2718304a70c3" xml:space="preserve">
     <value>Настройки игры не изменены</value>
+  </data>
+  <data xml:space="preserve" name="Text_271962fab9d7">
+    <value>Подготовка клиента</value>
   </data>
   <data name="Text_272776a0df04" xml:space="preserve">
     <value>КАЧЕСТВО</value>
@@ -1001,7 +1010,7 @@
     <value>Полная копия</value>
   </data>
   <data name="Text_2f0bd5f62bba" xml:space="preserve">
-    <value>Основа: {0}</value>
+    <value>База: {0}</value>
   </data>
   <data name="Text_2f1395cf5579" xml:space="preserve">
     <value>Задать пароль…</value>
@@ -1086,13 +1095,13 @@
     <value>Ничего не найдено.</value>
   </data>
   <data name="Text_32afaa784333" xml:space="preserve">
-    <value>Расколотый</value>
+    <value>Разделённый</value>
   </data>
   <data name="Text_32d7e8208247" xml:space="preserve">
     <value>Управление</value>
   </data>
   <data name="Text_33078347b50b" xml:space="preserve">
-    <value>МОДИФИКАТОРЫ</value>
+    <value>СВОЙСТВА</value>
   </data>
   <data xml:space="preserve" name="Text_331551b0de41">
     <value>Ожидание</value>
@@ -1152,7 +1161,7 @@
     <value>Проверка Python 3.9+ и Frida без установки пакетов.</value>
   </data>
   <data name="Text_35b31d20f9a2" xml:space="preserve">
-    <value>Lockstep изменится при следующем запуске Gateway: «Играть» перезапустит серверы.</value>
+    <value>«Синхронизация» изменится при следующем запуске Gateway: «Играть» перезапустит серверы.</value>
   </data>
   <data name="Text_35dd8b832082" xml:space="preserve">
     <value>Показать Waypoint</value>
@@ -1257,7 +1266,7 @@
     <value>Также применяется к пункту «Выйти из Waypoint» в меню трея.</value>
   </data>
   <data name="Text_3b891891e321" xml:space="preserve">
-    <value>Соберите любой предмет: база, редкость, модификаторы со значениями, гнёзда и влияния. Сохраните, чтобы вернуться к нему, и выдайте персонажу в игре.</value>
+    <value>Соберите любой предмет: база, редкость, свойства со значениями, гнёзда и влияния. Сохраните, чтобы вернуться к нему, и выдайте персонажу в игре.</value>
   </data>
   <data xml:space="preserve" name="Text_3bd8fd42d412">
     <value>Папка ещё не существует: </value>
@@ -1294,13 +1303,13 @@
     <value> · файлы не изменены</value>
   </data>
   <data name="Text_3d502d9e88cc" xml:space="preserve">
-    <value>В лиге Standard; другие лиги доступны на экране создания персонажа в игре</value>
+    <value>В лиге «Стандарт»; другие лиги доступны на экране создания персонажа в игре</value>
   </data>
   <data name="Text_3db20e7a2c35" xml:space="preserve">
     <value>Текущие сохранения копируются и убираются в сторону, но не удаляются; действует на одно переключение</value>
   </data>
   <data name="Text_3dbe26764706" xml:space="preserve">
-    <value>сетевой режим ещё не задан: выберите Predictive в игре</value>
+    <value>режим работы сети ещё не задан: выберите в игре «Рассинхронизация»</value>
   </data>
   <data name="Text_3dc5a2da83a2" xml:space="preserve">
     <value>Последняя игра: {0}</value>
@@ -1340,6 +1349,9 @@
   </data>
   <data xml:space="preserve" name="Text_3fbcbf7d0499">
     <value>Ветки получены.</value>
+  </data>
+  <data name="Text_3fc597ad27c9" xml:space="preserve">
+    <value>Не удалось запустить git: {0}. Установите Git и запустите лаунчер снова.</value>
   </data>
   <data name="Text_3fe586513da2" xml:space="preserve">
     <value>сборка GameServer.Host …</value>
@@ -1393,7 +1405,7 @@
     <value>Сервер сохраняет прогресс персонажа по ходу игры.</value>
   </data>
   <data name="Text_42e37604b638" xml:space="preserve">
-    <value>Модификатор</value>
+    <value>Свойство</value>
   </data>
   <data name="Text_431027eb3edb" xml:space="preserve">
     <value>Открыть Waypoint</value>
@@ -1477,7 +1489,7 @@
     <value>Очистить поиск модов</value>
   </data>
   <data name="Text_47b09d87605c" xml:space="preserve">
-    <value>{0}: модификаторов: {1}, все строки найдены.</value>
+    <value>{0}: свойств: {1}, все строки найдены.</value>
   </data>
   <data name="Text_47c062d35d2c" xml:space="preserve">
     <value>Совпадений нет</value>
@@ -1492,7 +1504,7 @@
     <value>Обновить копии</value>
   </data>
   <data name="Text_480189e83289" xml:space="preserve">
-    <value>Персонажей: {0} · Вкладок тайника: {1}</value>
+    <value>Персонажей: {0} · Секций тайника: {1}</value>
   </data>
   <data xml:space="preserve" name="Text_4859a908b868">
     <value>Горячая перезагрузка</value>
@@ -1504,7 +1516,7 @@
     <value>Это собственные сохранения этого LocalExile.</value>
   </data>
   <data name="Text_48ce04a2b2bc" xml:space="preserve">
-    <value>Полная копия включает персонажей, прогресс и все вкладки личных и гильдейских тайников. Пустой аккаунт содержит только новые данные входа.</value>
+    <value>Полная копия включает персонажей, прогресс и все секции личных и гильдейских тайников. Пустой аккаунт содержит только новые данные входа.</value>
   </data>
   <data xml:space="preserve" name="Text_49089f5749b2">
     <value>Копировать проверенный отчёт</value>
@@ -1617,14 +1629,11 @@
   <data name="Text_4df36313ae04" xml:space="preserve">
     <value>2.  Находит клиент игры или позволяет указать его</value>
   </data>
+  <data name="Text_4df4a74256c7" xml:space="preserve">
+    <value>режим работы сети {0}: сервер его обслуживает</value>
+  </data>
   <data xml:space="preserve" name="Text_4df57ea533cf">
     <value>Проверка восстановления</value>
-  </data>
-  <data name="Text_4df4a74256c7" xml:space="preserve">
-    <value>сетевой режим {0}: сервер его обслуживает</value>
-  </data>
-  <data name="Text_4df7d19d0633" xml:space="preserve">
-    <value>Всё на месте. Нажмите «Играть» в Waypoint, чтобы запустить серверы и игру. В первый раз в самой игре выберите Options → Game → Network Mode → Predictive.</value>
   </data>
   <data name="Text_4e2f30ce9131" xml:space="preserve">
     <value>LocalExile сейчас занят другой операцией. Повторите, когда она закончится.</value>
@@ -1776,14 +1785,14 @@
   <data name="Text_5594a1f9def3" xml:space="preserve">
     <value>Остановить серверы и игру перед выходом</value>
   </data>
-  <data xml:space="preserve" name="Text_5634c7509b09">
-    <value>Автоматические копии создаются перед переключением ветки/PR, сборкой, запуском/перезапуском Gateway, перезагрузкой игровых данных, изменением модов и восстановлением сохранений. Ошибка копирования блокирует изменение. В историю модов входят выбор модов, версии манифестов, отпечатки DLL и последний подтверждённый отчёт. Восстановление сохранений не меняет исходники, клиент, ключи входа и переопределения игровых данных. Восстановление выбора модов не устанавливает DLL и не заменяет сохранения. Waypoint записывает ревизию последнего запущенного Gateway; внешние запуски и каждое горячее изменение не отслеживаются.</value>
-  </data>
   <data name="Text_55b612083b47" xml:space="preserve">
     <value>Даёт LocalExile собственные настройки и сохранённый вход, а у вашей обычной игры остаются свои</value>
   </data>
   <data name="Text_55f68b111c40" xml:space="preserve">
     <value>Дать LocalExile собственные настройки игры, а у вашей обычной игры останутся свои.</value>
+  </data>
+  <data xml:space="preserve" name="Text_5634c7509b09">
+    <value>Автоматические копии создаются перед переключением ветки/PR, сборкой, запуском/перезапуском Gateway, перезагрузкой игровых данных, изменением модов и восстановлением сохранений. Ошибка копирования блокирует изменение. В историю модов входят выбор модов, версии манифестов, отпечатки DLL и последний подтверждённый отчёт. Восстановление сохранений не меняет исходники, клиент, ключи входа и переопределения игровых данных. Восстановление выбора модов не устанавливает DLL и не заменяет сохранения. Waypoint записывает ревизию последнего запущенного Gateway; внешние запуски и каждое горячее изменение не отслеживаются.</value>
   </data>
   <data name="Text_564570edcef7" xml:space="preserve">
     <value>Gateway работает под dotnet watch, поэтому сохранённые изменения кода применяются прямо во время игры; при выключении передаётся -NoHotReload</value>
@@ -1800,6 +1809,12 @@
   <data name="Text_5726606d5e2a" xml:space="preserve">
     <value>в выпуске {0} нет {1} с файлом .sha256</value>
   </data>
+  <data name="Text_573bf7ff7f9e" xml:space="preserve">
+    <value>Ничего не меняется. Если этот клиент использует настройки вашей обычной игры, выберите в игре «Режим работы сети» → «Рассинхронизация» (Networking Mode → Predictive) сами.</value>
+  </data>
+  <data name="Text_57b7b5924c6b" xml:space="preserve">
+    <value>Всё на месте. Нажмите «Играть» в Waypoint, чтобы запустить серверы и игру. В первый раз в самой игре выберите Настройки → Игра → Режим работы сети → Рассинхронизация (Options → Game → Networking Mode → Predictive).</value>
+  </data>
   <data name="Text_581dec3ed74b" xml:space="preserve">
     <value>ПОСЛЕДНИЙ КОММИТ</value>
   </data>
@@ -1814,14 +1829,14 @@
   <data xml:space="preserve" name="Text_589877b1a7f3">
     <value>Последняя проверка в игре: </value>
   </data>
+  <data name="Text_5899382b7399" xml:space="preserve">
+    <value>Его файл config.json не удалось прочитать. Он останется рядом с новым как config.json.old.</value>
+  </data>
   <data xml:space="preserve" name="Text_58b1306d2f1d">
     <value>Резервные копии сохранений</value>
   </data>
   <data xml:space="preserve" name="Text_58fc561ca474">
     <value>Установить распаковщик</value>
-  </data>
-  <data name="Text_5899382b7399" xml:space="preserve">
-    <value>Его файл config.json не удалось прочитать. Он останется рядом с новым как config.json.old.</value>
   </data>
   <data name="Text_591889ac42e0" xml:space="preserve">
     <value>Открыть журналы</value>
@@ -1868,14 +1883,14 @@
   <data name="Text_5bb7de320b88" xml:space="preserve">
     <value>В {0} есть собственные коммиты, которых нет в запросе на слияние ({1}); сначала отправьте или перенесите их</value>
   </data>
+  <data name="Text_5c1a1026eda3" xml:space="preserve">
+    <value>Всё на месте. Нажмите «Играть» в Waypoint, чтобы запустить серверы и игру. У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
+  </data>
   <data xml:space="preserve" name="Text_5c412a262086">
     <value>Игра</value>
   </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Выберите локальную ветку, полученную удалённую ветку или PR LocalExile. Переключение останавливает службы этой установки, создаёт копию сохранений и собирает выбранную ревизию. Сначала закройте игру; затем нажмите «Играть».</value>
-  </data>
-  <data name="Text_5c1a1026eda3" xml:space="preserve">
-    <value>Всё на месте. Нажмите «Играть» в Waypoint, чтобы запустить серверы и игру. У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
   </data>
   <data name="Text_5c55fea32942" xml:space="preserve">
     <value>Не удалось прочитать данные предметов: {0}</value>
@@ -2094,7 +2109,7 @@
 Переключение соберёт и запустит этот код на вашем компьютере с вашими правами, включая live.ps1 и другие скрипты. Запускайте его, только если доверяете автору или изучили изменения («Открыть на GitHub»).</value>
   </data>
   <data name="Text_652e32ff2169" xml:space="preserve">
-    <value>Walk maps · Frida. Сохраняет планировки при загрузке новых областей. Необязательный инструмент; подключается только к подготовленному клиенту этой копии. Существующие записи сохраняются.</value>
+    <value>Запись планировок · Frida. Сохраняет планировки при загрузке новых областей. Необязательный инструмент; подключается только к подготовленному клиенту этой копии. Существующие записи сохраняются.</value>
   </data>
   <data xml:space="preserve" name="Text_6561a8925313">
     <value>Ветки и запросы на слияние</value>
@@ -2187,13 +2202,16 @@
     <value>Светлая, тёмная или системная тема; цветовые схемы, свои цвета и параметры чтения.</value>
   </data>
   <data name="Text_691145a11e9f" xml:space="preserve">
-    <value>Вкладок тайника: {0}</value>
+    <value>Секций тайника: {0}</value>
   </data>
   <data name="Text_6952069f9d84" xml:space="preserve">
     <value>уровень {0}</value>
   </data>
+  <data name="Text_695421b8f03a" xml:space="preserve">
+    <value>LocalExile получит собственные в {0}: это копия ваших обычных настроек без данных для входа, с режимом работы сети «Рассинхронизация». Файлы вашей обычной игры не изменятся.</value>
+  </data>
   <data name="Text_6979ababfdcb" xml:space="preserve">
-    <value>LocalExile хранит свою графику, клавиши и сохранённый вход в {0} и сразу использует нужный сетевой режим. Настройки вашей обычной игры только читаются, один раз, как отправная точка.</value>
+    <value>LocalExile хранит свою графику, клавиши и сохранённый вход в {0} и сразу использует нужный режим работы сети. Настройки вашей обычной игры только читаются, один раз, как отправная точка.</value>
   </data>
   <data name="Text_697e044feb96" xml:space="preserve">
     <value>Waypoint не может определить, что ещё использует настройки этого клиента.</value>
@@ -2253,7 +2271,7 @@
     <value>Из {0}</value>
   </data>
   <data name="Text_6d0e201a1cb9" xml:space="preserve">
-    <value>Импортирован {0}, модификаторов: {1}; пропущено строк: {2}. «Сохранить» оставит его в списке.</value>
+    <value>Импортирован {0}, свойств: {1}; пропущено строк: {2}. «Сохранить» оставит его в списке.</value>
   </data>
   <data name="Text_6d3add9cf2ef" xml:space="preserve">
     <value>значения вне тира</value>
@@ -2299,9 +2317,6 @@
   </data>
   <data name="Text_6f20e73b9302" xml:space="preserve">
     <value>Префиксы</value>
-  </data>
-  <data name="Text_6f32b22fe74f" xml:space="preserve">
-    <value>Ничего не меняется. Если этот клиент использует настройки вашей обычной игры, выберите в игре Network Mode → Predictive сами.</value>
   </data>
   <data name="Text_6f3c603b812d" xml:space="preserve">
     <value>СЛУЖБА</value>
@@ -2386,9 +2401,6 @@
   </data>
   <data name="Text_726c2b850161" xml:space="preserve">
     <value>Меняется интерфейс Waypoint. Названия репозиториев, пути, хеши коммитов, игровые команды и необработанные журналы остаются без перевода.</value>
-  </data>
-  <data name="Text_72cbebbffd2d" xml:space="preserve">
-    <value>Esc → Options → Game → Network Mode → Predictive, затем выйдите на экран персонажей и снова нажмите «Играть»</value>
   </data>
   <data name="Text_72db542cccd0" xml:space="preserve">
     <value>Изменения сохраняются сразу. Кнопка сворачивания по-прежнему сворачивает окно на панель задач.</value>
@@ -2565,7 +2577,7 @@
     <value>Поля ввода</value>
   </data>
   <data name="Text_7cc42933ec9d" xml:space="preserve">
-    <value>Id модификатора</value>
+    <value>Id свойства</value>
   </data>
   <data xml:space="preserve" name="Text_7cd52f8db23c">
     <value>Синий–жёлтый</value>
@@ -2643,7 +2655,7 @@
     <value>Поиск по веткам, заголовкам PR, авторам или хешам коммитов</value>
   </data>
   <data name="Text_8084a51b3c64" xml:space="preserve">
-    <value>Сил</value>
+    <value>Сила</value>
   </data>
   <data xml:space="preserve" name="Text_808fc010f815">
     <value>{0}: {1} при копировании</value>
@@ -2740,6 +2752,9 @@
   </data>
   <data name="Text_853c6a3cc7ff" xml:space="preserve">
     <value>Обновить и перезапустить</value>
+  </data>
+  <data name="Text_8550dd056667" xml:space="preserve">
+    <value>Выпуска для Linux пока нет, поэтому LocalExile будет установлен из исходного кода.</value>
   </data>
   <data name="Text_85a70742a28e" xml:space="preserve">
     <value>Удалить сохранённый предмет</value>
@@ -2889,7 +2904,7 @@
     <value>У {0} может быть не больше {1} гнёзд</value>
   </data>
   <data name="Text_8de109f741c7" xml:space="preserve">
-    <value>Lockstep</value>
+    <value>Синхронизация</value>
   </data>
   <data name="Text_8de4d4dac04c" xml:space="preserve">
     <value>пок. 2</value>
@@ -2944,9 +2959,6 @@
   </data>
   <data name="Text_9057fd0f98cc" xml:space="preserve">
     <value>Игровой клиент</value>
-  </data>
-  <data name="Text_908eb71d714e" xml:space="preserve">
-    <value>Всё готово. Нажмите «Играть» в Waypoint, чтобы запустить игру. Войдите с учётной записью: её имя вводится в поле Email. При первом запуске в игре выберите Options → Game → Network Mode → Predictive.</value>
   </data>
   <data name="Text_90eb3b815e3e" xml:space="preserve">
     <value>{0} — уникальный предмет: крафтер делает только обычные, магические и редкие.</value>
@@ -3020,6 +3032,9 @@
   <data name="Text_94e14eed87ef" xml:space="preserve">
     <value>клиент (PID {0}) закрыт</value>
   </data>
+  <data name="Text_94fac69c8653" xml:space="preserve">
+    <value>Дать LocalExile собственные настройки игры</value>
+  </data>
   <data xml:space="preserve" name="Text_9533a426d7fa">
     <value>Фон логотипа</value>
   </data>
@@ -3028,9 +3043,6 @@
   </data>
   <data xml:space="preserve" name="Text_9575a529260a">
     <value>Оформление и доступность</value>
-  </data>
-  <data name="Text_94fac69c8653" xml:space="preserve">
-    <value>Дать LocalExile собственные настройки игры</value>
   </data>
   <data name="Text_95784099d97d" xml:space="preserve">
     <value>{0} ещё выполняется</value>
@@ -3159,7 +3171,7 @@
     <value>Начать заново (заменить учётные записи и персонажей)</value>
   </data>
   <data name="Text_9a939257dd1b" xml:space="preserve">
-    <value>Добавить модификаторы</value>
+    <value>Добавить свойства</value>
   </data>
   <data xml:space="preserve" name="Text_9aa6000ef944">
     <value>Восстановить сохранения от {0:g}?
@@ -3169,7 +3181,7 @@
 Службы этой установки будут остановлены. Автоматическое копирование: {2}. Исходники, клиент и ключи входа останутся прежними; старому сохранению может понадобиться его исходная ревизия.</value>
   </data>
   <data name="Text_9ac9ed76c86d" xml:space="preserve">
-    <value>Начать заново с пустого предмета: без основы и модификаторов, поиск и фильтры очищены. Сохранённые предметы остаются.</value>
+    <value>Начать заново с пустого предмета: без базы и свойств, поиск и фильтры очищены. Сохранённые предметы остаются.</value>
   </data>
   <data name="Text_9afaaba23e27" xml:space="preserve">
     <value>Учётная запись создана.</value>
@@ -3180,20 +3192,23 @@
   <data xml:space="preserve" name="Text_9b6f051b7ea9">
     <value>Использовать локальную оболочку запуска репозитория, если она есть</value>
   </data>
+  <data name="Text_9bad10eb9ddf" xml:space="preserve">
+    <value>umu-launcher запускает игру через Proton</value>
+  </data>
   <data name="Text_9bc57fc48f3b" xml:space="preserve">
-    <value>Поиск модификаторов</value>
+    <value>Поиск свойств</value>
   </data>
   <data name="Text_9bc7bc6c8d2a" xml:space="preserve">
     <value>Проверка завершена.</value>
   </data>
   <data name="Text_9bf4d9a05005" xml:space="preserve">
-    <value>{0}: модификаторов: {1}. Пропущено строк: {2} (красные): у конструктора нет модификатора с таким текстом.</value>
-  </data>
-  <data xml:space="preserve" name="Text_9c2f5c362587">
-    <value>Создание локальной учётной записи</value>
+    <value>{0}: свойств: {1}. Пропущено строк: {2} (красные): у конструктора нет свойства с таким текстом.</value>
   </data>
   <data name="Text_9c0f7a91cfa6" xml:space="preserve">
     <value>настройки игры общие с вашей обычной игрой</value>
+  </data>
+  <data xml:space="preserve" name="Text_9c2f5c362587">
+    <value>Создание локальной учётной записи</value>
   </data>
   <data name="Text_9c384372f6be" xml:space="preserve">
     <value>Запись остановлена. Существующие файлы сохранены.</value>
@@ -3223,7 +3238,7 @@
     <value>Кнопки окна</value>
   </data>
   <data name="Text_9ceecb44ac12" xml:space="preserve">
-    <value>Конструктор сброшен: выберите основу.</value>
+    <value>Конструктор сброшен: выберите базу.</value>
   </data>
   <data name="Text_9cf951e82d56" xml:space="preserve">
     <value>Тестовый режим нескольких экземпляров</value>
@@ -3247,7 +3262,7 @@
     <value>Использовать саму эту папку вместо копии. Это экономит место, но LocalExile будет изменять этот клиент.</value>
   </data>
   <data name="Text_9da9ae7b30ae" xml:space="preserve">
-    <value>Нет модификатора с таким текстом</value>
+    <value>Нет свойства с таким текстом</value>
   </data>
   <data name="Text_9df4f4d7fd9d" xml:space="preserve">
     <value>Выбрать другой репозиторий сервера LocalExile; Waypoint перезапустится с ним</value>
@@ -3292,7 +3307,7 @@
     <value>Скопируйте команду и вставьте её в чат игры сочетанием Ctrl+V.</value>
   </data>
   <data name="Text_a01017bcc8cb" xml:space="preserve">
-    <value>В этом Gateway нет модификатора {0}</value>
+    <value>В этом Gateway нет свойства {0}</value>
   </data>
   <data xml:space="preserve" name="Text_a0160f336a55">
     <value>Не удалось открыть папку: </value>
@@ -3362,6 +3377,9 @@
   </data>
   <data name="Text_a388bd2d373c" xml:space="preserve">
     <value>Незакоммиченные изменения</value>
+  </data>
+  <data name="Text_a3986c49db0d" xml:space="preserve">
+    <value>PowerShell 7 выполняет скрипты сборки и настройки LocalExile</value>
   </data>
   <data name="Text_a3ac0b8d4d94" xml:space="preserve">
     <value>1.  Загружает LocalExile в выбранную папку или находит уже имеющуюся копию</value>
@@ -3463,7 +3481,7 @@
     <value>Имя аккаунта</value>
   </data>
   <data name="Text_a71162b3bbb4" xml:space="preserve">
-    <value>сетевой режим {0}: персонаж не сможет двигаться</value>
+    <value>режим работы сети {0}: персонаж не сможет двигаться</value>
   </data>
   <data name="Text_a71ee1d4ac5c" xml:space="preserve">
     <value>Остановка</value>
@@ -3585,6 +3603,9 @@
   <data xml:space="preserve" name="Text_acb4bce11dae">
     <value>Выполняется операция с рабочей папкой.</value>
   </data>
+  <data name="Text_ad3c7c6418d1" xml:space="preserve">
+    <value>Конструктор предметов пока недоступен в Linux.</value>
+  </data>
   <data name="Text_ad909a80eb9a" xml:space="preserve">
     <value>Открытых запросов на слияние нет.</value>
   </data>
@@ -3598,7 +3619,7 @@
     <value>Выберите мод, чтобы увидеть зависимости и доступные действия.</value>
   </data>
   <data name="Text_adc6944d0f20" xml:space="preserve">
-    <value>Собственные свойства осквернения</value>
+    <value>Осквернённые собственные свойства</value>
   </data>
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>При выходе из Waypoint службы этой рабочей копии останавливаются.</value>
@@ -3610,7 +3631,7 @@
     <value>Перезагрузить мод</value>
   </data>
   <data name="Text_aeb925989fbb" xml:space="preserve">
-    <value>Модификаторы: {0}</value>
+    <value>Свойства: {0}</value>
   </data>
   <data xml:space="preserve" name="Text_aeed4d26bb5f">
     <value>Запускается</value>
@@ -3688,7 +3709,7 @@
     <value>Для переключения веток и запросов на слияние нужна копия LocalExile с git. Эта папка — выпуск. Откройте папку с git или настройте новую копию.</value>
   </data>
   <data name="Text_b2ab0c098068" xml:space="preserve">
-    <value>На предмете уже есть модификатор той же группы: игра не даёт выпасть обоим.</value>
+    <value>На предмете уже есть свойство той же группы: игра не даёт выпасть обоим.</value>
   </data>
   <data xml:space="preserve" name="Text_b2cc39e00968">
     <value>Службы запущены.</value>
@@ -3697,7 +3718,7 @@
     <value>Клиент подготовлен.</value>
   </data>
   <data name="Text_b2feff991def" xml:space="preserve">
-    <value>Войдите с учётной записью LocalExile: её имя вводится в поле Email. Когда игра закроется, серверы остановятся.</value>
+    <value>Войдите с учётной записью LocalExile: её имя вводится в поле «Эл. почта» (Email). Когда игра закроется, серверы остановятся.</value>
   </data>
   <data xml:space="preserve" name="Text_b34ae7c4547d">
     <value>Локальный HEAD: </value>
@@ -3782,9 +3803,6 @@
   </data>
   <data xml:space="preserve" name="Text_b77c7a041298">
     <value>Восстановление сохранений</value>
-  </data>
-  <data name="Text_b77a85ad8d91" xml:space="preserve">
-    <value>LocalExile получит собственные в {0}: это копия ваших обычных настроек без данных для входа, с Network Mode → Predictive. Файлы вашей обычной игры не изменятся.</value>
   </data>
   <data name="Text_b7b159728e5f" xml:space="preserve">
     <value>нет Node.js или Tools\ooz\node_modules (шаг 7)</value>
@@ -3892,7 +3910,7 @@
     <value>live.ps1 -Only {0}: собирает и запускает</value>
   </data>
   <data name="Text_bc5cf0efe679" xml:space="preserve">
-    <value>сетевой режим Predictive</value>
+    <value>режим работы сети «Рассинхронизация»</value>
   </data>
   <data xml:space="preserve" name="Text_bc74ef1e258a">
     <value> — вывод</value>
@@ -3940,7 +3958,7 @@
     <value>Обновить игровые данные</value>
   </data>
   <data name="Text_bf91cdb0ca76" xml:space="preserve">
-    <value>Обслуживает игру с сетевым режимом Lockstep, только на этом компьютере (Game_LOCKSTEP=1). Настройка самой игры не меняется. Применяется при следующем запуске Gateway.</value>
+    <value>Обслуживает игру с режимом работы сети «Синхронизация» (Lockstep), только на этом компьютере (Game_LOCKSTEP=1). Настройка самой игры не меняется. Применяется при следующем запуске Gateway.</value>
   </data>
   <data name="Text_bffd26352bd5" xml:space="preserve">
     <value>Перед сохранением предпочтения вам один раз предложат выбрать действие при закрытии.</value>
@@ -3991,7 +4009,7 @@
     <value>{0} (копия)</value>
   </data>
   <data name="Text_c29d9392b89a" xml:space="preserve">
-    <value>Всё готово. Нажмите «Играть» в Waypoint, чтобы запустить игру. Войдите с учётной записью: её имя вводится в поле Email. У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
+    <value>Всё готово. Нажмите «Играть» в Waypoint, чтобы запустить игру. Войдите с учётной записью: её имя вводится в поле «Эл. почта» (Email). У LocalExile собственные настройки игры, поэтому у вашей обычной Path of Exile остаются свои.</value>
   </data>
   <data name="Text_c29f3cadd717" xml:space="preserve">
     <value>При сворачивании в трей службы всегда продолжают работать. Этот выбор применяется только при полном выходе.</value>
@@ -4098,11 +4116,11 @@
 
 Установка Steam и более новый официальный клиент не поддерживаются. Waypoint не скачивает игру.</value>
   </data>
-  <data xml:space="preserve" name="Text_c7ece59b9c12">
-    <value>Создать учётную запись</value>
-  </data>
   <data name="Text_c7c78e5406ce" xml:space="preserve">
     <value>Использовать отдельные настройки игры…</value>
+  </data>
+  <data xml:space="preserve" name="Text_c7ece59b9c12">
+    <value>Создать учётную запись</value>
   </data>
   <data name="Text_c7f937836f5d" xml:space="preserve">
     <value>Выбор</value>
@@ -4236,7 +4254,7 @@
     <value>Настроить цвета</value>
   </data>
   <data name="Text_cd4b01b8b2e8" xml:space="preserve">
-    <value>Импортирован {0}, модификаторов: {1}. «Сохранить» оставит его в списке.</value>
+    <value>Импортирован {0}, свойств: {1}. «Сохранить» оставит его в списке.</value>
   </data>
   <data name="Text_cd77503a4522" xml:space="preserve">
     <value>Команда скопирована, но в ней {0} символов, а чат игры принимает {1}. Используйте «Выдать предмет».</value>
@@ -4413,7 +4431,7 @@
     <value>Чистые сохранения после переключения</value>
   </data>
   <data name="Text_d6b74be161c2" xml:space="preserve">
-    <value>В этом Gateway нет основы «{0}».</value>
+    <value>В этом Gateway нет базы «{0}».</value>
   </data>
   <data name="Text_d6d6be81ee89" xml:space="preserve">
     <value>{0}: обновлено. «Перезапустить серверы» (или «Играть») соберёт новую версию.</value>
@@ -4535,6 +4553,9 @@
   <data name="Text_dcf6607f29a2" xml:space="preserve">
     <value>{0} мин назад</value>
   </data>
+  <data name="Text_dd051395345d" xml:space="preserve">
+    <value>Буфер обмена недоступен.</value>
+  </data>
   <data name="Text_dd0abeaace42" xml:space="preserve">
     <value>Ремесленный префикс</value>
   </data>
@@ -4554,7 +4575,7 @@
     <value>Когда новая копия заработает, спросить перед удалением старой.</value>
   </data>
   <data name="Text_de955093808e" xml:space="preserve">
-    <value>Аккаунт {0} зарегистрирован: используйте его для входа в поле Email в игре.</value>
+    <value>Аккаунт {0} зарегистрирован: используйте его для входа в поле «Эл. почта» в игре.</value>
   </data>
   <data xml:space="preserve" name="Text_deba91fae8c8">
     <value>Для распаковки пакетов нужен Node.js</value>
@@ -4618,7 +4639,7 @@
     <value>Для удаления введите точное имя аккаунта</value>
   </data>
   <data name="Text_e1fe46b5de30" xml:space="preserve">
-    <value>Модификаторов нет. Добавьте их на странице «Добавить модификаторы» слева: двойной щелчок или Enter добавляет выбранный.</value>
+    <value>Свойств нет. Добавьте их на странице «Добавить свойства» слева: двойной щелчок или Enter добавляет выбранное.</value>
   </data>
   <data name="Text_e1fe8b01e751" xml:space="preserve">
     <value>Запуск серверов</value>
@@ -4645,7 +4666,7 @@
     <value>Новая копия использует файлы игры из {0}, поэтому не удаляйте эту папку самостоятельно.</value>
   </data>
   <data name="Text_e2bc3ab610f6" xml:space="preserve">
-    <value>Работает · hot reload</value>
+    <value>Работает · горячая перезагрузка</value>
   </data>
   <data name="Text_e2bec0c84c30" xml:space="preserve">
     <value>Требуется: {0}</value>
@@ -4672,7 +4693,7 @@
     <value>HEAD совпадает с последним коммитом LocalExile</value>
   </data>
   <data name="Text_e43b920e4fec" xml:space="preserve">
-    <value>Вставьте предмет, скопированный через Ctrl+C в Path of Building или в игре (Ctrl+Alt+C в игре добавляет каждый модификатор и его тир). Ниже видно, чем становится каждая строка; красные будут пропущены. Клик по строке выделяет её в тексте.</value>
+    <value>Вставьте предмет, скопированный через Ctrl+C в Path of Building или в игре (Ctrl+Alt+C в игре добавляет каждое свойство и его тир). Ниже видно, чем становится каждая строка; красные будут пропущены. Клик по строке выделяет её в тексте.</value>
   </data>
   <data name="Text_e448d0ca53ec" xml:space="preserve">
     <value>Получение последнего обновления</value>
@@ -4707,11 +4728,11 @@
   <data name="Text_e6024c22b8bb" xml:space="preserve">
     <value>Ожидание игрового клиента выбранной копии.</value>
   </data>
-  <data xml:space="preserve" name="Text_e62daa01ba01">
-    <value>Выберите и проверьте рабочую папку, чтобы увидеть её копии.</value>
-  </data>
   <data name="Text_e6128fcc2b1e" xml:space="preserve">
     <value>Использовать отдельные настройки</value>
+  </data>
+  <data xml:space="preserve" name="Text_e62daa01ba01">
+    <value>Выберите и проверьте рабочую папку, чтобы увидеть её копии.</value>
   </data>
   <data name="Text_e64a3e6ff925" xml:space="preserve">
     <value>Запись планировки областей</value>
@@ -4852,7 +4873,7 @@
     <value>Проверка…</value>
   </data>
   <data name="Text_eca8f3a20a81" xml:space="preserve">
-    <value>Показывать и модификаторы, которым нужен уровень предмета выше текущего</value>
+    <value>Показывать и свойства, которым нужен уровень предмета выше текущего</value>
   </data>
   <data name="Text_ed059fe4e0d0" xml:space="preserve">
     <value>Отражённый</value>
@@ -4986,6 +5007,9 @@
   <data xml:space="preserve" name="Text_f2b4f43625b6">
     <value>Усиливает контрастность текста; при необходимости меняет фон кнопок.</value>
   </data>
+  <data name="Text_f2c5815e6b8b" xml:space="preserve">
+    <value>Esc → Настройки → Игра → Режим работы сети → Рассинхронизация (Options → Game → Networking Mode → Predictive), затем выйдите на экран персонажей и снова нажмите «Играть»</value>
+  </data>
   <data name="Text_f2ff9dad3097" xml:space="preserve">
     <value>GameServer.Host: Waypoint запускает его, чтобы регистрировать аккаунты и создавать персонажей</value>
   </data>
@@ -5082,6 +5106,9 @@
   </data>
   <data name="Text_f785c3ce1d58" xml:space="preserve">
     <value>мс</value>
+  </data>
+  <data name="Text_f7a7e0898704" xml:space="preserve">
+    <value>Нужен umu-launcher: он запускает игру через Proton. Waypoint сообщит о новом выпуске и установит его.</value>
   </data>
   <data name="Text_f7a90ea11a44" xml:space="preserve">
     <value>Посмотреть, что случилось</value>
@@ -5257,11 +5284,11 @@
   <data name="Text_fea8224e17a4" xml:space="preserve">
     <value>Версия Steam или Epic: использовать нельзя</value>
   </data>
-  <data xml:space="preserve" name="Text_fed12611d2d8">
-    <value>Океан</value>
-  </data>
   <data name="Text_fece8604a2c2" xml:space="preserve">
     <value>Настройки игры</value>
+  </data>
+  <data xml:space="preserve" name="Text_fed12611d2d8">
+    <value>Океан</value>
   </data>
   <data name="Text_feddcf308625" xml:space="preserve">
     <value>Редкость</value>
@@ -5296,32 +5323,5 @@
   </data>
   <data name="Text_ffd7f7c8013d" xml:space="preserve">
     <value>опережает LocalExile на {0} коммит(ов)</value>
-  </data>
-  <data name="Text_03c9dea7a093" xml:space="preserve">
-    <value>У вас последняя версия.</value>
-  </data>
-  <data name="Text_0e23f575981d" xml:space="preserve">
-    <value>Не удалось прочитать список команд. Команду всё равно можно ввести и скопировать.</value>
-  </data>
-  <data name="Text_dd051395345d" xml:space="preserve">
-    <value>Буфер обмена недоступен.</value>
-  </data>
-  <data name="Text_f7a7e0898704" xml:space="preserve">
-    <value>Нужен umu-launcher: он запускает игру через Proton. Waypoint сообщит о новом выпуске и установит его.</value>
-  </data>
-  <data name="Text_8550dd056667" xml:space="preserve">
-    <value>Выпуска для Linux пока нет, поэтому LocalExile будет установлен из исходного кода.</value>
-  </data>
-  <data name="Text_ad3c7c6418d1" xml:space="preserve">
-    <value>Конструктор предметов пока недоступен в Linux.</value>
-  </data>
-  <data name="Text_3fc597ad27c9" xml:space="preserve">
-    <value>Не удалось запустить git: {0}. Установите Git и запустите лаунчер снова.</value>
-  </data>
-  <data name="Text_9bad10eb9ddf" xml:space="preserve">
-    <value>umu-launcher запускает игру через Proton</value>
-  </data>
-  <data name="Text_a3986c49db0d" xml:space="preserve">
-    <value>PowerShell 7 выполняет скрипты сборки и настройки LocalExile</value>
   </data>
 </root>

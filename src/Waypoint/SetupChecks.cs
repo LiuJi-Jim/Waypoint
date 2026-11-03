@@ -72,7 +72,7 @@ static class SetupChecks
     /// <summary>The server supports only Predictive; "auto" picks lockstep on localhost (GettingStarted step 10).</summary>
     static SetupCheck NetworkMode()
     {
-        string hint = L.Text("Esc → Options → Game → Network Mode → Predictive, then log out to the character screen and Play again");
+        string hint = L.Text("Esc → Options → Game → Networking Mode → Predictive, then log out to the character screen and Play again");
         if (!System.IO.File.Exists(Repo.ClientConfig)) return new(null, L.Text("network mode not set yet: set Predictive in game"), hint);
         string? mode = ClientSettings.NetworkMode(Repo.ClientConfig);
         if (string.Equals(mode, "predictive", StringComparison.OrdinalIgnoreCase)) return new(true, L.Text("network mode Predictive"));

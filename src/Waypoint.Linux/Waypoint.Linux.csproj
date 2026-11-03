@@ -10,7 +10,7 @@
     <RootNamespace>Waypoint</RootNamespace>
     <Version>0.0.0-dev</Version>
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
-    <SatelliteResourceLanguages>en;ru</SatelliteResourceLanguages>
+    <SatelliteResourceLanguages>en;ru;zh-CN</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

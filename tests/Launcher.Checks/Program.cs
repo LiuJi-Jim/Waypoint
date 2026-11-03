@@ -119,6 +119,8 @@ try
     Check(SettingsStore.Load(settingsPath).UseLocalProfile, "atomic settings replacement");
     SettingsStore.Save(original with { Language = "ru" }, settingsPath);
     Check(SettingsStore.Load(settingsPath) == original with { Language = "ru" }, "Russian preference persists with existing repository and runtime choices");
+    SettingsStore.Save(original with { Language = "zh-CN" }, settingsPath);
+    Check(SettingsStore.Load(settingsPath) == original with { Language = "zh-CN" }, "a language with a region persists as its tag");
     var appearance=new AppearanceSettings(Mode:"System",Scheme:"custom",DarkColors:new(){["PrimaryFill"]="#4567AB"},Font:"OpenDyslexic",TextScale:125,StrongFocus:true,ReduceMotion:true);
     SettingsStore.Save(original with{Appearance=appearance},settingsPath);
     var appearanceSettings=SettingsStore.Load(settingsPath);
