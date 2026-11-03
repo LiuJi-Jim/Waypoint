@@ -27,7 +27,7 @@ python tools/missing-translations.py
 
 The scripts work on throwaway fixtures, never on a real checkout's saves. They do not replace looking at the running app:
 start it with `--repo <checkout>` (and `--allow-multiple` beside another copy), look at every changed section at the
-minimum window size, in light and dark, in both languages, and in the blocked and ready states.
+minimum window size, in light and dark, in every language, and in the blocked and ready states.
 
 ## How the code is laid out
 

@@ -164,7 +164,7 @@
                     <RadioButton x:Name="OwnSettingsChoice" GroupName="GameSettings" Style="{StaticResource ChoiceRadio}" Content="{l:Loc 'Use separate LocalExile settings (recommended)'}" IsChecked="True" />
                     <TextBlock x:Name="OwnSettingsNote" Style="{StaticResource Caption}" Margin="27,0,0,8" />
                     <RadioButton x:Name="LeaveSettings" GroupName="GameSettings" Style="{StaticResource ChoiceRadio}" Content="{l:Loc 'Leave this client as it is'}" />
-                    <TextBlock Text="{l:Loc 'Nothing changes. If this client shares its settings with your normal game, you set Network Mode to Predictive in the game yourself.'}" Style="{StaticResource Caption}" Margin="27,0,0,0" />
+                    <TextBlock Text="{l:Loc 'Nothing changes. If this client shares its settings with your normal game, you set Networking Mode to Predictive in the game yourself.'}" Style="{StaticResource Caption}" Margin="27,0,0,0" />
                 </StackPanel>
 
                 <!-- What a player on a release wants done with what they have -->

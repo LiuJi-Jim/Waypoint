@@ -5,10 +5,8 @@
       <Border Classes="card">
         <StackPanel Spacing="6">
           <TextBlock x:Name="LanguageHeading" Classes="heading" />
-          <StackPanel Orientation="Horizontal" Spacing="20">
-            <RadioButton x:Name="English" Content="English" GroupName="Language" IsCheckedChanged="LanguageChanged" />
-            <RadioButton x:Name="Russian" Content="Русский" GroupName="Language" IsCheckedChanged="LanguageChanged" />
-          </StackPanel>
+          <!-- One choice per L.Languages, each named in its own language (SettingsTab.Attach). -->
+          <WrapPanel x:Name="LanguageChoices" ItemSpacing="20" />
           <TextBlock x:Name="LanguageNote" Classes="note" />
         </StackPanel>
       </Border>

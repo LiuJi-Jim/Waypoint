@@ -197,7 +197,8 @@ The theme button in the header goes Light → Dark → System. System follows th
 while Waypoint runs. The choice is saved. The branch is read from the checkout's `.git/HEAD` (a short commit when detached); clicking it opens the
 Versions section. The settings button opens the Settings section.
 
-The interface is in English or Russian (**Settings → Language**, at once; [localization.md](localization.md)).
+The interface is in English, Russian or Simplified Chinese (**Settings → Language**, at once; until one is picked it
+follows the system's display language; [localization.md](localization.md)).
 
 Ctrl+1 to Ctrl+9 and Ctrl+Tab choose a section, F5 inspects the checkout again, and Ctrl+Shift+R restores the default
 appearance.
@@ -439,7 +440,7 @@ answer ends the card, and a guide that finished with a client counts as answered
 client's Documents are those of its Wine prefix. LocalExile on its own uses one per install (`data/wine-prefix`), so Waypoint
 names one for everything it starts, `~/.local/share/LocalExile/wine-prefix`, through `WINEPREFIX` (`GameSettings`): every
 checkout and release shares it, it outlives them, and no other Path of Exile uses it. Waypoint creates its first settings there
-with Network Mode Predictive, from the install's older `data/wine-prefix` when it has one, and leaves them alone after that. A
+with Networking Mode Predictive, from the install's older `data/wine-prefix` when it has one, and leaves them alone after that. A
 prefix the shell names with `WINEPREFIX` is the player's, and is only read. A Gateway asked for its commands, values or crafter
 data gets a temporary folder of its own: on Linux its start would otherwise delete a running Gateway's module copies.
 
@@ -586,7 +587,7 @@ adapter does not know can be browsed but not changed.
 | `Workspace.cs`, `OutputPanel.xaml` | the app's side of the adapter: the last inspection, the operations and their output |
 | `SetupTab`, `ModsTab`, `BackupsTab`, `SettingsTab` | those sections |
 | `ToolsTab`, `ItemCrafterWindow`, `CrafterCatalog.cs`, `CraftedItems.cs`, `ItemImport.cs`, `ItemImportWindow` | the Tools section; the item crafter, the Gateway's crafter data and the game's wording of modifiers, the saved items, importing an item copied from Path of Building or the game |
-| `Loc.cs`, `src/Launcher.Core/Localization.cs`, `src/Launcher.Core/Resources/` | interface text in XAML and code, the English and Russian catalogs |
+| `Loc.cs`, `src/Launcher.Core/Localization.cs`, `src/Launcher.Core/Resources/` | interface text in XAML and code, the languages (`L.Languages`) and their catalogs |
 | `src/Launcher.Core/` | the adapter's client (`RuntimeClient.cs`, `BridgeScripts.cs`), the mods, backups, accounts, setup guidance, checkout discovery, diagnostics, the single instance |
 | `scripts/` | the adapter: `RuntimeBridge.ps1` and its parts, `SaveBackup.py`, `AccountData.py` |
 | `RuntimeCounters.cs`, `Metrics.cs`, `TimeSeries.cs`, `LineChart.cs` | the runtime counter sessions, the history, the charts (drawn directly: the WPF chart libraries pull in .NET Framework builds of SkiaSharp) |

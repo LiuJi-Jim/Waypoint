@@ -70,7 +70,7 @@ public static class ClientSettings
         string found = Read(client).Kind == ClientSettingsKind.Unknown
             ? L.Text("Waypoint can't tell what else uses this client's settings.") + " " + WhyUnknown(Path.GetFullPath(client), IsLink(client))
             : L.Text("LocalExile shares its settings and saved login with your normal Path of Exile.");
-        return found + "\n\n" + L.Text("LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Network Mode set to Predictive. Your normal game's files are not changed.", OwnFolderPath);
+        return found + "\n\n" + L.Text("LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Networking Mode set to Predictive. Your normal game's files are not changed.", OwnFolderPath);
     }
 
     /// <summary>A setup with a whole client that has no settings of its own, and has not been offered them.</summary>

@@ -1,5 +1,5 @@
 # Every push to main and every pull request: the solution builds without warnings, the tests and the adapter's checks pass,
-# and all interface text has its Russian translation.
+# and all interface text has a translation in every catalog.
 name: CI
 
 on:

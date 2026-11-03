@@ -25,6 +25,17 @@ public partial class SettingsTab : UserControl
         _shared = shared;
         ServerFolder.Text = Environment.CurrentDirectory;
         ServerFolder.ToolTip = Environment.CurrentDirectory;
+        foreach (var language in L.Languages)
+        {
+            // Its own language too, so that its glyphs are that language's whatever the interface shows.
+            var choice = new RadioButton
+            {
+                Content = language.Name, Tag = language.Tag, GroupName = "Language", Style = (Style)FindResource("ChoiceRadio"),
+                Margin = new Thickness(0, 0, 20, 0), Language = System.Windows.Markup.XmlLanguage.GetLanguage(language.Tag),
+            };
+            choice.Checked += LanguageChanged;
+            LanguageChoices.Children.Add(choice);
+        }
         Theme.Changed += ShowAppearance;
         L.Current.PropertyChanged += (_, _) => Show();
         Show();
@@ -34,8 +45,7 @@ public partial class SettingsTab : UserControl
     {
         _loading = true;
         ShowAppearance();
-        English.IsChecked = L.Current.Language != "ru";
-        Russian.IsChecked = L.Current.Language == "ru";
+        foreach (RadioButton choice in LanguageChoices.Children) choice.IsChecked = (string)choice.Tag == L.Current.Language;
         WindowChoices.Load(S.CloseToTray, S.StopServicesOnExit);
         AlwaysAsk.IsChecked = S.AlwaysAskOnClose;
         TrayWhileGame.IsChecked = S.TrayWhileGameRuns;
@@ -68,7 +78,7 @@ public partial class SettingsTab : UserControl
     void LanguageChanged(object sender, RoutedEventArgs e)
     {
         if (_loading || _shared is null) return;
-        S.Language = Russian.IsChecked == true ? "ru" : "en";
+        S.Language = (string)((RadioButton)sender).Tag;
         S.Save();
         L.Current.SetLanguage(S.Language);
     }

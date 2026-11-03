@@ -1,9 +1,12 @@
 """List interface text that is missing from a catalog; exit 1 when there is any.
 
 Example: python tools/missing-translations.py
-Scans src/**/*.cs for L.Text("...") and src/**/*.xaml for {l:Loc '...'}. A first argument made of literals joined with + is
-one source, and each literal branch of a ?: counts. L.Text with an interpolated string is reported too: its source can never
-match a key. Anything else non-literal (L.Text(stage)) cannot be read from the code: add its possible values by hand.
+Scans src/**/*.cs for L.Text("...") and src/**/*.xaml and *.axaml for {l:Loc '...'}. A first argument made of literals
+joined with + is one source, and each literal branch of a ?: counts. L.Text with an interpolated string is reported too: its
+source can never match a key. Anything else non-literal (L.Text(stage)) cannot be read from the code: add its possible
+values by hand.
+Every catalog (Strings.resx, and Strings.<language>.resx for each language) is checked, and each language's catalog must
+also hold every source of the English one, those added by hand included, and nothing else.
 """
 import hashlib
 import html
@@ -144,20 +147,26 @@ def sources_in_xaml(text):
         yield match.start(), re.sub(r"\\(.)", r"\1", html.unescape(raw), flags=re.S)
 
 
-def catalog(name):
-    root = ET.parse(ROOT / "src/Launcher.Core/Resources" / name).getroot()
-    return {d.attrib["name"] for d in root.findall("data")}
+def catalog(path):
+    root = ET.parse(path).getroot()
+    return {d.attrib["name"]: d.find("value").text or "" for d in root.findall("data")}
 
 
 def main():
     # A Windows console's code page cannot print every source, and CI's pipe has no better one.
     sys.stdout.reconfigure(encoding="utf-8")
-    english, russian = catalog("Strings.resx"), catalog("Strings.ru.resx")
+    resources = ROOT / "src/Launcher.Core/Resources"
+    english = catalog(resources / "Strings.resx")
+    catalogs = {"en": english} | {p.name[len("Strings."):-len(".resx")]: catalog(p) for p in sorted(resources.glob("Strings.*.resx"))}
+    uneven = []
+    for language, keys in catalogs.items():
+        uneven += [f"Strings.{language}.resx lacks {english[k]!r}" for k in english.keys() - keys.keys()]
+        uneven += [f"Strings.{language}.resx has {k}, which Strings.resx does not" for k in keys.keys() - english.keys()]
     missing = {}
     interpolated = []
     for path in sorted((ROOT / "src").rglob("*")):
         parts = path.relative_to(ROOT).parts
-        if "bin" in parts or "obj" in parts or path.suffix not in (".cs", ".xaml"):
+        if "bin" in parts or "obj" in parts or path.suffix not in (".cs", ".xaml", ".axaml"):
             continue
         text = path.read_text(encoding="utf-8-sig")
         found = sources_in_code(text) if path.suffix == ".cs" else sources_in_xaml(text)
@@ -166,14 +175,16 @@ def main():
             if source is None:
                 interpolated.append(place)
             else:
-                lacking = [n for n, keys in (("en", english), ("ru", russian)) if key_of(source) not in keys]
+                lacking = [n for n, keys in catalogs.items() if key_of(source) not in keys]
                 if lacking:
                     missing.setdefault(source, (lacking, place))
     for source, (lacking, place) in missing.items():
         print(f"{place} [{'/'.join(lacking)}] {source!r}")
     for place in interpolated:
         print(f"{place} interpolated source")
-    return 1 if missing or interpolated else 0
+    for line in uneven:
+        print(line)
+    return 1 if missing or interpolated or uneven else 0
 
 
 if __name__ == "__main__":

@@ -78,6 +78,9 @@
   <data xml:space="preserve" name="Text_03aaf79a604f">
     <value>Stop servers</value>
   </data>
+  <data name="Text_03c9dea7a093" xml:space="preserve">
+    <value>You have the latest version.</value>
+  </data>
   <data xml:space="preserve" name="Text_03f25d282624">
     <value>data/login-keys.json must match the prepared client; never regenerate existing keys casually</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Text_090416e6e2e6" xml:space="preserve">
     <value>Records each area's walk map with Frida</value>
+  </data>
+  <data name="Text_092673d5a5c0" xml:space="preserve">
+    <value>Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Networking Mode to Predictive the first time.</value>
   </data>
   <data name="Text_092709c82157" xml:space="preserve">
     <value>LocalExile and your saves go back to how they were before the update. Your progress since then is kept in a backup. Updates pause for a week.</value>
@@ -293,6 +299,9 @@
   </data>
   <data name="Text_0e2226b5235f" xml:space="preserve">
     <value>Welcome</value>
+  </data>
+  <data name="Text_0e23f575981d" xml:space="preserve">
+    <value>The command list could not be read. You can still type a command and copy it.</value>
   </data>
   <data name="Text_0e2a0f489dd2" xml:space="preserve">
     <value>End it and continue</value>
@@ -816,11 +825,11 @@
   <data xml:space="preserve" name="Text_26c164899bbb">
     <value>not built</value>
   </data>
-  <data xml:space="preserve" name="Text_271962fab9d7">
-    <value>Preparing client</value>
-  </data>
   <data name="Text_2718304a70c3" xml:space="preserve">
     <value>Game settings were not changed</value>
+  </data>
+  <data xml:space="preserve" name="Text_271962fab9d7">
+    <value>Preparing client</value>
   </data>
   <data name="Text_272776a0df04" xml:space="preserve">
     <value>QUALITY</value>
@@ -1341,6 +1350,9 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_3fbcbf7d0499">
     <value>Fetch completed.</value>
   </data>
+  <data name="Text_3fc597ad27c9" xml:space="preserve">
+    <value>git could not run: {0}. Install Git and start the launcher again.</value>
+  </data>
   <data name="Text_3fe586513da2" xml:space="preserve">
     <value>building GameServer.Host …</value>
   </data>
@@ -1617,14 +1629,11 @@ This checkout has modified tracked files.</value>
   <data name="Text_4df36313ae04" xml:space="preserve">
     <value>2.  Finds your game client, or lets you point to it</value>
   </data>
-  <data xml:space="preserve" name="Text_4df57ea533cf">
-    <value>Checking restore</value>
-  </data>
   <data name="Text_4df4a74256c7" xml:space="preserve">
     <value>network mode {0}: the server serves it</value>
   </data>
-  <data name="Text_4df7d19d0633" xml:space="preserve">
-    <value>Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Network Mode to Predictive the first time.</value>
+  <data xml:space="preserve" name="Text_4df57ea533cf">
+    <value>Checking restore</value>
   </data>
   <data name="Text_4e2f30ce9131" xml:space="preserve">
     <value>Something else is using LocalExile. Try again when it is done.</value>
@@ -1776,14 +1785,14 @@ This checkout has modified tracked files.</value>
   <data name="Text_5594a1f9def3" xml:space="preserve">
     <value>Stop the servers and the game before exiting</value>
   </data>
-  <data xml:space="preserve" name="Text_5634c7509b09">
-    <value>Automatic backups run before branch/PR activation, builds, Gateway startup/restart, game-data reload, mod changes and save restore. A failed backup blocks the change. Mod history records choices, manifest versions, DLL fingerprints and the last confirmed runtime report. Restoring saves does not switch source, client files, login keys or game-data overrides. Restoring mod choices never installs DLLs or replaces saves. Last launched Gateway is recorded by Waypoint; outside launches and every hot edit are not tracked.</value>
-  </data>
   <data name="Text_55b612083b47" xml:space="preserve">
     <value>Gives LocalExile its own settings and saved login, so your normal game keeps its own</value>
   </data>
   <data name="Text_55f68b111c40" xml:space="preserve">
     <value>Give LocalExile its own game settings, so your normal game keeps its own.</value>
+  </data>
+  <data xml:space="preserve" name="Text_5634c7509b09">
+    <value>Automatic backups run before branch/PR activation, builds, Gateway startup/restart, game-data reload, mod changes and save restore. A failed backup blocks the change. Mod history records choices, manifest versions, DLL fingerprints and the last confirmed runtime report. Restoring saves does not switch source, client files, login keys or game-data overrides. Restoring mod choices never installs DLLs or replaces saves. Last launched Gateway is recorded by Waypoint; outside launches and every hot edit are not tracked.</value>
   </data>
   <data name="Text_564570edcef7" xml:space="preserve">
     <value>The Gateway runs under dotnet watch, so saved code edits apply with the game still running; off passes -NoHotReload</value>
@@ -1800,6 +1809,12 @@ This checkout has modified tracked files.</value>
   <data name="Text_5726606d5e2a" xml:space="preserve">
     <value>release {0} has no {1} with its .sha256</value>
   </data>
+  <data name="Text_573bf7ff7f9e" xml:space="preserve">
+    <value>Nothing changes. If this client shares its settings with your normal game, you set Networking Mode to Predictive in the game yourself.</value>
+  </data>
+  <data name="Text_57b7b5924c6b" xml:space="preserve">
+    <value>Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Networking Mode to Predictive the first time.</value>
+  </data>
   <data name="Text_581dec3ed74b" xml:space="preserve">
     <value>LAST COMMIT</value>
   </data>
@@ -1814,14 +1829,14 @@ Current saves are unchanged. This backup will no longer be available to restore.
   <data xml:space="preserve" name="Text_589877b1a7f3">
     <value>Runtime last checked: </value>
   </data>
+  <data name="Text_5899382b7399" xml:space="preserve">
+    <value>Its config.json could not be read. It is kept beside the new one as config.json.old.</value>
+  </data>
   <data xml:space="preserve" name="Text_58b1306d2f1d">
     <value>Save backups</value>
   </data>
   <data xml:space="preserve" name="Text_58fc561ca474">
     <value>Install extraction dependency</value>
-  </data>
-  <data name="Text_5899382b7399" xml:space="preserve">
-    <value>Its config.json could not be read. It is kept beside the new one as config.json.old.</value>
   </data>
   <data name="Text_591889ac42e0" xml:space="preserve">
     <value>Open logs</value>
@@ -1868,14 +1883,14 @@ Current saves are unchanged. This backup will no longer be available to restore.
   <data name="Text_5bb7de320b88" xml:space="preserve">
     <value>{0} has {1} commit(s) of its own that the pull request has not; push or move them first</value>
   </data>
+  <data name="Text_5c1a1026eda3" xml:space="preserve">
+    <value>Everything is in place. Press Play in Waypoint to start the servers and the game. LocalExile has its own game settings, so your normal Path of Exile keeps its own.</value>
+  </data>
   <data xml:space="preserve" name="Text_5c412a262086">
     <value>Game</value>
   </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Choose a local branch, a fetched remote branch or an upstream PR. Switching stops owned servers, backs up saves and builds the revision. Close the game first; press Play afterward.</value>
-  </data>
-  <data name="Text_5c1a1026eda3" xml:space="preserve">
-    <value>Everything is in place. Press Play in Waypoint to start the servers and the game. LocalExile has its own game settings, so your normal Path of Exile keeps its own.</value>
   </data>
   <data name="Text_5c55fea32942" xml:space="preserve">
     <value>The item data could not be read: {0}</value>
@@ -2192,6 +2207,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6952069f9d84" xml:space="preserve">
     <value>level {0}</value>
   </data>
+  <data name="Text_695421b8f03a" xml:space="preserve">
+    <value>LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Networking Mode set to Predictive. Your normal game's files are not changed.</value>
+  </data>
   <data name="Text_6979ababfdcb" xml:space="preserve">
     <value>LocalExile keeps its own graphics, keys and saved login in {0}, and starts with the network mode it needs. Your normal game's settings are only read, once, as a starting point.</value>
   </data>
@@ -2300,9 +2318,6 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6f20e73b9302" xml:space="preserve">
     <value>Prefixes</value>
   </data>
-  <data name="Text_6f32b22fe74f" xml:space="preserve">
-    <value>Nothing changes. If this client shares its settings with your normal game, you set Network Mode to Predictive in the game yourself.</value>
-  </data>
   <data name="Text_6f3c603b812d" xml:space="preserve">
     <value>SERVICE</value>
   </data>
@@ -2386,9 +2401,6 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_726c2b850161" xml:space="preserve">
     <value>This changes Waypoint's interface. Repository names, paths, commit hashes, in-game commands and raw logs keep their original text.</value>
-  </data>
-  <data name="Text_72cbebbffd2d" xml:space="preserve">
-    <value>Esc → Options → Game → Network Mode → Predictive, then log out to the character screen and Play again</value>
   </data>
   <data name="Text_72db542cccd0" xml:space="preserve">
     <value>Changes here are saved immediately. The minimize button still uses the taskbar.</value>
@@ -2741,6 +2753,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_853c6a3cc7ff" xml:space="preserve">
     <value>Update and restart</value>
   </data>
+  <data name="Text_8550dd056667" xml:space="preserve">
+    <value>No release for Linux is published yet, so LocalExile is set up from its source code.</value>
+  </data>
   <data name="Text_85a70742a28e" xml:space="preserve">
     <value>Delete saved item</value>
   </data>
@@ -2945,9 +2960,6 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_9057fd0f98cc" xml:space="preserve">
     <value>Game client</value>
   </data>
-  <data name="Text_908eb71d714e" xml:space="preserve">
-    <value>Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Network Mode to Predictive the first time.</value>
-  </data>
   <data name="Text_90eb3b815e3e" xml:space="preserve">
     <value>{0} is a unique: the crafter makes normal, magic and rare items.</value>
   </data>
@@ -3020,6 +3032,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_94e14eed87ef" xml:space="preserve">
     <value>client (pid {0}) closed</value>
   </data>
+  <data name="Text_94fac69c8653" xml:space="preserve">
+    <value>Give LocalExile its own game settings</value>
+  </data>
   <data xml:space="preserve" name="Text_9533a426d7fa">
     <value>Logo background</value>
   </data>
@@ -3028,9 +3043,6 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data xml:space="preserve" name="Text_9575a529260a">
     <value>Appearance and accessibility</value>
-  </data>
-  <data name="Text_94fac69c8653" xml:space="preserve">
-    <value>Give LocalExile its own game settings</value>
   </data>
   <data name="Text_95784099d97d" xml:space="preserve">
     <value>{0} is still running</value>
@@ -3180,6 +3192,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_9b6f051b7ea9">
     <value>Use this checkout’s local runtime wrapper when present</value>
   </data>
+  <data name="Text_9bad10eb9ddf" xml:space="preserve">
+    <value>umu-launcher runs the game under Proton</value>
+  </data>
   <data name="Text_9bc57fc48f3b" xml:space="preserve">
     <value>Search modifiers</value>
   </data>
@@ -3189,11 +3204,11 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_9bf4d9a05005" xml:space="preserve">
     <value>{0}: {1} modifiers. {2} lines are left out (red): the crafter has no modifier worded so.</value>
   </data>
-  <data xml:space="preserve" name="Text_9c2f5c362587">
-    <value>Create a local game account</value>
-  </data>
   <data name="Text_9c0f7a91cfa6" xml:space="preserve">
     <value>game settings are shared with your normal game</value>
+  </data>
+  <data xml:space="preserve" name="Text_9c2f5c362587">
+    <value>Create a local game account</value>
   </data>
   <data name="Text_9c384372f6be" xml:space="preserve">
     <value>Capture stopped. Existing files were kept.</value>
@@ -3362,6 +3377,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_a388bd2d373c" xml:space="preserve">
     <value>Uncommitted changes</value>
+  </data>
+  <data name="Text_a3986c49db0d" xml:space="preserve">
+    <value>PowerShell 7 runs LocalExile's build and setup scripts</value>
   </data>
   <data name="Text_a3ac0b8d4d94" xml:space="preserve">
     <value>1.  Gets LocalExile to a folder you choose, or finds the copy you have</value>
@@ -3585,6 +3603,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_acb4bce11dae">
     <value>A workspace operation is in progress.</value>
   </data>
+  <data name="Text_ad3c7c6418d1" xml:space="preserve">
+    <value>The item crafter is not available on Linux yet.</value>
+  </data>
   <data name="Text_ad909a80eb9a" xml:space="preserve">
     <value>No open pull requests.</value>
   </data>
@@ -3782,9 +3803,6 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data xml:space="preserve" name="Text_b77c7a041298">
     <value>Restoring saves</value>
-  </data>
-  <data name="Text_b77a85ad8d91" xml:space="preserve">
-    <value>LocalExile gets its own in {0}, starting from a copy of your normal settings without your login, with Network Mode set to Predictive. Your normal game's files are not changed.</value>
   </data>
   <data name="Text_b7b159728e5f" xml:space="preserve">
     <value>Node.js or Tools\ooz\node_modules missing (step 7)</value>
@@ -4098,11 +4116,11 @@ Last reported Gateway event. Open Gateway output for details.</value>
 
 Steam layout and a newer official client are unsupported. The launcher does not download the game.</value>
   </data>
-  <data xml:space="preserve" name="Text_c7ece59b9c12">
-    <value>Create local account</value>
-  </data>
   <data name="Text_c7c78e5406ce" xml:space="preserve">
     <value>Use separate game settings…</value>
+  </data>
+  <data xml:space="preserve" name="Text_c7ece59b9c12">
+    <value>Create local account</value>
   </data>
   <data name="Text_c7f937836f5d" xml:space="preserve">
     <value>Choose</value>
@@ -4535,6 +4553,9 @@ Dependencies: {2}
   <data name="Text_dcf6607f29a2" xml:space="preserve">
     <value>{0} min ago</value>
   </data>
+  <data name="Text_dd051395345d" xml:space="preserve">
+    <value>The clipboard is not available.</value>
+  </data>
   <data name="Text_dd0abeaace42" xml:space="preserve">
     <value>Crafted prefix</value>
   </data>
@@ -4707,11 +4728,11 @@ Dependencies: {2}
   <data name="Text_e6024c22b8bb" xml:space="preserve">
     <value>Waiting for the selected game client.</value>
   </data>
-  <data xml:space="preserve" name="Text_e62daa01ba01">
-    <value>Choose and check a workspace to see its backups.</value>
-  </data>
   <data name="Text_e6128fcc2b1e" xml:space="preserve">
     <value>Use separate settings</value>
+  </data>
+  <data xml:space="preserve" name="Text_e62daa01ba01">
+    <value>Choose and check a workspace to see its backups.</value>
   </data>
   <data name="Text_e64a3e6ff925" xml:space="preserve">
     <value>Area layout capture</value>
@@ -4986,6 +5007,9 @@ Dependencies: {2}
   <data xml:space="preserve" name="Text_f2b4f43625b6">
     <value>Targets stronger text contrast and may adjust button fills.</value>
   </data>
+  <data name="Text_f2c5815e6b8b" xml:space="preserve">
+    <value>Esc → Options → Game → Networking Mode → Predictive, then log out to the character screen and Play again</value>
+  </data>
   <data name="Text_f2ff9dad3097" xml:space="preserve">
     <value>GameServer.Host, which Waypoint starts to register accounts and create characters</value>
   </data>
@@ -5082,6 +5106,9 @@ Mods at backup: </value>
   </data>
   <data name="Text_f785c3ce1d58" xml:space="preserve">
     <value>ms</value>
+  </data>
+  <data name="Text_f7a7e0898704" xml:space="preserve">
+    <value>Needs umu-launcher, which runs it under Proton. Waypoint tells you when a newer release is out and installs it for you.</value>
   </data>
   <data name="Text_f7a90ea11a44" xml:space="preserve">
     <value>See what happened</value>
@@ -5257,11 +5284,11 @@ Mods at backup: </value>
   <data name="Text_fea8224e17a4" xml:space="preserve">
     <value>Steam or Epic layout: it cannot be used</value>
   </data>
-  <data xml:space="preserve" name="Text_fed12611d2d8">
-    <value>Ocean</value>
-  </data>
   <data name="Text_fece8604a2c2" xml:space="preserve">
     <value>Game settings</value>
+  </data>
+  <data xml:space="preserve" name="Text_fed12611d2d8">
+    <value>Ocean</value>
   </data>
   <data name="Text_feddcf308625" xml:space="preserve">
     <value>Rarity</value>
@@ -5296,32 +5323,5 @@ This replaces the saved choices only. Mod DLLs and saves are not restored. The c
   </data>
   <data name="Text_ffd7f7c8013d" xml:space="preserve">
     <value>{0} commit(s) ahead of LocalExile</value>
-  </data>
-  <data name="Text_03c9dea7a093" xml:space="preserve">
-    <value>You have the latest version.</value>
-  </data>
-  <data name="Text_0e23f575981d" xml:space="preserve">
-    <value>The command list could not be read. You can still type a command and copy it.</value>
-  </data>
-  <data name="Text_dd051395345d" xml:space="preserve">
-    <value>The clipboard is not available.</value>
-  </data>
-  <data name="Text_f7a7e0898704" xml:space="preserve">
-    <value>Needs umu-launcher, which runs it under Proton. Waypoint tells you when a newer release is out and installs it for you.</value>
-  </data>
-  <data name="Text_8550dd056667" xml:space="preserve">
-    <value>No release for Linux is published yet, so LocalExile is set up from its source code.</value>
-  </data>
-  <data name="Text_ad3c7c6418d1" xml:space="preserve">
-    <value>The item crafter is not available on Linux yet.</value>
-  </data>
-  <data name="Text_3fc597ad27c9" xml:space="preserve">
-    <value>git could not run: {0}. Install Git and start the launcher again.</value>
-  </data>
-  <data name="Text_9bad10eb9ddf" xml:space="preserve">
-    <value>umu-launcher runs the game under Proton</value>
-  </data>
-  <data name="Text_a3986c49db0d" xml:space="preserve">
-    <value>PowerShell 7 runs LocalExile's build and setup scripts</value>
   </data>
 </root>

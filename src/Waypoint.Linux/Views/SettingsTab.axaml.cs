@@ -25,6 +25,12 @@ partial class SettingsTab : UserControl
         _shared = shared;
         ServerFolder.Text = Environment.CurrentDirectory;
         ToolTip.SetTip(ServerFolder, Environment.CurrentDirectory);
+        foreach (var language in L.Languages)
+        {
+            var choice = new RadioButton { Content = language.Name, Tag = language.Tag, GroupName = "Language" };
+            choice.IsCheckedChanged += LanguageChanged;
+            LanguageChoices.Children.Add(choice);
+        }
         L.Current.PropertyChanged += (_, _) => Show();
         Show();
     }
@@ -33,8 +39,7 @@ partial class SettingsTab : UserControl
     {
         _loading = true;
         ShowTexts();
-        English.IsChecked = L.Current.Language != "ru";
-        Russian.IsChecked = L.Current.Language == "ru";
+        foreach (RadioButton choice in LanguageChoices.Children) choice.IsChecked = (string)choice.Tag! == L.Current.Language;
         StopServices.IsChecked = S.StopServicesOnExit;
         LeaveServices.IsChecked = !S.StopServicesOnExit;
         ShowServicesHelp();
@@ -84,8 +89,8 @@ partial class SettingsTab : UserControl
     // A radio button says it was checked before its group unchecks the other, so these go by the sender.
     void LanguageChanged(object? sender, RoutedEventArgs e)
     {
-        if (_loading || _shared is null || sender is not RadioButton { IsChecked: true }) return;
-        S.Language = sender == Russian ? "ru" : "en";
+        if (_loading || _shared is null || sender is not RadioButton { IsChecked: true, Tag: string tag }) return;
+        S.Language = tag;
         S.Save();
         L.Current.SetLanguage(S.Language);
     }

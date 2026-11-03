@@ -45,8 +45,9 @@ sealed class Settings
     public bool TrayWhileGameRuns { get; set; } = true;
     /// <summary>Theme, scheme, font, text size and the accessibility options; null until changed.</summary>
     public AppearanceSettings? Appearance { get; set; }
-    /// <summary>The interface's language: "en" or "ru".</summary>
-    public string Language { get; set; } = "en";
+    /// <summary>The interface's language, a tag of <see cref="L.Languages"/>; empty until the player picks one, which follows
+    /// Windows' display language (<see cref="L.SetLanguage"/>).</summary>
+    public string Language { get; set; } = "";
     /// <summary>Back the saves up before a server start, a checkout switch or an account change.</summary>
     public bool AutomaticBackups { get; set; } = true;
     /// <summary>Use the checkout's scripts/dev/live.local.ps1 where it has one (its config/runtime.local.ps1 included).</summary>

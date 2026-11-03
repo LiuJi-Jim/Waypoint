@@ -898,11 +898,11 @@ public partial class SetupWizard : FormWindow
                 bool ready = settings.Kind == ClientSettingsKind.Separate && ClientSettings.IsPredictive(settings.ConfigFile);
                 DoneText.Text = !HasClient(checkout) ? L.Text("LocalExile is built. Add your game client with this guide when you have it: Setup → Run setup guide.")
                     : ready ? L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. LocalExile has its own game settings, so your normal Path of Exile keeps its own.")
-                    : L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Network Mode to Predictive the first time.");
+                    : L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Networking Mode to Predictive the first time.");
                 bool accounts = HasClient(checkout) && !UsingRelease;
                 if (UsingRelease) DoneText.Text = !HasClient(checkout) ? L.Text("LocalExile is installed. Run this guide again when you have your game client: Play → Finish setup.")
                     : ready ? L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. LocalExile has its own game settings, so your normal Path of Exile keeps its own.")
-                    : L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Network Mode to Predictive the first time.");
+                    : L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Networking Mode to Predictive the first time.");
                 if (SwitchFrom is not null)
                 {
                     var choices = Choices();

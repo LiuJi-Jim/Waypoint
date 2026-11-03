@@ -50,8 +50,9 @@ rules: the server's are in its `AGENTS.md`.
   relative to that root, never absolute or searched for. Searching happens only when the player asks for it.
 - **No server data or secrets here**: nothing from the checkout's `Client/` or `data/`, no keys, accounts or passwords.
   Waypoint's own settings live in `%LOCALAPPDATA%\Waypoint\settings.json`.
-- **All interface text goes through `L.Text` or `{l:Loc '…'}`** with a Russian translation in the same change
-  ([docs/localization.md](docs/localization.md)); `tools/missing-translations.py` finds what is missing. Logs, commands,
+- **All interface text goes through `L.Text` or `{l:Loc '…'}`** with a translation in every catalog (Russian and
+  Simplified Chinese) in the same change ([docs/localization.md](docs/localization.md)); `tools/missing-translations.py`
+  finds what is missing. The languages are one list, `L.Languages`: never compare a language tag in a view. Logs, commands,
   paths and protocol values stay as they are.
 - **Colours come from the theme**: `{DynamicResource Shell.*}` in views, `Theme.Brush` in code. A colour written into a view
   would stay the same in every scheme.
