@@ -15,8 +15,8 @@ public static class Platform
     public static string LocalData => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData,
         OperatingSystem.IsWindows() ? Environment.SpecialFolderOption.None : Environment.SpecialFolderOption.Create);
 
-    /// <summary>The prefix a Linux client runs in: the shell's, else LocalExile's own, which every install shares and no other Path
-    /// of Exile uses (scripts/dev/platform-linux.ps1, the release's Platform.cs).</summary>
+    /// <summary>The prefix a Linux client runs in: the shell's, else the one Waypoint keeps for every install it runs, which no other
+    /// Path of Exile uses. Waypoint names it to what it starts with WINEPREFIX (src/Waypoint.Linux/GameSettings.cs).</summary>
     public static string GamePrefix => Environment.GetEnvironmentVariable("WINEPREFIX") is { Length: > 0 } own ? own : Path.Combine(LocalData, "LocalExile", "wine-prefix");
 
     /// <summary>The Python on PATH. Some Linux systems only have python3.</summary>

@@ -431,10 +431,12 @@ client as it was, and other keys in it stay; one that can't be parsed is kept as
 An existing setup changes only when the player asks: Setup's **Use separate game settings…**, shown until they are separate, and
 Play's card, which a Simple mode player or a release sees once (`SettingsOffer`, remembered in `GameSettingsOffered`). Either
 answer ends the card, and a guide that finished with a client counts as answered. The Linux guide has no such step: a Linux
-client runs in LocalExile's own Wine prefix, `~/.local/share/LocalExile/wine-prefix`, with its own Documents. Every checkout and
-release of that user shares it, it outlives them, and no other Path of Exile uses it. LocalExile creates its first settings there
-with Network Mode Predictive, from an install's older `data/wine-prefix` when it has one, and leaves them alone after that. A
-prefix named by `WINEPREFIX` is the player's, and is only read.
+client's Documents are those of its Wine prefix. LocalExile on its own uses one per install (`data/wine-prefix`), so Waypoint
+names one for everything it starts, `~/.local/share/LocalExile/wine-prefix`, through `WINEPREFIX` (`GameSettings`): every
+checkout and release shares it, it outlives them, and no other Path of Exile uses it. Waypoint creates its first settings there
+with Network Mode Predictive, from the install's older `data/wine-prefix` when it has one, and leaves them alone after that. A
+prefix the shell names with `WINEPREFIX` is the player's, and is only read. A Gateway asked for its commands, values or crafter
+data gets a temporary folder of its own: on Linux its start would otherwise delete a running Gateway's module copies.
 
 On Linux (`src/Waypoint.Linux/Views/SetupWizard.axaml`) the guide is the same, with what running there takes. The release route
 also passes through the Tools page, which lists umu-launcher (or a runner named in `Game_CLIENT_RUNNER`): `LocalExile.exe` runs
