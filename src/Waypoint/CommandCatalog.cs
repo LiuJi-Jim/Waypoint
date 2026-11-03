@@ -41,9 +41,20 @@ sealed class CommandCatalog(IReadOnlyList<ChatCommand> commands, DateTime built 
         if (!Repo.IsInstall && !Repo.HasLauncherHooks())
             throw new InvalidOperationException(L.Text("This checkout is older than the launcher hooks, so its Gateway cannot list commands: pull the server's main branch."));
         // A release's Gateway is its own executable.
+#if WINDOWS
         bool program = arguments[0].EndsWith(".exe", StringComparison.OrdinalIgnoreCase);
+#else
+        bool program = !arguments[0].EndsWith(".dll", StringComparison.OrdinalIgnoreCase);
+#endif
         var info = new ProcessStartInfo(program ? Path.GetFullPath(arguments[0]) : "dotnet") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true };
         foreach (string a in program ? arguments.Skip(1) : arguments) info.ArgumentList.Add(a);
+#if !WINDOWS
+        // A Gateway, in these modes too, first deletes the module copies older than ten minutes in its temporary folder. On Linux
+        // a running Gateway's loaded copies can be deleted, so a question asked here gets a temporary folder of its own.
+        string temp = Path.Combine(Platform.LocalData, "Waypoint", "gateway-questions");
+        Directory.CreateDirectory(temp);
+        info.Environment["TMPDIR"] = temp;
+#endif
         using var process = Process.Start(info)!;
         try
         {

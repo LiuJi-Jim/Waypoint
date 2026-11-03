@@ -4,7 +4,7 @@ namespace Launcher.Core;
 /// <param name="Accounts">The accounts found in the release, negative when they could not be read; <paramref name="Characters"/> the same.</param>
 /// <param name="CopyClientGb">The size of a client copy still to make; 0 when none is.</param>
 public sealed record SwitchChoices(string Copy, string Old, bool Download, bool BringCharacters, int Accounts, int Characters,
-    bool KeepOld, bool TestedVersion, bool GiveItem, bool SharesClient, double CopyClientGb, bool CopyHasSaves);
+    bool KeepOld, bool TestedVersion, bool GiveItem, bool SharesClient, double CopyClientGb, bool CopyHasSaves, bool OwnSettings = false);
 
 /// <summary>A line of "What will happen".</summary>
 public sealed record SwitchLine(string Text, bool Attention = false);
@@ -50,13 +50,15 @@ public static class SwitchToSource
     }
 
     public static bool HasFrida(string copy) =>
-        File.Exists(Path.Combine(copy, ".venv", "Scripts", "python.exe")) && Directory.Exists(Path.Combine(copy, ".venv", "Lib", "site-packages", "frida"));
+        File.Exists(Platform.VenvPython(copy)) && (OperatingSystem.IsWindows()
+            ? Directory.Exists(Path.Combine(copy, ".venv", "Lib", "site-packages", "frida"))
+            : Directory.Exists(Path.Combine(copy, ".venv", "lib")) && Directory.EnumerateDirectories(Path.Combine(copy, ".venv", "lib"), "frida", SearchOption.AllDirectories).Any());
 
     /// <summary>Python with Frida in the checkout's own .venv, where the client control bridge looks. git ignores it.</summary>
     public static async Task InstallFridaAsync(string copy, Action<string> output, CancellationToken stop)
     {
-        string python = Path.Combine(copy, ".venv", "Scripts", "python.exe");
-        if (!File.Exists(python) && await ToolProcess.RunAsync("python", ["-m", "venv", Path.Combine(copy, ".venv")], copy, output, stop) != 0)
+        string python = Platform.VenvPython(copy);
+        if (!File.Exists(python) && await ToolProcess.RunAsync(Platform.Python, ["-m", "venv", Path.Combine(copy, ".venv")], copy, output, stop) != 0)
             throw new IOException(L.Text("Python could not make its environment in {0}.", copy));
         if (await ToolProcess.RunAsync(python, ["-m", "pip", "install", "--disable-pip-version-check", "frida"], copy, output, stop) != 0)
             throw new IOException(L.Text("Frida could not be installed. Check your connection and try again."));
@@ -71,6 +73,7 @@ public static class SwitchToSource
         };
         if (c.SharesClient) lines.Add(new(L.Text("Use the game client of your current LocalExile, so it takes no extra space.")));
         else if (c.CopyClientGb > 0) lines.Add(new(L.Text("Copy the game client, about {0:0} GB.", c.CopyClientGb)));
+        if (c.OwnSettings) lines.Add(new(L.Text("Give LocalExile its own game settings, so your normal game keeps its own.")));
         if (c.BringCharacters)
         {
             lines.Add(new(c.Accounts >= 0 ? L.Text("Copy your accounts and characters. Accounts: {0}. Characters: {1}.", c.Accounts, c.Characters)

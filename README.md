@@ -49,6 +49,24 @@ The exe is not code-signed, so Windows SmartScreen may say "Windows protected yo
 Settings of an earlier Waypoint or LocalExile Launcher are taken over on the first start, and existing save backups stay
 where they are. Neither old file is changed.
 
+## Linux
+
+Linux has its own executable and interface (`src/Waypoint.Linux`, Avalonia) over the same engine, and the Windows app is
+built as before. It needs the .NET 10 SDK, [umu-launcher](https://github.com/Open-Wine-Components/umu-launcher) and your own
+standalone PoE **3.29.3b** client. A source checkout also needs PowerShell 7 (`dotnet tool install --global PowerShell`), Git,
+Python 3.9+ and Node.js.
+
+```bash
+dotnet run --project src/Waypoint.Linux
+```
+
+Game settings and the saved login are kept in `~/.local/share/LocalExile/wine-prefix`: every LocalExile of yours shares them, they
+stay when an install is deleted, and your normal Path of Exile does not use them.
+
+The ready-to-play route needs a release with a `-linux-x64` zip. Until LocalExile publishes one, the setup guide sets up the
+source code instead. Not on Linux yet: walk maps, the client control bridge (the Console copies commands instead of sending
+them), the item crafter, the tray and the appearance editor.
+
 ## Simple and Advanced modes
 
 On a release install some sections do less, because a release has no source, Frida or per-service control: **Console** copies

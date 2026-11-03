@@ -32,6 +32,8 @@
                     ToolTip="{l:Loc 'Creates the missing login keys and Game.patched.exe in your client copy; existing ones are kept'}" />
             <Button x:Name="DependenciesButton" Content="{l:Loc 'Install dependency'}" Click="Dependencies"
                     ToolTip="{l:Loc 'npm ci in the checkout\'s Tools/ooz'}" />
+            <Button x:Name="SettingsButton" Content="{l:Loc 'Use separate game settings…'}" Click="SeparateSettings"
+                    ToolTip="{l:Loc 'Gives LocalExile its own settings and saved login, so your normal game keeps its own'}" />
             <Button Content="{l:Loc 'Create account…'}" Click="CreateAccount" />
             <Button Content="{l:Loc 'Open Client folder'}" Click="OpenClient" />
             <Button Content="{l:Loc 'Setup guide'}" Click="OpenGuide" ToolTip="Agents/GettingStarted.md" />

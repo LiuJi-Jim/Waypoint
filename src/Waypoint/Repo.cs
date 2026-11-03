@@ -123,14 +123,25 @@ static class Repo
     public static string Logs { get; } = "logs";
 
     /// <summary>A server's build output, as live.ps1 runs it (Debug, net10.0).</summary>
+#if WINDOWS
     public static string ServerDll(string project) => IsInstall ? Path.Combine("app", $"GameServer.{project}.exe") :
+#else
+    public static string ServerDll(string project) => IsInstall ? Path.Combine("app", $"GameServer.{project}") :
+#endif
         Path.Combine("src", $"GameServer.{project}", "bin", "Debug", "net10.0", $"GameServer.{project}.dll");
 
     /// <summary>The checkout's virtual environment wins over the python on PATH, as in live.ps1.</summary>
+#if WINDOWS
     public static string Python => File.Exists(Path.Combine(".venv", "Scripts", "python.exe"))
         ? Path.GetFullPath(Path.Combine(".venv", "Scripts", "python.exe")) : "python";
+#else
+    public static string Python => File.Exists(Platform.VenvPython(".")) ? Path.GetFullPath(Platform.VenvPython(".")) : Platform.Python;
+#endif
 
-    /// <summary>The client's own settings; GettingStarted step 10 needs networking_type=predictive there.</summary>
-    public static string ClientConfig => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Path of Exile", "production_Config.ini");
+    /// <summary>The settings file this client uses; GettingStarted step 10 needs networking_type=predictive there.</summary>
+#if WINDOWS
+    public static string ClientConfig => ClientSettings.Read("Client").ConfigFile;
+#else
+    public static string ClientConfig => Path.Combine(Platform.GamePrefix, "drive_c", "users", "steamuser", "Documents", "My Games", "Path of Exile", "production_Config.ini");
+#endif
 }

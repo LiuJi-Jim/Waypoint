@@ -86,7 +86,7 @@ public static class Prerequisites
         RefreshPath();
         var dotnet = ToolProcess.AskAsync("dotnet", "--list-sdks");
         var git = ToolProcess.AskAsync("git", "--version");
-        var python = ToolProcess.AskAsync("python", "--version");
+        var python = ToolProcess.AskAsync(Platform.Python, "--version");
         var node = ToolProcess.AskAsync("node", "--version");
         await Task.WhenAll(dotnet, git, python, node);
         return
@@ -181,7 +181,7 @@ public static class SetupSequence
     /// <summary>Generates the game data. Each entry is stamped only once it is complete, so an entry cut short runs again.</summary>
     public static async Task ExtractAsync(string checkout, Action<string> output, CancellationToken stop)
     {
-        string powershell = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"WindowsPowerShell\v1.0\powershell.exe");
+        string powershell = Platform.PowerShell;
         string last = "";
         int code = await ToolProcess.RunAsync(powershell, ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path.Combine("scripts", "dev", "extract-data.ps1")],
             checkout, line => { if (line.Trim().Length > 0) last = line; output(line); }, stop);

@@ -10,7 +10,11 @@ static class SetupChecks
     {
         var checks = new List<SetupCheck>
         {
+#if WINDOWS
             OnPath("dotnet.exe") ? new(true, ".NET SDK") : new(false, L.Text(".NET SDK not found (dotnet)"), "https://dotnet.microsoft.com/download"),
+#else
+            OnPath("dotnet") ? new(true, ".NET SDK") : new(false, L.Text(".NET SDK not found (dotnet)"), "https://dotnet.microsoft.com/download"),
+#endif
             File("Client/Game.exe", L.Text("client copied into Client\\ (step 3)"), L.Text("robocopy your 3.29.3b client to Client, then copy PathOfExile.exe to Game.exe")),
             File("Client/Content.ggpk", L.Text("standalone client layout (Content.ggpk)"), L.Text("Steam installs have no Content.ggpk")),
             File("data/login-keys.json", L.Text("login keys (step 4)"), "dotnet run --project src/GameServer.Auth -- keygen Client/Game.exe"),
@@ -19,14 +23,37 @@ static class SetupChecks
                 : new(null, L.Text("gateway list not patched yet (step 6)"), L.Text("live.ps1 selects the local gateway itself; step 6 keeps a backup")),
             System.IO.File.Exists("data/extract-stamps.json") ? new(true, L.Text("game data extracted (step 7)"))
                 : new(null, L.Text("game data not extracted yet (step 7)"), L.Text("Play runs extract-data.ps1 first; it takes a few minutes the first time")),
+#if WINDOWS
             OnPath("node.exe") && Directory.Exists("Tools/ooz/node_modules/ooz-wasm") ? new(true, L.Text("Node.js and ooz (data extraction)"))
+#else
+            OnPath("node") && Directory.Exists("Tools/ooz/node_modules/ooz-wasm") ? new(true, L.Text("Node.js and ooz (data extraction)"))
+#endif
                 : new(false, L.Text("Node.js or Tools\\ooz\\node_modules missing (step 7)"), L.Text("install Node.js, then: cd Tools\\ooz; npm install")),
             ServerHooks(),
             NetworkMode(),
             Frida(),
         };
+#if WINDOWS
+        // A Linux client has a Wine prefix of its own, so nothing is shared there.
+        if (Directory.Exists("Client")) checks.Insert(checks.Count - 2, GameSettings());
+#endif
         return checks;
     }
+
+#if WINDOWS
+    /// <summary>Whether LocalExile can change what the player's normal game uses (ClientSettings).</summary>
+    static SetupCheck GameSettings()
+    {
+        var settings = ClientSettings.Read("Client");
+        string hint = L.Text("Guided setup → Use separate game settings…");
+        return settings.Kind switch
+        {
+            ClientSettingsKind.Separate => new(true, L.Text("game settings are separate ({0})", Path.GetRelativePath(ClientSettings.Documents, settings.ConfigFile))),
+            ClientSettingsKind.Shared => new(null, L.Text("game settings are shared with your normal game"), hint),
+            _ => new(null, L.Text("game settings: Waypoint can't tell what else uses them"), hint),
+        };
+    }
+#endif
 
     /// <summary>The server checkout has what the launcher drives it with (live.ps1 -Stop, the Gateway's commands and
     /// values, the dev host's accounts; they came together).</summary>
@@ -47,8 +74,7 @@ static class SetupChecks
     {
         string hint = L.Text("Esc → Options → Game → Network Mode → Predictive, then log out to the character screen and Play again");
         if (!System.IO.File.Exists(Repo.ClientConfig)) return new(null, L.Text("network mode not set yet: set Predictive in game"), hint);
-        string? mode = System.IO.File.ReadLines(Repo.ClientConfig)
-            .Select(l => l.Trim()).FirstOrDefault(l => l.StartsWith("networking_type=", StringComparison.OrdinalIgnoreCase))?.Split('=', 2)[1];
+        string? mode = ClientSettings.NetworkMode(Repo.ClientConfig);
         if (string.Equals(mode, "predictive", StringComparison.OrdinalIgnoreCase)) return new(true, L.Text("network mode Predictive"));
         return Repo.ServesLockstep ? new(true, L.Text("network mode {0}: the server serves it", mode ?? "auto"))
             : new(false, L.Text("network mode is {0}: the character won't move", mode ?? "auto"), hint);

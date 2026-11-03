@@ -72,7 +72,7 @@ sealed class StepRow(string name) : INotifyPropertyChanged
 /// </summary>
 public partial class SetupWizard : FormWindow
 {
-    enum Page { Welcome, Source, Install, Requirements, Checkout, Client, Switch, Account, Run, Done }
+    enum Page { Welcome, Source, Install, Requirements, Checkout, Client, Settings, Switch, Account, Run, Done }
 
     /// <summary>Roughly what a checkout takes with its client and generated data.</summary>
     const long NeededBytes = 75_000_000_000;
@@ -145,11 +145,37 @@ public partial class SetupWizard : FormWindow
     /// <summary>A new install has no saves, so no account yet; LocalExile.exe asks when one with saves has none.</summary>
     bool AccountNeeded => UsingRelease && NoClient.IsChecked != true && (_accountAsked || ChosenCheckout() is not { } folder || !LocalExileReleases.HasSaves(folder));
 
+    /// <summary>The client will be a link rather than a folder of its own.</summary>
+    bool LinkedClient => Sharing || LinkClient.IsChecked == true;
+
+    /// <summary>How the client will keep its settings once it is in place: a copy brings along the source's config.json. Null
+    /// when there is no client yet.</summary>
+    ClientSettingsState? PlannedSettings()
+    {
+        string? checkout = ChosenCheckout();
+        if (HasClient(checkout)) return ClientSettings.Read(Path.Combine(checkout!, "Client"));
+        if (NoClient.IsChecked == true || ClientList.SelectedItem is not FoundClient client) return null;
+        return ClientSettings.Read(client.Folder, LinkedClient);
+    }
+
+    /// <summary>Waypoint can't tell what a change would reach, so the player decides.</summary>
+    bool AskSettings => PlannedSettings() is { Kind: ClientSettingsKind.Unknown };
+
+    /// <summary>Settings of its own, unless it has them already or the player said to leave it.</summary>
+    bool OwnSettings => PlannedSettings() is { Kind: not ClientSettingsKind.Separate } && (!AskSettings || LeaveSettings.IsChecked != true);
+
     /// <summary>The pages of the chosen route, in order.</summary>
-    Page[] Flow => UsingRelease
-        ? AccountNeeded ? [Page.Welcome, Page.Source, Page.Install, Page.Client, Page.Account, Page.Run, Page.Done] : [Page.Welcome, Page.Source, Page.Install, Page.Client, Page.Run, Page.Done]
-        : SwitchFrom is not null ? [Page.Welcome, Page.Source, Page.Requirements, Page.Checkout, Page.Client, Page.Switch, Page.Run, Page.Done]
-        : [Page.Welcome, Page.Source, Page.Requirements, Page.Checkout, Page.Client, Page.Run, Page.Done];
+    Page[] Flow
+    {
+        get
+        {
+            Page[] flow = UsingRelease
+                ? AccountNeeded ? [Page.Welcome, Page.Source, Page.Install, Page.Client, Page.Account, Page.Run, Page.Done] : [Page.Welcome, Page.Source, Page.Install, Page.Client, Page.Run, Page.Done]
+                : SwitchFrom is not null ? [Page.Welcome, Page.Source, Page.Requirements, Page.Checkout, Page.Client, Page.Switch, Page.Run, Page.Done]
+                : [Page.Welcome, Page.Source, Page.Requirements, Page.Checkout, Page.Client, Page.Run, Page.Done];
+            return AskSettings ? [.. flow.SelectMany(p => p == Page.Client ? new[] { p, Page.Settings } : [p])] : flow;
+        }
+    }
 
     static string PageName(Page page) => L.Text(page switch
     {
@@ -158,6 +184,7 @@ public partial class SetupWizard : FormWindow
         Page.Requirements => "Tools",
         Page.Install or Page.Checkout => "LocalExile",
         Page.Client => "Game client",
+        Page.Settings => "Game settings",
         Page.Switch => "Your characters",
         Page.Account => "Account",
         _ => "Set up",
@@ -167,7 +194,7 @@ public partial class SetupWizard : FormWindow
     {
         _page = page;
         (FrameworkElement, Page)[] pages = [(WelcomePage, Page.Welcome), (SourcePage, Page.Source), (InstallPage, Page.Install), (RequirementsPage, Page.Requirements), (CheckoutPage, Page.Checkout),
-            (ClientPage, Page.Client), (SwitchPage, Page.Switch), (AccountPage, Page.Account), (RunPage, Page.Run), (DonePage, Page.Done)];
+            (ClientPage, Page.Client), (SettingsPage, Page.Settings), (SwitchPage, Page.Switch), (AccountPage, Page.Account), (RunPage, Page.Run), (DonePage, Page.Done)];
         foreach (var (element, shown) in pages) element.Visibility = shown == page ? Visibility.Visible : Visibility.Collapsed;
         if (page == Page.Account) _accountAsked = true;
         ShowRail();
@@ -178,6 +205,7 @@ public partial class SetupWizard : FormWindow
             case Page.Requirements: _ = CheckRequirementsAsync(); break;
             case Page.Checkout when !_searchedCheckouts: _ = FindCheckoutsAsync(); break;
             case Page.Client when !_clientsSearched: _ = FindClientsAsync(); break;
+            case Page.Settings: ShowSettings(); break;
             case Page.Switch: ShowSwitch(); break;
             case Page.Run when !Running && _outcome != SetupOutcome.Finished: PrepareRun(); break;
         }
@@ -231,7 +259,7 @@ public partial class SetupWizard : FormWindow
     {
         switch (_page)
         {
-            case Page.Welcome or Page.Source or Page.Requirements or Page.Client or Page.Switch or Page.Account: Show(Next()); break;
+            case Page.Welcome or Page.Source or Page.Requirements or Page.Client or Page.Settings or Page.Switch or Page.Account: Show(Next()); break;
             case Page.Install or Page.Checkout:
                 _clientsSearched = false;
                 Show(Next());
@@ -540,6 +568,7 @@ public partial class SetupWizard : FormWindow
         ShareClient.Visibility = Visibility.Collapsed;
         LinkClient.Visibility = UsingRelease && client is not null ? Visibility.Visible : Visibility.Collapsed;
         if (client is not null) ClientNote.Text = ClientWarning(client);
+        ShowRail();
         UpdateButtons();
         if (UsingRelease || client is not { Kind: ClientKind.Ready } || ChosenCheckout() is not { } checkout) return;
         string[] others = OtherFolders(checkout);
@@ -550,11 +579,23 @@ public partial class SetupWizard : FormWindow
         ShareClient.IsChecked = true;
         ShareClient.Visibility = Visibility.Visible;
         ClientNote.Text = ClientWarning(client);
+        ShowRail();
     }
 
     void ShareChanged(object sender, RoutedEventArgs e)
     {
         if (ClientList.SelectedItem is FoundClient client) ClientNote.Text = ClientWarning(client);
+        ShowRail();
+    }
+
+    void ShowSettings()
+    {
+        string? checkout = ChosenCheckout();
+        bool has = HasClient(checkout);
+        string client = has ? Path.Combine(checkout!, "Client") : (ClientList.SelectedItem as FoundClient)?.Folder ?? "";
+        bool linked = has ? ClientSettings.IsLink(client) : LinkedClient;
+        SettingsWhy.Text = ClientSettings.WhyUnknown(client, linked);
+        OwnSettingsNote.Text = L.Text("LocalExile keeps its own graphics, keys and saved login in {0}, and starts with the network mode it needs. Your normal game's settings are only read, once, as a starting point.", ClientSettings.OwnFolderPath);
     }
 
     /// <summary>The chosen client is shared through a link, with the keys of this folder, instead of copied.</summary>
@@ -614,13 +655,13 @@ public partial class SetupWizard : FormWindow
         double gigabytes = copying && ClientList.SelectedItem is FoundClient client ? client.Bytes / 1e9 : 0;
         return new(copy, SwitchFrom ?? "", DownloadChoice.IsChecked == true, BringCharacters.IsChecked == true, _oldAccounts, _oldCharacters,
             KeepBoth.IsChecked == true, TestedVersion.IsChecked == true, GiveItem.IsChecked == true || SwitchToSource.HasFrida(copy), Sharing, gigabytes,
-            LocalExileReleases.HasSaves(copy) && !SwitchToSource.SavesBrought(copy));
+            LocalExileReleases.HasSaves(copy) && !SwitchToSource.SavesBrought(copy), OwnSettings);
     }
 
     // --- Setting up ---
 
     /// <summary>The steps this run will take, in order, for the Run page to show before Start.</summary>
-    IReadOnlyList<SetupTask> Plan(string checkout, bool download, string? client, string? sharedKeys, bool prepare, SwitchChoices? switching)
+    IReadOnlyList<SetupTask> Plan(string checkout, bool download, string? client, string? sharedKeys, bool prepare, bool ownSettings, SwitchChoices? switching)
     {
         LauncherSettings Options() => _settings.ForBridge with { RepositoryPath = checkout };
         async Task Bridge(string action, Action<string> detail, CancellationToken stop, string? saveSource = null)
@@ -647,6 +688,7 @@ public partial class SetupWizard : FormWindow
         if (prepare)
             tasks.Add(new(L.Text("Prepare the client"), () => File.Exists(Path.Combine(checkout, "Client", "Game.patched.exe")) && File.Exists(Path.Combine(checkout, "data", "login-keys.json"))
                 && File.Exists(Path.Combine(checkout, "data", "gateway_list.original.txt")), (detail, stop) => Bridge("PrepareClient", detail, stop)));
+        if (prepare && ownSettings) tasks.Add(SettingsStep(checkout));
         tasks.Add(new(L.Text("Build LocalExile"), null, (detail, stop) => Bridge("Build", detail, stop)));
         if (prepare)
             tasks.Add(new(L.Text("Extract the game data"), null, (detail, stop) => SetupSequence.ExtractAsync(checkout, line => { Write(line); detail(line); }, stop)));
@@ -657,11 +699,18 @@ public partial class SetupWizard : FormWindow
         return tasks;
     }
 
+    static SetupTask SettingsStep(string checkout)
+    {
+        string client = Path.Combine(checkout, "Client");
+        return new(L.Text("Give LocalExile its own game settings"), () => ClientSettings.Read(client).Kind == ClientSettingsKind.Separate, (_, _) => Task.Run(() => ClientSettings.UseOwn(client)));
+    }
+
     /// <summary>A release's steps: the zip, then LocalExile.exe's own setup, which goes on from wherever it stopped.</summary>
-    IReadOnlyList<SetupTask> ReleasePlan(string folder, string? client, bool prepare)
+    IReadOnlyList<SetupTask> ReleasePlan(string folder, string? client, bool prepare, bool ownSettings)
     {
         var tasks = new List<SetupTask> { new(L.Text("Download LocalExile"), () => LocalExileReleases.IsInstall(folder), (detail, stop) => DownloadReleaseAsync(folder, detail, stop)) };
         if (prepare) tasks.Add(new(L.Text("Prepare LocalExile"), null, (detail, stop) => PrepareReleaseAsync(folder, client, detail, stop)));
+        if (prepare && ownSettings) tasks.Add(SettingsStep(folder));
         return tasks;
     }
 
@@ -784,8 +833,8 @@ public partial class SetupWizard : FormWindow
         string checkout = ChosenCheckout() ?? Checkout ?? "";
         var client = NoClient.IsChecked == true ? null : ClientList.SelectedItem as FoundClient;
         bool hasClient = client is not null || HasClient(checkout);
-        if (UsingRelease) return ReleasePlan(checkout, HasClient(checkout) ? null : client?.Folder, hasClient);
-        return Plan(checkout, DownloadChoice.IsChecked == true, HasClient(checkout) ? null : client?.Folder, Sharing ? _sharedKeys : null, hasClient, SwitchFrom is null ? null : Choices());
+        if (UsingRelease) return ReleasePlan(checkout, HasClient(checkout) ? null : client?.Folder, hasClient, OwnSettings);
+        return Plan(checkout, DownloadChoice.IsChecked == true, HasClient(checkout) ? null : client?.Folder, Sharing ? _sharedKeys : null, hasClient, OwnSettings, SwitchFrom is null ? null : Choices());
     }
 
     void Remember(string checkout)
@@ -843,12 +892,17 @@ public partial class SetupWizard : FormWindow
             case SetupOutcome.Finished:
                 Remember(checkout);
                 _settings.SetupClient = null;
+                _settings.GameSettingsOffered = _settings.GameSettingsOffered || HasClient(checkout);
                 _settings.Save();
-                DoneText.Text = HasClient(checkout) ? L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Network Mode to Predictive the first time.")
-                    : L.Text("LocalExile is built. Add your game client with this guide when you have it: Setup → Run setup guide.");
+                var settings = ClientSettings.Read(Path.Combine(checkout, "Client"));
+                bool ready = settings.Kind == ClientSettingsKind.Separate && ClientSettings.IsPredictive(settings.ConfigFile);
+                DoneText.Text = !HasClient(checkout) ? L.Text("LocalExile is built. Add your game client with this guide when you have it: Setup → Run setup guide.")
+                    : ready ? L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. LocalExile has its own game settings, so your normal Path of Exile keeps its own.")
+                    : L.Text("Everything is in place. Press Play in Waypoint to start the servers and the game. In the game, set Options → Game → Network Mode to Predictive the first time.");
                 bool accounts = HasClient(checkout) && !UsingRelease;
-                if (UsingRelease) DoneText.Text = HasClient(checkout) ? L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Network Mode to Predictive the first time.")
-                    : L.Text("LocalExile is installed. Run this guide again when you have your game client: Play → Finish setup.");
+                if (UsingRelease) DoneText.Text = !HasClient(checkout) ? L.Text("LocalExile is installed. Run this guide again when you have your game client: Play → Finish setup.")
+                    : ready ? L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. LocalExile has its own game settings, so your normal Path of Exile keeps its own.")
+                    : L.Text("Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. In the game, set Options → Game → Network Mode to Predictive the first time.");
                 if (SwitchFrom is not null)
                 {
                     var choices = Choices();

@@ -4,6 +4,12 @@ Waypoint is a Windows desktop tool for a [LocalExile](https://github.com/LocalEx
 [README.md](README.md) and [docs/launcher.md](docs/launcher.md) first; what to build next is in
 [docs/roadmap.md](docs/roadmap.md).
 
+## Linux
+
+`src/Waypoint` is the Windows app and `src/Waypoint.Linux` the Linux one. The Linux project links the engine's files from
+`src/Waypoint`, so a Linux path in one goes behind `#if WINDOWS`: the Windows app must compile to the same bytes. It builds from
+`Waypoint.Linux.slnx`, never from `Waypoint.slnx`. On Linux the views are copies, so a change to a section's logic goes in both.
+
 ## Working on both repositories
 
 Waypoint drives a server checkout, usually beside this repository (`..\LocalExile`). To see both, open them together (a
@@ -37,6 +43,9 @@ rules: the server's are in its `AGENTS.md`.
   change to accounts or mods is backed up unless the player turned that off. Never force-kill a Gateway as an automatic
   fallback; it needs the chance to save. A release and a source copy never share one database: bringing saves copies them
   with the online backup, because a stopped release still has saves in its WAL.
+- **The player's normal game settings are only ever read.** `production_Config.ini` and `production_login.credentials` are
+  shared with retail, Steam and Epic. LocalExile gets its own through `Client\config.json` (`ClientSettings`), asked for when
+  Waypoint cannot tell what that reaches.
 - **Work from the checkout's root.** Waypoint makes the chosen checkout its working directory at startup; keep its paths
   relative to that root, never absolute or searched for. Searching happens only when the player asks for it.
 - **No server data or secrets here**: nothing from the checkout's `Client/` or `data/`, no keys, accounts or passwords.

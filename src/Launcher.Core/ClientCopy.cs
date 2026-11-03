@@ -56,8 +56,17 @@ public static class ClientCopy
     /// <summary>Free bytes on the drive of a path, which need not exist yet; null when it cannot be told.</summary>
     public static long? FreeSpace(string path)
     {
-        try { return new DriveInfo(Path.GetPathRoot(Path.GetFullPath(path))!).AvailableFreeSpace; }
+        try { return new DriveInfo(OperatingSystem.IsWindows() ? Path.GetPathRoot(Path.GetFullPath(path))! : NearestFolder(path)).AvailableFreeSpace; }
         catch (Exception e) when (e is ArgumentException or IOException or UnauthorizedAccessException) { return null; }
+    }
+
+    /// <summary>On Linux every path's root is /, whichever disk holds it: the folder itself, or the nearest one above it that
+    /// exists yet, tells the disk.</summary>
+    static string NearestFolder(string path)
+    {
+        string folder = Path.GetFullPath(path);
+        while (!Directory.Exists(folder) && Path.GetDirectoryName(folder) is { } parent) folder = parent;
+        return folder;
     }
 
     public static void RequireSpace(ClientCopyPlan plan)
@@ -73,7 +82,7 @@ public static class ClientCopy
         if (new DirectoryInfo(target).LinkTarget is null) return;
         if (ClientLocator.Classify(target) is ClientKind.Ready or ClientKind.Standalone)
             throw new IOException(L.Text("Client must be a separate physical copy in this checkout, not a link to another folder."));
-        Directory.Delete(target);
+        if (OperatingSystem.IsWindows()) Directory.Delete(target); else File.Delete(target); // a Unix link is a file
     }
 
     /// <summary>A client patched for a set of keys has their public key in it, as it is, and the original has not: so whether
@@ -116,9 +125,13 @@ public static class ClientCopy
             if (Directory.EnumerateFileSystemEntries(target).Any()) throw new IOException(L.Text("{0} already has files in it, so Waypoint will not replace it with a link.", target));
             Directory.Delete(target);
         }
-        // A junction needs no special rights, which a symbolic link does.
-        int code = await ToolProcess.RunAsync("cmd.exe", ["/c", "mklink", "/J", target, ClientLocator.RealPath(client)], checkout, output, stop);
-        if (code != 0) throw new IOException(L.Text("Windows could not make the link at {0}. Copy the client instead.", target));
+        if (OperatingSystem.IsWindows())
+        {
+            // A junction needs no special rights, which a symbolic link does.
+            int code = await ToolProcess.RunAsync("cmd.exe", ["/c", "mklink", "/J", target, ClientLocator.RealPath(client)], checkout, output, stop);
+            if (code != 0) throw new IOException(L.Text("Windows could not make the link at {0}. Copy the client instead.", target));
+        }
+        else Directory.CreateSymbolicLink(target, ClientLocator.RealPath(client));
         BringKeys(keys, checkout);
     }
 

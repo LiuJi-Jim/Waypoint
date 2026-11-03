@@ -35,7 +35,7 @@ public partial class SetupTab : UserControl
         ServerFolder.Text = Environment.CurrentDirectory;
         ServerFolder.ToolTip = Environment.CurrentDirectory;
         shared.Workspace.Changed += () => Dispatcher.BeginInvoke(Show);
-        shared.LiveRunning += running => Dispatcher.BeginInvoke(() => Toolbar.IsEnabled = PrepareButton.IsEnabled = DependenciesButton.IsEnabled = Steps.IsEnabled = !running);
+        shared.LiveRunning += running => Dispatcher.BeginInvoke(() => Toolbar.IsEnabled = PrepareButton.IsEnabled = DependenciesButton.IsEnabled = SettingsButton.IsEnabled = Steps.IsEnabled = !running);
         Theme.Changed += Show;
         L.Current.PropertyChanged += (_, _) => Show();
         IsVisibleChanged += async (_, e) => { if ((bool)e.NewValue) await shared.Workspace.RefreshAsync(); };
@@ -51,6 +51,7 @@ public partial class SetupTab : UserControl
         bool Needs(params string[] names) => state is null || rows.Any(r => !r.Step.Ready && names.Contains(r.Step.Name));
         PrepareButton.Visibility = Needs("Prepared client", "Login keys") ? Visibility.Visible : Visibility.Collapsed;
         DependenciesButton.Visibility = Needs("Bundle decompressor") ? Visibility.Visible : Visibility.Collapsed;
+        SettingsButton.Visibility = Directory.Exists("Client") && ClientSettings.Read("Client").Kind != ClientSettingsKind.Separate ? Visibility.Visible : Visibility.Collapsed;
         Summary.Text = state is null ? "" : missing == 0 ? L.Text("Setup checks · all passed") : L.Text("Setup checks · {0} need attention", missing);
         Empty.Text = _shared.Workspace.InspectError is { } error ? L.Text("Check failed: ") + error : L.Text("Checking the selected installation…");
         Empty.Visibility = rows.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -136,6 +137,21 @@ public partial class SetupTab : UserControl
             case "Node": Open("https://nodejs.org/en/download"); break;
             default: OpenGuide(this, new RoutedEventArgs()); break;
         }
+    }
+
+    /// <summary>An existing setup changes only when the player asks: a new one gets this from the guide.</summary>
+    async void SeparateSettings(object sender, RoutedEventArgs e)
+    {
+        var owner = Window.GetWindow(this);
+        if (!Dialog.Ask(owner, DialogKind.Info, L.Text("Use separate game settings"), ClientSettings.Explain("Client"), L.Text("Use separate settings"), L.Text("Cancel"))) return;
+        try { await _shared.RunExclusiveAsync(L.Text("Game settings"), () => Task.Run(() => ClientSettings.UseOwn("Client"))); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            Dialog.Tell(owner, DialogKind.Error, L.Text("Game settings were not changed"), ex.Message);
+            return;
+        }
+        Show();
+        SetupFinished?.Invoke();
     }
 
     void CreateAccount(object sender, RoutedEventArgs e) => CreateAccountRequested?.Invoke();

@@ -42,6 +42,7 @@ public partial class PlayTab : UserControl
     {
         _shared = shared;
         _control = control;
+        Offer.Attach(shared.Settings);
         shared.Monitor.Sampled += _ => Dispatcher.BeginInvoke(Show);
         shared.Workspace.Changed += () => Dispatcher.BeginInvoke(Show);
         shared.LiveRunning += _ => Dispatcher.BeginInvoke(Show);
@@ -70,6 +71,7 @@ public partial class PlayTab : UserControl
             ? Visibility.Visible : Visibility.Collapsed;
         RemoveOldCard.Visibility = !busy && !AnythingRunning && Replaced is not null ? Visibility.Visible : Visibility.Collapsed;
         if (Replaced is { } replaced) RemoveOldText.Text = L.Text("Has the new copy worked for you? You can delete your old LocalExile in {0} now.", replaced.Old);
+        Offer.Show(!busy && !AnythingRunning && !needsSetup && !Checking);
     }
 
     /// <summary>The release this copy replaces, once the player has played here.</summary>
