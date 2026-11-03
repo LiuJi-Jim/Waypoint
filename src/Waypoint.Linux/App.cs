@@ -28,6 +28,7 @@ sealed class App : Avalonia.Application
         Settings = Settings.Load();
         L.Current.SetLanguage(Settings.Language);
         Repo.UseLocalProfile = Settings.UseLocalProfile;
+        Repo.LockstepSwitch = Settings.LockstepServer;
         string? root = Repo.Find(Program.Checkout ?? Settings.ServerPath, Environment.CurrentDirectory);
         if (root is not null) Open(root);
     }

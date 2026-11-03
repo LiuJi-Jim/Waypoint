@@ -186,7 +186,7 @@ partial class ControlTab : UserControl
             ? L.Text("live.ps1 -NoClient: rebuilds and restarts Patch, Auth and Gateway (after a pull, or edits outside the Gateway); " +
               "the Gateway's own code edits apply by themselves with hot reload. A running client stays.")
             : L.Text("live.ps1 -NoClient: builds and starts Patch, Auth and Gateway; a running client stays"));
-        ToolTip.SetTip(PlayButton, PlaysOnlyTheGame(samples, Walkmaps.IsChecked == true, Repo.ClientOnlyTakesWalkmaps())
+        ToolTip.SetTip(PlayButton, !_lockstepChanged && PlaysOnlyTheGame(samples, Walkmaps.IsChecked == true, Repo.ClientOnlyTakesWalkmaps())
             ? L.Text("live.ps1 -ClientOnly: starts the game against the running servers (Restart servers rebuilds them)")
             : L.Text("live.ps1: builds and starts the servers, then the game (closes a running one)"));
     }
@@ -199,7 +199,46 @@ partial class ControlTab : UserControl
         s.NoExtract = NoExtract.IsChecked == true;
         s.HotReload = HotReload.IsChecked == true;
         s.Save();
-        return new LiveRequest(mode, server, s.Walkmaps, s.NoBuild, s.NoExtract, NoHotReload: !s.HotReload);
+        return new LiveRequest(mode, server, s.Walkmaps, s.NoBuild, s.NoExtract, NoHotReload: !s.HotReload, Lockstep: Repo.ServesLockstep);
+    }
+
+    /// <summary>The Lockstep switch differs from what the running Gateway started with.</summary>
+    bool _lockstepChanged;
+
+    bool GatewayRunning => _shared.Monitor.Latest.Any(s => s.Service == Service.Gateway && s.Running);
+
+    /// <summary>The switch as the checkout has it. A local launch profile that sets lockstep decides, so the switch only shows that.</summary>
+    void ShowLockstep()
+    {
+        string? profile = Repo.ProfileLockstep();
+        _showingLockstep = true;
+        Lockstep.Content = L.Text("Lockstep");
+        Lockstep.IsVisible = Repo.HasLockstep();
+        Lockstep.IsEnabled = profile is null;
+        Lockstep.IsChecked = Repo.ServesLockstep;
+        ToolTip.SetTip(Lockstep, profile is null
+            ? L.Text("Serves a game set to the Lockstep network mode, on this PC only (Game_LOCKSTEP=1). The game's own setting stays as it is. Applies when the Gateway next starts.")
+            : L.Text("Set by this checkout's local launch profile, config/runtime.local.ps1. Remove it there to use this switch."));
+        _showingLockstep = false;
+    }
+
+    bool _showingLockstep;
+
+    /// <summary>The player's flip, by mouse, keyboard or screen reader. A running Gateway keeps what it started with: until it
+    /// starts again, Play restarts the servers instead of only starting the game. Flipped back, nothing needs to change.</summary>
+    void LockstepChanged(object? sender, RoutedEventArgs e)
+    {
+        if (_showingLockstep || _shared is null) return;
+        Repo.LockstepSwitch = _shared.Settings.LockstepServer = Lockstep.IsChecked == true;
+        _shared.Settings.Save();
+        if (GatewayRunning)
+        {
+            _lockstepChanged = !_lockstepChanged;
+            if (_lockstepChanged) Say(() => L.Text("Lockstep changes when the Gateway starts again: Play restarts the servers."));
+            else Say(() => L.Text("Ready."));
+        }
+        ShowServices(_shared.Monitor.Latest);
+        _ = RefreshSetup();
     }
 
     bool ClientRunning => _shared.Monitor.Latest.Any(s => s.Service == Service.Client && s.Running);
@@ -210,8 +249,7 @@ partial class ControlTab : UserControl
     /// so.</summary>
     async Task<bool> BackUp(LiveRequest request)
     {
-        bool startsGateway = request.Mode is LiveMode.All or LiveMode.Servers || request is { Mode: LiveMode.Restart, Server: "Gateway" };
-        if (!startsGateway || !_shared.Settings.AutomaticBackups) return true;
+        if (!request.StartsGateway || !_shared.Settings.AutomaticBackups) return true;
         var result = await _shared.Workspace.OperateAsync("Backup", L.Text("Back up now"), quiet: true);
         return result is { Ok: true } || Dialog.Ask(Owner, DialogKind.Warning, L.Text("Start without a backup?"),
             L.Text("The saves could not be backed up. Automatic backups can be turned off on the Backups section."), L.Text("Start anyway"), cancelByDefault: true);
@@ -244,6 +282,7 @@ partial class ControlTab : UserControl
         var started = Stopwatch.StartNew();
         int? code = await run(request, line => Dispatcher.UIThread.Post(() => Append(line)));
         double seconds = started.Elapsed.TotalSeconds;
+        if (code == 0 && request.StartsGateway) _lockstepChanged = false;
         Say(() => code switch
         {
             null => L.Text("live.ps1 is already running."),
@@ -264,7 +303,7 @@ partial class ControlTab : UserControl
     /// null when none ran.</summary>
     internal async Task<int?> PlayAsync()
     {
-        if (PlaysOnlyTheGame(_shared.Monitor.Latest, Walkmaps.IsChecked == true, Repo.ClientOnlyTakesWalkmaps()))
+        if (!_lockstepChanged && PlaysOnlyTheGame(_shared.Monitor.Latest, Walkmaps.IsChecked == true, Repo.ClientOnlyTakesWalkmaps()))
         {
             // The servers stay as they are: only the game (again) against them.
             if (ClientRunning)
@@ -435,6 +474,7 @@ partial class ControlTab : UserControl
     internal async Task RefreshSetup()
     {
         if (Repo.IsInstall) return;
+        ShowLockstep();
         SetupList.ItemsSource = new[] { new SetupRow(new SetupCheck(null, L.Text("checking …"))) };
         SetupList.ItemsSource = (await Task.Run(SetupChecks.Run)).Select(check => new SetupRow(check)).ToList();
     }

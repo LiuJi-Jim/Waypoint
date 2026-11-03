@@ -74,8 +74,10 @@ static class SetupChecks
     {
         string hint = L.Text("Esc → Options → Game → Network Mode → Predictive, then log out to the character screen and Play again");
         if (!System.IO.File.Exists(Repo.ClientConfig)) return new(null, L.Text("network mode not set yet: set Predictive in game"), hint);
-        return ClientSettings.IsPredictive(Repo.ClientConfig)
-            ? new(true, L.Text("network mode Predictive")) : new(false, L.Text("network mode is {0}: the character won't move", ClientSettings.NetworkMode(Repo.ClientConfig) ?? "auto"), hint);
+        string? mode = ClientSettings.NetworkMode(Repo.ClientConfig);
+        if (string.Equals(mode, "predictive", StringComparison.OrdinalIgnoreCase)) return new(true, L.Text("network mode Predictive"));
+        return Repo.ServesLockstep ? new(true, L.Text("network mode {0}: the server serves it", mode ?? "auto"))
+            : new(false, L.Text("network mode is {0}: the character won't move", mode ?? "auto"), hint);
     }
 
     static SetupCheck Frida()
