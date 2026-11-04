@@ -30,6 +30,12 @@ try {
     $services = @([pscustomobject]@{ Name='Gateway'; Status='Ready'; ProcessId=$PID; WatchProcessId=0 })
     $snapshot = [pscustomobject]@{ Services=$services; Conflicts=@() }
     Check (Test-CaptureSupport) 'capability detection reads upstream files without executing them'
+    New-Item -ItemType Directory -Force "$script:root/src/GameServer.Gateway/World" | Out-Null
+    Move-Item "$script:root/src/GameServer.Gateway/AreaLayouts.cs" "$script:root/src/GameServer.Gateway/World/AreaLayouts.cs"
+    Check (Test-CaptureSupport) 'capability detection finds AreaLayouts.cs in the Gateway World folder of newer revisions'
+    Set-Content "$script:root/src/GameServer.Gateway/World/AreaLayouts.cs" '// no capture switch'
+    Check (-not (Test-CaptureSupport)) 'an AreaLayouts.cs without the capture switch is not a recorder'
+    Set-Content "$script:root/src/GameServer.Gateway/World/AreaLayouts.cs" '// Game_WALKMAPS'
     Check (-not (Test-CaptureGatewayEnabled $services)) 'a running Gateway without verified capture metadata is not assumed enabled'
     Record-CaptureGateway $services
     Check (Test-CaptureGatewayEnabled $services) 'capture mode is tied to the current Gateway PID and exact start time'

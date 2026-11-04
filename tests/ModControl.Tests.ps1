@@ -36,6 +36,12 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'SQLite fixture failed' }
     $inspected = Operation 'Inspect'
     Check ($inspected.Ok -and $inspected.Snapshot.ModEnvironment.Supported -and -not $inspected.Snapshot.ModEnvironment.RuntimeReport) 'mod capability inspection does not invent runtime status'
+    New-Item -ItemType Directory -Force "$root/src/GameServer.Gateway/Modding" | Out-Null
+    Move-Item "$root/src/GameServer.Gateway/Program.Mods.cs" "$root/src/GameServer.Gateway/Modding/Program.Mods.cs"
+    Check ((Operation 'Inspect').Snapshot.ModEnvironment.Supported) 'newer revisions with Program.Mods.cs in the Gateway Modding folder have a mod host'
+    Remove-Item "$root/src/GameServer.Gateway/Modding/Program.Mods.cs"
+    Check (-not (Operation 'Inspect').Snapshot.ModEnvironment.Supported) 'a checkout without Program.Mods.cs has no mod host'
+    Set-Content "$root/src/GameServer.Gateway/Modding/Program.Mods.cs" '// capability fixture'
     $manifestHash = (Get-FileHash "$root/Mods/Binaries/alpha/mod.json").Hash
     $enabled = Operation 'EnableMod' @{ModId='alpha'}
     Check ($enabled.Ok -and [IO.File]::ReadAllText("$root/Mods/Binaries/mod-state.txt").Contains('alpha on')) 'stopped-Gateway enable persists in the native mod-state file'

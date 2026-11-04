@@ -10,7 +10,9 @@ branch switches go through `live.ps1` and git from the app ([launcher.md](launch
 `RuntimeSnapshot.Capture` is optional and separate from `Services`: it never affects normal server readiness.
 `LauncherSettings.CaptureAreaLayouts` defaults false. `CheckCapture`, `SetupCapture`, `StartCapture` and
 `StopCapture` use the same runtime writer lock as other mutations. Inspection never attaches to a client.
-No LocalExile source changes or launcher-specific server endpoint are required. The app's walk maps are the Control
+No LocalExile source changes or launcher-specific server endpoint are required. A checkout supports capture when it has
+`scripts/walkmaps/walkmaps.py` and `walkmaps.js`, and an `AreaLayouts.cs` naming `Game_WALKMAPS` in
+`src/GameServer.Gateway/World/` (since 2026-10-31) or in `src/GameServer.Gateway/` (before). The app's walk maps are the Control
 section's Walk maps switch (`live.ps1 -Walkmaps`).
 
 ## Desktop instance coordination (0.6.2, local review)
@@ -214,7 +216,9 @@ the launcher never assumes submission means application. The helper never starts
 ## Mod management (0.4.0)
 
 The typed snapshot includes optional mod capability, effective folder/global enable preference and a bounded cached
-runtime list. Older snapshots/branches remain valid. Core reads JSONC manifests and native saved choices without
+runtime list. Older snapshots/branches remain valid. A source checkout has a mod host when it has
+`src/GameServer.Modding/GameServer.Modding.csproj` and `Program.Mods.cs` in `src/GameServer.Gateway/Modding/` (since
+2026-10-31) or in `src/GameServer.Gateway/` (before). Core reads JSONC manifests and native saved choices without
 loading assemblies. Source projects follow the documented Mods/Source/<Name>/<Name>.csproj convention.
 
 BuildMod, BuildMods, EnableMod, DisableMod, ReloadMod, QueryMods and RestoreModChoices use the same named mutation
