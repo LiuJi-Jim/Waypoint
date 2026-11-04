@@ -88,6 +88,12 @@ public partial class SetupTab : UserControl
     /// <summary>The guide on the source route: clones LocalExile into a chosen folder and sets it up.</summary>
     internal void SetUpNewCopy() => Guide(newCopy: true);
 
+    /// <summary>The guide on the release route: downloads a LocalExile release into a chosen folder.</summary>
+    internal void SetUpRelease() => Guide(newCopy: false, release: true);
+
+    /// <summary>The guide on the source route with the newest changes chosen: Simple mode's Latest.</summary>
+    internal void SetUpLatest() => Guide(newCopy: true, newest: true);
+
     /// <summary>Another checkout or release install; Waypoint starts again on it.</summary>
     internal void ChangeFolder() => ChangeCheckout(this, new RoutedEventArgs());
 
@@ -95,12 +101,12 @@ public partial class SetupTab : UserControl
     /// Waypoint again on that one.</summary>
     void RunGuide(object? sender, RoutedEventArgs e) => Guide(newCopy: false);
 
-    async void Guide(bool newCopy)
+    async void Guide(bool newCopy, bool release = false, bool newest = false)
     {
         if (Busy()) return;
         var owner = Ui.Owner(this);
         string current = Environment.CurrentDirectory;
-        var guide = new SetupWizard(_shared.Settings, owner, current, newCopy);
+        var guide = new SetupWizard(_shared.Settings, owner, current, newCopy, release, newest);
         await _shared.RunExclusiveAsync(L.Text("Setup guide"), () => Ui.ShowAsync(guide, owner));
         if (guide.Checkout is { } checkout && !checkout.Equals(current, StringComparison.Ordinal))
         {

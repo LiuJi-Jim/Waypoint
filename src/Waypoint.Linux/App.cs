@@ -109,6 +109,7 @@ sealed class App : Avalonia.Application
         if (Settings.ServerPath != root) { Settings.ServerPath = root; Settings.Save(); }
         Environment.CurrentDirectory = root;
         Repo.IsInstall = LocalExileReleases.IsInstall(root);
+        Editions.Remember(Settings, root);
         if (!Program.Rendering) GameSettings.Prepare(root);
     }
 }

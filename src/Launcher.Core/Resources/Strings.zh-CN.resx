@@ -12,8 +12,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
   </resheader>
+  <data name="Text_0054e707d5a9" xml:space="preserve">
+    <value>备份</value>
+  </data>
   <data name="Text_005cb5071483" xml:space="preserve">
     <value>服务器已就绪</value>
+  </data>
+  <data name="Text_00d1a1e34df7" xml:space="preserve">
+    <value>备份并切换</value>
   </data>
   <data name="Text_00e989018b91" xml:space="preserve">
     <value>打开模组文件夹</value>
@@ -753,6 +759,9 @@
   <data name="Text_23c0a4391171" xml:space="preserve">
     <value>上游 PR 编号</value>
   </data>
+  <data name="Text_23fa08e2f716" xml:space="preserve">
+    <value>一份可以在“备份”中恢复的副本。无论如何，你的角色都会留在这个发布版中。</value>
+  </data>
   <data name="Text_240f51c01b28" xml:space="preserve">
     <value>密码只能使用英文字母、数字和常用符号。</value>
   </data>
@@ -1063,6 +1072,9 @@
   <data name="Text_3194ceb3ac95" xml:space="preserve">
     <value>{0} 正在运行；请在其完成后再切换。</value>
   </data>
+  <data name="Text_31cfcf149caa" xml:space="preserve">
+    <value>经过测试的 LocalExile 源码版本，保持不变。它有自己的角色。</value>
+  </data>
   <data name="Text_31d524153069" xml:space="preserve">
     <value>还原 Waypoint</value>
   </data>
@@ -1213,6 +1225,9 @@
   </data>
   <data name="Text_3907fa7f8072" xml:space="preserve">
     <value>外观</value>
+  </data>
+  <data name="Text_390dc6e41d4f" xml:space="preserve">
+    <value>安装向导会下载并构建 LocalExile 的最新版本，还可以迁移你的角色。</value>
   </data>
   <data name="Text_39921a740bf2" xml:space="preserve">
     <value>切换</value>
@@ -1437,6 +1452,9 @@
   <data name="Text_449b92dc7163" xml:space="preserve">
     <value>GC 时间占比</value>
   </data>
+  <data name="Text_44a8e8881f95" xml:space="preserve">
+    <value>LocalExile 的最新改动，在你游戏时更新。它有自己的角色。</value>
+  </data>
   <data name="Text_4556e8f76b8d" xml:space="preserve">
     <value>下载失败（git 退出代码 {0}）。请检查网络连接后重试。</value>
   </data>
@@ -1527,6 +1545,9 @@
   <data name="Text_491291cca723" xml:space="preserve">
     <value>重新加载所选</value>
   </data>
+  <data name="Text_4938abfad1ef" xml:space="preserve">
+    <value>保留最新版的角色</value>
+  </data>
   <data name="Text_494ca78f7374" xml:space="preserve">
     <value>自定义</value>
   </data>
@@ -1535,6 +1556,9 @@
   </data>
   <data name="Text_4987ea348964" xml:space="preserve">
     <value>{0} 正在运行；列表中显示的是源码副本已知的内容。</value>
+  </data>
+  <data name="Text_49897adf0b24" xml:space="preserve">
+    <value>角色不能从最新版转回发布版：较新的 LocalExile 保存的内容，较旧的发布版可能无法读取。</value>
   </data>
   <data name="Text_49c266baaaa7" xml:space="preserve">
     <value>搜索</value>
@@ -1862,6 +1886,9 @@
   <data name="Text_59fc6e9d24f1" xml:space="preserve">
     <value>游戏正在运行。请先关闭游戏，再停止或重启服务。</value>
   </data>
+  <data name="Text_5a259fd9e329" xml:space="preserve">
+    <value>迁移我的角色</value>
+  </data>
   <data name="Text_5a3f8a56fafe" xml:space="preserve">
     <value>Steam 和 Epic 版本没有 Content.ggpk，无法使用。请选择独立版安装。</value>
   </data>
@@ -1918,6 +1945,9 @@
   </data>
   <data name="Text_5d202208fa1a" xml:space="preserve">
     <value>创建副本…</value>
+  </data>
+  <data name="Text_5d881cebd727" xml:space="preserve">
+    <value>开发中的 LocalExile：最新的改动，在你游戏时更新。</value>
   </data>
   <data name="Text_5d9389cbbeb3" xml:space="preserve">
     <value>详情</value>
@@ -2188,6 +2218,9 @@
   </data>
   <data name="Text_680ce38047bf" xml:space="preserve">
     <value>狩猎者</value>
+  </data>
+  <data name="Text_682fb6eacde7" xml:space="preserve">
+    <value>不备份</value>
   </data>
   <data name="Text_68342976d01d" xml:space="preserve">
     <value>请在上方粘贴物品文本。</value>
@@ -2582,6 +2615,9 @@
   <data name="Text_7b47361aad19" xml:space="preserve">
     <value>基础类型</value>
   </data>
+  <data name="Text_7c0189e54acf" xml:space="preserve">
+    <value>打开安装向导</value>
+  </data>
   <data name="Text_7ca41615c19b" xml:space="preserve">
     <value>选择…</value>
   </data>
@@ -2786,6 +2822,9 @@
   <data name="Text_8703b1f43ea7" xml:space="preserve">
     <value>无本地更改</value>
   </data>
+  <data name="Text_8730d3c2022a" xml:space="preserve">
+    <value>最新版</value>
+  </data>
   <data name="Text_87bb59ba2f92" xml:space="preserve">
     <value>工作区</value>
   </data>
@@ -2861,8 +2900,14 @@
   <data name="Text_8b2d4fa44372" xml:space="preserve">
     <value>搜索模组 ID、版本、类型、状态或错误（Ctrl+F）</value>
   </data>
+  <data name="Text_8b3831d4d5e0" xml:space="preserve">
+    <value>请先停止 LocalExile</value>
+  </data>
   <data name="Text_8b3a87465604" xml:space="preserve">
     <value>dev host 正在监听 127.0.0.1:{0}</value>
+  </data>
+  <data name="Text_8b57b64a80f5" xml:space="preserve">
+    <value>备份这个发布版的存档？</value>
   </data>
   <data name="Text_8b7df2ff57b5" xml:space="preserve">
     <value>部分自定义文字/背景组合的对比度较低。请调整颜色或重置此方案。</value>
@@ -3124,6 +3169,9 @@
   </data>
   <data name="Text_9777bf4aa207" xml:space="preserve">
     <value>构建所选</value>
+  </data>
+  <data name="Text_97bc1cb9f0ad" xml:space="preserve">
+    <value>把你的角色迁移到最新版？</value>
   </data>
   <data name="Text_9814c443a469" xml:space="preserve">
     <value>退出时会先停止此源码副本的服务，再关闭 Waypoint。如果游戏处于打开状态，你可以取消，或让一切保持运行。</value>
@@ -3651,8 +3699,14 @@
   <data name="Text_ae82cf58855d" xml:space="preserve">
     <value>重新加载模组</value>
   </data>
+  <data name="Text_ae985631f320" xml:space="preserve">
+    <value>角色没有迁移</value>
+  </data>
   <data name="Text_aeb925989fbb" xml:space="preserve">
     <value>{0} 词缀</value>
+  </data>
+  <data name="Text_aee5cf83a5dd" xml:space="preserve">
+    <value>你还没有最新版</value>
   </data>
   <data name="Text_aeed4d26bb5f" xml:space="preserve">
     <value>启动中</value>
@@ -3683,6 +3737,9 @@
   </data>
   <data name="Text_b03f0885df1b" xml:space="preserve">
     <value>{0} 不在发行版的 LocalExile 文件夹内；未做任何更改</value>
+  </data>
+  <data name="Text_b070fdeaef64" xml:space="preserve">
+    <value>经过测试的发布版。它有自己的角色。</value>
   </data>
   <data name="Text_b09919b9d100" xml:space="preserve">
     <value>账号已读取。</value>
@@ -3840,6 +3897,9 @@
   <data name="Text_b7d1e0571f80" xml:space="preserve">
     <value>工作区检查失败。请在“设置”中解决问题，然后刷新。</value>
   </data>
+  <data name="Text_b808698f20e7" xml:space="preserve">
+    <value>没有进行切换。</value>
+  </data>
   <data name="Text_b82eacd81525" xml:space="preserve">
     <value>发行版包含不安全的路径 {0}；未做任何更改</value>
   </data>
@@ -3948,6 +4008,9 @@
   <data name="Text_bd72c01ccb05" xml:space="preserve">
     <value>无法读取你的存档。未做任何更改。</value>
   </data>
+  <data name="Text_bd80835654f0" xml:space="preserve">
+    <value>最新版有自己的角色。迁移这个发布版的角色时，最新版原有的角色会先备份并另存。</value>
+  </data>
   <data name="Text_bd814d6ca441" xml:space="preserve">
     <value>“{0}”不是插槽颜色（R、G、B 或 W）</value>
   </data>
@@ -3992,6 +4055,9 @@
   </data>
   <data name="Text_c032d8c45d13" xml:space="preserve">
     <value>选择安装</value>
+  </data>
+  <data name="Text_c04278c627e5" xml:space="preserve">
+    <value>请点击“停止游戏”，然后再切换。</value>
   </data>
   <data name="Text_c04a64764afe" xml:space="preserve">
     <value>所选的本地运行配置指定了一个不存在的数据库。请恢复原本要使用的数据库，或修正 config/runtime.local.ps1。不要为现有安装创建空的替代数据库。如有需要，请打开“设置”选择其他源码副本/配置。</value>
@@ -4472,6 +4538,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_d79efb58cadf" xml:space="preserve">
     <value>查看采集日志</value>
   </data>
+  <data name="Text_d7a2fea36f19" xml:space="preserve">
+    <value>安装向导会下载一个。它有自己的角色；你的角色留在这里的最新版中。</value>
+  </data>
   <data name="Text_d7b563a3ba47" xml:space="preserve">
     <value>无法写入已保存的物品：{0}</value>
   </data>
@@ -4625,6 +4694,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_dfb118290f6f" xml:space="preserve">
     <value>正在恢复模组选择</value>
   </data>
+  <data name="Text_e020e3c67bd0" xml:space="preserve">
+    <value>发布版</value>
+  </data>
   <data name="Text_e0a8b24caf7e" xml:space="preserve">
     <value>总督军</value>
   </data>
@@ -4710,6 +4782,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_e36274578842" xml:space="preserve">
     <value>{0} 不是空文件夹。请选择一个空文件夹用于下载。</value>
   </data>
+  <data name="Text_e3b7b1ed944d" xml:space="preserve">
+    <value>已发布的 LocalExile：经过测试，在你同意时更新。</value>
+  </data>
   <data name="Text_e3f02e617e2c" xml:space="preserve">
     <value>3–32 个字母、数字、下划线或连字符。</value>
   </data>
@@ -4761,6 +4836,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_e64a3e6ff925" xml:space="preserve">
     <value>区域布局采集</value>
   </data>
+  <data name="Text_e66094b9faf9" xml:space="preserve">
+    <value>你还没有发布版</value>
+  </data>
   <data name="Text_e6617c8f941d" xml:space="preserve">
     <value>模组构建完成。</value>
   </data>
@@ -4787,6 +4865,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_e86c89de2566" xml:space="preserve">
     <value>迁移我的角色（推荐）</value>
+  </data>
+  <data name="Text_e8797965019b" xml:space="preserve">
+    <value>切换到发布版？</value>
   </data>
   <data name="Text_e8857091f9bb" xml:space="preserve">
     <value>配置“发放物品”（推荐）</value>
@@ -5322,6 +5403,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_fee9dda2d85a" xml:space="preserve">
     <value>职业 / 升华职业</value>
+  </data>
+  <data name="Text_fef63c5ce56d" xml:space="preserve">
+    <value>发布版有自己的角色。你的角色留在最新版中，等你切换回来。</value>
   </data>
   <data name="Text_ff6c6bc8e40c" xml:space="preserve">
     <value>服务器源码副本</value>

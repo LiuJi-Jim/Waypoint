@@ -233,6 +233,21 @@ week. Restoring keeps a copy of the current saves first. A checkout follows `mai
 `main` as it is: the way back catches a build or start that fails, not a bug in the game. A release install is different: see
 [Release installs](#release-installs).
 
+**Release | Latest** at the top of Simple mode's Play (`EditionSwitch`, `Editions.cs`) moves between a release install and a
+source copy that follows `main`. Each is a folder of its own with its own characters; Waypoint remembers the last of each it ran on
+(`ReleaseFolder`, `LatestFolder`). Switching needs nothing running, then asks, and Waypoint starts again on the other folder:
+
+- **Release → Latest**: bring your characters? **Bring my characters** copies them in (the adapter's `ImportSaves`, as the guide's
+  Your characters page: Latest's own are backed up and set aside first). **Keep Latest's own** then offers a backup of the
+  release's saves.
+- **Latest → Release**: the release keeps its own characters, and Latest's stay for the way back; **Back up and switch** backs
+  them up first. Characters never go from Latest to a release: a newer LocalExile may save what an older release can't read.
+- A side Waypoint has no folder for opens the setup guide: the release route, or the source route with **Get the newest changes**
+  chosen, which from a release has its Your characters page.
+- On a release, **Tools → Get the item crafter…** switches to the Latest copy when Waypoint has one, with the same questions, and
+  otherwise opens the guide as before, on the tested version. A copy on that tested version (`waypoint-tested`) is still the Latest
+  side, and the switch says it is kept as it is, since Play does not move it.
+
 A link to a section Simple mode's list lacks (a log, from a failure) shows that section without selecting anything.
 
 ## Sections
@@ -600,6 +615,7 @@ adapter does not know can be browsed but not changed.
 | `RuntimeCounters.cs`, `Metrics.cs`, `TimeSeries.cs`, `LineChart.cs` | the runtime counter sessions, the history, the charts (drawn directly: the WPF chart libraries pull in .NET Framework builds of SkiaSharp) |
 | `Git.cs`, `PullRequests.cs`, `VersionsTab.xaml.cs` | git in the checkout and the parsing of its output, the open pull requests, the Versions section and its guards |
 | `PlayTab.xaml.cs`, `CheckoutUpdates.cs` | Simple mode's home; when Play may update the checkout |
+| `EditionSwitch.xaml.cs`, `Editions.cs` | Simple mode's Release \| Latest switch: the two folders, the saves questions |
 | `OperationTimings.cs`, `TimingsTab.xaml.cs` | the Gateway's operation timings (its meter's histogram intervals) and their window |
 | `LogTail.cs`, `LogHub.cs` | following the logs, the severities |
 | `CommandCatalog.cs`, `Completion.cs`, `ClientBridge.cs` | the Gateway's command list and argument values, the suggestions, the bridge process |

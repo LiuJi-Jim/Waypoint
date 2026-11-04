@@ -9,6 +9,7 @@
        is doing: its steps as on the setup guide, and its output. -->
   <Grid RowDefinitions="*,Auto">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
+      <l:EditionSwitch x:Name="Edition" />
       <TextBlock x:Name="Headline" FontSize="24" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,24" />
       <Button x:Name="MainButton" Classes="accent" Click="MainClicked" HorizontalAlignment="Center" Height="52" MinWidth="200" Padding="40,0" FontSize="18"
               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />

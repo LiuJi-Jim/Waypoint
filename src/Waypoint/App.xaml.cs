@@ -58,6 +58,7 @@ public partial class App : Application
             // Every path of the server's tools is relative to its root (its AGENTS.md).
             Environment.CurrentDirectory = root;
             Repo.IsInstall = LocalExileReleases.IsInstall(root);
+            if (options.RepositoryPath is null) Editions.Remember(Settings, root);
             // A Python installed without its PATH option counts, for Waypoint and the scripts it runs.
             await Prerequisites.RefreshToolsAsync();
         }

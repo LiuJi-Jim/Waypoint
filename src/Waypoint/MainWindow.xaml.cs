@@ -152,10 +152,21 @@ public partial class MainWindow : Window
         InstallView.ChangeFolderRequested += Setup.ChangeFolder;
         ReleasesView.ChangeFolderRequested += Setup.ChangeFolder;
         PlayView.NewCopyRequested += Setup.SetUpNewCopy;
+        // Simple mode's Release | Latest switch, when the other side is not set up yet.
+        foreach (var edition in new[] { PlayView.Edition, InstallView.Edition })
+        {
+            edition.ReleaseSetupRequested += Setup.SetUpRelease;
+            edition.LatestSetupRequested += Setup.SetUpLatest;
+        }
         InstallView.NewCopyRequested += Setup.SetUpNewCopy;
         ReleasesView.NewCopyRequested += Setup.SetUpNewCopy;
         Control.NewCopyRequested += Setup.SetUpNewCopy;
-        ToolsView.NewCopyRequested += Setup.SetUpNewCopy;
+        // The crafter needs a source copy: the Latest one Waypoint knows, or a new one through the guide (its tested version).
+        ToolsView.NewCopyRequested += () =>
+        {
+            if (Editions.Folder(_shared.Settings, release: false) is null) Setup.SetUpNewCopy();
+            else InstallView.Edition.Choose(release: false);
+        };
         Control.InstallPlayRequested += () =>
         {
             ShowSection(InstallView);

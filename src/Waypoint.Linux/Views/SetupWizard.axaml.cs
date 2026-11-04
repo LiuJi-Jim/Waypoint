@@ -112,7 +112,9 @@ public partial class SetupWizard : Window
     public SetupWizard() : this(App.Instance.Settings, null, null) { }
 
     /// <param name="newCopy">Opens on the source route, with cloning chosen: a developer's new copy.</param>
-    internal SetupWizard(Settings settings, Window? owner, string? current, bool newCopy = false)
+    /// <param name="release">Opens on the release route, from a source copy too (Simple mode's switch to a release).</param>
+    /// <param name="newest">A new copy gets the newest changes rather than the tested version (Simple mode's switch to Latest).</param>
+    internal SetupWizard(Settings settings, Window? owner, string? current, bool newCopy = false, bool release = false, bool newest = false)
     {
         _newCopy = newCopy;
         _settings = settings;
@@ -135,7 +137,8 @@ public partial class SetupWizard : Window
         DownloadFolder.Text = SuggestedFolder();
         ExistingChoice.IsChecked = true;
         InstallFolder.Text = LocalExileReleases.IsInstall(current) ? current! : SuggestedInstallFolder();
-        (newCopy || Repo.IsRoot(current) ? SourceChoice : ReleaseChoice).IsChecked = true;
+        (!release && (newCopy || Repo.IsRoot(current)) ? SourceChoice : ReleaseChoice).IsChecked = true;
+        if (newest) NewestVersion.IsChecked = true;
         Closed += (_, _) =>
         {
             _closing.Cancel();

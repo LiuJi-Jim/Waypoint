@@ -44,6 +44,7 @@ partial class PlayTab : UserControl
     {
         _shared = shared;
         _control = control;
+        Edition.Attach(shared);
         shared.Monitor.Sampled += _ => Dispatcher.UIThread.Post(Show);
         shared.Workspace.Changed += () => Dispatcher.UIThread.Post(Show);
         shared.LiveRunning += _ => Dispatcher.UIThread.Post(Show);

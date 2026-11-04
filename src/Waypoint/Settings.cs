@@ -9,6 +9,10 @@ sealed class Settings
 {
     /// <summary>The LocalExile server checkout Waypoint drives (chosen on the first start, <see cref="Repo"/>).</summary>
     public string? ServerPath { get; set; }
+    /// <summary>The release install and the source copy Simple mode's Release | Latest switch moves between (<see cref="Editions"/>):
+    /// the last of each Waypoint ran on.</summary>
+    public string? ReleaseFolder { get; set; }
+    public string? LatestFolder { get; set; }
     /// <summary>Every section, or Simple mode's few. A new player starts in Simple mode; someone who used an earlier launcher,
     /// or this one before the modes, stays with every section (<see cref="Load"/>).</summary>
     public bool? AdvancedMode { get; set; }
