@@ -648,6 +648,9 @@
   <data name="Text_1d6ca631e720" xml:space="preserve">
     <value>! команды не загружены: {0}</value>
   </data>
+  <data name="Text_1dcfc8d6f905" xml:space="preserve">
+    <value>Имя нового профиля на основе ваших обычных настроек игры:</value>
+  </data>
   <data name="Text_1dd780b2767c" xml:space="preserve">
     <value>Перенести {0} в {1}?</value>
   </data>
@@ -716,6 +719,9 @@
   </data>
   <data name="Text_21078c6e285e" xml:space="preserve">
     <value>«{0}» — не имя папки.</value>
+  </data>
+  <data name="Text_210c94b4b726" xml:space="preserve">
+    <value>Настройки игры:</value>
   </data>
   <data name="Text_2125db5eddda" xml:space="preserve">
     <value>LocalExile готов</value>
@@ -809,6 +815,9 @@
   </data>
   <data name="Text_253a6e5a66fa" xml:space="preserve">
     <value>загрузка {0} …</value>
+  </data>
+  <data name="Text_2568f6e6326b" xml:space="preserve">
+    <value>Другие папки</value>
   </data>
   <data name="Text_257afbba53dd" xml:space="preserve">
     <value>проверка Python/frida не уложилась во время</value>
@@ -1392,6 +1401,9 @@
   <data name="Text_3dbe26764706" xml:space="preserve">
     <value>режим работы сети ещё не задан: выберите в игре «Рассинхронизация»</value>
   </data>
+  <data name="Text_3dc529458c3c" xml:space="preserve">
+    <value>Копировать профиль</value>
+  </data>
   <data name="Text_3dc5a2da83a2" xml:space="preserve">
     <value>Последняя игра: {0}</value>
   </data>
@@ -1517,6 +1529,9 @@
   </data>
   <data name="Text_4404e17d8000" xml:space="preserve">
     <value>В последнем сеансе ещё нет записанных областей.</value>
+  </data>
+  <data name="Text_4406ed643196" xml:space="preserve">
+    <value>Имя копии профиля {0}:</value>
   </data>
   <data xml:space="preserve" name="Text_442aded87a55">
     <value>Мониторинг</value>
@@ -2417,6 +2432,9 @@
   <data name="Text_6d3add9cf2ef" xml:space="preserve">
     <value>значения вне тира</value>
   </data>
+  <data name="Text_6d7beeefb57a" xml:space="preserve">
+    <value>Создать профиль</value>
+  </data>
   <data name="Text_6dafb2da0b4c" xml:space="preserve">
     <value>★ Закрепить</value>
   </data>
@@ -2566,6 +2584,9 @@
   </data>
   <data name="Text_73b6e48a1b55" xml:space="preserve">
     <value>Позже</value>
+  </data>
+  <data name="Text_73e30cdb9ebb" xml:space="preserve">
+    <value>Новое имя для {0}:</value>
   </data>
   <data name="Text_740d285557d7" xml:space="preserve">
     <value>Какой вариант LocalExile вам нужен?</value>
@@ -2809,6 +2830,9 @@
   </data>
   <data name="Text_7f1aa82e323e" xml:space="preserve">
     <value>dotnet build GameServer.slnx при остановленных серверах</value>
+  </data>
+  <data name="Text_7f743d4cc54a" xml:space="preserve">
+    <value>Копировать…</value>
   </data>
   <data name="Text_7f8ba52ba5d8" xml:space="preserve">
     <value>Готовый к игре выпуск (рекомендуется)</value>
@@ -3086,6 +3110,9 @@
   <data xml:space="preserve" name="Text_8e3cda3b4f8b">
     <value>Локальный HEAD недоступен</value>
   </data>
+  <data name="Text_8e5407e6fdc9" xml:space="preserve">
+    <value>Переименовать профиль</value>
+  </data>
   <data name="Text_8e6f9abf3515" xml:space="preserve">
     <value>LocalExile</value>
   </data>
@@ -3250,6 +3277,9 @@
   </data>
   <data name="Text_96850b2f4bd2" xml:space="preserve">
     <value>Дуэлянт</value>
+  </data>
+  <data name="Text_968529265348" xml:space="preserve">
+    <value>Создать…</value>
   </data>
   <data name="Text_9699394c5080" xml:space="preserve">
     <value>Версия {0}</value>

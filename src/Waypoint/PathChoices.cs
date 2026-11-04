@@ -162,6 +162,11 @@ static class PathChoices
             settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase)))];
     }
 
+    /// <summary>The player's own profiles: the default Waypoint gives a client, those made here, and the active one. The other
+    /// folders there are listed after them, and not on Play.</summary>
+    public static bool IsYours(GameProfile profile) =>
+        profile.Made || profile.Active || string.Equals(profile.Name, ClientSettings.DefaultProfile, StringComparison.OrdinalIgnoreCase);
+
     /// <summary>Rename is offered for a profile made here that is not the active one.</summary>
     public static bool CanRename(Settings settings, string name) =>
         settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase) && !string.Equals(name, GameSettingsFolder(), StringComparison.OrdinalIgnoreCase);

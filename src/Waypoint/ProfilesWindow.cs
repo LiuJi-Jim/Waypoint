@@ -5,15 +5,15 @@ using System.Windows.Controls;
 namespace Waypoint;
 
 /// <summary>
-/// LocalExile's game settings profiles, as Mod Organizer's Profiles window: the profiles on the left, the active one marked, and
-/// Select, Create, Copy, Rename, Remove beside them (<see cref="PathChoices"/>). Every folder under Documents\My Games\Path of
-/// Exile with settings is listed; those Waypoint did not make can be selected and copied, not renamed or removed.
+/// LocalExile's game settings profiles, as Mod Organizer's Profiles window: the player's profiles on the left (the default and
+/// those made here, the active one marked), the other folders under Documents\My Games\Path of Exile below them, and Select,
+/// Create, Copy, Rename, Remove beside them (<see cref="PathChoices"/>). Create, Copy and Rename ask for the name. The other folders
+/// can be selected and copied, not renamed or removed.
 /// </summary>
 sealed class ProfilesWindow : FormWindow
 {
     readonly Shared _shared;
     readonly ListBox _list = new() { MinHeight = 220, Margin = new Thickness(0, 0, 12, 0) };
-    readonly TextBox _name = new() { MaxLength = 64 };
     readonly TextBlock _detail = new() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 12, 0, 0) };
     readonly Button _select, _create, _copy, _rename, _remove, _open;
 
@@ -34,21 +34,13 @@ sealed class ProfilesWindow : FormWindow
         root.Children.Add(intro);
 
         _detail.SetResourceReference(StyleProperty, "Shell.Secondary");
-        var nameRow = new DockPanel { Margin = new Thickness(0, 12, 0, 0) };
-        var nameLabel = new TextBlock { Text = L.Text("Name for Create, Copy or Rename:"), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) };
-        DockPanel.SetDock(nameLabel, Dock.Left);
-        nameRow.Children.Add(nameLabel);
-        nameRow.Children.Add(_name);
-        var bottom = new StackPanel();
-        bottom.Children.Add(nameRow);
-        bottom.Children.Add(_detail);
-        DockPanel.SetDock(bottom, Dock.Bottom);
-        root.Children.Add(bottom);
+        DockPanel.SetDock(_detail, Dock.Bottom);
+        root.Children.Add(_detail);
 
         _select = Action(L.Text("Select"), L.Text("Use this profile from the game's next start."), Select);
-        _create = Action(L.Text("Create"), L.Text("A new profile from your normal game settings, without their saved login."), () => Make(null));
-        _copy = Action(L.Text("Copy"), L.Text("A new profile from the selected one, without its saved login."), () => Make(Selected?.Name));
-        _rename = Action(L.Text("Rename"), L.Text("Only a profile made here, and not the active one."), Rename);
+        _create = Action(L.Text("Create…"), L.Text("A new profile from your normal game settings, without their saved login."), Create);
+        _copy = Action(L.Text("Copy…"), L.Text("A new profile from the selected one, without its saved login."), Copy);
+        _rename = Action(L.Text("Rename…"), L.Text("Only a profile made here, and not the active one."), Rename);
         _remove = Action(L.Text("Remove"), L.Text("Only a profile made here, never the active one or the last. It goes to the Recycle Bin."), Remove);
         _open = Action(L.Text("Open folder"), "", OpenFolder);
         var buttons = new StackPanel { Width = 150 };
@@ -76,18 +68,26 @@ sealed class ProfilesWindow : FormWindow
     void Refresh(string? select)
     {
         _list.Items.Clear();
-        foreach (var profile in PathChoices.GameProfiles(_shared.Settings))
+        var profiles = PathChoices.GameProfiles(_shared.Settings);
+        // The player's own first; the rest of the folders there, quieter, under their heading.
+        var others = profiles.Where(p => !PathChoices.IsYours(p)).ToList();
+        foreach (var profile in profiles.Where(PathChoices.IsYours)) Add(profile, profile.Name + (profile.Active ? "  " + L.Text("(active)") : ""), select);
+        if (others.Count > 0)
         {
-            // LocalExile is Waypoint's own default; the rest it did not make may be another copy's or another tool's.
-            string mark = profile.Made ? "" : string.Equals(profile.Name, ClientSettings.DefaultProfile, StringComparison.OrdinalIgnoreCase)
-                ? "  " + L.Text("· default") : "  " + L.Text("· not made here");
-            string text = profile.Name + (profile.Active ? "  " + L.Text("(active)") : "") + mark;
-            var item = new ListBoxItem { Content = text, Tag = profile, FontWeight = profile.Active ? FontWeights.SemiBold : FontWeights.Normal };
-            _list.Items.Add(item);
-            if (string.Equals(profile.Name, select, StringComparison.OrdinalIgnoreCase)) _list.SelectedItem = item;
+            _list.Items.Add(new ListBoxItem { Content = L.Text("Other folders"), IsEnabled = false, Focusable = false, Margin = new Thickness(0, 8, 0, 0),
+                FontWeight = FontWeights.SemiBold });
+            foreach (var profile in others) Add(profile, profile.Name, select).SetResourceReference(ForegroundProperty, "Shell.TextSecondary");
         }
         _detail.Text = PathChoices.GameSettingsDetail();
         Enable();
+    }
+
+    ListBoxItem Add(PathChoices.GameProfile profile, string text, string? select)
+    {
+        var item = new ListBoxItem { Content = text, Tag = profile, FontWeight = profile.Active ? FontWeights.SemiBold : FontWeights.Normal };
+        _list.Items.Add(item);
+        if (string.Equals(profile.Name, select, StringComparison.OrdinalIgnoreCase)) _list.SelectedItem = item;
+        return item;
     }
 
     void Enable()
@@ -107,24 +107,22 @@ sealed class ProfilesWindow : FormWindow
         if (Selected is { } profile && PathChoices.UseGameSettings(_shared, profile.Name, Ask)) Refresh(profile.Name);
     }
 
-    void Make(string? from)
+    void Create()
     {
-        string name = _name.Text.Trim();
-        if (PathChoices.CreateGameSettings(_shared, name, from, Ask))
-        {
-            _name.Text = "";
-            Refresh(name);
-        }
+        if (NameDialog.Ask(this, L.Text("Create a profile"), L.Text("Name of the new profile, from your normal game settings:")) is { } name
+            && PathChoices.CreateGameSettings(_shared, name, null, Ask)) Refresh(name);
+    }
+
+    void Copy()
+    {
+        if (Selected is { } profile && NameDialog.Ask(this, L.Text("Copy a profile"), L.Text("Name of the copy of {0}:", profile.Name), profile.Name + " 2") is { } name
+            && PathChoices.CreateGameSettings(_shared, name, profile.Name, Ask)) Refresh(name);
     }
 
     void Rename()
     {
-        string name = _name.Text.Trim();
-        if (Selected is { } profile && PathChoices.RenameGameSettings(_shared, profile.Name, name, Ask))
-        {
-            _name.Text = "";
-            Refresh(name);
-        }
+        if (Selected is { } profile && NameDialog.Ask(this, L.Text("Rename a profile"), L.Text("New name for {0}:", profile.Name), profile.Name) is { } name
+            && name != profile.Name && PathChoices.RenameGameSettings(_shared, profile.Name, name, Ask)) Refresh(name);
     }
 
     void Remove()

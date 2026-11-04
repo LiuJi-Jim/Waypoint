@@ -18,6 +18,10 @@ sealed class Settings
     public Dictionary<string, string> Tools { get; set; } = [];
     /// <summary>Linux: the Wine prefix the client runs in; empty: WINEPREFIX, else Waypoint's own.</summary>
     public string? WinePrefix { get; set; }
+    /// <summary>Something under Settings → Folders and tools is chosen: the group then shows without Developer Mode.</summary>
+    [JsonIgnore]
+    public bool PathsChosen => DataFolder is { Length: > 0 } || BackupsFolder is { Length: > 0 } || WinePrefix is { Length: > 0 }
+        || Tools.Values.Any(v => v.Length > 0);
     /// <summary>The game settings folders made with Create (Settings → Folders and tools): the only ones Delete offers.</summary>
     public List<string> MadeGameSettings { get; set; } = [];
     /// <summary>Every section, or Simple mode's few. A new player starts in Simple mode; someone who used an earlier launcher,

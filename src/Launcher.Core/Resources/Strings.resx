@@ -648,6 +648,9 @@
   <data name="Text_1d6ca631e720" xml:space="preserve">
     <value>! commands not loaded: {0}</value>
   </data>
+  <data name="Text_1dcfc8d6f905" xml:space="preserve">
+    <value>Name of the new profile, from your normal game settings:</value>
+  </data>
   <data name="Text_1dd780b2767c" xml:space="preserve">
     <value>Move {0} to {1}?</value>
   </data>
@@ -716,6 +719,9 @@
   </data>
   <data name="Text_21078c6e285e" xml:space="preserve">
     <value>"{0}" is not a folder name.</value>
+  </data>
+  <data name="Text_210c94b4b726" xml:space="preserve">
+    <value>Game settings:</value>
   </data>
   <data name="Text_2125db5eddda" xml:space="preserve">
     <value>LocalExile is ready</value>
@@ -809,6 +815,9 @@
   </data>
   <data name="Text_253a6e5a66fa" xml:space="preserve">
     <value>downloading {0} …</value>
+  </data>
+  <data name="Text_2568f6e6326b" xml:space="preserve">
+    <value>Other folders</value>
   </data>
   <data name="Text_257afbba53dd" xml:space="preserve">
     <value>Python/frida check timed out</value>
@@ -1392,6 +1401,9 @@ This checkout has modified tracked files.</value>
   <data name="Text_3dbe26764706" xml:space="preserve">
     <value>network mode not set yet: set Predictive in game</value>
   </data>
+  <data name="Text_3dc529458c3c" xml:space="preserve">
+    <value>Copy a profile</value>
+  </data>
   <data name="Text_3dc5a2da83a2" xml:space="preserve">
     <value>Last played: {0}</value>
   </data>
@@ -1517,6 +1529,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data name="Text_4404e17d8000" xml:space="preserve">
     <value>No area captured in the latest session.</value>
+  </data>
+  <data name="Text_4406ed643196" xml:space="preserve">
+    <value>Name of the copy of {0}:</value>
   </data>
   <data xml:space="preserve" name="Text_442aded87a55">
     <value>Performance</value>
@@ -2417,6 +2432,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6d3add9cf2ef" xml:space="preserve">
     <value>values outside its tier</value>
   </data>
+  <data name="Text_6d7beeefb57a" xml:space="preserve">
+    <value>Create a profile</value>
+  </data>
   <data name="Text_6dafb2da0b4c" xml:space="preserve">
     <value>★ Pin</value>
   </data>
@@ -2566,6 +2584,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_73b6e48a1b55" xml:space="preserve">
     <value>Later</value>
+  </data>
+  <data name="Text_73e30cdb9ebb" xml:space="preserve">
+    <value>New name for {0}:</value>
   </data>
   <data name="Text_740d285557d7" xml:space="preserve">
     <value>How do you want LocalExile?</value>
@@ -2809,6 +2830,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_7f1aa82e323e" xml:space="preserve">
     <value>dotnet build GameServer.slnx, with the servers stopped</value>
+  </data>
+  <data name="Text_7f743d4cc54a" xml:space="preserve">
+    <value>Copy…</value>
   </data>
   <data name="Text_7f8ba52ba5d8" xml:space="preserve">
     <value>The ready-to-play release (recommended)</value>
@@ -3086,6 +3110,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data xml:space="preserve" name="Text_8e3cda3b4f8b">
     <value>Local HEAD unavailable</value>
   </data>
+  <data name="Text_8e5407e6fdc9" xml:space="preserve">
+    <value>Rename a profile</value>
+  </data>
   <data name="Text_8e6f9abf3515" xml:space="preserve">
     <value>LocalExile</value>
   </data>
@@ -3250,6 +3277,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_96850b2f4bd2" xml:space="preserve">
     <value>Duelist</value>
+  </data>
+  <data name="Text_968529265348" xml:space="preserve">
+    <value>Create…</value>
   </data>
   <data name="Text_9699394c5080" xml:space="preserve">
     <value>Version {0}</value>

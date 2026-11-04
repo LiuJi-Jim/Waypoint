@@ -23,13 +23,14 @@ sealed class ProfilePicker : StackPanel
         Children.Add(_label);
         Children.Add(_list);
         _list.SelectionChanged += Chosen;
-        // Back on Play after Settings or another window: what the client uses may have changed.
-        IsVisibleChanged += (_, _) => { if (IsVisible) Refresh(); };
     }
 
     internal void Attach(Shared shared)
     {
         _shared = shared;
+        // Back on Play after Settings or another window: what the client uses may have changed, and a second profile shows the
+        // picker. Its container's visibility, since a collapsed picker would never see its own change.
+        if (Parent is UIElement parent) parent.IsVisibleChanged += (_, _) => { if (parent.IsVisible) Refresh(); };
         L.Current.PropertyChanged += (_, _) => Refresh();
         Refresh();
     }
@@ -37,11 +38,13 @@ sealed class ProfilePicker : StackPanel
     void Refresh()
     {
         if (_shared is null) return;
-        Visibility = Directory.Exists("Client") ? Visibility.Visible : Visibility.Collapsed;
+        // Only the player's own profiles, and only once there are two to choose from: most players have one, and Play stays one
+        // button. Settings and the Profiles window have the rest.
+        var profiles = PathChoices.GameProfiles(_shared.Settings).Where(PathChoices.IsYours).ToList();
+        Visibility = Directory.Exists("Client") && profiles.Count >= 2 ? Visibility.Visible : Visibility.Collapsed;
         _loading = true;
-        _label.Text = L.Text("Game settings profile:");
+        _label.Text = L.Text("Game settings:");
         _list.Items.Clear();
-        var profiles = PathChoices.GameProfiles(_shared.Settings);
         // No profile yet: the normal settings are in use, until one is chosen.
         if (!profiles.Any(p => p.Active)) _list.Items.Add(new ComboBoxItem { Content = L.Text("Your normal settings"), Tag = "", IsSelected = true });
         foreach (var profile in profiles) _list.Items.Add(new ComboBoxItem { Content = profile.Name, Tag = profile.Name, IsSelected = profile.Active });

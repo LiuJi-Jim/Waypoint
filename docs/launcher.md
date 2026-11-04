@@ -165,7 +165,9 @@ player chooses otherwise, so backups made by an earlier Waypoint are still liste
 
 ### Folders and tools
 
-**Settings → Folders and tools** (`PathChoices.cs`) chooses where Waypoint keeps its files and which programs it uses. A field
+**Settings → Folders and tools** (`PathChoices.cs`) chooses where Waypoint keeps its files and which programs it uses. It shows
+with Developer Mode, and also whenever something there is chosen or a choice cannot be used, so what startup reports can always be
+changed there. **Settings → Game settings**, for everyone, has the game settings profile (below). A field
 left empty is the default, which is where every Waypoint before this setting kept things, so an existing setup changes nothing.
 Each field takes a typed path as well as **Browse…** (on Linux a picker may be missing), and **Save** applies it.
 
@@ -193,13 +195,15 @@ Each field takes a typed path as well as **Browse…** (on Linux a picker may be
   `Documents\My Games\Path of Exile` (graphics, keys, network mode and saved login), and the active one is the folder
   `Client\config.json` names (`ClientSettings.Profile`); the client reads those names relative to that folder, so a profile is
   always one plain folder there. The profile in use is the default: nothing changes until the player picks another.
-  - **On Play** (both views, `ProfilePicker`), **Game settings profile** lists them, the active one selected (or **Your normal
-    settings** while none is); picking one uses it from the game's next start, and **Manage…** opens the Profiles window.
-    Settings → Folders and tools shows the same profile with **Manage…** and **Open**.
-  - **The Profiles window** (`ProfilesWindow`) lists every folder there with settings, the active one marked, those Waypoint did
-    not make marked **not made here**. **Select** uses one; **Create** makes one from the normal settings (no login,
-    Predictive); **Copy** makes one from the selected profile as it is, without its saved login; both list the new profile
-    without selecting it. **Rename** and **Remove** are offered only for a profile made here (`MadeGameSettings`) that is not
+  - **The player's own profiles** are the default (`LocalExile`), those made here and the active one (`PathChoices.IsYours`).
+  - **On Play** (both views, `ProfilePicker`), **Game settings:** lists the player's own profiles, the active one selected (or
+    **Your normal settings** while none is), and **Manage…**; picking one uses it from the game's next start. It shows only
+    once there are two of them, so a player with one profile sees Play as before. **Settings → Game settings** shows the
+    profile in use with **Manage…** and **Open**.
+  - **The Profiles window** (`ProfilesWindow`) lists the player's own profiles, the active one marked, then the other folders
+    there with settings under **Other folders**. **Select** uses one; **Create…** makes one from the normal settings (no login,
+    Predictive); **Copy…** makes one from the selected profile as it is, without its saved login; each asks for the name
+    (`NameDialog`), and lists the new profile without selecting it. **Rename…** asks for the new name. **Rename** and **Remove** are offered only for a profile made here (`MadeGameSettings`) that is not
     the active one, and Remove never for the last; Remove asks, then sends the folder to the Recycle Bin.
   - Only while the game is closed; a shared (linked) client is asked about first, since every copy that uses it switches too.
     Only `config.json`'s two names change on a switch, and the normal `production_Config.ini` is only read.

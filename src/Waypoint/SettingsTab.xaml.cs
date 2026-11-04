@@ -126,7 +126,7 @@ public partial class SettingsTab : UserControl
     /// <summary>The sidebar's switch moved: Simple and Advanced mode show different settings.</summary>
     internal void ShowMode()
     {
-        if (_shared is not null) Show();
+        if (_shared is not null) { Show(); ShowPaths(); }
     }
 
     /// <summary>On, the sidebar gets its switch and Simple mode stays until it is used. Off, Waypoint goes back to Simple mode.</summary>
@@ -188,6 +188,10 @@ public partial class SettingsTab : UserControl
     void ShowPaths()
     {
         PathRows.Children.Clear();
+        GameSettingsRow.Children.Clear();
+        // A power user's page: with Developer Mode, and whenever something there is chosen or cannot be used, so that what
+        // startup reports can always be changed here.
+        PathsGroup.Visibility = S.Developer || S.PathsChosen || Settings.PathProblems.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
         AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
         AddGameSettingsRow();
@@ -223,9 +227,8 @@ public partial class SettingsTab : UserControl
         line.Children.Add(open);
         line.Children.Add(manage);
         line.Children.Add(name);
-        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings profile"), FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
-        PathRows.Children.Add(line);
-        PathRows.Children.Add(detail);
+        GameSettingsRow.Children.Add(line);
+        GameSettingsRow.Children.Add(detail);
     }
 
     void AddPathRow(PathKind kind, string? tool, string label, string? value)

@@ -80,6 +80,7 @@ partial class SettingsTab : UserControl
         DeveloperMode.Content = L.Text("Developer Mode");
         CheckoutHeading.Text = L.Text("Server checkout");
         PathsHeading.Text = L.Text("Folders and tools");
+        GameSettingsHeading.Text = L.Text("Game settings");
         PathsNote.Text = L.Text("Leave a field empty to use the default. A folder or program that is not there is skipped, and the default is used instead.");
         UseProfile.Content = L.Text("Use the checkout's local launch profile when it has one");
         FindButton.Content = L.Text("Find automatically…");
@@ -135,7 +136,9 @@ partial class SettingsTab : UserControl
     /// <summary>The sidebar's switch moved: Simple and Advanced mode show different settings.</summary>
     public void ShowMode()
     {
-        if (_shared is not null) Show();
+        if (_shared is null) return;
+        Show();
+        ShowPaths();
     }
 
     /// <summary>On, the sidebar gets its switch and Simple mode stays until it is used. Off, Waypoint goes back to Simple mode.</summary>
@@ -194,6 +197,8 @@ partial class SettingsTab : UserControl
     void ShowPaths()
     {
         PathRows.Children.Clear();
+        GameSettingsRow.Children.Clear();
+        PathsCard.IsVisible = S.Developer || S.PathsChosen || Settings.PathProblems.Count > 0;
         AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
         AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
         AddPathRow(PathKind.WinePrefix, null, L.Text("Wine prefix"), S.WinePrefix);
@@ -214,8 +219,7 @@ partial class SettingsTab : UserControl
         DockPanel.SetDock(open, Dock.Right);
         line.Children.Add(open);
         line.Children.Add(detail);
-        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings"), FontWeight = Avalonia.Media.FontWeight.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
-        PathRows.Children.Add(line);
+        GameSettingsRow.Children.Add(line);
     }
 
     void AddPathRow(PathKind kind, string? tool, string label, string? value)
