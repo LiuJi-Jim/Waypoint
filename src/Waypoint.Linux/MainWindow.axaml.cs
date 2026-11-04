@@ -125,10 +125,21 @@ public partial class MainWindow : Window
         ReleasesView.ChangeFolderRequested += Setup.ChangeFolder;
         Control.ChangeFolderRequested += Setup.ChangeFolder;
         PlayView.NewCopyRequested += Setup.SetUpNewCopy;
+        // Simple mode's Release | Latest switch, when the other side is not set up yet.
+        foreach (var edition in new[] { PlayView.Edition, InstallView.Edition })
+        {
+            edition.ReleaseSetupRequested += Setup.SetUpRelease;
+            edition.LatestSetupRequested += Setup.SetUpLatest;
+        }
         InstallView.NewCopyRequested += Setup.SetUpNewCopy;
         ReleasesView.NewCopyRequested += Setup.SetUpNewCopy;
         Control.NewCopyRequested += Setup.SetUpNewCopy;
-        ToolsView.NewCopyRequested += Setup.SetUpNewCopy;
+        // The crafter needs a source copy: the Latest one Waypoint knows, or a new one through the guide (its tested version).
+        ToolsView.NewCopyRequested += () =>
+        {
+            if (Editions.Folder(_shared.Settings, release: false) is null) Setup.SetUpNewCopy();
+            else InstallView.Edition.Choose(release: false);
+        };
         ReleasesView.CheckRequested += () => _ = CheckLocalExile(manual: true);
         SettingsView.CheckUpdatesRequested += () => _ = CheckLocalExile(manual: true);
         SettingsView.DeveloperModeChanged += ShowMode;
@@ -144,6 +155,10 @@ public partial class MainWindow : Window
         Opened += (_, _) =>
         {
             _ = _shared.Workspace.RefreshAsync();
+            // A chosen folder or tool that is not there now: said once, and Waypoint goes on with the default.
+            if (Settings.PathProblems.Count > 0)
+                Dialog.Tell(this, DialogKind.Warning, L.Text("Some of your folders or tools can't be used"),
+                    string.Join("\n\n", Settings.PathProblems) + "\n\n" + L.Text("Waypoint works with the defaults until then. Change or clear them in Settings → Folders and tools."));
             if (Repo.IsInstall && _shared.Settings.KeepUpToDate) _ = CheckLocalExile();
             if (_shared.Settings.CreateAccountOnStart)
             {

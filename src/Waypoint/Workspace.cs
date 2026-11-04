@@ -74,6 +74,31 @@ sealed class Workspace(Shared shared)
         }
     }
 
+    /// <summary>Another LocalExile's characters copied into <paramref name="into"/> (the adapter's ImportSaves, run on that folder):
+    /// its own saves are backed up and set aside first, and <paramref name="from"/> is only read. Null when something holds the
+    /// checkout.</summary>
+    public async Task<BridgeResult?> ImportSavesAsync(string into, string from)
+    {
+        BridgeResult? result = null;
+        string name = L.Text("Bring your characters");
+        bool ran = await shared.RunExclusiveAsync(name, async () =>
+        {
+            Write($"> {name}");
+            try
+            {
+                result = await _client.RunAsync(shared.Settings.ForBridge with { RepositoryPath = into }, "ImportSaves", log: Write,
+                    progress: update => Stage?.Invoke(update.Stage, update.Detail), saveSource: from);
+            }
+            catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException or System.ComponentModel.Win32Exception)
+            {
+                result = new(false, e.Message, null, name);
+            }
+        });
+        Stage?.Invoke("", "");
+        if (ran) Write(result!.Message);
+        return ran ? result : null;
+    }
+
     /// <summary>Runs one adapter operation; null when a live.ps1 run, git or another operation holds the checkout. A failure
     /// is in the returned result, and reported through <see cref="Failed"/> unless the caller asks a question about it itself
     /// (<paramref name="quiet"/>).</summary>

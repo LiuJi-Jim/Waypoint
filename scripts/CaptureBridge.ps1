@@ -3,7 +3,7 @@ function Get-CaptureHome {
     $sha = [Security.Cryptography.SHA256]::Create()
     try { $key = ([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($script:root.ToLowerInvariant())))).Replace('-','') }
     finally { $sha.Dispose() }
-    $path = Join-Path $env:LOCALAPPDATA ('EmulatorWorkspaceLauncher/captures/' + $key + '-' + [Diagnostics.Process]::GetCurrentProcess().SessionId)
+    $path = Join-Path (Get-WaypointData) ('captures/' + $key + '-' + [Diagnostics.Process]::GetCurrentProcess().SessionId)
     Assert-Physical $path
     return $path
 }

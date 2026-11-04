@@ -20,7 +20,7 @@ public sealed record SaveBackup(string Id, string Directory, DateTimeOffset Crea
 public static class BackupCatalog
 {
     public static string Key(string database) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(Path.GetFullPath(database).ToLowerInvariant())))[..16];
-    public static string DirectoryFor(string database) => Path.Combine(SettingsStore.DataDirectory, "backups", Key(database));
+    public static string DirectoryFor(string database) => Path.Combine(SettingsStore.BackupsDirectory, Key(database));
 
     public static SaveBackup[] Read(string database)
     {

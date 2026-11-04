@@ -51,7 +51,7 @@ sealed class CommandCatalog(IReadOnlyList<ChatCommand> commands, DateTime built 
 #if !WINDOWS
         // A Gateway, in these modes too, first deletes the module copies older than ten minutes in its temporary folder. On Linux
         // a running Gateway's loaded copies can be deleted, so a question asked here gets a temporary folder of its own.
-        string temp = Path.Combine(Platform.LocalData, "Waypoint", "gateway-questions");
+        string temp = Path.Combine(Settings.Home, "gateway-questions");
         Directory.CreateDirectory(temp);
         info.Environment["TMPDIR"] = temp;
 #endif

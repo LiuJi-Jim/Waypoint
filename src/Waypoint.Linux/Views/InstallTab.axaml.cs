@@ -96,6 +96,7 @@ partial class InstallTab : UserControl
     {
         _shared = shared;
         if (!Repo.IsInstall) return;
+        Edition.Attach(shared);
         StepList.ItemsSource = _steps;
         shared.Monitor.Sampled += _ => Dispatcher.UIThread.Post(Show);
         shared.LiveRunning += _ => Dispatcher.UIThread.Post(Show);

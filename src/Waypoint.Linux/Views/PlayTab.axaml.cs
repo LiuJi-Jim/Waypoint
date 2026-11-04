@@ -15,6 +15,9 @@ partial class PlayTab : UserControl
     Shared _shared = null!;
     ControlTab _control = null!;
     bool _working, _failed;
+    /// <summary>How many commits LocalExile's main is ahead of this plain copy, as last looked; null when not known or not one.</summary>
+    int? _behind;
+    readonly DispatcherTimer _lookAgain = new() { Interval = TimeSpan.FromMinutes(30) };
     /// <summary>The words shown, as functions, so that a language change says them again.</summary>
     Func<string>? _stage, _note;
 
@@ -44,10 +47,15 @@ partial class PlayTab : UserControl
     {
         _shared = shared;
         _control = control;
+        Edition.Attach(shared);
         shared.Monitor.Sampled += _ => Dispatcher.UIThread.Post(Show);
         shared.Workspace.Changed += () => Dispatcher.UIThread.Post(Show);
         shared.LiveRunning += _ => Dispatcher.UIThread.Post(Show);
         L.Current.PropertyChanged += (_, _) => Show();
+        // LocalExile changes many times a day: Play says how far behind it is, without waiting for its daily update.
+        _lookAgain.Tick += async (_, _) => await LookForChangesAsync();
+        _lookAgain.Start();
+        Dispatcher.UIThread.Post(async () => await LookForChangesAsync());
         Show();
     }
 
@@ -68,6 +76,9 @@ partial class PlayTab : UserControl
         Note.IsVisible = note is not null;
         DetailsLink.IsVisible = _failed && !busy;
         StopLink.IsVisible = !busy && AnythingRunning;
+        BehindPanel.IsVisible = !busy && !GameRunning && !needsSetup && _behind is > 0;
+        BehindText.Text = _behind is { } behind ? L.Text("{0} new change(s) in LocalExile since your version.", behind) : "";
+        UpdateNowLink.IsEnabled = !AnythingRunning;
         GoBackLink.IsVisible = !busy && !AnythingRunning && !needsSetup && CheckoutUpdates.CanGoBack(S.LastUpdate, DateTimeOffset.UtcNow);
         RemoveOldCard.IsVisible = !busy && !AnythingRunning && Replaced is not null;
         if (Replaced is { } replaced) RemoveOldText.Text = L.Text("Has the new copy worked for you? You can delete your old LocalExile in {0} now.", replaced.Old);
@@ -127,12 +138,10 @@ partial class PlayTab : UserControl
         }
     }
 
-    /// <summary>Moves a plain copy to the newest LocalExile when one is due; null when it did not.</summary>
-    async Task<CheckoutUpdate?> UpdateAsync()
+    /// <summary>Fetches and compares: the branch, how far it is from LocalExile's, and whether it is a plain copy Play may move.
+    /// <paramref name="record"/>: this is Play's daily look, which the next one waits a day after.</summary>
+    async Task<(string? Branch, (int Ahead, int Behind)? Compared, bool Plain)> LookAsync(DateTimeOffset now, bool record)
     {
-        var now = DateTimeOffset.UtcNow;
-        if (!CheckoutUpdates.Due(S.KeepUpToDate, S.LastUpdateCheck, S.UpdatesPausedUntil, now) || AnythingRunning) return null;
-        Say(() => L.Text("Looking for updates"));
         string? branch = null;
         (int Ahead, int Behind)? compared = null;
         bool plain = false;
@@ -140,12 +149,35 @@ partial class PlayTab : UserControl
         {
             // No network is no reason not to play; Play looks again next time.
             if (!(await Git.FetchAsync(Log)).Ok) return;
-            S.LastUpdateCheck = now;
-            S.Save();
+            if (record)
+            {
+                S.LastUpdateCheck = now;
+                S.Save();
+            }
             branch = Repo.Branch();
             compared = branch is null ? null : await Git.CompareAsync(branch);
             plain = CheckoutUpdates.PlainCopy(branch, await Git.DefaultBranchAsync(), await Git.GitHubRepositoryAsync(), (await Git.ChangesAsync()).Count, compared);
         });
+        _behind = plain ? compared?.Behind : null;
+        return (branch, compared, plain);
+    }
+
+    /// <summary>The indicator's look, every half hour and when Play opens; never while something runs or holds the checkout.</summary>
+    async Task LookForChangesAsync()
+    {
+        if (Repo.IsInstall || _working || _shared.IsLiveRunning || AnythingRunning || NeedsSetup) return;
+        await LookAsync(DateTimeOffset.UtcNow, record: false);
+        Show();
+    }
+
+    /// <summary>Moves a plain copy to the newest LocalExile when one is due, or at once when the player asked
+    /// (<paramref name="now"/>, Update now); null when it did not.</summary>
+    async Task<CheckoutUpdate?> UpdateAsync(bool now = false)
+    {
+        var at = DateTimeOffset.UtcNow;
+        if ((!now && !CheckoutUpdates.Due(S.KeepUpToDate, S.LastUpdateCheck, S.UpdatesPausedUntil, at)) || AnythingRunning) return null;
+        Say(() => L.Text("Looking for updates"));
+        var (branch, compared, plain) = await LookAsync(at, record: true);
         if (!plain || compared is not (_, > 0)) return null;
 
         string? before = NewestBackup();
@@ -161,7 +193,8 @@ partial class PlayTab : UserControl
         bool moved = false;
         await _shared.RunGitAsync(async () => moved = (await Git.MoveForwardAsync(branch!, Log)).Ok);
         if (!moved) return null;
-        S.LastUpdate = new(previous, backup != before ? backup : null, now);
+        _behind = 0;
+        S.LastUpdate = new(previous, backup != before ? backup : null, at);
         S.Save();
         CheckoutChanged?.Invoke();
         return S.LastUpdate;
@@ -208,6 +241,29 @@ partial class PlayTab : UserControl
                 _failed = true;
                 _note = () => L.Text("Waypoint couldn't go back to that version.");
             }
+        }
+        finally
+        {
+            _working = false;
+            _stage = null;
+            Show();
+        }
+    }
+
+    /// <summary>The update Play makes once a day, now: saves backed up, the checkout moved forward, the way back kept. The game is
+    /// not started.</summary>
+    async void UpdateNowClicked(object? sender, RoutedEventArgs e)
+    {
+        if (_working || _shared.IsLiveRunning || AnythingRunning) return;
+        _working = true;
+        _failed = false;
+        _note = null;
+        try
+        {
+            var update = await UpdateAsync(now: true);
+            _note = update is not null ? () => L.Text("LocalExile was updated. Press Play to start it.")
+                : _behind is > 0 ? () => L.Text("LocalExile couldn't be updated now. Play starts the version you have.")
+                : () => L.Text("LocalExile is up to date.");
         }
         finally
         {

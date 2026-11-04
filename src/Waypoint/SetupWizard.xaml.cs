@@ -107,7 +107,9 @@ public partial class SetupWizard : FormWindow
     public bool CreateAccountNext { get; private set; }
 
     /// <param name="newCopy">Opens on the source route, with cloning chosen: a developer's new copy.</param>
-    internal SetupWizard(Settings settings, Window? owner, string? current, bool newCopy = false)
+    /// <param name="release">Opens on the release route, from a source copy too (Simple mode's switch to a release).</param>
+    /// <param name="newest">A new copy gets the newest changes rather than the tested version (Simple mode's switch to Latest).</param>
+    internal SetupWizard(Settings settings, Window? owner, string? current, bool newCopy = false, bool release = false, bool newest = false)
     {
         _newCopy = newCopy;
         _settings = settings;
@@ -125,7 +127,8 @@ public partial class SetupWizard : FormWindow
         DownloadFolder.Text = SuggestedFolder();
         ExistingChoice.IsChecked = true;
         InstallFolder.Text = LocalExileReleases.IsInstall(current) ? current! : SuggestedInstallFolder();
-        (newCopy || Repo.IsRoot(current) ? SourceChoice : ReleaseChoice).IsChecked = true;
+        (!release && (newCopy || Repo.IsRoot(current)) ? SourceChoice : ReleaseChoice).IsChecked = true;
+        if (newest) NewestVersion.IsChecked = true;
         Closed += (_, _) =>
         {
             _closing.Cancel();
@@ -679,7 +682,7 @@ public partial class SetupWizard : FormWindow
                 Remember(checkout);
             }));
         if (switching is { Download: true, TestedVersion: true })
-            tasks.Add(new(L.Text("Choose the tested version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
+            tasks.Add(new(L.Text("Go to the older version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
         if (client is not null && sharedKeys is not null)
             tasks.Add(new(L.Text("Share the game client"), () => HasClient(checkout), (detail, stop) => ClientCopy.ShareAsync(client, checkout, sharedKeys, line => { Write(line); detail(line); }, stop)));
         else if (client is not null)

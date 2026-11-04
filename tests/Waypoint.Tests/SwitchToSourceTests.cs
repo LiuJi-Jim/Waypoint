@@ -43,7 +43,7 @@ public class SwitchToSourceTests : IDisposable
             "Use the game client of your current LocalExile, so it takes no extra space.",
             "Copy your accounts and characters. Accounts: 2. Characters: 5.",
             "Install Frida, so that Give item works.",
-            "Stay on the tested version.",
+            "Keep the older version; it won't update.",
             "Leave your current LocalExile as it is. Each copy keeps its own progress.",
         ], Lines(Choices()));
     }

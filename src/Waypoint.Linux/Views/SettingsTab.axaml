@@ -54,6 +54,22 @@
           </WrapPanel>
         </StackPanel>
       </Border>
+      <!-- LocalExile's game settings: here the Wine prefix's, for everyone. -->
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <TextBlock x:Name="GameSettingsHeading" Classes="heading" />
+          <StackPanel x:Name="GameSettingsRow" />
+        </StackPanel>
+      </Border>
+      <!-- Where Waypoint keeps its files and which programs it uses (PathChoices): rows made in code, as on Windows. Shown with
+           Developer Mode, and whenever something there is chosen or cannot be used. -->
+      <Border x:Name="PathsCard" Classes="card">
+        <StackPanel Spacing="6">
+          <TextBlock x:Name="PathsHeading" Classes="heading" />
+          <TextBlock x:Name="PathsNote" Classes="note" TextWrapping="Wrap" />
+          <StackPanel x:Name="PathRows" />
+        </StackPanel>
+      </Border>
     </StackPanel>
   </ScrollViewer>
 </UserControl>
