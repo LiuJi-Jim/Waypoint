@@ -93,20 +93,26 @@ public static class Prerequisites
     /// elsewhere a package manager's python3 is on PATH from the start.</summary>
     public static async Task RefreshToolsAsync()
     {
-        if (!OperatingSystem.IsWindows()) return;
-        RefreshPath();
-        PythonLookup.Adopt(await PythonLookup.FindAsync());
+        if (OperatingSystem.IsWindows())
+        {
+            RefreshPath();
+            PythonLookup.Adopt(await PythonLookup.FindAsync());
+        }
+        // The player's chosen programs stay first, whatever PATH gained.
+        ToolPaths.Apply();
     }
 
     public static async Task<Prerequisite[]> CheckAsync()
     {
         RefreshPath();
+        ToolPaths.Apply();
         var dotnet = ToolProcess.AskAsync("dotnet", "--list-sdks");
         var git = ToolProcess.AskAsync("git", "--version");
         var python = PythonLookup.FindAsync();
         var node = ToolProcess.AskAsync("node", "--version");
         await Task.WhenAll(dotnet, git, python, node);
         PythonLookup.Adopt(await python);
+        ToolPaths.Apply();
         return
         [
             new(".NET 10 SDK", (await dotnet) is { Code: 0 } sdks && HasSdk(sdks.Output), "Install .NET 10 SDK; check with dotnet --list-sdks"),

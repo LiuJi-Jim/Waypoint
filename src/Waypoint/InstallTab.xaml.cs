@@ -47,6 +47,7 @@ public partial class InstallTab : UserControl
         if (!Repo.IsInstall) return;
         Offer.Attach(shared.Settings);
         Edition.Attach(shared);
+        Profile.Attach(shared);
         StepList.ItemsSource = _steps;
         shared.Monitor.Sampled += _ => Dispatcher.BeginInvoke(Show);
         shared.LiveRunning += _ => Dispatcher.BeginInvoke(Show);

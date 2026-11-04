@@ -64,7 +64,7 @@ function Retire-RemovedManagedMods {
             Assert-Physical $path
             if (Test-Path -LiteralPath $path) { Require ((Get-ModFileHash $path) -ieq $file.Value) "The source for managed mod $($entry.Id) was removed, but its output was changed outside the recorded build. Review Mods/Binaries/$($entry.Id) before starting; no output was discarded." }
         }
-        $recovery = Join-Path (Join-Path $env:LOCALAPPDATA 'EmulatorWorkspaceLauncher/retired-mods') ([guid]::NewGuid().ToString('N') + '/' + $entry.Id)
+        $recovery = Join-Path (Join-Path (Get-WaypointData) 'retired-mods') ([guid]::NewGuid().ToString('N') + '/' + $entry.Id)
         Assert-Physical $recovery
         Set-Stage 'Retiring removed source mods' $entry.Id
         foreach ($file in $files) {

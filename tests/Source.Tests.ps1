@@ -76,6 +76,11 @@ try {
     $before = @(Get-ChildItem "$env:LOCALAPPDATA/EmulatorWorkspaceLauncher/backups" -Filter backup.json -Recurse).Count
     $disabled = Operation 'Switch' @('-SourceKind','Branch','-SourceValue','refs/heads/feature','-NoBackup')
     Check ($disabled.Ok -and @(Get-ChildItem "$env:LOCALAPPDATA/EmulatorWorkspaceLauncher/backups" -Filter backup.json -Recurse).Count -eq $before) 'backup preference can be disabled explicitly'
+    # A backups folder of the player's own, which Waypoint names as WAYPOINT_BACKUPS: backups go there.
+    $env:WAYPOINT_BACKUPS = Join-Path $fixture 'own-backups'
+    $own = Operation 'Backup'
+    Check ($own.Ok -and @(Get-ChildItem $env:WAYPOINT_BACKUPS -Filter backup.json -Recurse).Count -eq 1) 'backups go to the folder Waypoint names'
+    Remove-Item Env:WAYPOINT_BACKUPS
     Fixture-Git @('update-ref','refs/remotes/fixture/main',$initial)
     $remote = Operation 'Switch' @('-SourceKind','Remote','-SourceValue','refs/remotes/fixture/main')
     Check ($remote.Ok -and $remote.Snapshot.SourceLabel -eq 'fixture/main' -and -not $remote.Snapshot.SourceBranch) 'detached remote activation retains a friendly source label bound to the actual commit'
@@ -143,6 +148,7 @@ try {
 } finally {
     Set-Location -LiteralPath $oldLocation.Path
     $env:LOCALAPPDATA = $oldAppData
+    Remove-Item Env:WAYPOINT_BACKUPS -ErrorAction SilentlyContinue
     # Only this test's new GUID directory. Git objects can be read-only on Windows.
     $resolved = [IO.Path]::GetFullPath($fixture)
     if ($resolved.StartsWith([IO.Path]::GetFullPath([IO.Path]::GetTempPath()), [StringComparison]::OrdinalIgnoreCase) -and (Split-Path $resolved -Leaf) -match '^Launcher-source-[0-9a-f]{32}$') {

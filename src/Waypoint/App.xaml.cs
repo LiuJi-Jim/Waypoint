@@ -27,6 +27,8 @@ public partial class App : Application
         // The first start's questions are windows too; closing one must not end the application.
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
         Settings = Settings.Load();
+        // The player's folders and tools, before anything reads a folder or starts a tool.
+        Settings.ApplyPaths();
         // Before anything shows, the first start's questions included.
         L.Current.SetLanguage(Settings.Language);
         Theme.Apply(Settings.Appearance);
@@ -172,6 +174,12 @@ public partial class App : Application
         if ((chosen ?? ChooseServer(owner)) is not { } root || root == settings.ServerPath) return;
         settings.ServerPath = root;
         settings.Save();
+        StartAgain(owner);
+    }
+
+    /// <summary>Waypoint again, once this one has exited: after a change every section reads anew (its folders, say).</summary>
+    internal static void StartAgain(Window owner)
+    {
         if (Environment.ProcessPath is { } exe)
             Current.Exit += (_, _) =>
             {

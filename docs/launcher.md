@@ -15,8 +15,8 @@ Waypoint references no server project. It drives the checkout through what the s
 Beside those it has an adapter of its own, the PowerShell and Python scripts in `scripts/`: `RuntimeBridge.ps1` inspects
 the checkout and runs the operations that need more care than a button can give them, the setup steps, the mod operations,
 the save backups and the offline account tools. [runtime-contract.md](runtime-contract.md) describes its guarantees. The
-scripts are embedded in the exe (`Launcher.Core`) and unpacked once per version to
-`%LOCALAPPDATA%\EmulatorWorkspaceLauncher\adapter\<hash>`, so a self-update, which replaces one file, carries them.
+scripts are embedded in the exe (`Launcher.Core`) and unpacked once per version to `adapter\<hash>` in Waypoint's data
+folder ([Folders and tools](#folders-and-tools)), so a self-update, which replaces one file, carries them.
 `Workspace.cs` is the app's side of it. The adapter still has its own start, stop and branch-switch actions, covered by its
 tests; the app does not use them.
 
@@ -160,8 +160,55 @@ At startup Waypoint makes the checkout its working directory, so every path it u
 Its own settings (the server folder, the switches, the appearance, the language, pinned console lines, the history) are per
 Windows user in `%LOCALAPPDATA%\Waypoint\settings.json`, never in a repository. The first start takes over
 `%LOCALAPPDATA%\LocalExile\launcher.json` and `%LOCALAPPDATA%\EmulatorWorkspaceLauncher\settings.json`, and leaves both as
-they are. The adapter's operation logs and the save backups stay under `%LOCALAPPDATA%\EmulatorWorkspaceLauncher`, so
-backups made by an earlier Waypoint are still listed.
+they are. The adapter's operation logs and the save backups stay under `%LOCALAPPDATA%\EmulatorWorkspaceLauncher` unless the
+player chooses otherwise, so backups made by an earlier Waypoint are still listed.
+
+### Folders and tools
+
+**Settings → Folders and tools** (`PathChoices.cs`) chooses where Waypoint keeps its files and which programs it uses. It shows
+with Developer Mode, and also whenever something there is chosen or a choice cannot be used, so what startup reports can always be
+changed there. **Settings → Game settings**, for everyone, has the game settings profile (below). A field
+left empty is the default, which is where every Waypoint before this setting kept things, so an existing setup changes nothing.
+Each field takes a typed path as well as **Browse…** (on Linux a picker may be missing), and **Save** applies it.
+
+| Row | Default | What it holds |
+|---|---|---|
+| Waypoint's data | `%LOCALAPPDATA%\EmulatorWorkspaceLauncher` | operation logs, the adapter's scripts, capture and mod notes, and the backups unless they have their own folder |
+| Save backups | `backups` in the data folder | the save backups |
+| Wine prefix (Linux) | `WINEPREFIX`, else Waypoint's own | the prefix the client runs in; nothing is moved, the game sets up a new one there |
+| Game settings profile | the folder the client uses now | LocalExile's graphics, keys and saved login (below) |
+| Git, .NET SDK, Node.js, Python, PowerShell | found on PATH as before | the program for that tool |
+
+- **A new data or backups folder** must be empty or new: Waypoint copies everything there, checks every file's size, removes the
+  old ones and starts again (`Folders.Move`). A failure removes the copies and changes nothing, and offers **Open both folders**
+  to move them by hand. A folder that already has files (moved by hand, say) is used as it is, with **Use it as it is**. Only
+  while nothing runs. A backups folder of its own inside the data folder must be moved first.
+- **A chosen program**'s folder goes first on Waypoint's PATH (`ToolPaths`), which everything it starts inherits, `live.ps1`
+  and LocalExile's scripts included. Each row shows the version and program in use. Versions are shown, never refused; a
+  program that does not answer `--version` is used only on **Use it anyway**.
+- **A choice that cannot be used now** (a drive not there, a program removed) is skipped at start with the default in its place,
+  and said once in a dialog; the choice stays, for when it is back (`Settings.ApplyPaths`).
+- The adapter is told the folders as `WAYPOINT_DATA` and `WAYPOINT_BACKUPS`, and falls back to the defaults without them.
+  `WAYPOINT_HOME` moves Waypoint's own settings and saved items, the one folder Settings cannot choose since the choice is kept
+  in it. The two variables can also be set by hand, as the folders' defaults.
+- **Game settings profiles** (Windows), as Mod Organizer's profiles: a profile is a folder right under
+  `Documents\My Games\Path of Exile` (graphics, keys, network mode and saved login), and the active one is the folder
+  `Client\config.json` names (`ClientSettings.Profile`); the client reads those names relative to that folder, so a profile is
+  always one plain folder there. The profile in use is the default: nothing changes until the player picks another.
+  - **The player's own profiles** are the default (`LocalExile`), those made here and the active one (`PathChoices.IsYours`).
+  - **On Play** (both views, `ProfilePicker`), **Game settings:** lists the player's own profiles, the active one selected (or
+    **Your normal settings** while none is), and **Manage…**; picking one uses it from the game's next start. It shows only
+    once there are two of them, so a player with one profile sees Play as before. **Settings → Game settings** shows the
+    profile in use with **Manage…** and **Open**.
+  - **The Profiles window** (`ProfilesWindow`) lists the player's own profiles, the active one marked, then the other folders
+    there with settings under **Other folders**. **Select** uses one; **Create…** makes one from the normal settings (no login,
+    Predictive); **Copy…** makes one from the selected profile as it is, without its saved login; each asks for the name
+    (`NameDialog`), and lists the new profile without selecting it. **Rename…** asks for the new name. **Rename** and **Remove** are offered only for a profile made here (`MadeGameSettings`) that is not
+    the active one, and Remove never for the last; Remove asks, then sends the folder to the Recycle Bin.
+  - Only while the game is closed; a shared (linked) client is asked about first, since every copy that uses it switches too.
+    Only `config.json`'s two names change on a switch, and the normal `production_Config.ini` is only read.
+- On Linux the game settings are the Wine prefix's (`GameSettings`): the row shows that folder, and another prefix is
+  another set.
 
 ## Look
 
@@ -558,7 +605,7 @@ write and gives it to the character in game.
   shows above them, and two modifiers of one group are marked; neither is refused.
 - **Preview** (right): the item as text in the game's rarity and modifier colours (readable on every scheme), with its
   name, item level, requirements, sockets, implicits, modifiers and states.
-- **Save** keeps it in **Saved** (left) with an optional label, in `%LOCALAPPDATA%\Waypoint\crafted-items.json`:
+- **Save** keeps it in **Saved** (left) with an optional label, in `crafted-items.json` beside Waypoint's settings:
   Waypoint's own file, never in the checkout. A saved item opens with a click; **New item** starts again. The icons
   beside it duplicate the selected item and delete the selected ones (Ctrl or Shift selects several, the Delete key
   deletes them too); each row also has its own delete icon under the mouse. Deleting asks first; the item on screen stays.

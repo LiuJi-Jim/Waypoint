@@ -13,6 +13,21 @@ sealed class Settings
     /// the last of each Waypoint ran on.</summary>
     public string? ReleaseFolder { get; set; }
     public string? LatestFolder { get; set; }
+    /// <summary>Waypoint's data folder (operation logs, the adapter's scripts, backups unless <see cref="BackupsFolder"/> says
+    /// otherwise); empty: the default (<see cref="SettingsStore.DefaultDataDirectory"/>). Settings → Folders and tools.</summary>
+    public string? DataFolder { get; set; }
+    /// <summary>The save backups' folder; empty: <c>backups</c> in the data folder.</summary>
+    public string? BackupsFolder { get; set; }
+    /// <summary>The program for each of LocalExile's tools (<see cref="ToolPaths.Names"/>); a missing one is found as before.</summary>
+    public Dictionary<string, string> Tools { get; set; } = [];
+    /// <summary>Linux: the Wine prefix the client runs in; empty: WINEPREFIX, else Waypoint's own.</summary>
+    public string? WinePrefix { get; set; }
+    /// <summary>Something under Settings → Folders and tools is chosen: the group then shows without Developer Mode.</summary>
+    [JsonIgnore]
+    public bool PathsChosen => DataFolder is { Length: > 0 } || BackupsFolder is { Length: > 0 } || WinePrefix is { Length: > 0 }
+        || Tools.Values.Any(v => v.Length > 0);
+    /// <summary>The game settings folders made with Create (Settings → Folders and tools): the only ones Delete offers.</summary>
+    public List<string> MadeGameSettings { get; set; } = [];
     /// <summary>Every section, or Simple mode's few. A new player starts in Simple mode; someone who used an earlier launcher,
     /// or this one before the modes, stays with every section (<see cref="Load"/>).</summary>
     public bool? AdvancedMode { get; set; }
@@ -82,7 +97,35 @@ sealed class Settings
 #else
     static string LocalData => Platform.LocalData;
 #endif
-    static string File => Path.Combine(LocalData, "Waypoint", "settings.json");
+    /// <summary>Where Waypoint keeps its settings and saved items: <c>WAYPOINT_HOME</c> when that is a folder it can use, else
+    /// <c>Waypoint</c> in the user's local data. The one folder not chosen in Settings, since the choice is kept in it.</summary>
+    public static string Home { get; } = Environment.GetEnvironmentVariable("WAYPOINT_HOME") is { Length: > 0 } home && Folders.Unusable(home) is null
+        ? home : Path.Combine(LocalData, "Waypoint");
+    static string File => Path.Combine(Home, "settings.json");
+
+    /// <summary>What <see cref="ApplyPaths"/> could not use, for the window to say once it is open.</summary>
+    public static List<string> PathProblems { get; } = [];
+
+    /// <summary>The chosen folders and tools, for this run. A folder that cannot be used now (a drive not there, no rights) is left
+    /// for this run, with the default in its place, and said: the choice stays, for when the folder is back.</summary>
+    public void ApplyPaths()
+    {
+        PathProblems.Clear();
+        if (DataFolder is { Length: > 0 } data)
+        {
+            if (Folders.Unusable(data) is { } why) PathProblems.Add(L.Text("Waypoint's data folder {0} can't be used ({1}), so {2} is used for now.", data, why, SettingsStore.DataDirectory));
+            else SettingsStore.DataDirectory = data;
+        }
+        if (BackupsFolder is { Length: > 0 } backups)
+        {
+            if (Folders.Unusable(backups) is { } why) PathProblems.Add(L.Text("The backups folder {0} can't be used ({1}), so backups go to {2} for now.", backups, why, Path.Combine(SettingsStore.DataDirectory, "backups")));
+            else SettingsStore.BackupsDirectory = backups;
+        }
+        ToolPaths.Choose(Tools);
+        foreach (var (name, program) in Tools)
+            if (program.Length > 0 && ToolPaths.Usable(name) is null) PathProblems.Add(L.Text("The program chosen for {0}, {1}, is not there, so Waypoint finds {0} itself.", name, program));
+        Platform.ChosenGamePrefix = WinePrefix is { Length: > 0 } prefix ? prefix : null;
+    }
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true, PropertyNameCaseInsensitive = true };
 
     /// <summary>What the adapter needs to know; the checkout is the working directory.</summary>

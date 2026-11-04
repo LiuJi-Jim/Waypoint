@@ -69,6 +69,21 @@
                     </WrapPanel>
                 </StackPanel>
             </GroupBox>
+
+            <!-- LocalExile's game settings profile, for everyone; Manage… opens the Profiles window. -->
+            <GroupBox Header="{l:Loc 'Game settings'}">
+                <StackPanel x:Name="GameSettingsRow" />
+            </GroupBox>
+
+            <!-- Where Waypoint keeps its files and which programs it uses (PathChoices): rows made in code. Shown with Developer
+                 Mode, and whenever something there is chosen or cannot be used (SettingsTab.ShowPaths). -->
+            <GroupBox x:Name="PathsGroup" Header="{l:Loc 'Folders and tools'}">
+                <StackPanel>
+                    <TextBlock Text="{l:Loc 'Leave a field empty to use the default. A folder or program that is not there is skipped, and the default is used instead.'}"
+                               Style="{StaticResource Shell.Secondary}" TextWrapping="Wrap" Margin="0,0,0,10" />
+                    <StackPanel x:Name="PathRows" />
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

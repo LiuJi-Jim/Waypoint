@@ -36,18 +36,40 @@ public sealed record AppearanceSettings(string Mode = "System", string Scheme = 
 public static class SettingsStore
 {
     // This identity is deliberately independent of the product's display name.
-    public static string DataDirectory => Path.Combine(Platform.LocalData, "EmulatorWorkspaceLauncher");
+    /// <summary>Where Waypoint's data goes when the player has chosen nothing: what every install before the choice used.</summary>
+    public static string DefaultDataDirectory => Path.Combine(Platform.LocalData, "EmulatorWorkspaceLauncher");
+
+    static string? _data, _backups;
+
+    /// <summary>Operation logs, the adapter's copy of its scripts, its capture and mod notes, and the backups unless
+    /// <see cref="BackupsDirectory"/> is elsewhere: the player's folder (Settings, or <c>WAYPOINT_DATA</c>), else the default.
+    /// The adapter is told it as <c>WAYPOINT_DATA</c>.</summary>
+    public static string DataDirectory
+    {
+        get => _data ?? Variable("WAYPOINT_DATA") ?? DefaultDataDirectory;
+        set => _data = value;
+    }
+
+    /// <summary>The save backups: the player's folder (Settings, or <c>WAYPOINT_BACKUPS</c>), else <c>backups</c> in the data
+    /// folder. The adapter is told it as <c>WAYPOINT_BACKUPS</c>.</summary>
+    public static string BackupsDirectory
+    {
+        get => _backups ?? Variable("WAYPOINT_BACKUPS") ?? Path.Combine(DataDirectory, "backups");
+        set => _backups = value;
+    }
+
+    static string? Variable(string name) => Environment.GetEnvironmentVariable(name) is { Length: > 0 } value ? value : null;
     public static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true, WriteIndented = true };
     public static LauncherSettings Load(string? path = null)
     {
-        path ??= Path.Combine(DataDirectory, "settings.json");
+        path ??= Path.Combine(DefaultDataDirectory, "settings.json");
         if (!File.Exists(path)) return new();
         return JsonSerializer.Deserialize<LauncherSettings>(File.ReadAllText(path), JsonOptions)
             ?? throw new InvalidDataException("The settings file is empty. Choose a checkout and save settings again.");
     }
     public static void Save(LauncherSettings settings, string? path = null)
     {
-        path ??= Path.Combine(DataDirectory, "settings.json");
+        path ??= Path.Combine(DefaultDataDirectory, "settings.json");
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
         string temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         File.WriteAllText(temporary, JsonSerializer.Serialize(settings, JsonOptions));

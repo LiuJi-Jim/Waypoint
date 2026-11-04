@@ -1,5 +1,8 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Platform.Storage;
 
 namespace Waypoint;
 
@@ -32,7 +35,9 @@ partial class SettingsTab : UserControl
             LanguageChoices.Children.Add(choice);
         }
         L.Current.PropertyChanged += (_, _) => Show();
+        L.Current.PropertyChanged += (_, _) => ShowPaths();
         Show();
+        ShowPaths();
     }
 
     void Show()
@@ -74,6 +79,9 @@ partial class SettingsTab : UserControl
         DeveloperHeading.Text = L.Text("Developer");
         DeveloperMode.Content = L.Text("Developer Mode");
         CheckoutHeading.Text = L.Text("Server checkout");
+        PathsHeading.Text = L.Text("Folders and tools");
+        GameSettingsHeading.Text = L.Text("Game settings");
+        PathsNote.Text = L.Text("Leave a field empty to use the default. A folder or program that is not there is skipped, and the default is used instead.");
         UseProfile.Content = L.Text("Use the checkout's local launch profile when it has one");
         FindButton.Content = L.Text("Find automatically…");
         ChangeButton.Content = L.Text("Change…");
@@ -128,7 +136,9 @@ partial class SettingsTab : UserControl
     /// <summary>The sidebar's switch moved: Simple and Advanced mode show different settings.</summary>
     public void ShowMode()
     {
-        if (_shared is not null) Show();
+        if (_shared is null) return;
+        Show();
+        ShowPaths();
     }
 
     /// <summary>On, the sidebar gets its switch and Simple mode stays until it is used. Off, Waypoint goes back to Simple mode.</summary>
@@ -176,5 +186,96 @@ partial class SettingsTab : UserControl
     {
         Directory.CreateDirectory(SettingsStore.DataDirectory);
         ViewTools.Open(SettingsStore.DataDirectory);
+    }
+
+    // ---- Folders and tools (PathChoices), as on Windows, with the Wine prefix ----
+
+    static readonly (string Tool, string Label)[] ToolLabels = [("git", "Git"), ("dotnet", ".NET SDK"), ("node", "Node.js"), ("python", "Python"), ("powershell", "PowerShell")];
+
+    /// <summary>A row per folder and tool: the choice, in a field that takes a typed path too (a picker may be missing here),
+    /// Browse…, Save, and what is in use now under it.</summary>
+    void ShowPaths()
+    {
+        PathRows.Children.Clear();
+        GameSettingsRow.Children.Clear();
+        PathsCard.IsVisible = S.Developer || S.PathsChosen || Settings.PathProblems.Count > 0;
+        AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
+        AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
+        AddPathRow(PathKind.WinePrefix, null, L.Text("Wine prefix"), S.WinePrefix);
+        AddGameSettingsRow();
+        foreach (var (tool, label) in ToolLabels) AddPathRow(PathKind.Tool, tool, label, S.Tools.GetValueOrDefault(tool));
+    }
+
+    /// <summary>LocalExile's game settings here are the Wine prefix's (GameSettings): another prefix, chosen above, is another set.</summary>
+    void AddGameSettingsRow()
+    {
+        string folder = Path.Combine(Platform.GamePrefix, GameSettings.Documents);
+        var detail = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+            Text = L.Text("In the Wine prefix: {0}. Another Wine prefix has settings of its own.", folder) };
+        detail.Classes.Add("note");
+        var open = new Button { Content = L.Text("Open"), Margin = new Thickness(8, 0, 0, 0) };
+        open.Click += (_, _) => { if (Directory.Exists(folder)) ViewTools.Open(folder); };
+        var line = new DockPanel { Margin = new Thickness(0, 0, 0, 12) };
+        DockPanel.SetDock(open, Dock.Right);
+        line.Children.Add(open);
+        line.Children.Add(detail);
+        GameSettingsRow.Children.Add(line);
+    }
+
+    void AddPathRow(PathKind kind, string? tool, string label, string? value)
+    {
+        var field = new TextBox { Text = value ?? "", Margin = new Thickness(0, 0, 8, 0) };
+        var browse = new Button { Content = L.Text("Browse…"), Margin = new Thickness(0, 0, 8, 0) };
+        var save = new Button { Content = L.Text("Save") };
+        var detail = new TextBlock { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 12) };
+        detail.Classes.Add("note");
+        detail.Text = kind == PathKind.Tool ? L.Text("Looking…") : L.Text("In use: {0}", PathChoices.Now(kind));
+        if (kind == PathKind.Tool) _ = Describe();
+        browse.Click += async (_, _) =>
+        {
+            if (Ui.Owner(this) is not { } owner) return;
+            if (kind != PathKind.Tool)
+            {
+                if (Ui.PickFolder(owner, label) is { } folder) field.Text = folder;
+                return;
+            }
+            try
+            {
+                var files = await owner.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions { Title = label });
+                if (files.FirstOrDefault()?.TryGetLocalPath() is { } program) field.Text = program;
+            }
+            // No portal and no GTK: the field takes a typed path.
+            catch (Exception error) when (error is InvalidOperationException or NotSupportedException or IOException or UnauthorizedAccessException)
+            {
+                Dialog.Tell(owner, DialogKind.Warning, label, error.Message);
+            }
+        };
+        save.Click += async (_, _) =>
+        {
+            var owner = Ui.Owner(this);
+            int Ask(DialogKind k, string title, string message, string[] buttons) => Dialog.Show(owner, k, title, message, null, buttons);
+            string? chosen = field.Text?.Trim() is { Length: > 0 } text ? text : null;
+            if (kind == PathKind.Tool)
+            {
+                if (await PathChoices.ChangeToolAsync(S, tool!, chosen, Ask)) await Describe();
+            }
+            else if (kind == PathKind.WinePrefix)
+            {
+                PathChoices.ChangeWinePrefix(S, chosen, Ask);
+                detail.Text = L.Text("In use: {0}", PathChoices.Now(kind));
+            }
+            else if (await PathChoices.ChangeFolderAsync(_shared, kind, chosen, Ask, ViewTools.Open) && owner is not null) App.Restart(owner);
+        };
+        var line = new DockPanel();
+        DockPanel.SetDock(save, Dock.Right);
+        DockPanel.SetDock(browse, Dock.Right);
+        line.Children.Add(save);
+        line.Children.Add(browse);
+        line.Children.Add(field);
+        PathRows.Children.Add(new TextBlock { Text = label, FontWeight = Avalonia.Media.FontWeight.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        PathRows.Children.Add(line);
+        PathRows.Children.Add(detail);
+
+        async Task Describe() => detail.Text = await PathChoices.DescribeToolAsync(S, tool!);
     }
 }

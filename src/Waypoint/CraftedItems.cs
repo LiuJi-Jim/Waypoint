@@ -55,11 +55,7 @@ static class CraftedItems
 {
     internal static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
 
-#if WINDOWS
-    static string File => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Waypoint", "crafted-items.json");
-#else
-    static string File => Path.Combine(Platform.LocalData, "Waypoint", "crafted-items.json");
-#endif
+    static string File => Path.Combine(Settings.Home, "crafted-items.json");
 
     public static List<CraftedItem> Load()
     {
