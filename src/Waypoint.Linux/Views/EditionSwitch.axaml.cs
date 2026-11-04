@@ -26,10 +26,19 @@ public partial class EditionSwitch : UserControl
     {
         ReleaseChoice.IsChecked = Repo.IsInstall;
         LatestChoice.IsChecked = !Repo.IsInstall;
-        Caption.Text = Repo.IsInstall ? L.Text("The tested release. Its characters are its own.")
-            // The crafter's route can leave the copy on the tested version, which Play does not move.
-            : SwitchToSource.OnTestedVersion(Environment.CurrentDirectory) ? L.Text("A tested version of LocalExile's source, kept as it is. Its characters are its own.")
+        // The crafter's route can leave the copy on the tested version, which Play does not move.
+        bool tested = !Repo.IsInstall && SwitchToSource.OnTestedVersion(Environment.CurrentDirectory);
+        Caption.Text = Repo.IsInstall ? L.Text("LocalExile's published release. Its characters are its own.")
+            : tested ? L.Text("An older version of LocalExile's source, which doesn't update. Its characters are its own.")
             : L.Text("LocalExile's newest changes, updated when you play. Its characters are its own.");
+        NewestLink.IsVisible = tested;
+    }
+
+    async void NewestClicked(object? sender, RoutedEventArgs e)
+    {
+        var owner = Ui.Owner(this);
+        await Editions.MoveToNewestAsync(_shared, (kind, title, message, buttons) => Dialog.Show(owner, kind, title, message, null, buttons));
+        Show();
     }
 
     void Chosen(object? sender, RoutedEventArgs e) => Choose(sender == ReleaseChoice);

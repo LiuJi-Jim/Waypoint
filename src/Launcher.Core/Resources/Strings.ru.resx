@@ -1042,6 +1042,9 @@
   <data xml:space="preserve" name="Text_2ff6b56154ab">
     <value>Завершите подготовку</value>
   </data>
+  <data name="Text_2ff712f20f9c" xml:space="preserve">
+    <value>Копия не переключена</value>
+  </data>
   <data name="Text_300d052f22b0" xml:space="preserve">
     <value>Ваши персонажи</value>
   </data>
@@ -1614,6 +1617,9 @@
   <data xml:space="preserve" name="Text_4bdd511d381b">
     <value>Инструкция</value>
   </data>
+  <data name="Text_4c49a6974e46" xml:space="preserve">
+    <value>Перейти на старую версию</value>
+  </data>
   <data name="Text_4c5a0be141c4" xml:space="preserve">
     <value>Для игры нужны все три сервера: нажмите «Играть» или сначала «Запустить серверы».</value>
   </data>
@@ -1715,6 +1721,9 @@
   </data>
   <data name="Text_515509f0e334" xml:space="preserve">
     <value>{0:0} МБ</value>
+  </data>
+  <data name="Text_5174093cf95b" xml:space="preserve">
+    <value>Оставить старую версию: она не будет обновляться.</value>
   </data>
   <data name="Text_5199860e98ea" xml:space="preserve">
     <value>Новое имя для {0}</value>
@@ -1889,6 +1898,9 @@
   <data name="Text_5a259fd9e329" xml:space="preserve">
     <value>Перенести персонажей</value>
   </data>
+  <data name="Text_5a2a9ccda1eb" xml:space="preserve">
+    <value>Не удалось выбрать старую версию (git завершился с кодом {0}).</value>
+  </data>
   <data name="Text_5a3f8a56fafe" xml:space="preserve">
     <value>В установках Steam и Epic нет Content.ggpk, они не подходят. Выберите автономную установку.</value>
   </data>
@@ -1970,6 +1982,9 @@
   <data xml:space="preserve" name="Text_5f1b134f71ee">
     <value>
 Достигнут лимит поиска; другие репозитории могут остаться ненайденными. Вы можете выбрать любую папку вручную.</value>
+  </data>
+  <data name="Text_5f42784698ae" xml:space="preserve">
+    <value>LocalExile от 1 ноября, с которым точно работает конструктор предметов. Последние изменения можно получить позже в разделе «Играть».</value>
   </data>
   <data name="Text_5f664501398a" xml:space="preserve">
     <value>git fetch --prune origin и открытые запросы на слияние с GitHub</value>
@@ -2348,6 +2363,9 @@
   <data name="Text_6e9c271dcc43" xml:space="preserve">
     <value>Показано: {0}. В каждой группе первым идёт лучший тир для уровня предмета.</value>
   </data>
+  <data name="Text_6ed6ae5d553b" xml:space="preserve">
+    <value>Нажмите «Закончить игру», затем попробуйте снова.</value>
+  </data>
   <data name="Text_6ed7c4e56792" xml:space="preserve">
     <value>Обновлять LocalExile автоматически</value>
   </data>
@@ -2494,6 +2512,9 @@
   </data>
   <data name="Text_75adbad9edb8" xml:space="preserve">
     <value>1 мин</value>
+  </data>
+  <data name="Text_76087b2f89df" xml:space="preserve">
+    <value>Получать последние изменения?</value>
   </data>
   <data name="Text_76409ed15c76" xml:space="preserve">
     <value>(нет ответа)</value>
@@ -3095,6 +3116,9 @@
   <data xml:space="preserve" name="Text_9533a426d7fa">
     <value>Фон логотипа</value>
   </data>
+  <data name="Text_954207191b8c" xml:space="preserve">
+    <value>Опубликованный релиз LocalExile: обновляется, когда вы соглашаетесь на новый.</value>
+  </data>
   <data xml:space="preserve" name="Text_95582a588b34">
     <value>PR #{0} (будет получен при активации)</value>
   </data>
@@ -3690,6 +3714,9 @@
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>При выходе из Waypoint службы этой рабочей копии останавливаются.</value>
   </data>
+  <data name="Text_ae2ff967432c" xml:space="preserve">
+    <value>Оставить старую версию, которая не меняется</value>
+  </data>
   <data name="Text_ae5ced38732e" xml:space="preserve">
     <value>Python нет в PATH. Установите Python 3.9 или новее с python.org, отметив «Add python.exe to PATH».</value>
   </data>
@@ -4062,6 +4089,9 @@
   <data xml:space="preserve" name="Text_c04a64764afe">
     <value>В выбранном локальном профиле указана несуществующая база данных. Восстановите нужную базу или исправьте config/runtime.local.ps1. Не заменяйте базу существующей установки пустой. При необходимости выберите другой репозиторий или профиль в настройках.</value>
   </data>
+  <data name="Text_c057cbc9d604" xml:space="preserve">
+    <value>Старая версия исходного кода LocalExile, которая не обновляется. Персонажи у неё свои.</value>
+  </data>
   <data name="Text_c09afdde42f0" xml:space="preserve">
     <value>Открыть конструктор предметов</value>
   </data>
@@ -4241,6 +4271,9 @@
   </data>
   <data xml:space="preserve" name="Text_c8ae1bb777a0">
     <value>Gateway запустил новый процесс в том же сеансе отслеживания. Войдите повторно, если игра вернулась на экран входа.</value>
+  </data>
+  <data name="Text_c8b5d313ef89" xml:space="preserve">
+    <value>Эта копия уйдёт с проверенной версии на последние изменения LocalExile, и «Играть» будет обновлять её каждый день. Новые изменения не проверены, и что-то может сломаться. Сначала будет создана резервная копия ваших сохранений.</value>
   </data>
   <data name="Text_c8d6b52dde33" xml:space="preserve">
     <value>T{0} · уровень {1}</value>
@@ -4493,6 +4526,9 @@
   <data name="Text_d58f93b4a354" xml:space="preserve">
     <value>LocalExile можно обновить, только когда игра и её серверы закрыты. Закройте игру, дождитесь остановки серверов и снова нажмите «Обновить сейчас».</value>
   </data>
+  <data name="Text_d5a68e116be7" xml:space="preserve">
+    <value>В этой копии есть ваши собственные изменения</value>
+  </data>
   <data name="Text_d5b898262c7c" xml:space="preserve">
     <value>Что произойдёт</value>
   </data>
@@ -4559,6 +4595,9 @@
   <data xml:space="preserve" name="Text_d838ad216459">
     <value>✓  Игра запущена</value>
   </data>
+  <data name="Text_d83be5294fb4" xml:space="preserve">
+    <value>Эта копия перейдёт со старой версии на последние изменения LocalExile, и «Играть» будет обновлять её каждый день. В последних изменениях что-то может сломаться. Сначала будет создана резервная копия ваших сохранений.</value>
+  </data>
   <data name="Text_d848702976bf" xml:space="preserve">
     <value>Оставить текущий LocalExile как есть. У каждой копии свой прогресс.</value>
   </data>
@@ -4600,6 +4639,9 @@
   </data>
   <data name="Text_daf3be705205" xml:space="preserve">
     <value>В трей на время игры</value>
+  </data>
+  <data name="Text_daf5a645a558" xml:space="preserve">
+    <value>Опубликованный релиз LocalExile. Персонажи у него свои.</value>
   </data>
   <data xml:space="preserve" name="Text_db03e3055c5a">
     <value>Страницы рабочей папки</value>
@@ -4988,6 +5030,9 @@
   </data>
   <data name="Text_ed5eb9a37e2d" xml:space="preserve">
     <value>сейчас</value>
+  </data>
+  <data name="Text_ed6a3be182e3" xml:space="preserve">
+    <value>Waypoint оставит её как есть. Сначала сохраните или удалите их.</value>
   </data>
   <data xml:space="preserve" name="Text_edab1377682d">
     <value>Перед запуском проверьте подготовку ниже.</value>

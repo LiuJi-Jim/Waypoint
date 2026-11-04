@@ -138,7 +138,7 @@ has no source to build, and turns to the download instead.
 - **Your current LocalExile**: **Keep both** leaves it as it is. **Remove the old one later** leaves it until the player has pressed Play
   on the copy and closed the game; Play then asks. **Delete the old one…** moves a shared client into the copy when both are on one
   drive, and deletes the release's program files. Its `data` and `Mods` stay, and so does anything a release does not ship.
-- **Updates**, for a download: **Stay on a tested version** puts the copy on its own branch `waypoint-tested` at
+- **Updates**, for a download: **Keep an older version that does not change** puts the copy on its own branch `waypoint-tested` at
   `SwitchToSource.TestedCommit`, which Play never moves, because only a plain copy on the default branch is updated. **Get the newest
   changes** leaves it on `main`. Changing the commit means testing it again: a release's database opened on it, and an item given.
 - **Giving items**: **Set up Give item** installs Frida into the copy's `.venv`, which git ignores. Left out, the crafter offers it
@@ -245,8 +245,10 @@ source copy that follows `main`. Each is a folder of its own with its own charac
 - A side Waypoint has no folder for opens the setup guide: the release route, or the source route with **Get the newest changes**
   chosen, which from a release has its Your characters page.
 - On a release, **Tools → Get the item crafter…** switches to the Latest copy when Waypoint has one, with the same questions, and
-  otherwise opens the guide as before, on the tested version. A copy on that tested version (`waypoint-tested`) is still the Latest
-  side, and the switch says it is kept as it is, since Play does not move it.
+  otherwise opens the guide as before, with the older version chosen. A copy on that older version (`waypoint-tested`) is still the
+  Latest side, and the switch says it does not update, since Play does not move it. **Get the newest changes** under it backs the saves
+  up and switches the copy to LocalExile's default branch (`Editions.MoveToNewestAsync`; nothing is done with changes of the
+  player's own), and clears the last update check, so the next Play updates it as it updates any plain copy, with its way back.
 
 A link to a section Simple mode's list lacks (a log, from a failure) shows that section without selecting anything.
 
@@ -623,7 +625,7 @@ adapter does not know can be browsed but not changed.
 | `SetupChecks.cs`, `Settings.cs` | the setup checks, the per-user settings |
 | `SetupWizard.xaml`, `PortCheck.cs` | the setup guide; what holds a server's port, and the question about it |
 | `src/Launcher.Core/SetupGuide.cs`, `ClientLocator.cs`, `ClientCopy.cs` | the guide's engine: tools that can be stopped, the prerequisites, the steps, finding a client, the resumable copy |
-| `src/Launcher.Core/SwitchToSource.cs` | moving from a release to a source copy: what the choices will do, the tested version, Frida, removing the release |
+| `src/Launcher.Core/SwitchToSource.cs` | moving from a release to a source copy: what the choices will do, the older version (`TestedCommit`), Frida, removing the release |
 | `Tray.cs` | the tray icon (Windows Forms' NotifyIcon) |
 | `branding\` | the emblem: `waypoint-master.png`, the reviewed source and how it was made (`waypoint-artwork.json`); `app.ico` of the exe, the window and the tray (16 to 256 px) and the 192 px image of the sidebar, both from `scripts\New-Icon.ps1` |
 | `Updates.cs`, `MainWindow.xaml.cs` | the version, the release check, the self-update; the update strip |

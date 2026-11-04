@@ -46,7 +46,7 @@ public static class SwitchToSource
     public static async Task ChooseTestedVersionAsync(string copy, Action<string> output, CancellationToken stop)
     {
         int code = await ToolProcess.RunAsync("git", ["-C", copy, "switch", "--no-track", "-c", TestedBranch, TestedCommit], null, output, stop);
-        if (code != 0) throw new IOException(L.Text("The tested version could not be chosen (git exit {0}).", code));
+        if (code != 0) throw new IOException(L.Text("The older version could not be chosen (git exit {0}).", code));
     }
 
     public static bool HasFrida(string copy) =>
@@ -83,7 +83,7 @@ public static class SwitchToSource
         else lines.Add(new(L.Text("Start with no accounts or characters. You create an account at the end.")));
         lines.Add(c.GiveItem ? new(L.Text("Install Frida, so that Give item works."))
             : new(L.Text("Leave out Frida. Waypoint offers it again when you press Give item."), true));
-        if (c.Download) lines.Add(c.TestedVersion ? new(L.Text("Stay on the tested version.")) : new(L.Text("Update to the newest changes once a day."), true));
+        if (c.Download) lines.Add(c.TestedVersion ? new(L.Text("Keep the older version; it won't update.")) : new(L.Text("Update to the newest changes once a day."), true));
         if (c.KeepOld) lines.Add(new(L.Text("Leave your current LocalExile as it is. Each copy keeps its own progress.")));
         else
         {

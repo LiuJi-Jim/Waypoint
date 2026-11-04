@@ -80,6 +80,39 @@ static class Editions
         return backup == 1 || await BackedUp(shared) ? (EditionStep.Switch, folder) : (EditionStep.Stay, null);
     }
 
+    /// <summary>A copy on the tested version (<see cref="SwitchToSource.TestedBranch"/>, which Play never moves) onto LocalExile's
+    /// default branch, which Play then keeps up to date: the saves backed up first, nothing done with changes of the player's own.
+    /// The next Play fetches and updates as it always does. True when it moved.</summary>
+    public static async Task<bool> MoveToNewestAsync(Shared shared, Func<DialogKind, string, string, string[], int> ask)
+    {
+        if (shared.IsLiveRunning || shared.Monitor.Latest.Any(s => s.Running))
+        {
+            ask(DialogKind.Info, L.Text("Stop LocalExile first"), L.Text("Press Stop playing, then try again."), [L.Text("OK")]);
+            return false;
+        }
+        if (ask(DialogKind.Question, L.Text("Get the newest changes?"),
+                L.Text("This copy moves from its older version to LocalExile's newest changes, and Play then updates it each day. The newest changes can break. Your saves are backed up first."),
+                [L.Text("Get the newest changes"), L.Text("Cancel")]) != 0) return false;
+        if ((await Git.ChangesAsync()).Count > 0)
+        {
+            ask(DialogKind.Warning, L.Text("This copy has changes of your own"), L.Text("Waypoint leaves it as it is. Keep or remove them first."), [L.Text("OK")]);
+            return false;
+        }
+        if (shared.Settings.AutomaticBackups && !await BackedUp(shared)) return false;
+        Git.Result? moved = null;
+        await shared.RunGitAsync(async () => moved = await Git.SwitchToBranchAsync(await Git.DefaultBranchAsync(), line => shared.Logs.Write($"git: {line}")));
+        if (moved is not { Ok: true })
+        {
+            if (moved is not null) ask(DialogKind.Error, L.Text("The copy didn't move"), moved.Output, [L.Text("OK")]);
+            return false;
+        }
+        // Due at once: the next Play fetches, backs up and moves forward, with its way back.
+        shared.Settings.LastUpdateCheck = null;
+        shared.Settings.Save();
+        await shared.Workspace.RefreshAsync();
+        return true;
+    }
+
     static async Task<bool> BackedUp(Shared shared) =>
         await shared.Workspace.OperateAsync("Backup", L.Text("Back up now")) is { Ok: true };
 }

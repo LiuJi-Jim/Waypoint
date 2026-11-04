@@ -682,7 +682,7 @@ public partial class SetupWizard : FormWindow
                 Remember(checkout);
             }));
         if (switching is { Download: true, TestedVersion: true })
-            tasks.Add(new(L.Text("Choose the tested version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
+            tasks.Add(new(L.Text("Go to the older version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
         if (client is not null && sharedKeys is not null)
             tasks.Add(new(L.Text("Share the game client"), () => HasClient(checkout), (detail, stop) => ClientCopy.ShareAsync(client, checkout, sharedKeys, line => { Write(line); detail(line); }, stop)));
         else if (client is not null)

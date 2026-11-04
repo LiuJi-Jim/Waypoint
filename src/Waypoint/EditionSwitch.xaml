@@ -36,11 +36,20 @@
         <Border HorizontalAlignment="Center" Padding="2" CornerRadius="4" BorderThickness="1" BorderBrush="{DynamicResource Shell.Border}">
             <UniformGrid Rows="1">
                 <RadioButton x:Name="ReleaseChoice" GroupName="Edition" Content="{l:Loc 'Release'}" Style="{StaticResource EditionChoice}" Click="Chosen"
-                             ToolTip="{l:Loc 'LocalExile as released: tested, and updated when you accept.'}" />
+                             ToolTip="{l:Loc 'The published release of LocalExile, updated when you accept a new one.'}" />
                 <RadioButton x:Name="LatestChoice" GroupName="Edition" Content="{l:Loc 'Latest'}" Style="{StaticResource EditionChoice}" Click="Chosen"
                              ToolTip="{l:Loc 'LocalExile as it is being made: the newest changes, updated when you play.'}" />
             </UniformGrid>
         </Border>
         <TextBlock x:Name="Caption" Style="{StaticResource Shell.Secondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,8,0,0" />
+        <!-- A copy on the tested version: the way onto the newest changes. -->
+        <Button x:Name="NewestLink" Content="{l:Loc 'Get the newest changes'}" Click="NewestClicked" Visibility="Collapsed" HorizontalAlignment="Center"
+                Margin="0,4,0,0" Cursor="Hand" Foreground="{DynamicResource Shell.Accent}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </StackPanel>
 </UserControl>

@@ -1042,6 +1042,9 @@
   <data name="Text_2ff6b56154ab" xml:space="preserve">
     <value>完成安装以开始游戏</value>
   </data>
+  <data name="Text_2ff712f20f9c" xml:space="preserve">
+    <value>副本没有切换</value>
+  </data>
   <data name="Text_300d052f22b0" xml:space="preserve">
     <value>你的角色</value>
   </data>
@@ -1614,6 +1617,9 @@
   <data name="Text_4bdd511d381b" xml:space="preserve">
     <value>查看说明</value>
   </data>
+  <data name="Text_4c49a6974e46" xml:space="preserve">
+    <value>切换到旧版本</value>
+  </data>
   <data name="Text_4c5a0be141c4" xml:space="preserve">
     <value>游戏需要全部三个服务器：请使用“开始游戏”，或先“启动服务器”。</value>
   </data>
@@ -1715,6 +1721,9 @@
   </data>
   <data name="Text_515509f0e334" xml:space="preserve">
     <value>{0:0} MB</value>
+  </data>
+  <data name="Text_5174093cf95b" xml:space="preserve">
+    <value>保留旧版本；它不会更新。</value>
   </data>
   <data name="Text_5199860e98ea" xml:space="preserve">
     <value>{0} 的新名称</value>
@@ -1889,6 +1898,9 @@
   <data name="Text_5a259fd9e329" xml:space="preserve">
     <value>迁移我的角色</value>
   </data>
+  <data name="Text_5a2a9ccda1eb" xml:space="preserve">
+    <value>无法选择旧版本（git 退出代码 {0}）。</value>
+  </data>
   <data name="Text_5a3f8a56fafe" xml:space="preserve">
     <value>Steam 和 Epic 版本没有 Content.ggpk，无法使用。请选择独立版安装。</value>
   </data>
@@ -1970,6 +1982,9 @@
   <data name="Text_5f1b134f71ee" xml:space="preserve">
     <value>
 已达到搜索上限；可能还有其他源码副本。可“浏览”到任意位置。</value>
+  </data>
+  <data name="Text_5f42784698ae" xml:space="preserve">
+    <value>11 月 1 日的 LocalExile，已知物品制作器可以正常使用。之后可以在“开始游戏”中获取最新更改。</value>
   </data>
   <data name="Text_5f664501398a" xml:space="preserve">
     <value>git fetch --prune origin，以及来自 GitHub 的打开的拉取请求</value>
@@ -2348,6 +2363,9 @@
   <data name="Text_6e9c271dcc43" xml:space="preserve">
     <value>已显示 {0} 个。每组中适合该物品等级的最佳阶排在最前面。</value>
   </data>
+  <data name="Text_6ed6ae5d553b" xml:space="preserve">
+    <value>请点击“停止游戏”，然后再试一次。</value>
+  </data>
   <data name="Text_6ed7c4e56792" xml:space="preserve">
     <value>保持 LocalExile 为最新</value>
   </data>
@@ -2494,6 +2512,9 @@
   </data>
   <data name="Text_75adbad9edb8" xml:space="preserve">
     <value>1 分钟</value>
+  </data>
+  <data name="Text_76087b2f89df" xml:space="preserve">
+    <value>获取最新更改？</value>
   </data>
   <data name="Text_76409ed15c76" xml:space="preserve">
     <value>（无回复）</value>
@@ -3095,6 +3116,9 @@
   <data name="Text_9533a426d7fa" xml:space="preserve">
     <value>徽标背景</value>
   </data>
+  <data name="Text_954207191b8c" xml:space="preserve">
+    <value>LocalExile 的正式发布版，在你同意安装新版本时更新。</value>
+  </data>
   <data name="Text_95582a588b34" xml:space="preserve">
     <value>PR #{0}（激活时获取）</value>
   </data>
@@ -3690,6 +3714,9 @@
   <data name="Text_addd1dcb439b" xml:space="preserve">
     <value>退出 Waypoint 时会停止此源码副本的服务。</value>
   </data>
+  <data name="Text_ae2ff967432c" xml:space="preserve">
+    <value>保留不会变化的旧版本</value>
+  </data>
   <data name="Text_ae5ced38732e" xml:space="preserve">
     <value>PATH 中没有 Python。请从 python.org 安装 Python 3.9 或更高版本，并勾选“Add python.exe to PATH”。</value>
   </data>
@@ -4062,6 +4089,9 @@
   <data name="Text_c04a64764afe" xml:space="preserve">
     <value>所选的本地运行配置指定了一个不存在的数据库。请恢复原本要使用的数据库，或修正 config/runtime.local.ps1。不要为现有安装创建空的替代数据库。如有需要，请打开“设置”选择其他源码副本/配置。</value>
   </data>
+  <data name="Text_c057cbc9d604" xml:space="preserve">
+    <value>LocalExile 源码的旧版本，不会更新。它有自己的角色。</value>
+  </data>
   <data name="Text_c09afdde42f0" xml:space="preserve">
     <value>打开物品制作器</value>
   </data>
@@ -4241,6 +4271,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_c8ae1bb777a0" xml:space="preserve">
     <value>Gateway 在同一监视进程下启动了新进程。如果游戏回到了登录界面，请重新登录。</value>
+  </data>
+  <data name="Text_c8b5d313ef89" xml:space="preserve">
+    <value>这个副本将从经过测试的版本改为 LocalExile 的最新更改，之后“开始游戏”会每天更新它。较新的更改未经测试，可能会出现问题。会先备份你的存档。</value>
   </data>
   <data name="Text_c8d6b52dde33" xml:space="preserve">
     <value>T{0} · 等级 {1}</value>
@@ -4493,6 +4526,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_d58f93b4a354" xml:space="preserve">
     <value>只有在游戏及其服务器都已关闭时才能更新 LocalExile。请关闭游戏，等待服务器停止，然后再次点击“立即更新”。</value>
   </data>
+  <data name="Text_d5a68e116be7" xml:space="preserve">
+    <value>这个副本有你自己的更改</value>
+  </data>
   <data name="Text_d5b898262c7c" xml:space="preserve">
     <value>将要进行的操作</value>
   </data>
@@ -4559,6 +4595,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_d838ad216459" xml:space="preserve">
     <value>✓  游戏运行中</value>
   </data>
+  <data name="Text_d83be5294fb4" xml:space="preserve">
+    <value>这个副本将从旧版本改为 LocalExile 的最新更改，之后“开始游戏”会每天更新它。最新更改可能会出现问题。会先备份你的存档。</value>
+  </data>
   <data name="Text_d848702976bf" xml:space="preserve">
     <value>保留你当前的 LocalExile 不变。每个副本各自保留进度。</value>
   </data>
@@ -4600,6 +4639,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_daf3be705205" xml:space="preserve">
     <value>游戏运行时隐藏到托盘</value>
+  </data>
+  <data name="Text_daf5a645a558" xml:space="preserve">
+    <value>LocalExile 的正式发布版。它有自己的角色。</value>
   </data>
   <data name="Text_db03e3055c5a" xml:space="preserve">
     <value>工作区页面</value>
@@ -4988,6 +5030,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_ed5eb9a37e2d" xml:space="preserve">
     <value>现在</value>
+  </data>
+  <data name="Text_ed6a3be182e3" xml:space="preserve">
+    <value>Waypoint 会保持原样。请先保留或删除这些更改。</value>
   </data>
   <data name="Text_edab1377682d" xml:space="preserve">
     <value>开始前请检查下方的安装状态。</value>

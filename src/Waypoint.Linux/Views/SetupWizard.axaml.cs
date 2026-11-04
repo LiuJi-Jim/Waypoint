@@ -193,8 +193,8 @@ public partial class SetupWizard : Window
         RemoveOldLater.Content = L.Text("Remove the old one later");
         RemoveNote.Text = L.Text("Once the new copy has worked for you, Waypoint will ask before deleting the old one.");
         UpdatesTitle.Text = L.Text("Updates");
-        TestedVersion.Content = L.Text("Stay on a tested version (recommended)");
-        TestedNote.Text = L.Text("A version we have checked. It does not change by itself.");
+        TestedVersion.Content = L.Text("Keep an older version that does not change");
+        TestedNote.Text = L.Text("LocalExile from 1 November, which the item crafter is known to work with. You can get the newest changes later from Play.");
         NewestVersion.Content = L.Text("Get the newest changes");
         NewestNote.Text = L.Text("Updates itself each day, and things can break.");
         GiveItemTitle.Text = L.Text("Giving items");
@@ -763,7 +763,7 @@ public partial class SetupWizard : Window
                 Remember(checkout);
             }));
         if (switching is { Download: true, TestedVersion: true })
-            tasks.Add(new(L.Text("Choose the tested version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
+            tasks.Add(new(L.Text("Go to the older version"), () => SwitchToSource.OnTestedVersion(checkout), (detail, stop) => SwitchToSource.ChooseTestedVersionAsync(checkout, line => { Write(line); detail(line); }, stop)));
         if (client is not null && sharedKeys is not null)
             tasks.Add(new(L.Text("Share the game client"), () => HasClient(checkout), (detail, stop) => ClientCopy.ShareAsync(client, checkout, sharedKeys, line => { Write(line); detail(line); }, stop)));
         else if (client is not null)
