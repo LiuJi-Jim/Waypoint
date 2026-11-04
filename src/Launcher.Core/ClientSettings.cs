@@ -25,6 +25,9 @@ public static class ClientSettings
 
     public static string Documents => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Path of Exile");
 
+    /// <summary>The game settings folder Waypoint gives a client of its own (setup, Play's offer): the default profile.</summary>
+    public const string DefaultProfile = OwnFolder;
+
     /// <summary>The folder a separate client's settings go in, for the player to read.</summary>
     public static string OwnFolderPath => Path.Combine(Documents, OwnFolder);
 
@@ -181,6 +184,20 @@ public static class ClientSettings
         if (from is not null && File.Exists(Path.Combine(documents, from, SharedConfig)))
             Replace(settings, string.Join(Environment.NewLine, WithoutLogin(File.ReadAllLines(Path.Combine(documents, from, SharedConfig)))) + Environment.NewLine, new UTF8Encoding(true));
         else Seed(settings, Path.Combine(documents, SharedConfig));
+    }
+
+    /// <summary>A game settings folder under a new name, beside the others. A client whose config.json names it is pointed at the
+    /// new name.</summary>
+    public static void RenameProfile(string name, string newName, string client, string? documents = null)
+    {
+        if (!ValidProfile(name) || !ValidProfile(newName)) throw new ArgumentException(L.Text("\"{0}\" is not a folder name.", ValidProfile(name) ? newName : name));
+        documents ??= Documents;
+        string from = Path.Combine(documents, name), to = Path.Combine(documents, newName);
+        if (!File.Exists(Path.Combine(from, SharedConfig))) throw new IOException(L.Text("{0} has no game settings.", from));
+        if (Directory.Exists(to)) throw new IOException(L.Text("{0} already exists.", to));
+        bool active = string.Equals(Profile(client, documents), name, StringComparison.OrdinalIgnoreCase);
+        Directory.Move(from, to);
+        if (active) Point(Path.Combine(client, "config.json"), newName);
     }
 
     /// <summary>Points the client at a game settings folder that has a settings file. Only config.json changes; what else it holds

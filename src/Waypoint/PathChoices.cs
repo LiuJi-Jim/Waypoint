@@ -139,21 +139,44 @@ static class PathChoices
         return true;
     }
 
-    // ---- LocalExile's game settings (Windows): a folder under Documents\My Games\Path of Exile, named in Client\config.json ----
+    // ---- LocalExile's game settings profiles (Windows), as Mod Organizer's profiles: a folder each under
+    // Documents\My Games\Path of Exile, the active one named in Client\config.json. Every folder there is listed; only those
+    // made here can be renamed or removed, never the active one, and there is always one left. ----
 
     const string Client = "Client";
 
-    /// <summary>The game settings folder in use, by name (null when the client uses the normal settings, or has none yet).</summary>
+    /// <summary>A profile as the Profiles window and the Play picker list it.</summary>
+    public sealed record GameProfile(string Name, bool Active, bool Made);
+
+    /// <summary>The active profile, by name (null when the client uses the normal settings, or has none yet).</summary>
     public static string? GameSettingsFolder() => Directory.Exists(Client) ? ClientSettings.Profile(Client) : null;
 
-    /// <summary>What the Game settings row says: the folder in use, and what a switch reaches.</summary>
+    /// <summary>Every profile there is, the active one and those made here marked.</summary>
+    public static IReadOnlyList<GameProfile> GameProfiles(Settings settings)
+    {
+        string? active = GameSettingsFolder();
+        var names = ClientSettings.Profiles().ToList();
+        // The client names a folder that is not there (deleted by hand): it is still the one in use, and the game makes it anew.
+        if (active is not null && !names.Contains(active, StringComparer.OrdinalIgnoreCase)) names.Add(active);
+        return [.. names.Order(StringComparer.OrdinalIgnoreCase).Select(name => new GameProfile(name, string.Equals(name, active, StringComparison.OrdinalIgnoreCase),
+            settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase)))];
+    }
+
+    /// <summary>Rename is offered for a profile made here that is not the active one.</summary>
+    public static bool CanRename(Settings settings, string name) =>
+        settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase) && !string.Equals(name, GameSettingsFolder(), StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>Remove too, and never the last profile.</summary>
+    public static bool CanRemove(Settings settings, string name) => CanRename(settings, name) && ClientSettings.Profiles().Count > 1;
+
+    /// <summary>What the Settings row and the Profiles window say: the profile in use, and what a switch reaches.</summary>
     public static string GameSettingsDetail()
     {
         if (!Directory.Exists(Client)) return L.Text("No game client yet: the setup guide adds one.");
         var state = ClientSettings.Read(Client);
         string text = state.Kind == ClientSettingsKind.Separate
             ? L.Text("In use: {0}", Path.GetDirectoryName(state.ConfigFile) ?? state.ConfigFile)
-            : L.Text("In use: your normal Path of Exile settings ({0}). Choose or create a folder to give LocalExile its own.", ClientSettings.Documents);
+            : L.Text("In use: your normal Path of Exile settings ({0}). Select or create a profile to give LocalExile its own.", ClientSettings.Documents);
         if (ClientSettings.IsLink(Client)) text += " " + L.Text("This game client is shared with other LocalExile copies: a switch changes theirs too.");
         return text;
     }
@@ -165,7 +188,21 @@ static class PathChoices
         return false;
     }
 
-    /// <summary>The client pointed at another game settings folder; only its config.json changes. True when it did.</summary>
+    static bool Named(string name, Ask ask)
+    {
+        if (ClientSettings.ValidProfile(name)) return true;
+        ask(DialogKind.Warning, L.Text("Choose another name"), L.Text("A plain folder name, without \\ / : * ? \" < > |."), [L.Text("OK")]);
+        return false;
+    }
+
+    static void Made(Settings settings, string name)
+    {
+        if (settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase)) return;
+        settings.MadeGameSettings.Add(name);
+        settings.Save();
+    }
+
+    /// <summary>Select: the client uses this profile from its next start; only config.json changes. True when it did.</summary>
     public static bool UseGameSettings(Shared shared, string name, Ask ask)
     {
         if (!Directory.Exists(Client) || !Closed(shared, ask)) return false;
@@ -181,47 +218,47 @@ static class PathChoices
         }
     }
 
-    /// <summary>A new game settings folder, a copy of the one in use (or of the normal settings) without the saved login, then
-    /// used. True when it was.</summary>
-    public static bool CreateGameSettings(Shared shared, string name, Ask ask)
+    /// <summary>Create (<paramref name="from"/> null: from the normal settings, no login, Predictive) or Copy (from that profile,
+    /// as it is, without its saved login). The new profile is listed, not selected. True when it was made.</summary>
+    public static bool CreateGameSettings(Shared shared, string name, string? from, Ask ask)
     {
         name = name.Trim();
-        if (!ClientSettings.ValidProfile(name))
-        {
-            ask(DialogKind.Warning, L.Text("Choose another name"), L.Text("A plain folder name, without \\ / : * ? \" < > |."), [L.Text("OK")]);
-            return false;
-        }
-        if (!Directory.Exists(Client) || !Closed(shared, ask)) return false;
-        string? from = GameSettingsFolder();
+        if (!Named(name, ask)) return false;
         try { ClientSettings.CreateProfile(name, from); }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException)
         {
-            ask(DialogKind.Error, L.Text("The folder wasn't made"), e.Message, [L.Text("OK")]);
+            ask(DialogKind.Error, L.Text("The profile wasn't made"), e.Message, [L.Text("OK")]);
             return false;
         }
-        if (!shared.Settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase))
-        {
-            shared.Settings.MadeGameSettings.Add(name);
-            shared.Settings.Save();
-        }
-        return UseGameSettings(shared, name, ask);
+        Made(shared.Settings, name);
+        return true;
     }
 
-    /// <summary>Whether Delete is offered for a folder: one made here with Create, not the one in use, and never the last one.</summary>
-    public static bool CanDeleteGameSettings(Settings settings, string name) =>
-        settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase)
-        && !string.Equals(name, GameSettingsFolder(), StringComparison.OrdinalIgnoreCase)
-        && ClientSettings.Profiles().Count > 1;
-
-    /// <summary>A folder made here goes to the Recycle Bin, after the player says so; its saved login goes with it. True when it
-    /// went.</summary>
-    public static bool DeleteGameSettings(Shared shared, string name, Ask ask)
+    /// <summary>Rename: a profile made here, not the active one. True when it was renamed.</summary>
+    public static bool RenameGameSettings(Shared shared, string name, string newName, Ask ask)
     {
-        if (!CanDeleteGameSettings(shared.Settings, name) || !Closed(shared, ask)) return false;
+        newName = newName.Trim();
+        if (!CanRename(shared.Settings, name) || !Named(newName, ask)) return false;
+        try { ClientSettings.RenameProfile(name, newName, Client); }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException)
+        {
+            ask(DialogKind.Error, L.Text("The profile wasn't renamed"), e.Message, [L.Text("OK")]);
+            return false;
+        }
+        shared.Settings.MadeGameSettings.RemoveAll(n => string.Equals(n, name, StringComparison.OrdinalIgnoreCase));
+        Made(shared.Settings, newName);
+        return true;
+    }
+
+    /// <summary>Remove: a profile made here, not the active one, never the last, to the Recycle Bin after the player says so; its
+    /// saved login goes with it. True when it went.</summary>
+    public static bool RemoveGameSettings(Shared shared, string name, Ask ask)
+    {
+        if (!CanRemove(shared.Settings, name)) return false;
         string folder = Path.Combine(ClientSettings.Documents, name);
-        if (ask(DialogKind.Warning, L.Text("Delete {0}?", name),
+        if (ask(DialogKind.Warning, L.Text("Remove {0}?", name),
                 L.Text("Its game settings and saved login go to the Recycle Bin, where you can restore them. Another LocalExile copy that uses it would start without them.") + "\n\n" + folder,
-                [L.Text("Delete"), L.Text("Cancel")]) != 0) return false;
+                [L.Text("Remove"), L.Text("Cancel")]) != 0) return false;
         try
         {
             if (Directory.Exists(folder))
@@ -234,7 +271,7 @@ static class PathChoices
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException or OperationCanceledException)
         {
-            ask(DialogKind.Error, L.Text("{0} wasn't deleted", name), e.Message + "\n\n" + L.Text("You can delete the folder yourself: {0}", folder), [L.Text("OK")]);
+            ask(DialogKind.Error, L.Text("{0} wasn't removed", name), e.Message + "\n\n" + L.Text("You can delete the folder yourself: {0}", folder), [L.Text("OK")]);
             return false;
         }
         shared.Settings.MadeGameSettings.RemoveAll(n => string.Equals(n, name, StringComparison.OrdinalIgnoreCase));

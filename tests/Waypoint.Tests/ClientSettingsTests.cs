@@ -166,6 +166,15 @@ public class ClientSettingsTests : IDisposable
         Assert.Contains("20481", File.ReadAllText(Config));
         Assert.Contains("login_email=me@example.invalid", File.ReadAllText(Shared));
 
+        // Renaming the folder in use renames it in config.json as well; onto a name taken, it is refused.
+        ClientSettings.RenameProfile("Test", "Renamed", Client, Documents);
+        Assert.Equal("Renamed", ClientSettings.Profile(Client, Documents));
+        Assert.False(Directory.Exists(Path.Combine(Documents, "Test")));
+        Assert.Throws<IOException>(() => ClientSettings.RenameProfile("Renamed", "LocalExile", Client, Documents));
+        ClientSettings.UseProfile(Client, "LocalExile", Documents);
+        ClientSettings.RenameProfile("Renamed", "Test", Client, Documents);
+        Assert.Equal("LocalExile", ClientSettings.Profile(Client, Documents));
+
         Assert.Throws<IOException>(() => ClientSettings.CreateProfile("Test", null, Documents));
         Assert.Throws<IOException>(() => ClientSettings.UseProfile(Client, "Screenshots", Documents));
         Assert.All(["", "..", "a\\b", "a/b", " x", "x:"], name => Assert.False(ClientSettings.ValidProfile(name)));

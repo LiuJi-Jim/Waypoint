@@ -522,6 +522,9 @@
   <data name="Text_17cebc83e8bd" xml:space="preserve">
     <value>Серверы не остановились</value>
   </data>
+  <data name="Text_17e0d5f6f602" xml:space="preserve">
+    <value>Новый профиль на основе выбранного, без его сохранённого входа.</value>
+  </data>
   <data xml:space="preserve" name="Text_17eb3c0168d0">
     <value>отключён</value>
   </data>
@@ -973,6 +976,9 @@
   <data xml:space="preserve" name="Text_2a43880cee01">
     <value>Сохраняет существующие сохранения и параметры из config/runtime.local.ps1. Адаптер v1 поддерживает буквальные присваивания Game_* и стандартные локальные порты. Неподдерживаемые профили отклоняются с пояснением.</value>
   </data>
+  <data name="Text_2a78025de6aa" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
   <data xml:space="preserve" name="Text_2a954f0067b1">
     <value>История резервных копий</value>
   </data>
@@ -1105,6 +1111,9 @@
   <data name="Text_305bdd79495d" xml:space="preserve">
     <value>Новая копия работает? Теперь можно удалить старый LocalExile в {0}.</value>
   </data>
+  <data name="Text_3064d79a295c" xml:space="preserve">
+    <value>Переименовать</value>
+  </data>
   <data xml:space="preserve" name="Text_30cc92d87a1e">
     <value>Монохромная</value>
   </data>
@@ -1146,6 +1155,9 @@
   </data>
   <data name="Text_32635dd132ba" xml:space="preserve">
     <value>Чтобы вернуться к другому LocalExile, нажмите «Сменить папку…» на странице «Играть» и выберите {0}.</value>
+  </data>
+  <data name="Text_329bee12161e" xml:space="preserve">
+    <value>Профиль настроек игры:</value>
   </data>
   <data xml:space="preserve" name="Text_32a9d6a7dfd3">
     <value>
@@ -1479,6 +1491,12 @@
   <data name="Text_42e37604b638" xml:space="preserve">
     <value>Свойство</value>
   </data>
+  <data name="Text_42ed6e27798d" xml:space="preserve">
+    <value>{0} не убран</value>
+  </data>
+  <data name="Text_42fb4e8ed2a0" xml:space="preserve">
+    <value>Использовать этот профиль со следующего запуска игры.</value>
+  </data>
   <data name="Text_431027eb3edb" xml:space="preserve">
     <value>Открыть Waypoint</value>
   </data>
@@ -1517,6 +1535,9 @@
   </data>
   <data name="Text_45d498d7208d" xml:space="preserve">
     <value>Остановка серверов и игры …</value>
+  </data>
+  <data name="Text_45e596bb002f" xml:space="preserve">
+    <value>· по умолчанию</value>
   </data>
   <data name="Text_45fd5081ff0d" xml:space="preserve">
     <value>Не удалось проверить обновления</value>
@@ -1628,6 +1649,9 @@
   </data>
   <data name="Text_4a416d8a0cdb" xml:space="preserve">
     <value>Недоступно в этой копии</value>
+  </data>
+  <data name="Text_4a47c24a406b" xml:space="preserve">
+    <value>Профили настроек игры</value>
   </data>
   <data name="Text_4a83511ffe2f" xml:space="preserve">
     <value>обновите ветку main сервера</value>
@@ -1748,6 +1772,9 @@
   </data>
   <data name="Text_4feda881a8e2" xml:space="preserve">
     <value>мост остановился: {0}</value>
+  </data>
+  <data name="Text_50033201e1f5" xml:space="preserve">
+    <value>Профиль — это папка с настройками игры LocalExile: графика, клавиши, сетевой режим и сохранённый вход, в {0}. Игра использует активный профиль со следующего запуска.</value>
   </data>
   <data name="Text_5010cae2d615" xml:space="preserve">
     <value>Waypoint скачает новую версию и перезапустится; серверы и игра продолжат работать.</value>
@@ -2067,6 +2094,9 @@
   <data name="Text_60540eaada37" xml:space="preserve">
     <value>LocalExile.exe: запускает серверы, затем игру</value>
   </data>
+  <data name="Text_607ce38cb664" xml:space="preserve">
+    <value>Профиль не создан</value>
+  </data>
   <data xml:space="preserve" name="Text_608f1cf89149">
     <value>Ключи входа</value>
   </data>
@@ -2177,6 +2207,9 @@
   </data>
   <data name="Text_641d1ef657bd" xml:space="preserve">
     <value>Следить</value>
+  </data>
+  <data name="Text_6425c4d51b31" xml:space="preserve">
+    <value>· создан не здесь</value>
   </data>
   <data name="Text_646204c2d8fb" xml:space="preserve">
     <value>Ваша папка LocalExile</value>
@@ -2903,6 +2936,9 @@
   <data name="Text_8703b1f43ea7" xml:space="preserve">
     <value>нет локальных изменений</value>
   </data>
+  <data name="Text_8799981821ae" xml:space="preserve">
+    <value>Имя для «Создать», «Копировать» или «Переименовать»:</value>
+  </data>
   <data xml:space="preserve" name="Text_87bb59ba2f92">
     <value>Рабочая папка</value>
   </data>
@@ -3079,6 +3115,9 @@
   </data>
   <data name="Text_8fa0453793e2" xml:space="preserve">
     <value>Выберите простой путь: пробелы допустимы, а &amp; | &lt; &gt; ^ % ! и кавычки — нет.</value>
+  </data>
+  <data name="Text_8fa9011c3472" xml:space="preserve">
+    <value>Ваши обычные настройки</value>
   </data>
   <data name="Text_902bf1204f8a" xml:space="preserve">
     <value>Без сборки</value>
@@ -3411,6 +3450,9 @@
   <data name="Text_9d4fdb63fa4f" xml:space="preserve">
     <value>Искать новый выпуск Waypoint при каждом запуске (только в релизных сборках)</value>
   </data>
+  <data name="Text_9d64ce84e2c3" xml:space="preserve">
+    <value>Убрать {0}?</value>
+  </data>
   <data name="Text_9da3e9b26c5e" xml:space="preserve">
     <value>Порт занят</value>
   </data>
@@ -3554,6 +3596,9 @@
   </data>
   <data name="Text_a3ffee699add" xml:space="preserve">
     <value>Поиск игрового клиента на этом ПК…</value>
+  </data>
+  <data name="Text_a42ac525ae69" xml:space="preserve">
+    <value>Управление…</value>
   </data>
   <data xml:space="preserve" name="Text_a43b66fb01b9">
     <value>Отчёт диагностики…</value>
@@ -3737,6 +3782,9 @@
   </data>
   <data name="Text_ab4bdca6bf1a" xml:space="preserve">
     <value>Обновите аккаунты для просмотра выбранной базы.</value>
+  </data>
+  <data name="Text_ab6dbf6ccc6e" xml:space="preserve">
+    <value>Новый профиль на основе ваших обычных настроек игры, без сохранённого входа.</value>
   </data>
   <data name="Text_ab744cb0b649" xml:space="preserve">
     <value>Waypoint не удалось удалить старый LocalExile: {0}</value>
@@ -4101,6 +4149,9 @@
   <data name="Text_bd12187abc3e" xml:space="preserve">
     <value>Удалить старую позже</value>
   </data>
+  <data name="Text_bd19f1c3f750" xml:space="preserve">
+    <value>Профиль настроек игры</value>
+  </data>
   <data name="Text_bd72c01ccb05" xml:space="preserve">
     <value>Не удалось прочитать сохранения. Ничего не изменено.</value>
   </data>
@@ -4394,6 +4445,9 @@
   <data xml:space="preserve" name="Text_cafc8e32728a">
     <value>Сбросить эти свои цвета</value>
   </data>
+  <data name="Text_cb275f461547" xml:space="preserve">
+    <value>Профиль не переименован</value>
+  </data>
   <data xml:space="preserve" name="Text_cb284ed772cb">
     <value>Язык меняется сразу. Журналы и диагностика сторонних инструментов остаются на исходном языке.</value>
   </data>
@@ -4525,6 +4579,9 @@
   </data>
   <data name="Text_d1cbffcbd10b" xml:space="preserve">
     <value>в файле .sha256 выпуска нет SHA-256</value>
+  </data>
+  <data name="Text_d1d6dc3249f4" xml:space="preserve">
+    <value>Используются: ваши обычные настройки Path of Exile ({0}). Выберите или создайте профиль, чтобы у LocalExile были свои.</value>
   </data>
   <data name="Text_d1d87274da84" xml:space="preserve">
     <value>Генерация</value>
@@ -5040,6 +5097,9 @@
   <data name="Text_ea93d6a262ec" xml:space="preserve">
     <value>Инструменты</value>
   </data>
+  <data name="Text_ead0b90e1990" xml:space="preserve">
+    <value>Только профиль, созданный здесь, и никогда не активный или последний. Он перемещается в корзину.</value>
+  </data>
   <data name="Text_ead4f70a6fdb" xml:space="preserve">
     <value>Остановить всё</value>
   </data>
@@ -5105,6 +5165,9 @@
   </data>
   <data xml:space="preserve" name="Text_edab1377682d">
     <value>Перед запуском проверьте подготовку ниже.</value>
+  </data>
+  <data name="Text_eddcb59d5cb7" xml:space="preserve">
+    <value>Только профиль, созданный здесь, и не активный.</value>
   </data>
   <data name="Text_ee21b15cbfce" xml:space="preserve">
     <value>Обновление {0} …</value>
@@ -5526,6 +5589,9 @@
   </data>
   <data name="Text_ff6c6bc8e40c" xml:space="preserve">
     <value>Репозиторий сервера</value>
+  </data>
+  <data name="Text_ff6eed8b5074" xml:space="preserve">
+    <value>(активный)</value>
   </data>
   <data name="Text_ff783f45ecd6" xml:space="preserve">
     <value>Конструктор предметов</value>

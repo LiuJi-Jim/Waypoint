@@ -196,53 +196,35 @@ public partial class SettingsTab : UserControl
 
     int Ask(DialogKind kind, string title, string message, string[] buttons) => Dialog.Show(Window.GetWindow(this), kind, title, message, null, buttons);
 
-    /// <summary>LocalExile's game settings: the folder in use under Documents\My Games\Path of Exile, the others there to switch to,
-    /// and a new one, a copy of the one in use without its saved login.</summary>
+    /// <summary>LocalExile's game settings profile: the one in use, and Manage… for the Profiles window, where they are switched,
+    /// made, renamed and removed (as on Play).</summary>
     void AddGameSettingsRow()
     {
         bool client = Directory.Exists("Client");
         string? current = PathChoices.GameSettingsFolder();
-        var list = new ComboBox { Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
-        foreach (string folder in ClientSettings.Profiles()) list.Items.Add(folder);
-        list.SelectedItem = current;
-        var use = new Button { Content = L.Text("Use"), Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
+        var name = new TextBlock { Text = current ?? L.Text("Your normal settings"), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) };
+        var manage = new Button { Content = L.Text("Manage…"), Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
         var open = new Button { Content = L.Text("Open"), Margin = new Thickness(0) };
-        // Only a folder made here with Create, not the one in use, and never the last: the others may be another copy's.
-        var delete = new Button { Content = L.Text("Delete"), Margin = new Thickness(0, 0, 8, 0),
-            ToolTip = L.Text("Only folders made here with Create, never the one in use. They go to the Recycle Bin.") };
-        void Deletable() => delete.IsEnabled = client && list.SelectedItem is string chosen && PathChoices.CanDeleteGameSettings(S, chosen);
-        list.SelectionChanged += (_, _) => Deletable();
-        Deletable();
-        delete.Click += (_, _) => { if (list.SelectedItem is string chosen && PathChoices.DeleteGameSettings(_shared, chosen, Ask)) ShowPaths(); };
-        var name = new TextBox { Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
-        var create = new Button { Content = L.Text("Create"), Margin = new Thickness(0), IsEnabled = client };
         var detail = new TextBlock { Style = (Style)FindResource("Shell.Secondary"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 12),
             Text = PathChoices.GameSettingsDetail() };
-        use.Click += (_, _) => { if (list.SelectedItem is string chosen && chosen != current && PathChoices.UseGameSettings(_shared, chosen, Ask)) ShowPaths(); };
+        manage.Click += (_, _) =>
+        {
+            new ProfilesWindow(Window.GetWindow(this), _shared).ShowDialog();
+            ShowPaths();
+        };
         open.Click += (_, _) =>
         {
             string folder = current is not null ? Path.Combine(ClientSettings.Documents, current) : ClientSettings.Documents;
             if (Directory.Exists(folder)) OpenFolder(folder);
         };
-        create.Click += (_, _) => { if (PathChoices.CreateGameSettings(_shared, name.Text, Ask)) ShowPaths(); };
-        var pick = new DockPanel();
+        var line = new DockPanel();
         DockPanel.SetDock(open, Dock.Right);
-        DockPanel.SetDock(delete, Dock.Right);
-        DockPanel.SetDock(use, Dock.Right);
-        pick.Children.Add(open);
-        pick.Children.Add(delete);
-        pick.Children.Add(use);
-        pick.Children.Add(list);
-        var make = new DockPanel { Margin = new Thickness(0, 6, 0, 0) };
-        var makeLabel = new TextBlock { Text = L.Text("New folder:"), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) };
-        DockPanel.SetDock(makeLabel, Dock.Left);
-        DockPanel.SetDock(create, Dock.Right);
-        make.Children.Add(makeLabel);
-        make.Children.Add(create);
-        make.Children.Add(name);
-        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings"), FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
-        PathRows.Children.Add(pick);
-        PathRows.Children.Add(make);
+        DockPanel.SetDock(manage, Dock.Right);
+        line.Children.Add(open);
+        line.Children.Add(manage);
+        line.Children.Add(name);
+        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings profile"), FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        PathRows.Children.Add(line);
         PathRows.Children.Add(detail);
     }
 

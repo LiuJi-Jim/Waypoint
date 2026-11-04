@@ -21,6 +21,7 @@
     <!-- Simple mode's home: one sentence, one button. Everything else appears only when there is something to say. -->
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="460">
+            <l:ProfilePicker x:Name="Profile" />
             <TextBlock x:Name="Headline" FontSize="24" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,24" />
             <Button x:Name="MainButton" Style="{StaticResource Shell.PrimaryButton}" Click="MainClicked" HorizontalAlignment="Center"
                     Height="52" MinWidth="200" Padding="40,0" Margin="0" FontSize="18" />
