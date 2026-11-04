@@ -29,11 +29,15 @@ function Write-CaptureJson([string]$path, $value) {
     Move-Item -LiteralPath ($path + '.tmp') -Destination $path -Force
 }
 function Test-CaptureSupport {
-    foreach ($relative in @('scripts/walkmaps/walkmaps.py','scripts/walkmaps/walkmaps.js','src/GameServer.Gateway/AreaLayouts.cs')) {
+    foreach ($relative in @('scripts/walkmaps/walkmaps.py','scripts/walkmaps/walkmaps.js')) {
         if (-not (Test-Path -LiteralPath (At $relative) -PathType Leaf)) { return $false }
     }
+    # The server moved AreaLayouts.cs into World/ on 2026-10-31; older revisions keep it in the Gateway's root.
+    $layouts = @('src/GameServer.Gateway/World/AreaLayouts.cs','src/GameServer.Gateway/AreaLayouts.cs') |
+        Where-Object { Test-Path -LiteralPath (At $_) -PathType Leaf } | Select-Object -First 1
+    if (-not $layouts) { return $false }
     return (Get-Content -LiteralPath (At 'scripts/walkmaps/walkmaps.py') -Raw).Contains('def on_message(') -and
-        (Get-Content -LiteralPath (At 'src/GameServer.Gateway/AreaLayouts.cs') -Raw).Contains('Game_WALKMAPS')
+        (Get-Content -LiteralPath (At $layouts) -Raw).Contains('Game_WALKMAPS')
 }
 function Get-CaptureGateway($services) {
     $gateway = @($services | Where-Object Name -eq 'Gateway') | Select-Object -First 1
