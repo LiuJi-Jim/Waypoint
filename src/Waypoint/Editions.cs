@@ -38,6 +38,7 @@ static class Editions
             ask(DialogKind.Info, L.Text("Stop LocalExile first"), L.Text("Press Stop playing, then switch."), [L.Text("OK")]);
             return (EditionStep.Stay, null);
         }
+        static string LessStable() => L.Text("Latest has LocalExile's newest changes. Every change is reviewed, but Latest may be less stable than the release.");
         static string OneWay() => L.Text("Characters can't go from Latest to a release: a newer LocalExile may save things an older release can't read.");
         string? folder = Folder(shared.Settings, toRelease);
         if (folder is null)
@@ -46,7 +47,7 @@ static class Editions
                       L.Text("The setup guide downloads one. It starts with its own characters; yours stay here in Latest.") + "\n\n" + OneWay(),
                       [L.Text("Open the setup guide"), L.Text("Cancel")]) == 0 ? (EditionStep.SetUpRelease, null) : (EditionStep.Stay, null)
                 : ask(DialogKind.Info, L.Text("You don't have Latest yet"),
-                      L.Text("The setup guide downloads LocalExile's newest version and builds it, and can bring your characters."),
+                      LessStable() + "\n\n" + L.Text("The setup guide downloads LocalExile's newest version and builds it, and can bring your characters."),
                       [L.Text("Open the setup guide"), L.Text("Cancel")]) == 0 ? (EditionStep.SetUpLatest, null) : (EditionStep.Stay, null);
 
         if (toRelease)
@@ -59,7 +60,7 @@ static class Editions
         }
 
         int keep = ask(DialogKind.Question, L.Text("Bring your characters to Latest?"),
-            L.Text("Latest has its own characters. Bring yours from this release, and Latest's are backed up and set aside first.") + "\n\n" + OneWay(),
+            LessStable() + "\n\n" + L.Text("Latest has its own characters. Bring yours from this release, and Latest's are backed up and set aside first.") + "\n\n" + OneWay(),
             [L.Text("Bring my characters"), L.Text("Keep Latest's own"), L.Text("Cancel")]);
         if (keep is < 0 or 2) return (EditionStep.Stay, null);
         if (keep == 0)
@@ -91,7 +92,7 @@ static class Editions
             return false;
         }
         if (ask(DialogKind.Question, L.Text("Get the newest changes?"),
-                L.Text("This copy moves from its older version to LocalExile's newest changes, and Play then updates it each day. The newest changes can break. Your saves are backed up first."),
+                L.Text("This copy moves from its older version to LocalExile's newest changes, and Play then updates it each day. The newest changes may be less stable. Your saves are backed up first."),
                 [L.Text("Get the newest changes"), L.Text("Cancel")]) != 0) return false;
         if ((await Git.ChangesAsync()).Count > 0)
         {

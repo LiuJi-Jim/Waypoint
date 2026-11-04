@@ -1590,6 +1590,9 @@
   <data xml:space="preserve" name="Text_4a9a45318354">
     <value>Другая локальная ревизия HEAD</value>
   </data>
+  <data name="Text_4aab6042a815" xml:space="preserve">
+    <value>«Новейшая» — это LocalExile в разработке, поэтому она может быть менее стабильной, чем релиз.</value>
+  </data>
   <data name="Text_4ac0fe518f59" xml:space="preserve">
     <value>При следующем закрытии окна Waypoint спросит, что делать.</value>
   </data>
@@ -1640,6 +1643,9 @@
   </data>
   <data xml:space="preserve" name="Text_4cda809eee92">
     <value>Сборка выбранной ревизии</value>
+  </data>
+  <data name="Text_4cefcb025be3" xml:space="preserve">
+    <value>LocalExile обновлён. Нажмите «Играть», чтобы запустить его.</value>
   </data>
   <data xml:space="preserve" name="Text_4d2ee5a61d29">
     <value>Gateway перезапущен</value>
@@ -2879,6 +2885,9 @@
   <data xml:space="preserve" name="Text_88b6f7429ce7">
     <value>Без изменений</value>
   </data>
+  <data name="Text_88d371c5b388" xml:space="preserve">
+    <value>Сейчас не удалось обновить LocalExile. «Играть» запустит вашу текущую версию.</value>
+  </data>
   <data name="Text_88fccfb10a8d" xml:space="preserve">
     <value>Выполняется {0} …</value>
   </data>
@@ -3052,6 +3061,9 @@
   </data>
   <data xml:space="preserve" name="Text_91bd172009ab">
     <value>Ревизии исходников и собранных компонентов показываются отдельно. Горячая перезагрузка может применить незакоммиченные изменения; хеш сборки указывает на исходную скомпилированную ревизию.</value>
+  </data>
+  <data name="Text_91c155b9f086" xml:space="preserve">
+    <value>«Новейшая» содержит последние изменения LocalExile. Каждое изменение проверяется, но «Новейшая» может быть менее стабильной, чем релиз.</value>
   </data>
   <data name="Text_9205e0dd7cb5" xml:space="preserve">
     <value>Удалить выбранные предметы (клавиша Delete); Ctrl или Shift выбирает несколько</value>
@@ -3692,6 +3704,9 @@
   </data>
   <data xml:space="preserve" name="Text_acb4bce11dae">
     <value>Выполняется операция с рабочей папкой.</value>
+  </data>
+  <data name="Text_acbaeabe2255" xml:space="preserve">
+    <value>Эта копия перейдёт со старой версии на последние изменения LocalExile, и «Играть» будет обновлять её каждый день. Последние изменения могут быть менее стабильными. Сначала будет создана резервная копия ваших сохранений.</value>
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>Конструктор предметов пока недоступен в Linux.</value>
@@ -4339,6 +4354,9 @@
   </data>
   <data name="Text_cb8603c8ce91" xml:space="preserve">
     <value>Автоматические копии</value>
+  </data>
+  <data name="Text_cb94dd7e7740" xml:space="preserve">
+    <value>LocalExile уже обновлён.</value>
   </data>
   <data name="Text_cb98398071ad" xml:space="preserve">
     <value>Использовать этот клиент совместно вместо копирования (экономит {0:0} ГБ). Обе папки LocalExile будут использовать одни и те же файлы игры.</value>
@@ -5400,6 +5418,9 @@
   </data>
   <data xml:space="preserve" name="Text_fcd4fe1982a4">
     <value>npm ci в папке Tools/ooz этого репозитория</value>
+  </data>
+  <data name="Text_fd249743c184" xml:space="preserve">
+    <value>Новых изменений в LocalExile с вашей версии: {0}.</value>
   </data>
   <data name="Text_fd4d54ace369" xml:space="preserve">
     <value>Уровень предмета: {0}</value>

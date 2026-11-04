@@ -1590,6 +1590,9 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_4a9a45318354">
     <value>Different local HEAD</value>
   </data>
+  <data name="Text_4aab6042a815" xml:space="preserve">
+    <value>Latest is LocalExile as it is being made, so it can be less stable than the release.</value>
+  </data>
   <data name="Text_4ac0fe518f59" xml:space="preserve">
     <value>Waypoint will ask what to do the next time you close the window.</value>
   </data>
@@ -1640,6 +1643,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data xml:space="preserve" name="Text_4cda809eee92">
     <value>Building selected revision</value>
+  </data>
+  <data name="Text_4cefcb025be3" xml:space="preserve">
+    <value>LocalExile was updated. Press Play to start it.</value>
   </data>
   <data xml:space="preserve" name="Text_4d2ee5a61d29">
     <value>Gateway restarted</value>
@@ -2879,6 +2885,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data xml:space="preserve" name="Text_88b6f7429ce7">
     <value>Unchanged</value>
   </data>
+  <data name="Text_88d371c5b388" xml:space="preserve">
+    <value>LocalExile couldn't be updated now. Play starts the version you have.</value>
+  </data>
   <data name="Text_88fccfb10a8d" xml:space="preserve">
     <value>Running {0} …</value>
   </data>
@@ -3052,6 +3061,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data xml:space="preserve" name="Text_91bd172009ab">
     <value>Source and built component identities are separate. Hot reload can apply uncommitted code edits; a build hash identifies the original compiled revision.</value>
+  </data>
+  <data name="Text_91c155b9f086" xml:space="preserve">
+    <value>Latest has LocalExile's newest changes. Every change is reviewed, but Latest may be less stable than the release.</value>
   </data>
   <data name="Text_9205e0dd7cb5" xml:space="preserve">
     <value>Delete the selected items (Delete key); Ctrl or Shift selects several</value>
@@ -3692,6 +3704,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data xml:space="preserve" name="Text_acb4bce11dae">
     <value>A workspace operation is in progress.</value>
+  </data>
+  <data name="Text_acbaeabe2255" xml:space="preserve">
+    <value>This copy moves from its older version to LocalExile's newest changes, and Play then updates it each day. The newest changes may be less stable. Your saves are backed up first.</value>
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>The item crafter is not available on Linux yet.</value>
@@ -4339,6 +4354,9 @@ Client: {2}</value>
   </data>
   <data name="Text_cb8603c8ce91" xml:space="preserve">
     <value>Automatic backups</value>
+  </data>
+  <data name="Text_cb94dd7e7740" xml:space="preserve">
+    <value>LocalExile is up to date.</value>
   </data>
   <data name="Text_cb98398071ad" xml:space="preserve">
     <value>Share this client instead of copying it (saves {0:0} GB). Both LocalExile folders will use the same game files.</value>
@@ -5400,6 +5418,9 @@ Mods at backup: </value>
   </data>
   <data xml:space="preserve" name="Text_fcd4fe1982a4">
     <value>npm ci in this checkout's Tools/ooz directory</value>
+  </data>
+  <data name="Text_fd249743c184" xml:space="preserve">
+    <value>{0} new change(s) in LocalExile since your version.</value>
   </data>
   <data name="Text_fd4d54ace369" xml:space="preserve">
     <value>Item Level: {0}</value>

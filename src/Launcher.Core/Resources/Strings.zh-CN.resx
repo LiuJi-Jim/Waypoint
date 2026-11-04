@@ -1590,6 +1590,9 @@
   <data name="Text_4a9a45318354" xml:space="preserve">
     <value>本地 HEAD 不同</value>
   </data>
+  <data name="Text_4aab6042a815" xml:space="preserve">
+    <value>最新版是开发中的 LocalExile，因此可能不如发布版稳定。</value>
+  </data>
   <data name="Text_4ac0fe518f59" xml:space="preserve">
     <value>下次关闭窗口时，Waypoint 会询问如何处理。</value>
   </data>
@@ -1640,6 +1643,9 @@
   </data>
   <data name="Text_4cda809eee92" xml:space="preserve">
     <value>正在构建所选修订版本</value>
+  </data>
+  <data name="Text_4cefcb025be3" xml:space="preserve">
+    <value>LocalExile 已更新。点击“开始游戏”启动。</value>
   </data>
   <data name="Text_4d2ee5a61d29" xml:space="preserve">
     <value>Gateway 已重启</value>
@@ -2879,6 +2885,9 @@
   <data name="Text_88b6f7429ce7" xml:space="preserve">
     <value>无更改</value>
   </data>
+  <data name="Text_88d371c5b388" xml:space="preserve">
+    <value>暂时无法更新 LocalExile。“开始游戏”会启动你现有的版本。</value>
+  </data>
   <data name="Text_88fccfb10a8d" xml:space="preserve">
     <value>正在运行 {0} …</value>
   </data>
@@ -3052,6 +3061,9 @@
   </data>
   <data name="Text_91bd172009ab" xml:space="preserve">
     <value>源码与已构建组件的标识分开显示。热重载可以应用未提交的代码修改；构建哈希标识的是最初编译的修订版本。</value>
+  </data>
+  <data name="Text_91c155b9f086" xml:space="preserve">
+    <value>最新版包含 LocalExile 的最新更改。每项更改都经过审查，但最新版可能不如发布版稳定。</value>
   </data>
   <data name="Text_9205e0dd7cb5" xml:space="preserve">
     <value>删除所选物品（Delete 键）；按住 Ctrl 或 Shift 可多选</value>
@@ -3692,6 +3704,9 @@
   </data>
   <data name="Text_acb4bce11dae" xml:space="preserve">
     <value>正在进行工作区操作。</value>
+  </data>
+  <data name="Text_acbaeabe2255" xml:space="preserve">
+    <value>这个副本将从旧版本改为 LocalExile 的最新更改，之后“开始游戏”会每天更新它。最新更改可能不够稳定。会先备份你的存档。</value>
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>物品制作器暂不支持 Linux。</value>
@@ -4339,6 +4354,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_cb8603c8ce91" xml:space="preserve">
     <value>自动备份</value>
+  </data>
+  <data name="Text_cb94dd7e7740" xml:space="preserve">
+    <value>LocalExile 已是最新版本。</value>
   </data>
   <data name="Text_cb98398071ad" xml:space="preserve">
     <value>共享此客户端而不是复制它（节省 {0:0} GB）。两个 LocalExile 文件夹将使用相同的游戏文件。</value>
@@ -5400,6 +5418,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_fcd4fe1982a4" xml:space="preserve">
     <value>在此源码副本的 Tools/ooz 目录中执行 npm ci</value>
+  </data>
+  <data name="Text_fd249743c184" xml:space="preserve">
+    <value>自你的版本以来，LocalExile 有 {0} 项新更改。</value>
   </data>
   <data name="Text_fd4d54ace369" xml:space="preserve">
     <value>物品等级：{0}</value>

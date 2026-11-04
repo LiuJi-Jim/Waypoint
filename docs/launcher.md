@@ -228,6 +228,11 @@ mode. Someone who used an earlier launcher, or Waypoint before the modes, starts
 5. When that run fails after an update, Waypoint stops what runs, restores that backup, puts the checkout back
    (`git reset --keep`) and starts again, and says so.
 
+**N new change(s) in LocalExile since your version** shows under the switch when a plain copy is behind LocalExile's branch.
+Play looks when it opens and every half hour, while nothing runs: a fetch and a count only, which neither moves the checkout nor
+counts as the day's update check. **Update now** beside it is that update at once, steps 2 and 3 above (backup, fast-forward, the
+way back kept), without starting the game; Play then builds and starts the new version.
+
 **Go back to the version you had** stays for a week after an update: the same way back, on request, and updates pause for a
 week. Restoring keeps a copy of the current saves first. A checkout follows `main`, which has no test results, so an update is
 `main` as it is: the way back catches a build or start that fails, not a bug in the game. A release install is different: see
@@ -237,6 +242,7 @@ week. Restoring keeps a copy of the current saves first. A checkout follows `mai
 source copy that follows `main`. Each is a folder of its own with its own characters; Waypoint remembers the last of each it ran on
 (`ReleaseFolder`, `LatestFolder`). Switching needs nothing running, then asks, and Waypoint starts again on the other folder:
 
+- Both ways to Latest say first that Latest has LocalExile's newest changes, reviewed, but possibly less stable than the release.
 - **Release → Latest**: bring your characters? **Bring my characters** copies them in (the adapter's `ImportSaves`, as the guide's
   Your characters page: Latest's own are backed up and set aside first). **Keep Latest's own** then offers a backup of the
   release's saves.
