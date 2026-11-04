@@ -153,6 +153,9 @@
   <data name="Text_087cc665f4f5" xml:space="preserve">
     <value>Stay on a tested version (recommended)</value>
   </data>
+  <data name="Text_08ac27f076b6" xml:space="preserve">
+    <value>The files weren't moved</value>
+  </data>
   <data xml:space="preserve" name="Text_08ad630cfbfa">
     <value>Open backup folder</value>
   </data>
@@ -273,6 +276,9 @@
   <data xml:space="preserve" name="Text_0cef0d77a2fe">
     <value>View operation output</value>
   </data>
+  <data name="Text_0cf0462b32ac" xml:space="preserve">
+    <value>{0} is not empty. Choose an empty folder or a new one.</value>
+  </data>
   <data name="Text_0d0d25a58963" xml:space="preserve">
     <value>Fetches pull request #{0} again: its newest commits, also after a force-push</value>
   </data>
@@ -372,6 +378,9 @@
   <data name="Text_1181d704686c" xml:space="preserve">
     <value>No capture session log yet.</value>
   </data>
+  <data name="Text_118ae3c5a8a6" xml:space="preserve">
+    <value>The game uses it from its next start</value>
+  </data>
   <data name="Text_118fb0172261" xml:space="preserve">
     <value>{0} updated</value>
   </data>
@@ -455,6 +464,9 @@
   </data>
   <data name="Text_15689b1ef00b" xml:space="preserve">
     <value>Tools LocalExile needs</value>
+  </data>
+  <data name="Text_157d59dc4b73" xml:space="preserve">
+    <value>{0} was not copied whole.</value>
   </data>
   <data name="Text_158b8358f7e4" xml:space="preserve">
     <value>The search could not finish: </value>
@@ -624,6 +636,9 @@
   <data name="Text_1d6ca631e720" xml:space="preserve">
     <value>! commands not loaded: {0}</value>
   </data>
+  <data name="Text_1dd780b2767c" xml:space="preserve">
+    <value>Move {0} to {1}?</value>
+  </data>
   <data xml:space="preserve" name="Text_1ddc54772630">
     <value> · prepared client found</value>
   </data>
@@ -635,6 +650,9 @@
   </data>
   <data name="Text_1e38f7b99036" xml:space="preserve">
     <value>Requested checkout</value>
+  </data>
+  <data name="Text_1e6e04fa8a3c" xml:space="preserve">
+    <value>The files could not be moved, and nothing was changed: {0}</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>Leave this client as it is</value>
@@ -819,6 +837,9 @@
   <data name="Text_26639e783252" xml:space="preserve">
     <value>Change account</value>
   </data>
+  <data name="Text_267342d2d102" xml:space="preserve">
+    <value>In use: {0} ({1})</value>
+  </data>
   <data name="Text_26776921d6a2" xml:space="preserve">
     <value>Guided setup → Use separate game settings…</value>
   </data>
@@ -850,11 +871,17 @@ Change location above to choose somewhere else.</value>
   <data xml:space="preserve" name="Text_27712080ff00">
     <value>ReloadData completed.</value>
   </data>
+  <data name="Text_277db01efc29" xml:space="preserve">
+    <value>One of these folders is inside the other: {0}, {1}.</value>
+  </data>
   <data xml:space="preserve" name="Text_279d233b3ee4">
     <value>Change location</value>
   </data>
   <data xml:space="preserve" name="Text_27e6ed25bcfa">
     <value>Select and check an installation first.</value>
+  </data>
+  <data name="Text_2810e56a442d" xml:space="preserve">
+    <value>Some old files stayed behind</value>
   </data>
   <data xml:space="preserve" name="Text_282b08d0523c">
     <value>Get Node.js</value>
@@ -873,6 +900,9 @@ Change location above to choose somewhere else.</value>
   </data>
   <data name="Text_28fd171b0b6b" xml:space="preserve">
     <value>Ask again next time</value>
+  </data>
+  <data name="Text_291431eb6c8a" xml:space="preserve">
+    <value>The old prefix stays where it is: {0}</value>
   </data>
   <data name="Text_291d2a97565f" xml:space="preserve">
     <value>Rare</value>
@@ -897,6 +927,9 @@ Change location above to choose somewhere else.</value>
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>per s</value>
+  </data>
+  <data name="Text_298d88416167" xml:space="preserve">
+    <value>Waypoint's data folder {0} can't be used ({1}), so the default {2} is used for now.</value>
   </data>
   <data name="Text_29945b65f986" xml:space="preserve">
     <value>game data extracted (step 7)</value>
@@ -958,6 +991,9 @@ Change location above to choose somewhere else.</value>
   <data name="Text_2c4117e5b038" xml:space="preserve">
     <value>Update to {0}?</value>
   </data>
+  <data name="Text_2c5c517cb9a3" xml:space="preserve">
+    <value>Waypoint works with the defaults until then. Change or clear them in Settings → Folders and tools.</value>
+  </data>
   <data xml:space="preserve" name="Text_2cb93bc2b809">
     <value>Enter a positive LocalExile PR number, including closed PRs</value>
   </data>
@@ -1002,6 +1038,12 @@ Change location above to choose somewhere else.</value>
   </data>
   <data name="Text_2e985979a4b9" xml:space="preserve">
     <value>That LocalExile folder has no saves.</value>
+  </data>
+  <data name="Text_2eaf1f9c10ef" xml:space="preserve">
+    <value>Looking…</value>
+  </data>
+  <data name="Text_2eda866504a2" xml:space="preserve">
+    <value>Use it anyway</value>
   </data>
   <data xml:space="preserve" name="Text_2ee7e02cbde9">
     <value>Building checkout</value>
@@ -1217,6 +1259,9 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_39921a740bf2">
     <value>Switch</value>
   </data>
+  <data name="Text_39d2600b7211" xml:space="preserve">
+    <value>Use it as it is</value>
+  </data>
   <data name="Text_3a0f7b919840" xml:space="preserve">
     <value>Changing account data</value>
   </data>
@@ -1286,6 +1331,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data name="Text_3c25c5fd139b" xml:space="preserve">
     <value>/ lists the commands, then each argument's values (areas, monsters, items, gems …): ↑↓ choose, Tab or Enter take one. Without a list ↑↓ go through the history. Text without / is a chat line.</value>
+  </data>
+  <data name="Text_3c5306ec52f9" xml:space="preserve">
+    <value>{0} didn't answer</value>
   </data>
   <data xml:space="preserve" name="Text_3c58451ae577">
     <value>Detached source</value>
@@ -1641,6 +1689,9 @@ This checkout has modified tracked files.</value>
   <data name="Text_4e2f30ce9131" xml:space="preserve">
     <value>Something else is using LocalExile. Try again when it is done.</value>
   </data>
+  <data name="Text_4e3a645f6bf1" xml:space="preserve">
+    <value>Wine prefix</value>
+  </data>
   <data name="Text_4e3e2cd41804" xml:space="preserve">
     <value>Build all mods</value>
   </data>
@@ -1677,11 +1728,17 @@ This checkout has modified tracked files.</value>
   <data name="Text_5045659cf175" xml:space="preserve">
     <value>{0}  ({1} errors)</value>
   </data>
+  <data name="Text_506dc5a78bd1" xml:space="preserve">
+    <value>Everything is in {0}, but these could not be removed from {1}; you can delete them:</value>
+  </data>
   <data xml:space="preserve" name="Text_507d2cdd1d1b">
     <value>Fetching pull request</value>
   </data>
   <data name="Text_509b359509d5" xml:space="preserve">
     <value>Implicit</value>
+  </data>
+  <data name="Text_50dee90771a3" xml:space="preserve">
+    <value>The program chosen for {0}, {1}, is not there, so Waypoint finds {0} itself.</value>
   </data>
   <data xml:space="preserve" name="Text_512f7f4147ad">
     <value>No verified process for this checkout</value>
@@ -1749,6 +1806,9 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_54377045445b">
     <value>Building preparation tools</value>
   </data>
+  <data name="Text_544b891ecca8" xml:space="preserve">
+    <value>That folder can't be used</value>
+  </data>
   <data name="Text_54624197825a" xml:space="preserve">
     <value>Switch anyway</value>
   </data>
@@ -1770,6 +1830,9 @@ This checkout has modified tracked files.</value>
   <data name="Text_55091c102c8f" xml:space="preserve">
     <value>The saves could not be backed up. Automatic backups can be turned off on the Backups section.</value>
   </data>
+  <data name="Text_5528762a7c7d" xml:space="preserve">
+    <value>Waypoint's data folder {0} can't be used ({1}), so {2} is used for now.</value>
+  </data>
   <data name="Text_5528f7df07c4" xml:space="preserve">
     <value>Copy your accounts and characters. Accounts: {0}. Characters: {1}.</value>
   </data>
@@ -1778,6 +1841,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data name="Text_5559b6621735" xml:space="preserve">
     <value>{0} has no Content.ggpk and PathOfExile.exe, so it is not a standalone client.</value>
+  </data>
+  <data name="Text_555bbeab2a7c" xml:space="preserve">
+    <value>The backups folder {0} can't be used ({1}), so backups go to {2} for now.</value>
   </data>
   <data name="Text_55863ec85560" xml:space="preserve">
     <value>Linking the game client</value>
@@ -2270,6 +2336,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6c26340a1b96" xml:space="preserve">
     <value>Save database</value>
   </data>
+  <data name="Text_6c6d375befb8" xml:space="preserve">
+    <value>Some of your folders or tools can't be used</value>
+  </data>
   <data name="Text_6caadd32b7a9" xml:space="preserve">
     <value>standalone client layout (Content.ggpk)</value>
   </data>
@@ -2293,6 +2362,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_6ddab223b645" xml:space="preserve">
     <value>The search stopped at its time limit; Browse if your client is not listed.</value>
+  </data>
+  <data name="Text_6de7c0d13d2c" xml:space="preserve">
+    <value>Leave a field empty to use the default. A folder or program that is not there is skipped, and the default is used instead.</value>
   </data>
   <data name="Text_6deabfbf3f4a" xml:space="preserve">
     <value>ITEM LEVEL</value>
@@ -2492,6 +2564,12 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_777a88e600e2" xml:space="preserve">
     <value>Requested build</value>
   </data>
+  <data name="Text_779a193c6fad" xml:space="preserve">
+    <value>Waypoint cannot write to {0}: {1}</value>
+  </data>
+  <data name="Text_77f818c944f1" xml:space="preserve">
+    <value>Open both folders</value>
+  </data>
   <data name="Text_780287165a99" xml:space="preserve">
     <value>The game and services stay open after Waypoint exits.</value>
   </data>
@@ -2545,6 +2623,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_7a5198f98ec2" xml:space="preserve">
     <value>This LocalExile folder already has a game client, so nothing needs copying.</value>
+  </data>
+  <data name="Text_7aa55705d1f4" xml:space="preserve">
+    <value>Waypoint copies the files there, checks them, removes the old ones and starts again. If anything goes wrong, nothing changes.</value>
   </data>
   <data name="Text_7aad4be82785" xml:space="preserve">
     <value>Puts the line in the box; Enter or Send sends it.</value>
@@ -2861,6 +2942,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data xml:space="preserve" name="Text_8b2d4fa44372">
     <value>Search mod ID, version, kind, status or error (Ctrl+F)</value>
   </data>
+  <data name="Text_8b3831d4d5e0" xml:space="preserve">
+    <value>Stop LocalExile first</value>
+  </data>
   <data name="Text_8b3a87465604" xml:space="preserve">
     <value>dev host listening on 127.0.0.1:{0}</value>
   </data>
@@ -3032,6 +3116,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_9436d7250b38" xml:space="preserve">
     <value>More: restart, log</value>
   </data>
+  <data name="Text_947987206957" xml:space="preserve">
+    <value>In use: {0}</value>
+  </data>
   <data name="Text_949063c7d942" xml:space="preserve">
     <value>Label in the saved list (optional)</value>
   </data>
@@ -3064,6 +3151,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data xml:space="preserve" name="Text_95b58be11552">
     <value>Select a checkout to inspect its mods.</value>
+  </data>
+  <data name="Text_95c48d9aaf34" xml:space="preserve">
+    <value>Your backups folder is inside it</value>
   </data>
   <data name="Text_95ef5f9316e2" xml:space="preserve">
     <value>Suffixes</value>
@@ -3134,6 +3224,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>Built from source</value>
   </data>
+  <data name="Text_984f80d3f5cd" xml:space="preserve">
+    <value>Waypoint moves files only into an empty folder. You can use this one as it is, with what is in it; the files in {0} stay there.</value>
+  </data>
   <data name="Text_9851f49eb7e6" xml:space="preserve">
     <value>No branches of closed pull requests to delete.</value>
   </data>
@@ -3201,6 +3294,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_9ac9ed76c86d" xml:space="preserve">
     <value>Start over with an empty item: no base, no modifiers, the searches and filters cleared. Saved items stay.</value>
   </data>
+  <data name="Text_9ae7976ac3c8" xml:space="preserve">
+    <value>That program isn't there</value>
+  </data>
   <data name="Text_9afaaba23e27" xml:space="preserve">
     <value>Register completed.</value>
   </data>
@@ -3218,6 +3314,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_9bc7bc6c8d2a" xml:space="preserve">
     <value>Inspect completed.</value>
+  </data>
+  <data name="Text_9bd7a07b82a0" xml:space="preserve">
+    <value>Waypoint's data</value>
   </data>
   <data name="Text_9bf4d9a05005" xml:space="preserve">
     <value>{0}: {1} modifiers. {2} lines are left out (red): the crafter has no modifier worded so.</value>
@@ -3423,6 +3522,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_a4561c05ee2f">
     <value>Select a valid checkout first.</value>
   </data>
+  <data name="Text_a4569a002ac6" xml:space="preserve">
+    <value>the save backups</value>
+  </data>
   <data name="Text_a45a59aa1dcf" xml:space="preserve">
     <value>could not close {0}: {1}</value>
   </data>
@@ -3585,6 +3687,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_aad03e2b1c5c" xml:space="preserve">
     <value>Automatic backups are OFF. This change will not create a recovery backup.</value>
   </data>
+  <data name="Text_ab04a325f523" xml:space="preserve">
+    <value>Asked its version, it did not answer. Use it anyway?</value>
+  </data>
   <data name="Text_ab4657748d92" xml:space="preserve">
     <value>LocalExile needs these ports, and another program is listening on them. It may be a server from another LocalExile folder, or something else entirely. Waypoint can end it, or you can look at it first. A server gets the chance to save before it is ended; another program may lose unsaved work.</value>
   </data>
@@ -3623,6 +3728,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>The item crafter is not available on Linux yet.</value>
+  </data>
+  <data name="Text_ad56e3fa73f0" xml:space="preserve">
+    <value>Move and start again</value>
   </data>
   <data name="Text_ad909a80eb9a" xml:space="preserve">
     <value>No open pull requests.</value>
@@ -3683,6 +3791,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_b03f0885df1b" xml:space="preserve">
     <value>{0} is not inside the release's LocalExile folder; nothing was changed</value>
+  </data>
+  <data name="Text_b064b4cd50cd" xml:space="preserve">
+    <value>{0} is not there, so Waypoint finds it itself.</value>
   </data>
   <data name="Text_b09919b9d100" xml:space="preserve">
     <value>QueryAccounts completed.</value>
@@ -3926,6 +4037,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data name="Text_bc01ae77f37c" xml:space="preserve">
     <value>Finish setup</value>
+  </data>
+  <data name="Text_bc03e2586e27" xml:space="preserve">
+    <value>Waypoint still uses {0}. You can move the files yourself, then choose the new folder again and pick Use it as it is.</value>
   </data>
   <data name="Text_bc31a9393a79" xml:space="preserve">
     <value>live.ps1 -Only {0}: builds and starts it</value>
@@ -4312,6 +4426,9 @@ Client: {2}</value>
   </data>
   <data name="Text_cf5c6c0d1737" xml:space="preserve">
     <value>Exiting Waypoint leaves services running.</value>
+  </data>
+  <data name="Text_cf9138da3097" xml:space="preserve">
+    <value>Choose another backups folder first, or the default one, then move Waypoint's data.</value>
   </data>
   <data name="Text_cf97478c04ab" xml:space="preserve">
     <value>frida missing: no walk maps, no console</value>
@@ -4710,6 +4827,9 @@ Dependencies: {2}
   <data name="Text_e36274578842" xml:space="preserve">
     <value>{0} is not empty. Choose an empty folder for the download.</value>
   </data>
+  <data name="Text_e3ebaa16dd9d" xml:space="preserve">
+    <value>Not found</value>
+  </data>
   <data name="Text_e3f02e617e2c" xml:space="preserve">
     <value>3–32 letters, digits, underscores or hyphens.</value>
   </data>
@@ -4733,6 +4853,9 @@ Dependencies: {2}
   </data>
   <data xml:space="preserve" name="Text_e4bb9f1ece9a">
     <value>Start</value>
+  </data>
+  <data name="Text_e4dd29b41c66" xml:space="preserve">
+    <value>Use the folder as it is</value>
   </data>
   <data name="Text_e4e9436bc643" xml:space="preserve">
     <value>Creates the missing login keys and Game.patched.exe in your client copy; existing ones are kept</value>
@@ -4775,6 +4898,9 @@ Dependencies: {2}
   </data>
   <data name="Text_e74cca36ea73" xml:space="preserve">
     <value>MB, MB/s</value>
+  </data>
+  <data name="Text_e75ba15efa68" xml:space="preserve">
+    <value>Waypoint moves its files only while nothing runs. Press Stop playing, then try again.</value>
   </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>Login and character selection</value>
@@ -4883,6 +5009,9 @@ Dependencies: {2}
   </data>
   <data name="Text_ec0a7a7da019" xml:space="preserve">
     <value>The client is running: Play closes it and starts it again.</value>
+  </data>
+  <data name="Text_ec3a92369875" xml:space="preserve">
+    <value>{0} is not empty</value>
   </data>
   <data name="Text_ec7ec1f4944b" xml:space="preserve">
     <value>The account name needs 3 to 32 letters, digits, _ or -.</value>
@@ -5082,6 +5211,9 @@ Mods at backup: </value>
   </data>
   <data name="Text_f5387f9bb6ed" xml:space="preserve">
     <value>Kind</value>
+  </data>
+  <data name="Text_f57fa4ab0ce7" xml:space="preserve">
+    <value>Folders and tools</value>
   </data>
   <data name="Text_f585e9956645" xml:space="preserve">
     <value>Node.js and ooz (data extraction)</value>

@@ -153,6 +153,9 @@
   <data name="Text_087cc665f4f5" xml:space="preserve">
     <value>保持使用经过测试的版本（推荐）</value>
   </data>
+  <data name="Text_08ac27f076b6" xml:space="preserve">
+    <value>文件没有移动</value>
+  </data>
   <data name="Text_08ad630cfbfa" xml:space="preserve">
     <value>打开备份文件夹</value>
   </data>
@@ -273,6 +276,9 @@
   <data name="Text_0cef0d77a2fe" xml:space="preserve">
     <value>查看操作输出</value>
   </data>
+  <data name="Text_0cf0462b32ac" xml:space="preserve">
+    <value>{0} 不是空的。请选择空文件夹或新文件夹。</value>
+  </data>
   <data name="Text_0d0d25a58963" xml:space="preserve">
     <value>重新获取拉取请求 #{0}：获取其最新提交，强制推送后同样适用</value>
   </data>
@@ -372,6 +378,9 @@
   <data name="Text_1181d704686c" xml:space="preserve">
     <value>尚无采集会话日志。</value>
   </data>
+  <data name="Text_118ae3c5a8a6" xml:space="preserve">
+    <value>游戏将在下次启动时使用它</value>
+  </data>
   <data name="Text_118fb0172261" xml:space="preserve">
     <value>{0} 已更新</value>
   </data>
@@ -455,6 +464,9 @@
   </data>
   <data name="Text_15689b1ef00b" xml:space="preserve">
     <value>LocalExile 所需的工具</value>
+  </data>
+  <data name="Text_157d59dc4b73" xml:space="preserve">
+    <value>{0} 没有完整复制。</value>
   </data>
   <data name="Text_158b8358f7e4" xml:space="preserve">
     <value>搜索未能完成：</value>
@@ -624,6 +636,9 @@
   <data name="Text_1d6ca631e720" xml:space="preserve">
     <value>! 命令未加载：{0}</value>
   </data>
+  <data name="Text_1dd780b2767c" xml:space="preserve">
+    <value>将{0}移动到 {1}？</value>
+  </data>
   <data name="Text_1ddc54772630" xml:space="preserve">
     <value> · 已找到已准备的客户端</value>
   </data>
@@ -635,6 +650,9 @@
   </data>
   <data name="Text_1e38f7b99036" xml:space="preserve">
     <value>请求的源码副本</value>
+  </data>
+  <data name="Text_1e6e04fa8a3c" xml:space="preserve">
+    <value>无法移动文件，未做任何更改：{0}</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>保持此客户端不变</value>
@@ -819,6 +837,9 @@
   <data name="Text_26639e783252" xml:space="preserve">
     <value>更改账号</value>
   </data>
+  <data name="Text_267342d2d102" xml:space="preserve">
+    <value>正在使用：{0}（{1}）</value>
+  </data>
   <data name="Text_26776921d6a2" xml:space="preserve">
     <value>引导式安装 → 使用独立的游戏设置…</value>
   </data>
@@ -850,11 +871,17 @@
   <data name="Text_27712080ff00" xml:space="preserve">
     <value>游戏数据已重新加载。</value>
   </data>
+  <data name="Text_277db01efc29" xml:space="preserve">
+    <value>这两个文件夹中一个位于另一个之内：{0}，{1}。</value>
+  </data>
   <data name="Text_279d233b3ee4" xml:space="preserve">
     <value>更改位置</value>
   </data>
   <data name="Text_27e6ed25bcfa" xml:space="preserve">
     <value>请先选择并检查安装。</value>
+  </data>
+  <data name="Text_2810e56a442d" xml:space="preserve">
+    <value>部分旧文件仍留在原处</value>
   </data>
   <data name="Text_282b08d0523c" xml:space="preserve">
     <value>获取 Node.js</value>
@@ -873,6 +900,9 @@
   </data>
   <data name="Text_28fd171b0b6b" xml:space="preserve">
     <value>下次再询问</value>
+  </data>
+  <data name="Text_291431eb6c8a" xml:space="preserve">
+    <value>旧的前缀保留在原处：{0}</value>
   </data>
   <data name="Text_291d2a97565f" xml:space="preserve">
     <value>稀有</value>
@@ -897,6 +927,9 @@
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>每秒</value>
+  </data>
+  <data name="Text_298d88416167" xml:space="preserve">
+    <value>无法使用 Waypoint 数据文件夹 {0}（{1}），暂时使用默认的 {2}。</value>
   </data>
   <data name="Text_29945b65f986" xml:space="preserve">
     <value>游戏数据已提取（第 7 步）</value>
@@ -958,6 +991,9 @@
   <data name="Text_2c4117e5b038" xml:space="preserve">
     <value>要更新到 {0} 吗？</value>
   </data>
+  <data name="Text_2c5c517cb9a3" xml:space="preserve">
+    <value>在此之前 Waypoint 使用默认值。可以在“设置”→“文件夹和工具”中更改或清除它们。</value>
+  </data>
   <data name="Text_2cb93bc2b809" xml:space="preserve">
     <value>输入 LocalExile PR 编号（正整数），包括已关闭的 PR</value>
   </data>
@@ -1002,6 +1038,12 @@
   </data>
   <data name="Text_2e985979a4b9" xml:space="preserve">
     <value>该 LocalExile 文件夹中没有存档。</value>
+  </data>
+  <data name="Text_2eaf1f9c10ef" xml:space="preserve">
+    <value>正在查找…</value>
+  </data>
+  <data name="Text_2eda866504a2" xml:space="preserve">
+    <value>仍然使用</value>
   </data>
   <data name="Text_2ee7e02cbde9" xml:space="preserve">
     <value>正在构建源码副本</value>
@@ -1217,6 +1259,9 @@
   <data name="Text_39921a740bf2" xml:space="preserve">
     <value>切换</value>
   </data>
+  <data name="Text_39d2600b7211" xml:space="preserve">
+    <value>按原样使用</value>
+  </data>
   <data name="Text_3a0f7b919840" xml:space="preserve">
     <value>正在更改账号数据</value>
   </data>
@@ -1286,6 +1331,9 @@
   </data>
   <data name="Text_3c25c5fd139b" xml:space="preserve">
     <value>/ 会列出命令，然后列出每个参数的可选值（区域、怪物、物品、宝石…）：↑↓ 选择，Tab 或 Enter 选用。没有列表时，↑↓ 浏览历史记录。不带 / 的文本是聊天消息。</value>
+  </data>
+  <data name="Text_3c5306ec52f9" xml:space="preserve">
+    <value>{0} 没有响应</value>
   </data>
   <data name="Text_3c58451ae577" xml:space="preserve">
     <value>未关联分支</value>
@@ -1641,6 +1689,9 @@
   <data name="Text_4e2f30ce9131" xml:space="preserve">
     <value>有其他操作正在使用 LocalExile。请在其完成后重试。</value>
   </data>
+  <data name="Text_4e3a645f6bf1" xml:space="preserve">
+    <value>Wine 前缀</value>
+  </data>
   <data name="Text_4e3e2cd41804" xml:space="preserve">
     <value>构建全部模组</value>
   </data>
@@ -1677,11 +1728,17 @@
   <data name="Text_5045659cf175" xml:space="preserve">
     <value>{0}（{1} 个错误）</value>
   </data>
+  <data name="Text_506dc5a78bd1" xml:space="preserve">
+    <value>所有文件都已在 {0} 中，但以下文件无法从 {1} 删除，你可以手动删除：</value>
+  </data>
   <data name="Text_507d2cdd1d1b" xml:space="preserve">
     <value>正在获取拉取请求</value>
   </data>
   <data name="Text_509b359509d5" xml:space="preserve">
     <value>固定词缀</value>
+  </data>
+  <data name="Text_50dee90771a3" xml:space="preserve">
+    <value>为 {0} 选择的程序 {1} 不存在，Waypoint 将自行查找 {0}。</value>
   </data>
   <data name="Text_512f7f4147ad" xml:space="preserve">
     <value>此源码副本没有已验证的进程</value>
@@ -1749,6 +1806,9 @@
   <data name="Text_54377045445b" xml:space="preserve">
     <value>正在构建准备工具</value>
   </data>
+  <data name="Text_544b891ecca8" xml:space="preserve">
+    <value>无法使用该文件夹</value>
+  </data>
   <data name="Text_54624197825a" xml:space="preserve">
     <value>仍然切换</value>
   </data>
@@ -1770,6 +1830,9 @@
   <data name="Text_55091c102c8f" xml:space="preserve">
     <value>无法备份存档。可在“备份”页面关闭自动备份。</value>
   </data>
+  <data name="Text_5528762a7c7d" xml:space="preserve">
+    <value>无法使用 Waypoint 数据文件夹 {0}（{1}），暂时使用 {2}。</value>
+  </data>
   <data name="Text_5528f7df07c4" xml:space="preserve">
     <value>复制你的账号和角色。账号：{0}。角色：{1}。</value>
   </data>
@@ -1778,6 +1841,9 @@
   </data>
   <data name="Text_5559b6621735" xml:space="preserve">
     <value>{0} 中没有 Content.ggpk 和 PathOfExile.exe，因此不是独立版客户端。</value>
+  </data>
+  <data name="Text_555bbeab2a7c" xml:space="preserve">
+    <value>无法使用备份文件夹 {0}（{1}），暂时将备份保存到 {2}。</value>
   </data>
   <data name="Text_55863ec85560" xml:space="preserve">
     <value>正在链接游戏客户端</value>
@@ -2270,6 +2336,9 @@
   <data name="Text_6c26340a1b96" xml:space="preserve">
     <value>存档数据库</value>
   </data>
+  <data name="Text_6c6d375befb8" xml:space="preserve">
+    <value>部分文件夹或工具无法使用</value>
+  </data>
   <data name="Text_6caadd32b7a9" xml:space="preserve">
     <value>独立版客户端布局（Content.ggpk）</value>
   </data>
@@ -2293,6 +2362,9 @@
   </data>
   <data name="Text_6ddab223b645" xml:space="preserve">
     <value>搜索已达到时间上限而停止；如果列表中没有你的客户端，请点击“浏览”。</value>
+  </data>
+  <data name="Text_6de7c0d13d2c" xml:space="preserve">
+    <value>留空则使用默认值。不存在的文件夹或程序会被跳过，改用默认值。</value>
   </data>
   <data name="Text_6deabfbf3f4a" xml:space="preserve">
     <value>物品等级</value>
@@ -2492,6 +2564,12 @@
   <data name="Text_777a88e600e2" xml:space="preserve">
     <value>请求的构建</value>
   </data>
+  <data name="Text_779a193c6fad" xml:space="preserve">
+    <value>Waypoint 无法写入 {0}：{1}</value>
+  </data>
+  <data name="Text_77f818c944f1" xml:space="preserve">
+    <value>打开两个文件夹</value>
+  </data>
   <data name="Text_780287165a99" xml:space="preserve">
     <value>Waypoint 退出后，游戏和服务保持运行。</value>
   </data>
@@ -2545,6 +2623,9 @@
   </data>
   <data name="Text_7a5198f98ec2" xml:space="preserve">
     <value>此 LocalExile 文件夹中已有游戏客户端，无需复制。</value>
+  </data>
+  <data name="Text_7aa55705d1f4" xml:space="preserve">
+    <value>Waypoint 会将文件复制过去并检查，再删除旧文件并重新启动。如果出现问题，不会做任何更改。</value>
   </data>
   <data name="Text_7aad4be82785" xml:space="preserve">
     <value>将此行填入输入框；按 Enter 或“发送”即可发送。</value>
@@ -2861,6 +2942,9 @@
   <data name="Text_8b2d4fa44372" xml:space="preserve">
     <value>搜索模组 ID、版本、类型、状态或错误（Ctrl+F）</value>
   </data>
+  <data name="Text_8b3831d4d5e0" xml:space="preserve">
+    <value>请先停止 LocalExile</value>
+  </data>
   <data name="Text_8b3a87465604" xml:space="preserve">
     <value>dev host 正在监听 127.0.0.1:{0}</value>
   </data>
@@ -3032,6 +3116,9 @@
   <data name="Text_9436d7250b38" xml:space="preserve">
     <value>更多：重启、日志</value>
   </data>
+  <data name="Text_947987206957" xml:space="preserve">
+    <value>正在使用：{0}</value>
+  </data>
   <data name="Text_949063c7d942" xml:space="preserve">
     <value>已保存列表中的显示名称（可选）</value>
   </data>
@@ -3064,6 +3151,9 @@
   </data>
   <data name="Text_95b58be11552" xml:space="preserve">
     <value>选择源码副本以检查其模组。</value>
+  </data>
+  <data name="Text_95c48d9aaf34" xml:space="preserve">
+    <value>你的备份文件夹位于其中</value>
   </data>
   <data name="Text_95ef5f9316e2" xml:space="preserve">
     <value>后缀</value>
@@ -3134,6 +3224,9 @@
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>从源码构建</value>
   </data>
+  <data name="Text_984f80d3f5cd" xml:space="preserve">
+    <value>Waypoint 只会将文件移动到空文件夹。你可以按原样使用这个文件夹及其内容；{0} 中的文件会保留在原处。</value>
+  </data>
   <data name="Text_9851f49eb7e6" xml:space="preserve">
     <value>没有需要删除的已关闭拉取请求分支。</value>
   </data>
@@ -3201,6 +3294,9 @@
   <data name="Text_9ac9ed76c86d" xml:space="preserve">
     <value>从空物品重新开始：没有基础类型和词缀，搜索和筛选条件均被清除。已保存的物品会保留。</value>
   </data>
+  <data name="Text_9ae7976ac3c8" xml:space="preserve">
+    <value>该程序不存在</value>
+  </data>
   <data name="Text_9afaaba23e27" xml:space="preserve">
     <value>账号已创建。</value>
   </data>
@@ -3218,6 +3314,9 @@
   </data>
   <data name="Text_9bc7bc6c8d2a" xml:space="preserve">
     <value>检查完成。</value>
+  </data>
+  <data name="Text_9bd7a07b82a0" xml:space="preserve">
+    <value>Waypoint 数据</value>
   </data>
   <data name="Text_9bf4d9a05005" xml:space="preserve">
     <value>{0}：{1} 个词缀。有 {2} 行被忽略（红色）：物品制作器中没有这样措辞的词缀。</value>
@@ -3423,6 +3522,9 @@
   <data name="Text_a4561c05ee2f" xml:space="preserve">
     <value>请先选择有效的源码副本。</value>
   </data>
+  <data name="Text_a4569a002ac6" xml:space="preserve">
+    <value>存档备份</value>
+  </data>
   <data name="Text_a45a59aa1dcf" xml:space="preserve">
     <value>无法关闭 {0}：{1}</value>
   </data>
@@ -3585,6 +3687,9 @@
   <data name="Text_aad03e2b1c5c" xml:space="preserve">
     <value>自动备份已关闭。此更改不会创建用于恢复的备份。</value>
   </data>
+  <data name="Text_ab04a325f523" xml:space="preserve">
+    <value>查询版本时它没有响应。仍然使用它吗？</value>
+  </data>
   <data name="Text_ab4657748d92" xml:space="preserve">
     <value>LocalExile 需要这些端口，但另一个程序正在监听它们。它可能是另一个 LocalExile 文件夹中的服务器，也可能是完全无关的程序。Waypoint 可以结束它，你也可以先查看一下。服务器在被结束前有机会保存；其他程序可能会丢失未保存的工作。</value>
   </data>
@@ -3623,6 +3728,9 @@
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>物品制作器暂不支持 Linux。</value>
+  </data>
+  <data name="Text_ad56e3fa73f0" xml:space="preserve">
+    <value>移动并重新启动</value>
   </data>
   <data name="Text_ad909a80eb9a" xml:space="preserve">
     <value>没有打开的拉取请求。</value>
@@ -3683,6 +3791,9 @@
   </data>
   <data name="Text_b03f0885df1b" xml:space="preserve">
     <value>{0} 不在发行版的 LocalExile 文件夹内；未做任何更改</value>
+  </data>
+  <data name="Text_b064b4cd50cd" xml:space="preserve">
+    <value>{0} 不存在，Waypoint 将自行查找。</value>
   </data>
   <data name="Text_b09919b9d100" xml:space="preserve">
     <value>账号已读取。</value>
@@ -3926,6 +4037,9 @@
   </data>
   <data name="Text_bc01ae77f37c" xml:space="preserve">
     <value>完成安装</value>
+  </data>
+  <data name="Text_bc03e2586e27" xml:space="preserve">
+    <value>Waypoint 仍在使用 {0}。你可以自己移动文件，然后再次选择新文件夹并点击“按原样使用”。</value>
   </data>
   <data name="Text_bc31a9393a79" xml:space="preserve">
     <value>live.ps1 -Only {0}：构建并启动它</value>
@@ -4312,6 +4426,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_cf5c6c0d1737" xml:space="preserve">
     <value>退出 Waypoint 时服务会继续运行。</value>
+  </data>
+  <data name="Text_cf9138da3097" xml:space="preserve">
+    <value>请先选择其他备份文件夹或默认文件夹，然后再移动 Waypoint 的数据。</value>
   </data>
   <data name="Text_cf97478c04ab" xml:space="preserve">
     <value>缺少 frida：无法使用行走地图和控制台</value>
@@ -4710,6 +4827,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_e36274578842" xml:space="preserve">
     <value>{0} 不是空文件夹。请选择一个空文件夹用于下载。</value>
   </data>
+  <data name="Text_e3ebaa16dd9d" xml:space="preserve">
+    <value>未找到</value>
+  </data>
   <data name="Text_e3f02e617e2c" xml:space="preserve">
     <value>3–32 个字母、数字、下划线或连字符。</value>
   </data>
@@ -4733,6 +4853,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_e4bb9f1ece9a" xml:space="preserve">
     <value>启动</value>
+  </data>
+  <data name="Text_e4dd29b41c66" xml:space="preserve">
+    <value>按原样使用该文件夹</value>
   </data>
   <data name="Text_e4e9436bc643" xml:space="preserve">
     <value>在你的客户端副本中创建缺少的登录密钥和 Game.patched.exe；已有的会保留</value>
@@ -4775,6 +4898,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_e74cca36ea73" xml:space="preserve">
     <value>MB, MB/s</value>
+  </data>
+  <data name="Text_e75ba15efa68" xml:space="preserve">
+    <value>Waypoint 只会在没有运行任何内容时移动文件。请点击“停止游戏”，然后再试一次。</value>
   </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>登录和角色选择</value>
@@ -4883,6 +5009,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_ec0a7a7da019" xml:space="preserve">
     <value>客户端正在运行：“开始游戏”会将其关闭并重新启动。</value>
+  </data>
+  <data name="Text_ec3a92369875" xml:space="preserve">
+    <value>{0} 不是空的</value>
   </data>
   <data name="Text_ec7ec1f4944b" xml:space="preserve">
     <value>账号名需由 3 到 32 个字母、数字、_ 或 - 组成。</value>
@@ -5082,6 +5211,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_f5387f9bb6ed" xml:space="preserve">
     <value>类型</value>
+  </data>
+  <data name="Text_f57fa4ab0ce7" xml:space="preserve">
+    <value>文件夹和工具</value>
   </data>
   <data name="Text_f585e9956645" xml:space="preserve">
     <value>Node.js 和 ooz（数据提取）</value>

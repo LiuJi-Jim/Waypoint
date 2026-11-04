@@ -38,6 +38,8 @@ public partial class SettingsTab : UserControl
         }
         Theme.Changed += ShowAppearance;
         L.Current.PropertyChanged += (_, _) => Show();
+        L.Current.PropertyChanged += (_, _) => ShowPaths();
+        ShowPaths();
         Show();
     }
 
@@ -171,6 +173,76 @@ public partial class SettingsTab : UserControl
     void OpenData(object sender, RoutedEventArgs e)
     {
         Directory.CreateDirectory(SettingsStore.DataDirectory);
-        Process.Start(new ProcessStartInfo("explorer.exe") { ArgumentList = { SettingsStore.DataDirectory }, UseShellExecute = false })?.Dispose();
+        OpenFolder(SettingsStore.DataDirectory);
+    }
+
+    static void OpenFolder(string folder) =>
+        Process.Start(new ProcessStartInfo("explorer.exe") { ArgumentList = { folder }, UseShellExecute = false })?.Dispose();
+
+    // ---- Folders and tools (PathChoices) ----
+
+    static readonly (string Tool, string Label)[] ToolLabels = [("git", "Git"), ("dotnet", ".NET SDK"), ("node", "Node.js"), ("python", "Python"), ("powershell", "PowerShell")];
+
+    /// <summary>A row per folder and tool: the choice, in a field that takes a typed path too, Browse…, Save, and what is in use
+    /// now under it.</summary>
+    void ShowPaths()
+    {
+        PathRows.Children.Clear();
+        AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
+        AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
+        foreach (var (tool, label) in ToolLabels) AddPathRow(PathKind.Tool, tool, label, S.Tools.GetValueOrDefault(tool));
+    }
+
+    void AddPathRow(PathKind kind, string? tool, string label, string? value)
+    {
+        var field = new TextBox { Text = value ?? "", Margin = new Thickness(0, 0, 8, 0) };
+        // A one-line field has nothing to scroll, but its own scroll viewer keeps the wheel: the page gets it instead.
+        field.PreviewMouseWheel += (_, e) =>
+        {
+            e.Handled = true;
+            ((UIElement)field.Parent).RaiseEvent(new System.Windows.Input.MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                { RoutedEvent = MouseWheelEvent, Source = field });
+        };
+        var browse = new Button { Content = L.Text("Browse…"), Margin = new Thickness(0, 0, 8, 0) };
+        var save = new Button { Content = L.Text("Save"), Margin = new Thickness(0) };
+        var detail = new TextBlock { Style = (Style)FindResource("Shell.Secondary"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 12) };
+        detail.Text = kind == PathKind.Tool ? L.Text("Looking…") : L.Text("In use: {0}", PathChoices.Now(kind));
+        if (kind == PathKind.Tool) _ = Describe();
+        browse.Click += (_, _) =>
+        {
+            var owner = Window.GetWindow(this);
+            if (kind == PathKind.Tool)
+            {
+                var pick = new Microsoft.Win32.OpenFileDialog { Title = label, Filter = $"{label} (*.exe)|*.exe" };
+                if (pick.ShowDialog(owner) == true) field.Text = pick.FileName;
+            }
+            else
+            {
+                var pick = new Microsoft.Win32.OpenFolderDialog { Title = label };
+                if (pick.ShowDialog(owner) == true) field.Text = pick.FolderName;
+            }
+        };
+        save.Click += async (_, _) =>
+        {
+            var owner = Window.GetWindow(this);
+            int Ask(DialogKind k, string title, string message, string[] buttons) => Dialog.Show(owner, k, title, message, null, buttons);
+            string? chosen = field.Text.Trim() is { Length: > 0 } text ? text : null;
+            if (kind == PathKind.Tool)
+            {
+                if (await PathChoices.ChangeToolAsync(S, tool!, chosen, Ask)) await Describe();
+            }
+            else if (await PathChoices.ChangeFolderAsync(_shared, kind, chosen, Ask, OpenFolder)) App.StartAgain(owner);
+        };
+        var line = new DockPanel();
+        DockPanel.SetDock(save, Dock.Right);
+        DockPanel.SetDock(browse, Dock.Right);
+        line.Children.Add(save);
+        line.Children.Add(browse);
+        line.Children.Add(field);
+        PathRows.Children.Add(new TextBlock { Text = label, FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        PathRows.Children.Add(line);
+        PathRows.Children.Add(detail);
+
+        async Task Describe() => detail.Text = await PathChoices.DescribeToolAsync(S, tool!);
     }
 }

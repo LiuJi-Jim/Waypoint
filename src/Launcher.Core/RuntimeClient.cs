@@ -55,6 +55,9 @@ public sealed class RuntimeClient
         foreach (string key in start.Environment.Keys.Where(k => k.StartsWith("Game_", StringComparison.OrdinalIgnoreCase)).ToArray())
             start.Environment.Remove(key);
         foreach (string key in start.Environment.Keys.Where(k => k.StartsWith("GIT_", StringComparison.OrdinalIgnoreCase)).ToArray()) start.Environment.Remove(key);
+        // The adapter keeps its files where Waypoint does.
+        start.Environment["WAYPOINT_DATA"] = SettingsStore.DataDirectory;
+        start.Environment["WAYPOINT_BACKUPS"] = SettingsStore.BackupsDirectory;
         start.Environment["GIT_TERMINAL_PROMPT"] = "0";
         start.Environment["GCM_INTERACTIVE"] = "never";
         if (action is not ("Inspect" or "QueryAccounts")) log?.Invoke(action == "ManageAccount"

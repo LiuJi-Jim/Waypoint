@@ -54,6 +54,14 @@
           </WrapPanel>
         </StackPanel>
       </Border>
+      <!-- Where Waypoint keeps its files and which programs it uses (PathChoices): rows made in code, as on Windows. -->
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <TextBlock x:Name="PathsHeading" Classes="heading" />
+          <TextBlock x:Name="PathsNote" Classes="note" TextWrapping="Wrap" />
+          <StackPanel x:Name="PathRows" />
+        </StackPanel>
+      </Border>
     </StackPanel>
   </ScrollViewer>
 </UserControl>

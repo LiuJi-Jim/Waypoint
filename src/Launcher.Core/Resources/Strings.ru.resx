@@ -153,6 +153,9 @@
   <data name="Text_087cc665f4f5" xml:space="preserve">
     <value>Остаться на проверенной версии (рекомендуется)</value>
   </data>
+  <data name="Text_08ac27f076b6" xml:space="preserve">
+    <value>Файлы не перенесены</value>
+  </data>
   <data xml:space="preserve" name="Text_08ad630cfbfa">
     <value>Папка копий</value>
   </data>
@@ -273,6 +276,9 @@
   <data xml:space="preserve" name="Text_0cef0d77a2fe">
     <value>Вывод операции</value>
   </data>
+  <data name="Text_0cf0462b32ac" xml:space="preserve">
+    <value>{0} не пуста. Выберите пустую или новую папку.</value>
+  </data>
   <data name="Text_0d0d25a58963" xml:space="preserve">
     <value>Заново получает запрос на слияние #{0}: его новейшие коммиты, в том числе после force-push</value>
   </data>
@@ -372,6 +378,9 @@
   <data name="Text_1181d704686c" xml:space="preserve">
     <value>Журнал сеанса записи ещё не создан.</value>
   </data>
+  <data name="Text_118ae3c5a8a6" xml:space="preserve">
+    <value>Игра будет использовать его со следующего запуска</value>
+  </data>
   <data name="Text_118fb0172261" xml:space="preserve">
     <value>{0}: обновлено</value>
   </data>
@@ -455,6 +464,9 @@
   </data>
   <data name="Text_15689b1ef00b" xml:space="preserve">
     <value>Инструменты для LocalExile</value>
+  </data>
+  <data name="Text_157d59dc4b73" xml:space="preserve">
+    <value>{0} скопирован не полностью.</value>
   </data>
   <data name="Text_158b8358f7e4" xml:space="preserve">
     <value>Поиск не удалось завершить: </value>
@@ -624,6 +636,9 @@
   <data name="Text_1d6ca631e720" xml:space="preserve">
     <value>! команды не загружены: {0}</value>
   </data>
+  <data name="Text_1dd780b2767c" xml:space="preserve">
+    <value>Перенести {0} в {1}?</value>
+  </data>
   <data xml:space="preserve" name="Text_1ddc54772630">
     <value> · подготовленный клиент найден</value>
   </data>
@@ -635,6 +650,9 @@
   </data>
   <data name="Text_1e38f7b99036" xml:space="preserve">
     <value>Запрошенный репозиторий</value>
+  </data>
+  <data name="Text_1e6e04fa8a3c" xml:space="preserve">
+    <value>Файлы не удалось перенести, ничего не изменено: {0}</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>Оставить этот клиент как есть</value>
@@ -819,6 +837,9 @@
   <data name="Text_26639e783252" xml:space="preserve">
     <value>Изменить аккаунт</value>
   </data>
+  <data name="Text_267342d2d102" xml:space="preserve">
+    <value>Используется: {0} ({1})</value>
+  </data>
   <data name="Text_26776921d6a2" xml:space="preserve">
     <value>Пошаговая подготовка → Использовать отдельные настройки игры…</value>
   </data>
@@ -850,11 +871,17 @@
   <data xml:space="preserve" name="Text_27712080ff00">
     <value>Игровые данные обновлены.</value>
   </data>
+  <data name="Text_277db01efc29" xml:space="preserve">
+    <value>Одна из этих папок находится внутри другой: {0}, {1}.</value>
+  </data>
   <data xml:space="preserve" name="Text_279d233b3ee4">
     <value>Изменить путь</value>
   </data>
   <data xml:space="preserve" name="Text_27e6ed25bcfa">
     <value>Сначала выберите и проверьте установку.</value>
+  </data>
+  <data name="Text_2810e56a442d" xml:space="preserve">
+    <value>Некоторые старые файлы остались</value>
   </data>
   <data xml:space="preserve" name="Text_282b08d0523c">
     <value>Скачать Node.js</value>
@@ -873,6 +900,9 @@
   </data>
   <data name="Text_28fd171b0b6b" xml:space="preserve">
     <value>Спросить снова в следующий раз</value>
+  </data>
+  <data name="Text_291431eb6c8a" xml:space="preserve">
+    <value>Старый префикс остаётся на месте: {0}</value>
   </data>
   <data name="Text_291d2a97565f" xml:space="preserve">
     <value>Редкий</value>
@@ -897,6 +927,9 @@
   </data>
   <data name="Text_298d318ece80" xml:space="preserve">
     <value>в секунду</value>
+  </data>
+  <data name="Text_298d88416167" xml:space="preserve">
+    <value>Папку данных Waypoint {0} нельзя использовать ({1}), поэтому пока используется папка по умолчанию {2}.</value>
   </data>
   <data name="Text_29945b65f986" xml:space="preserve">
     <value>игровые данные извлечены (шаг 7)</value>
@@ -958,6 +991,9 @@
   <data name="Text_2c4117e5b038" xml:space="preserve">
     <value>Обновить до {0}?</value>
   </data>
+  <data name="Text_2c5c517cb9a3" xml:space="preserve">
+    <value>До тех пор Waypoint работает со значениями по умолчанию. Измените или очистите их в разделе «Настройки» → «Папки и программы».</value>
+  </data>
   <data xml:space="preserve" name="Text_2cb93bc2b809">
     <value>Введите положительный номер PR LocalExile, включая закрытые PR</value>
   </data>
@@ -1002,6 +1038,12 @@
   </data>
   <data name="Text_2e985979a4b9" xml:space="preserve">
     <value>В этой папке LocalExile нет сохранений.</value>
+  </data>
+  <data name="Text_2eaf1f9c10ef" xml:space="preserve">
+    <value>Поиск…</value>
+  </data>
+  <data name="Text_2eda866504a2" xml:space="preserve">
+    <value>Всё равно использовать</value>
   </data>
   <data xml:space="preserve" name="Text_2ee7e02cbde9">
     <value>Сборка репозитория</value>
@@ -1217,6 +1259,9 @@
   <data xml:space="preserve" name="Text_39921a740bf2">
     <value>Перейти</value>
   </data>
+  <data name="Text_39d2600b7211" xml:space="preserve">
+    <value>Использовать как есть</value>
+  </data>
   <data name="Text_3a0f7b919840" xml:space="preserve">
     <value>Изменение данных аккаунта</value>
   </data>
@@ -1286,6 +1331,9 @@
   </data>
   <data name="Text_3c25c5fd139b" xml:space="preserve">
     <value>/ показывает команды, затем значения каждого аргумента (области, монстры, предметы, камни …): ↑↓ — выбор, Tab или Enter — подставить значение. Без списка ↑↓ листают историю. Текст без / — это строка чата.</value>
+  </data>
+  <data name="Text_3c5306ec52f9" xml:space="preserve">
+    <value>{0} не ответила</value>
   </data>
   <data xml:space="preserve" name="Text_3c58451ae577">
     <value>Без привязки к ветке</value>
@@ -1641,6 +1689,9 @@
   <data name="Text_4e2f30ce9131" xml:space="preserve">
     <value>LocalExile сейчас занят другой операцией. Повторите, когда она закончится.</value>
   </data>
+  <data name="Text_4e3a645f6bf1" xml:space="preserve">
+    <value>Префикс Wine</value>
+  </data>
   <data name="Text_4e3e2cd41804" xml:space="preserve">
     <value>Собрать все моды</value>
   </data>
@@ -1677,11 +1728,17 @@
   <data name="Text_5045659cf175" xml:space="preserve">
     <value>{0}  (ошибок: {1})</value>
   </data>
+  <data name="Text_506dc5a78bd1" xml:space="preserve">
+    <value>Всё перенесено в {0}, но эти файлы не удалось удалить из {1}; их можно удалить вручную:</value>
+  </data>
   <data xml:space="preserve" name="Text_507d2cdd1d1b">
     <value>Получение PR</value>
   </data>
   <data name="Text_509b359509d5" xml:space="preserve">
     <value>Собственное</value>
+  </data>
+  <data name="Text_50dee90771a3" xml:space="preserve">
+    <value>Программы, выбранной для {0} ({1}), нет, поэтому Waypoint сам найдёт {0}.</value>
   </data>
   <data xml:space="preserve" name="Text_512f7f4147ad">
     <value>Нет подтверждённого процесса этой установки</value>
@@ -1749,6 +1806,9 @@
   <data xml:space="preserve" name="Text_54377045445b">
     <value>Сборка инструментов подготовки</value>
   </data>
+  <data name="Text_544b891ecca8" xml:space="preserve">
+    <value>Эту папку нельзя использовать</value>
+  </data>
   <data name="Text_54624197825a" xml:space="preserve">
     <value>Всё равно переключить</value>
   </data>
@@ -1770,6 +1830,9 @@
   <data name="Text_55091c102c8f" xml:space="preserve">
     <value>Не удалось создать копию сохранений. Автоматические копии можно отключить в разделе «Резервные копии».</value>
   </data>
+  <data name="Text_5528762a7c7d" xml:space="preserve">
+    <value>Папку данных Waypoint {0} нельзя использовать ({1}), поэтому пока используется {2}.</value>
+  </data>
   <data name="Text_5528f7df07c4" xml:space="preserve">
     <value>Скопировать аккаунты и персонажей. Аккаунтов: {0}. Персонажей: {1}.</value>
   </data>
@@ -1778,6 +1841,9 @@
   </data>
   <data name="Text_5559b6621735" xml:space="preserve">
     <value>В {0} нет Content.ggpk и PathOfExile.exe, поэтому это не автономный клиент.</value>
+  </data>
+  <data name="Text_555bbeab2a7c" xml:space="preserve">
+    <value>Папку резервных копий {0} нельзя использовать ({1}), поэтому пока копии сохраняются в {2}.</value>
   </data>
   <data name="Text_55863ec85560" xml:space="preserve">
     <value>Подключение клиента игры</value>
@@ -2270,6 +2336,9 @@
   <data name="Text_6c26340a1b96" xml:space="preserve">
     <value>База сохранений</value>
   </data>
+  <data name="Text_6c6d375befb8" xml:space="preserve">
+    <value>Некоторые ваши папки или программы недоступны</value>
+  </data>
   <data name="Text_6caadd32b7a9" xml:space="preserve">
     <value>структура отдельного клиента (Content.ggpk)</value>
   </data>
@@ -2293,6 +2362,9 @@
   </data>
   <data name="Text_6ddab223b645" xml:space="preserve">
     <value>Поиск остановился по лимиту времени; если вашего клиента нет в списке, укажите его вручную.</value>
+  </data>
+  <data name="Text_6de7c0d13d2c" xml:space="preserve">
+    <value>Оставьте поле пустым, чтобы использовать значение по умолчанию. Если папки или программы нет, она пропускается и используется значение по умолчанию.</value>
   </data>
   <data name="Text_6deabfbf3f4a" xml:space="preserve">
     <value>УРОВЕНЬ ПРЕДМЕТА</value>
@@ -2492,6 +2564,12 @@
   <data name="Text_777a88e600e2" xml:space="preserve">
     <value>Запрошенная сборка</value>
   </data>
+  <data name="Text_779a193c6fad" xml:space="preserve">
+    <value>Waypoint не может записывать в {0}: {1}</value>
+  </data>
+  <data name="Text_77f818c944f1" xml:space="preserve">
+    <value>Открыть обе папки</value>
+  </data>
   <data name="Text_780287165a99" xml:space="preserve">
     <value>После выхода из Waypoint игра и службы продолжат работать.</value>
   </data>
@@ -2545,6 +2623,9 @@
   </data>
   <data name="Text_7a5198f98ec2" xml:space="preserve">
     <value>В этой папке LocalExile уже есть игровой клиент, копировать ничего не нужно.</value>
+  </data>
+  <data name="Text_7aa55705d1f4" xml:space="preserve">
+    <value>Waypoint скопирует туда файлы, проверит их, удалит старые и перезапустится. Если что-то пойдёт не так, ничего не изменится.</value>
   </data>
   <data name="Text_7aad4be82785" xml:space="preserve">
     <value>Подставляет строку в поле ввода; Enter или «Отправить» отправляет её.</value>
@@ -2861,6 +2942,9 @@
   <data xml:space="preserve" name="Text_8b2d4fa44372">
     <value>Поиск по ID, версии, типу, состоянию или ошибке мода (Ctrl+F)</value>
   </data>
+  <data name="Text_8b3831d4d5e0" xml:space="preserve">
+    <value>Сначала остановите LocalExile</value>
+  </data>
   <data name="Text_8b3a87465604" xml:space="preserve">
     <value>dev host слушает 127.0.0.1:{0}</value>
   </data>
@@ -3032,6 +3116,9 @@
   <data name="Text_9436d7250b38" xml:space="preserve">
     <value>Ещё: перезапуск, журнал</value>
   </data>
+  <data name="Text_947987206957" xml:space="preserve">
+    <value>Используется: {0}</value>
+  </data>
   <data name="Text_949063c7d942" xml:space="preserve">
     <value>Подпись в списке сохранённых (необязательно)</value>
   </data>
@@ -3064,6 +3151,9 @@
   </data>
   <data xml:space="preserve" name="Text_95b58be11552">
     <value>Выберите репозиторий, чтобы проверить его моды.</value>
+  </data>
+  <data name="Text_95c48d9aaf34" xml:space="preserve">
+    <value>Папка резервных копий находится внутри неё</value>
   </data>
   <data name="Text_95ef5f9316e2" xml:space="preserve">
     <value>Суффиксы</value>
@@ -3134,6 +3224,9 @@
   <data name="Text_984c29f084d4" xml:space="preserve">
     <value>Сборка из исходников</value>
   </data>
+  <data name="Text_984f80d3f5cd" xml:space="preserve">
+    <value>Waypoint переносит файлы только в пустую папку. Эту папку можно использовать как есть, вместе с её содержимым; файлы в {0} останутся на месте.</value>
+  </data>
   <data name="Text_9851f49eb7e6" xml:space="preserve">
     <value>Веток закрытых запросов на слияние для удаления нет.</value>
   </data>
@@ -3201,6 +3294,9 @@
   <data name="Text_9ac9ed76c86d" xml:space="preserve">
     <value>Начать заново с пустого предмета: без базы и свойств, поиск и фильтры очищены. Сохранённые предметы остаются.</value>
   </data>
+  <data name="Text_9ae7976ac3c8" xml:space="preserve">
+    <value>Этой программы нет</value>
+  </data>
   <data name="Text_9afaaba23e27" xml:space="preserve">
     <value>Учётная запись создана.</value>
   </data>
@@ -3218,6 +3314,9 @@
   </data>
   <data name="Text_9bc7bc6c8d2a" xml:space="preserve">
     <value>Проверка завершена.</value>
+  </data>
+  <data name="Text_9bd7a07b82a0" xml:space="preserve">
+    <value>Данные Waypoint</value>
   </data>
   <data name="Text_9bf4d9a05005" xml:space="preserve">
     <value>{0}: свойств: {1}. Пропущено строк: {2} (красные): у конструктора нет свойства с таким текстом.</value>
@@ -3423,6 +3522,9 @@
   <data xml:space="preserve" name="Text_a4561c05ee2f">
     <value>Сначала выберите подходящий репозиторий.</value>
   </data>
+  <data name="Text_a4569a002ac6" xml:space="preserve">
+    <value>резервные копии сохранений</value>
+  </data>
   <data name="Text_a45a59aa1dcf" xml:space="preserve">
     <value>не удалось закрыть {0}: {1}</value>
   </data>
@@ -3585,6 +3687,9 @@
   <data name="Text_aad03e2b1c5c" xml:space="preserve">
     <value>Автоматические копии ВЫКЛЮЧЕНЫ. Резервная копия для восстановления создана не будет.</value>
   </data>
+  <data name="Text_ab04a325f523" xml:space="preserve">
+    <value>На запрос версии программа не ответила. Всё равно использовать её?</value>
+  </data>
   <data name="Text_ab4657748d92" xml:space="preserve">
     <value>Эти порты нужны LocalExile, но их занимает другая программа. Это может быть сервер из другой папки LocalExile или что-то совсем другое. Waypoint может завершить её, либо вы можете сначала посмотреть, что это. Сервер успеет сохраниться перед завершением; другая программа может потерять несохранённые данные.</value>
   </data>
@@ -3623,6 +3728,9 @@
   </data>
   <data name="Text_ad3c7c6418d1" xml:space="preserve">
     <value>Конструктор предметов пока недоступен в Linux.</value>
+  </data>
+  <data name="Text_ad56e3fa73f0" xml:space="preserve">
+    <value>Перенести и перезапустить</value>
   </data>
   <data name="Text_ad909a80eb9a" xml:space="preserve">
     <value>Открытых запросов на слияние нет.</value>
@@ -3683,6 +3791,9 @@
   </data>
   <data name="Text_b03f0885df1b" xml:space="preserve">
     <value>{0} находится вне папки LocalExile в выпуске; ничего не изменено</value>
+  </data>
+  <data name="Text_b064b4cd50cd" xml:space="preserve">
+    <value>{0} нет, поэтому Waypoint найдёт программу сам.</value>
   </data>
   <data name="Text_b09919b9d100" xml:space="preserve">
     <value>Аккаунты прочитаны.</value>
@@ -3926,6 +4037,9 @@
   </data>
   <data name="Text_bc01ae77f37c" xml:space="preserve">
     <value>Завершить настройку</value>
+  </data>
+  <data name="Text_bc03e2586e27" xml:space="preserve">
+    <value>Waypoint по-прежнему использует {0}. Вы можете перенести файлы сами, затем снова выбрать новую папку и нажать «Использовать как есть».</value>
   </data>
   <data name="Text_bc31a9393a79" xml:space="preserve">
     <value>live.ps1 -Only {0}: собирает и запускает</value>
@@ -4312,6 +4426,9 @@
   </data>
   <data name="Text_cf5c6c0d1737" xml:space="preserve">
     <value>При выходе из Waypoint службы продолжают работать.</value>
+  </data>
+  <data name="Text_cf9138da3097" xml:space="preserve">
+    <value>Сначала выберите другую папку для резервных копий или папку по умолчанию, затем перенесите данные Waypoint.</value>
   </data>
   <data name="Text_cf97478c04ab" xml:space="preserve">
     <value>нет frida: запись планировок и консоль недоступны</value>
@@ -4710,6 +4827,9 @@
   <data name="Text_e36274578842" xml:space="preserve">
     <value>Папка {0} не пуста. Выберите для загрузки пустую папку.</value>
   </data>
+  <data name="Text_e3ebaa16dd9d" xml:space="preserve">
+    <value>Не найдено</value>
+  </data>
   <data name="Text_e3f02e617e2c" xml:space="preserve">
     <value>От 3 до 32 латинских букв, цифр, знаков подчёркивания или дефисов.</value>
   </data>
@@ -4733,6 +4853,9 @@
   </data>
   <data xml:space="preserve" name="Text_e4bb9f1ece9a">
     <value>Старт</value>
+  </data>
+  <data name="Text_e4dd29b41c66" xml:space="preserve">
+    <value>Использовать папку как есть</value>
   </data>
   <data name="Text_e4e9436bc643" xml:space="preserve">
     <value>Создаёт недостающие ключи входа и Game.patched.exe в вашей копии клиента; имеющиеся сохраняются</value>
@@ -4775,6 +4898,9 @@
   </data>
   <data name="Text_e74cca36ea73" xml:space="preserve">
     <value>МБ, МБ/с</value>
+  </data>
+  <data name="Text_e75ba15efa68" xml:space="preserve">
+    <value>Waypoint переносит свои файлы, только когда ничего не запущено. Нажмите «Закончить игру», затем попробуйте снова.</value>
   </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>Вход и выбор персонажа</value>
@@ -4883,6 +5009,9 @@
   </data>
   <data name="Text_ec0a7a7da019" xml:space="preserve">
     <value>Клиент запущен: «Играть» закроет его и запустит снова.</value>
+  </data>
+  <data name="Text_ec3a92369875" xml:space="preserve">
+    <value>{0} не пуста</value>
   </data>
   <data name="Text_ec7ec1f4944b" xml:space="preserve">
     <value>Имя учётной записи: от 3 до 32 латинских букв, цифр, _ или -.</value>
@@ -5082,6 +5211,9 @@
   </data>
   <data name="Text_f5387f9bb6ed" xml:space="preserve">
     <value>Тип</value>
+  </data>
+  <data name="Text_f57fa4ab0ce7" xml:space="preserve">
+    <value>Папки и программы</value>
   </data>
   <data name="Text_f585e9956645" xml:space="preserve">
     <value>Node.js и ooz (извлечение данных)</value>

@@ -210,6 +210,10 @@ public partial class MainWindow : Window
         if (_shared.Settings.CheckForUpdates && Updates.IsReleaseBuild) Loaded += (_, _) => _ = CheckForUpdates(manual: false);
         if (Repo.IsInstall && _shared.Settings.KeepUpToDate) Loaded += (_, _) => _ = CheckLocalExile();
         Loaded += (_, _) => _ = _shared.Workspace.RefreshAsync();
+        // A chosen folder or tool that is not there now: said once, and Waypoint goes on with the default.
+        if (Settings.PathProblems.Count > 0)
+            Loaded += (_, _) => Dialog.Tell(this, DialogKind.Warning, L.Text("Some of your folders or tools can't be used"),
+                string.Join("\n\n", Settings.PathProblems) + "\n\n" + L.Text("Waypoint works with the defaults until then. Change or clear them in Settings → Folders and tools."));
     }
 
     bool _live;

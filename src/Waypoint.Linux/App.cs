@@ -26,6 +26,8 @@ sealed class App : Avalonia.Application
     public void Prepare()
     {
         Settings = Settings.Load();
+        // The player's folders and tools, before anything reads a folder or starts a tool.
+        Settings.ApplyPaths();
         L.Current.SetLanguage(Settings.Language);
         Repo.UseLocalProfile = Settings.UseLocalProfile;
         Repo.LockstepSwitch = Settings.LockstepServer;
@@ -87,6 +89,12 @@ sealed class App : Avalonia.Application
         if ((chosen ?? ChooseServer(owner)) is not { } root || root == settings.ServerPath) return;
         settings.ServerPath = root;
         settings.Save();
+        Restart(owner);
+    }
+
+    /// <summary>Waypoint again, once this one has exited: after a change every section reads anew (its folders, say).</summary>
+    internal static void Restart(Window owner)
+    {
         if (Instance.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) desktop.Exit += (_, _) => StartAgain();
         owner.Close();
     }

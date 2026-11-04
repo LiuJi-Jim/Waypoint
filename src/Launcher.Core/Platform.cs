@@ -5,10 +5,11 @@ namespace Launcher.Core;
 public static class Platform
 {
     /// <summary>Windows PowerShell on Windows, which live.ps1 and the adapter are written for; PowerShell 7 elsewhere, found on
-    /// PATH or where `dotnet tool install --global PowerShell` puts it, which PATH often lacks.</summary>
-    public static string PowerShell => OperatingSystem.IsWindows()
+    /// PATH or where `dotnet tool install --global PowerShell` puts it, which PATH often lacks. The player's choice first
+    /// (Settings → Folders and tools), while it exists.</summary>
+    public static string PowerShell => ToolPaths.Usable("powershell") ?? (OperatingSystem.IsWindows()
         ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"WindowsPowerShell\v1.0\powershell.exe")
-        : OnPath("pwsh") ?? DotnetTool("pwsh") ?? "pwsh";
+        : OnPath("pwsh") ?? DotnetTool("pwsh") ?? "pwsh");
 
     /// <summary>Where a user's data goes. Outside Windows the folder may not exist yet, and .NET then answers with nothing, which
     /// would put settings in the working directory: the checkout.</summary>
@@ -17,7 +18,11 @@ public static class Platform
 
     /// <summary>The prefix a Linux client runs in: the shell's, else the one Waypoint keeps for every install it runs, which no other
     /// Path of Exile uses. Waypoint names it to what it starts with WINEPREFIX (src/Waypoint.Linux/GameSettings.cs).</summary>
-    public static string GamePrefix => Environment.GetEnvironmentVariable("WINEPREFIX") is { Length: > 0 } own ? own : Path.Combine(LocalData, "LocalExile", "wine-prefix");
+    public static string GamePrefix => ChosenGamePrefix is { Length: > 0 } chosen ? chosen
+        : Environment.GetEnvironmentVariable("WINEPREFIX") is { Length: > 0 } own ? own : Path.Combine(LocalData, "LocalExile", "wine-prefix");
+
+    /// <summary>The player's own prefix (Settings → Folders and tools), over the shell's and the default.</summary>
+    public static string? ChosenGamePrefix { get; set; }
 
     /// <summary>The Python on PATH. Some Linux systems only have python3.</summary>
     public static string Python => OperatingSystem.IsWindows() || OnPath("python") is not null ? "python" : "python3";

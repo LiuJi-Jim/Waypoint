@@ -227,7 +227,7 @@ function Get-SourceSelectionPath {
     $sha = [Security.Cryptography.SHA256]::Create()
     try { $key = ([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($script:root.ToLowerInvariant())))).Replace('-','') }
     finally { $sha.Dispose() }
-    return Join-Path (Join-Path $env:LOCALAPPDATA 'EmulatorWorkspaceLauncher/source-selections') ($key + '.json')
+    return Join-Path (Join-Path (Get-WaypointData) 'source-selections') ($key + '.json')
 }
 function Test-Sdk {
     if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { return $false }
@@ -449,8 +449,18 @@ function Backup-Saves($snapshot) {
     $metadata | Set-Content -LiteralPath (Join-Path $destination 'backup.json') -Encoding UTF8
     Write-Host "Save backup verified: $destination"
 }
+# Waypoint's data folder and backups folder, as Waypoint names them to the adapter (Settings: Folders and tools); without them,
+# where every Waypoint before the choice kept them.
+function Get-WaypointData {
+    if ($env:WAYPOINT_DATA) { return $env:WAYPOINT_DATA }
+    return Join-Path $env:LOCALAPPDATA 'EmulatorWorkspaceLauncher'
+}
+function Get-WaypointBackups {
+    if ($env:WAYPOINT_BACKUPS) { return $env:WAYPOINT_BACKUPS }
+    return Join-Path (Get-WaypointData) 'backups'
+}
 function Get-BackupDirectory {
-    $base = Join-Path $env:LOCALAPPDATA 'EmulatorWorkspaceLauncher/backups'
+    $base = Get-WaypointBackups
     $sha = [Security.Cryptography.SHA256]::Create()
     try { $key = ([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($script:savePath.ToLowerInvariant())))).Replace('-','').Substring(0,16) }
     finally { $sha.Dispose() }
