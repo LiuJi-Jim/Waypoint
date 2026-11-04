@@ -50,19 +50,24 @@ static class Editions
                       LessStable() + "\n\n" + L.Text("The setup guide downloads LocalExile's newest version and builds it, and can bring your characters."),
                       [L.Text("Open the setup guide"), L.Text("Cancel")]) == 0 ? (EditionStep.SetUpLatest, null) : (EditionStep.Stay, null);
 
+        // One question each way. The saves here are backed up as every other change backs them up: with automatic backups on
+        // (Backups), and the question says so; off, nothing is asked about it.
+        bool backup = shared.Settings.AutomaticBackups;
+        string backupNote = backup ? "\n\n" + L.Text("Your saves here are backed up first.") : "";
         if (toRelease)
         {
             int choice = ask(DialogKind.Warning, L.Text("Switch to the release?"),
-                L.Text("The release has its own characters. Yours stay here in Latest for when you switch back.") + "\n\n" + OneWay(),
-                [L.Text("Back up and switch"), L.Text("Switch"), L.Text("Cancel")]);
-            if (choice is < 0 or 2) return (EditionStep.Stay, null);
-            return choice == 1 || await BackedUp(shared) ? (EditionStep.Switch, folder) : (EditionStep.Stay, null);
+                L.Text("The release has its own characters. Yours stay here in Latest for when you switch back.") + "\n\n" + OneWay() + backupNote,
+                [L.Text("Switch"), L.Text("Cancel")]);
+            if (choice != 0) return (EditionStep.Stay, null);
+            return !backup || await BackedUp(shared) ? (EditionStep.Switch, folder) : (EditionStep.Stay, null);
         }
 
         int keep = ask(DialogKind.Question, L.Text("Bring your characters to Latest?"),
-            LessStable() + "\n\n" + L.Text("Latest has its own characters. Bring yours from this release, and Latest's are backed up and set aside first.") + "\n\n" + OneWay(),
+            LessStable() + "\n\n" + L.Text("Latest has its own characters. Bring yours from this release, and Latest's are backed up and set aside first.") + "\n\n" + OneWay() + backupNote,
             [L.Text("Bring my characters"), L.Text("Keep Latest's own"), L.Text("Cancel")]);
         if (keep is < 0 or 2) return (EditionStep.Stay, null);
+        if (backup && !await BackedUp(shared)) return (EditionStep.Stay, null);
         if (keep == 0)
         {
             var brought = await shared.Workspace.ImportSavesAsync(folder, Environment.CurrentDirectory);
@@ -72,13 +77,8 @@ static class Editions
                     ask(DialogKind.Error, L.Text("Your characters weren't brought"), L.Describe(brought.Message) + "\n\n" + L.Text("Nothing was switched."), [L.Text("OK")]);
                 return (EditionStep.Stay, null);
             }
-            return (EditionStep.Switch, folder);
         }
-        int backup = ask(DialogKind.Question, L.Text("Back up this release's saves?"),
-            L.Text("A copy you can restore from Backups. Your characters stay in this release either way."),
-            [L.Text("Back up"), L.Text("Don't back up"), L.Text("Cancel")]);
-        if (backup is < 0 or 2) return (EditionStep.Stay, null);
-        return backup == 1 || await BackedUp(shared) ? (EditionStep.Switch, folder) : (EditionStep.Stay, null);
+        return (EditionStep.Switch, folder);
     }
 
     /// <summary>A copy on the tested version (<see cref="SwitchToSource.TestedBranch"/>, which Play never moves) onto LocalExile's

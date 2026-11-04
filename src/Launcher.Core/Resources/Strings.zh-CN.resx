@@ -5151,6 +5151,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_f24116ae1425" xml:space="preserve">
     <value>欢迎使用 Waypoint</value>
   </data>
+  <data name="Text_f2499338fc41" xml:space="preserve">
+    <value>会先备份你在这里的存档。</value>
+  </data>
   <data name="Text_f25cdb3f89bd" xml:space="preserve">
     <value>角色名称须为 3–32 个字母、数字、_ 或 -</value>
   </data>

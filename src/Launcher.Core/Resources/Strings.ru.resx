@@ -5151,6 +5151,9 @@
   <data name="Text_f24116ae1425" xml:space="preserve">
     <value>Добро пожаловать в Waypoint</value>
   </data>
+  <data name="Text_f2499338fc41" xml:space="preserve">
+    <value>Сначала будет создана резервная копия ваших сохранений здесь.</value>
+  </data>
   <data name="Text_f25cdb3f89bd" xml:space="preserve">
     <value>имя персонажа: 3–32 латинские буквы, цифры, _ или -</value>
   </data>

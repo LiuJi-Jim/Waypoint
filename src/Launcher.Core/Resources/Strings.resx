@@ -5151,6 +5151,9 @@ Dependencies: {2}
   <data name="Text_f24116ae1425" xml:space="preserve">
     <value>Welcome to Waypoint</value>
   </data>
+  <data name="Text_f2499338fc41" xml:space="preserve">
+    <value>Your saves here are backed up first.</value>
+  </data>
   <data name="Text_f25cdb3f89bd" xml:space="preserve">
     <value>character names are 3–32 letters, digits, _ or -</value>
   </data>

@@ -240,17 +240,18 @@ week. Restoring keeps a copy of the current saves first. A checkout follows `mai
 
 **Release | Latest** at the top of Simple mode's Play (`EditionSwitch`, `Editions.cs`) moves between a release install and a
 source copy that follows `main`. Each is a folder of its own with its own characters; Waypoint remembers the last of each it ran on
-(`ReleaseFolder`, `LatestFolder`). Switching needs nothing running, then asks, and Waypoint starts again on the other folder:
+(`ReleaseFolder`, `LatestFolder`). Switching needs nothing running, then asks one question, and Waypoint starts again on the
+other folder. The saves of the folder left are backed up first while automatic backups are on (Backups), as for every other
+change, and the question says so; with them off nothing is backed up or asked.
 
 - Both ways to Latest say first that Latest has LocalExile's newest changes, reviewed, but possibly less stable than the release.
 - **Release → Latest**: bring your characters? **Bring my characters** copies them in (the adapter's `ImportSaves`, as the guide's
-  Your characters page: Latest's own are backed up and set aside first). **Keep Latest's own** then offers a backup of the
-  release's saves.
-- **Latest → Release**: the release keeps its own characters, and Latest's stay for the way back; **Back up and switch** backs
-  them up first. Characters never go from Latest to a release: a newer LocalExile may save what an older release can't read.
+  Your characters page: Latest's own are backed up and set aside first); **Keep Latest's own** leaves both as they are.
+- **Latest → Release**: the release keeps its own characters, and Latest's stay for the way back (**Switch**). Characters never
+  go from Latest to a release: a newer LocalExile may save what an older release can't read.
 - A side Waypoint has no folder for opens the setup guide: the release route, or the source route with **Get the newest changes**
   chosen, which from a release has its Your characters page.
-- On a release, **Tools → Get the item crafter…** switches to the Latest copy when Waypoint has one, with the same questions, and
+- On a release, **Tools → Get the item crafter…** switches to the Latest copy when Waypoint has one, with the same question, and
   otherwise opens the guide as before, with the older version chosen. A copy on that older version (`waypoint-tested`) is still the
   Latest side, and the switch says it does not update, since Play does not move it. **Get the newest changes** under it backs the saves
   up and switches the copy to LocalExile's default branch (`Editions.MoveToNewestAsync`; nothing is done with changes of the
