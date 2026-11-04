@@ -207,6 +207,13 @@ public partial class SettingsTab : UserControl
         list.SelectedItem = current;
         var use = new Button { Content = L.Text("Use"), Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
         var open = new Button { Content = L.Text("Open"), Margin = new Thickness(0) };
+        // Only a folder made here with Create, not the one in use, and never the last: the others may be another copy's.
+        var delete = new Button { Content = L.Text("Delete"), Margin = new Thickness(0, 0, 8, 0),
+            ToolTip = L.Text("Only folders made here with Create, never the one in use. They go to the Recycle Bin.") };
+        void Deletable() => delete.IsEnabled = client && list.SelectedItem is string chosen && PathChoices.CanDeleteGameSettings(S, chosen);
+        list.SelectionChanged += (_, _) => Deletable();
+        Deletable();
+        delete.Click += (_, _) => { if (list.SelectedItem is string chosen && PathChoices.DeleteGameSettings(_shared, chosen, Ask)) ShowPaths(); };
         var name = new TextBox { Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
         var create = new Button { Content = L.Text("Create"), Margin = new Thickness(0), IsEnabled = client };
         var detail = new TextBlock { Style = (Style)FindResource("Shell.Secondary"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 12),
@@ -220,8 +227,10 @@ public partial class SettingsTab : UserControl
         create.Click += (_, _) => { if (PathChoices.CreateGameSettings(_shared, name.Text, Ask)) ShowPaths(); };
         var pick = new DockPanel();
         DockPanel.SetDock(open, Dock.Right);
+        DockPanel.SetDock(delete, Dock.Right);
         DockPanel.SetDock(use, Dock.Right);
         pick.Children.Add(open);
+        pick.Children.Add(delete);
         pick.Children.Add(use);
         pick.Children.Add(list);
         var make = new DockPanel { Margin = new Thickness(0, 6, 0, 0) };

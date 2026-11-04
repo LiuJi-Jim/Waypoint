@@ -18,6 +18,8 @@ sealed class Settings
     public Dictionary<string, string> Tools { get; set; } = [];
     /// <summary>Linux: the Wine prefix the client runs in; empty: WINEPREFIX, else Waypoint's own.</summary>
     public string? WinePrefix { get; set; }
+    /// <summary>The game settings folders made with Create (Settings → Folders and tools): the only ones Delete offers.</summary>
+    public List<string> MadeGameSettings { get; set; } = [];
     /// <summary>Every section, or Simple mode's few. A new player starts in Simple mode; someone who used an earlier launcher,
     /// or this one before the modes, stays with every section (<see cref="Load"/>).</summary>
     public bool? AdvancedMode { get; set; }

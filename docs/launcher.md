@@ -194,7 +194,9 @@ Each field takes a typed path as well as **Browse…** (on Linux a picker may be
   plain folder there. The row shows the folder in use, selected in a list of the folders there that have a
   `production_Config.ini`, and changes nothing until **Use** (only `config.json`'s two names change; the rest of it stays) or
   **Create**: a new folder, a copy of the one in use as it is without its saved login, or of the normal settings with no login
-  and Predictive when none is in use, then used. Each folder keeps its own saved login. Only while the game is closed; a shared
+  and Predictive when none is in use, then used. Each folder keeps its own saved login. **Delete** is offered only for a folder
+  made here with Create (`MadeGameSettings`), never the one in use or the last one, and sends it to the Recycle Bin after
+  asking; the other folders there may be another copy's or another tool's. Only while the game is closed; a shared
   (linked) client is asked about first, since every copy that uses it switches too. The normal `production_Config.ini` is only
   read. On Linux the game settings are the Wine prefix's (`GameSettings`): the row shows that folder, and another prefix is
   another set.

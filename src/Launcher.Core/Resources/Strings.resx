@@ -288,6 +288,9 @@
   <data name="Text_0d422d261e8b" xml:space="preserve">
     <value>Backing up your saves</value>
   </data>
+  <data name="Text_0d5f058ab4ff" xml:space="preserve">
+    <value>Its game settings and saved login go to the Recycle Bin, where you can restore them. Another LocalExile copy that uses it would start without them.</value>
+  </data>
   <data name="Text_0d9fe2fa20b9" xml:space="preserve">
     <value>You can change this in Settings → Window behavior.</value>
   </data>
@@ -1982,6 +1985,9 @@ Current saves are unchanged. This backup will no longer be available to restore.
   <data xml:space="preserve" name="Text_5c412a262086">
     <value>Game</value>
   </data>
+  <data name="Text_5c4824060366" xml:space="preserve">
+    <value>You can delete the folder yourself: {0}</value>
+  </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Choose a local branch, a fetched remote branch or an upstream PR. Switching stops owned servers, backs up saves and builds the revision. Close the game first; press Play afterward.</value>
   </data>
@@ -2341,6 +2347,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data xml:space="preserve" name="Text_6ae2ae6a2f07">
     <value>Bundle decompressor</value>
+  </data>
+  <data name="Text_6afb5f4184ac" xml:space="preserve">
+    <value>Only folders made here with Create, never the one in use. They go to the Recycle Bin.</value>
   </data>
   <data name="Text_6b43463e9003" xml:space="preserve">
     <value>Delete the local branches of pull requests that are no longer open?</value>
@@ -3606,6 +3615,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data name="Text_a616c8dd22a5" xml:space="preserve">
     <value>Synthesised Item</value>
   </data>
+  <data name="Text_a61fa7f3aa60" xml:space="preserve">
+    <value>{0} wasn't deleted</value>
+  </data>
   <data xml:space="preserve" name="Text_a63d0dedb7bb">
     <value>In game: /mod_{0} {1} · /mod_reload {2}</value>
   </data>
@@ -4720,6 +4732,9 @@ Dependencies: {2}
   </data>
   <data xml:space="preserve" name="Text_dc62d4bb4fb1">
     <value>Creating local account</value>
+  </data>
+  <data name="Text_dc6c5ae4c245" xml:space="preserve">
+    <value>Delete {0}?</value>
   </data>
   <data name="Text_dc9ff9ecb39c" xml:space="preserve">
     <value>Added {0}</value>

@@ -288,6 +288,9 @@
   <data name="Text_0d422d261e8b" xml:space="preserve">
     <value>正在备份你的存档</value>
   </data>
+  <data name="Text_0d5f058ab4ff" xml:space="preserve">
+    <value>其游戏设置和保存的登录信息会移到回收站，可以从中恢复。使用它的其他 LocalExile 副本将在没有这些设置的情况下启动。</value>
+  </data>
   <data name="Text_0d9fe2fa20b9" xml:space="preserve">
     <value>可以在“设置 → 窗口行为”中更改此项。</value>
   </data>
@@ -1982,6 +1985,9 @@
   <data name="Text_5c412a262086" xml:space="preserve">
     <value>游戏</value>
   </data>
+  <data name="Text_5c4824060366" xml:space="preserve">
+    <value>你可以自己删除该文件夹：{0}</value>
+  </data>
   <data name="Text_5c520be69184" xml:space="preserve">
     <value>选择本地分支、已获取的远程分支或上游 PR。切换时会停止所属的服务器、备份存档并构建该修订版本。请先关闭游戏，之后再点击“开始游戏”。</value>
   </data>
@@ -2341,6 +2347,9 @@
   </data>
   <data name="Text_6ae2ae6a2f07" xml:space="preserve">
     <value>Bundle 解压器</value>
+  </data>
+  <data name="Text_6afb5f4184ac" xml:space="preserve">
+    <value>只能删除在此用“创建”建立的文件夹，且不能删除正在使用的。它们会移到回收站。</value>
   </data>
   <data name="Text_6b43463e9003" xml:space="preserve">
     <value>删除已不再打开的拉取请求的本地分支吗？</value>
@@ -3606,6 +3615,9 @@
   <data name="Text_a616c8dd22a5" xml:space="preserve">
     <value>追忆之物</value>
   </data>
+  <data name="Text_a61fa7f3aa60" xml:space="preserve">
+    <value>{0} 没有删除</value>
+  </data>
   <data name="Text_a63d0dedb7bb" xml:space="preserve">
     <value>游戏内：/mod_{0} {1} · /mod_reload {2}</value>
   </data>
@@ -4720,6 +4732,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_dc62d4bb4fb1" xml:space="preserve">
     <value>正在创建本地账号</value>
+  </data>
+  <data name="Text_dc6c5ae4c245" xml:space="preserve">
+    <value>删除 {0}？</value>
   </data>
   <data name="Text_dc9ff9ecb39c" xml:space="preserve">
     <value>已添加 {0}</value>

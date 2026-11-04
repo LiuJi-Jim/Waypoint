@@ -199,7 +199,47 @@ static class PathChoices
             ask(DialogKind.Error, L.Text("The folder wasn't made"), e.Message, [L.Text("OK")]);
             return false;
         }
+        if (!shared.Settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase))
+        {
+            shared.Settings.MadeGameSettings.Add(name);
+            shared.Settings.Save();
+        }
         return UseGameSettings(shared, name, ask);
+    }
+
+    /// <summary>Whether Delete is offered for a folder: one made here with Create, not the one in use, and never the last one.</summary>
+    public static bool CanDeleteGameSettings(Settings settings, string name) =>
+        settings.MadeGameSettings.Contains(name, StringComparer.OrdinalIgnoreCase)
+        && !string.Equals(name, GameSettingsFolder(), StringComparison.OrdinalIgnoreCase)
+        && ClientSettings.Profiles().Count > 1;
+
+    /// <summary>A folder made here goes to the Recycle Bin, after the player says so; its saved login goes with it. True when it
+    /// went.</summary>
+    public static bool DeleteGameSettings(Shared shared, string name, Ask ask)
+    {
+        if (!CanDeleteGameSettings(shared.Settings, name) || !Closed(shared, ask)) return false;
+        string folder = Path.Combine(ClientSettings.Documents, name);
+        if (ask(DialogKind.Warning, L.Text("Delete {0}?", name),
+                L.Text("Its game settings and saved login go to the Recycle Bin, where you can restore them. Another LocalExile copy that uses it would start without them.") + "\n\n" + folder,
+                [L.Text("Delete"), L.Text("Cancel")]) != 0) return false;
+        try
+        {
+            if (Directory.Exists(folder))
+#if WINDOWS
+                Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(folder, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                    Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+#else
+                Directory.Delete(folder, recursive: true);
+#endif
+        }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or OperationCanceledException)
+        {
+            ask(DialogKind.Error, L.Text("{0} wasn't deleted", name), e.Message + "\n\n" + L.Text("You can delete the folder yourself: {0}", folder), [L.Text("OK")]);
+            return false;
+        }
+        shared.Settings.MadeGameSettings.RemoveAll(n => string.Equals(n, name, StringComparison.OrdinalIgnoreCase));
+        shared.Settings.Save();
+        return true;
     }
 
     /// <summary>What a row says under its field: the version and program in use, or why there is none.</summary>

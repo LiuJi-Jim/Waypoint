@@ -288,6 +288,9 @@
   <data name="Text_0d422d261e8b" xml:space="preserve">
     <value>Резервное копирование сохранений</value>
   </data>
+  <data name="Text_0d5f058ab4ff" xml:space="preserve">
+    <value>Её настройки игры и сохранённый вход будут перемещены в корзину, откуда их можно восстановить. Другая копия LocalExile, которая её использует, запустится без них.</value>
+  </data>
   <data name="Text_0d9fe2fa20b9" xml:space="preserve">
     <value>Это можно изменить в разделе «Настройки → Поведение окна».</value>
   </data>
@@ -1982,6 +1985,9 @@
   <data xml:space="preserve" name="Text_5c412a262086">
     <value>Игра</value>
   </data>
+  <data name="Text_5c4824060366" xml:space="preserve">
+    <value>Вы можете удалить папку сами: {0}</value>
+  </data>
   <data xml:space="preserve" name="Text_5c520be69184">
     <value>Выберите локальную ветку, полученную удалённую ветку или PR LocalExile. Переключение останавливает службы этой установки, создаёт копию сохранений и собирает выбранную ревизию. Сначала закройте игру; затем нажмите «Играть».</value>
   </data>
@@ -2341,6 +2347,9 @@
   </data>
   <data xml:space="preserve" name="Text_6ae2ae6a2f07">
     <value>Распаковщик</value>
+  </data>
+  <data name="Text_6afb5f4184ac" xml:space="preserve">
+    <value>Только папки, созданные здесь кнопкой «Создать», и никогда не используемую. Они перемещаются в корзину.</value>
   </data>
   <data name="Text_6b43463e9003" xml:space="preserve">
     <value>Удалить локальные ветки закрытых запросов на слияние?</value>
@@ -3606,6 +3615,9 @@
   <data name="Text_a616c8dd22a5" xml:space="preserve">
     <value>Синтезированный предмет</value>
   </data>
+  <data name="Text_a61fa7f3aa60" xml:space="preserve">
+    <value>{0} не удалена</value>
+  </data>
   <data xml:space="preserve" name="Text_a63d0dedb7bb">
     <value>В игре: /mod_{0} {1} · /mod_reload {2}</value>
   </data>
@@ -4720,6 +4732,9 @@
   </data>
   <data xml:space="preserve" name="Text_dc62d4bb4fb1">
     <value>Создание учётной записи</value>
+  </data>
+  <data name="Text_dc6c5ae4c245" xml:space="preserve">
+    <value>Удалить {0}?</value>
   </data>
   <data name="Text_dc9ff9ecb39c" xml:space="preserve">
     <value>Добавлено: {0}</value>
