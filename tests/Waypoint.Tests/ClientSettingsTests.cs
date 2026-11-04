@@ -140,4 +140,34 @@ public class ClientSettingsTests : IDisposable
         File.WriteAllLines(Shared, ["[NETWORKING]", "NETWORKING_TYPE=Predictive"]);
         Assert.True(ClientSettings.IsPredictive(Shared));
     }
+
+    [Fact]
+    public void Game_settings_folders_are_listed_made_from_the_one_in_use_without_its_login_and_switched_to()
+    {
+        File.WriteAllLines(Shared, ["[DISPLAY]", "fullscreen=true", "[LOGIN]", "login_email=me@example.invalid"]);
+        File.WriteAllText(Config, """{ "GGG_LOGIN_SERVER_PORT": "20481" }""");
+        ClientSettings.UseOwn(Client, Documents);
+        File.AppendAllLines(Own, ["[NETWORKING]", "networking_type=lockstep", "[LOGIN]", "login_email=own@example.invalid"]);
+        File.WriteAllText(Path.Combine(Documents, "LocalExile", "production_login.credentials"), "saved");
+        Directory.CreateDirectory(Path.Combine(Documents, "Screenshots"));
+        Assert.Equal("LocalExile", ClientSettings.Profile(Client, Documents));
+
+        // A copy of the folder in use, as it is but for the saved login; listed with it, not the folders without settings.
+        ClientSettings.CreateProfile("Test", "LocalExile", Documents);
+        string copy = File.ReadAllText(Path.Combine(Documents, "Test", "production_Config.ini"));
+        Assert.Contains("networking_type=lockstep", copy);
+        Assert.DoesNotContain("login_email", copy);
+        Assert.False(File.Exists(Path.Combine(Documents, "Test", "production_login.credentials")));
+        Assert.Equal(["LocalExile", "Test"], ClientSettings.Profiles(Documents));
+
+        // Switching names it in config.json, which keeps what else it holds; the normal settings are only read.
+        ClientSettings.UseProfile(Client, "Test", Documents);
+        Assert.Equal("Test", ClientSettings.Profile(Client, Documents));
+        Assert.Contains("20481", File.ReadAllText(Config));
+        Assert.Contains("login_email=me@example.invalid", File.ReadAllText(Shared));
+
+        Assert.Throws<IOException>(() => ClientSettings.CreateProfile("Test", null, Documents));
+        Assert.Throws<IOException>(() => ClientSettings.UseProfile(Client, "Screenshots", Documents));
+        Assert.All(["", "..", "a\\b", "a/b", " x", "x:"], name => Assert.False(ClientSettings.ValidProfile(name)));
+    }
 }

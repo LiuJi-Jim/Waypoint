@@ -197,7 +197,25 @@ partial class SettingsTab : UserControl
         AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
         AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
         AddPathRow(PathKind.WinePrefix, null, L.Text("Wine prefix"), S.WinePrefix);
+        AddGameSettingsRow();
         foreach (var (tool, label) in ToolLabels) AddPathRow(PathKind.Tool, tool, label, S.Tools.GetValueOrDefault(tool));
+    }
+
+    /// <summary>LocalExile's game settings here are the Wine prefix's (GameSettings): another prefix, chosen above, is another set.</summary>
+    void AddGameSettingsRow()
+    {
+        string folder = Path.Combine(Platform.GamePrefix, GameSettings.Documents);
+        var detail = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+            Text = L.Text("In the Wine prefix: {0}. Another Wine prefix has settings of its own.", folder) };
+        detail.Classes.Add("note");
+        var open = new Button { Content = L.Text("Open"), Margin = new Thickness(8, 0, 0, 0) };
+        open.Click += (_, _) => { if (Directory.Exists(folder)) ViewTools.Open(folder); };
+        var line = new DockPanel { Margin = new Thickness(0, 0, 0, 12) };
+        DockPanel.SetDock(open, Dock.Right);
+        line.Children.Add(open);
+        line.Children.Add(detail);
+        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings"), FontWeight = Avalonia.Media.FontWeight.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        PathRows.Children.Add(line);
     }
 
     void AddPathRow(PathKind kind, string? tool, string label, string? value)

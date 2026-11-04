@@ -324,6 +324,9 @@
   <data name="Text_0e8f55547359" xml:space="preserve">
     <value>Use arrows to choose a page. Ctrl+1–9 switches pages; Ctrl+Tab moves to the next page.</value>
   </data>
+  <data name="Text_0e910da61165" xml:space="preserve">
+    <value>Nothing was changed. The file that names them is {0}.</value>
+  </data>
   <data xml:space="preserve" name="Text_0e9161011702">
     <value>Refresh</value>
   </data>
@@ -579,6 +582,9 @@
   <data name="Text_1a6ff8f22cbb" xml:space="preserve">
     <value>Start when you are ready. You can stop at any point, and the game can stay closed the whole time.</value>
   </data>
+  <data name="Text_1a8b0672f8cf" xml:space="preserve">
+    <value>The folder wasn't made</value>
+  </data>
   <data xml:space="preserve" name="Text_1ac6734160c8">
     <value>Restore saves…</value>
   </data>
@@ -702,6 +708,9 @@
   <data name="Text_20d28271bfa9" xml:space="preserve">
     <value>{0} h ago</value>
   </data>
+  <data name="Text_21078c6e285e" xml:space="preserve">
+    <value>"{0}" is not a folder name.</value>
+  </data>
   <data name="Text_2125db5eddda" xml:space="preserve">
     <value>LocalExile is ready</value>
   </data>
@@ -773,6 +782,9 @@
   </data>
   <data name="Text_240f51c01b28" xml:space="preserve">
     <value>The password can only use English letters, digits and common symbols.</value>
+  </data>
+  <data name="Text_24532939f9d0" xml:space="preserve">
+    <value>Choose another name</value>
   </data>
   <data xml:space="preserve" name="Text_245c1078b5e7">
     <value>Mod details</value>
@@ -1071,6 +1083,9 @@ Change location above to choose somewhere else.</value>
   </data>
   <data xml:space="preserve" name="Text_2fc55bd56efc">
     <value>Start Gateway and enter a playable area to check live status. Python + Frida are required.</value>
+  </data>
+  <data name="Text_2fd09340d317" xml:space="preserve">
+    <value>Switch for every copy?</value>
   </data>
   <data xml:space="preserve" name="Text_2ff6b56154ab">
     <value>Finish setup to play</value>
@@ -1434,6 +1449,9 @@ This checkout has modified tracked files.</value>
   <data xml:space="preserve" name="Text_419911a932d1">
     <value>Selected checkout: </value>
   </data>
+  <data name="Text_41a905338c51" xml:space="preserve">
+    <value>In the Wine prefix: {0}. Another Wine prefix has settings of its own.</value>
+  </data>
   <data xml:space="preserve" name="Text_41ed52921661">
     <value>Gateway</value>
   </data>
@@ -1481,6 +1499,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data xml:space="preserve" name="Text_442aded87a55">
     <value>Performance</value>
+  </data>
+  <data name="Text_4460058aec6a" xml:space="preserve">
+    <value>No game client yet: the setup guide adds one.</value>
   </data>
   <data name="Text_449b92dc7163" xml:space="preserve">
     <value>time in GC</value>
@@ -1571,6 +1592,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data xml:space="preserve" name="Text_49089f5749b2">
     <value>Copy reviewed report</value>
+  </data>
+  <data name="Text_491051de7e93" xml:space="preserve">
+    <value>The game reads its settings when it starts.</value>
   </data>
   <data xml:space="preserve" name="Text_491291cca723">
     <value>Reload selected</value>
@@ -2459,6 +2483,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_71c4cf22a93b" xml:space="preserve">
     <value>Skip data check</value>
   </data>
+  <data name="Text_71d637842972" xml:space="preserve">
+    <value>The game settings weren't switched</value>
+  </data>
   <data name="Text_71e98f7b1e7a" xml:space="preserve">
     <value>SetupCapture completed.</value>
   </data>
@@ -3085,6 +3112,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data xml:space="preserve" name="Text_92c1cdfdf4cb">
     <value>Enabled</value>
+  </data>
+  <data name="Text_92ed295821cb" xml:space="preserve">
+    <value>This game client is shared with other LocalExile copies: a switch changes theirs too.</value>
   </data>
   <data xml:space="preserve" name="Text_92fef4d42c37">
     <value>Build this mod or install its DLL.</value>
@@ -4137,11 +4167,17 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_c1ebc7817870">
     <value>Needs attention</value>
   </data>
+  <data name="Text_c201813d895d" xml:space="preserve">
+    <value>In use: your normal Path of Exile settings ({0}). Choose or create a folder to give LocalExile its own.</value>
+  </data>
   <data name="Text_c2423c59626b" xml:space="preserve">
     <value>Stop services and exit</value>
   </data>
   <data name="Text_c242571e0f75" xml:space="preserve">
     <value>{0} (copy)</value>
+  </data>
+  <data name="Text_c285bfca43e4" xml:space="preserve">
+    <value>{0} already exists.</value>
   </data>
   <data name="Text_c29d9392b89a" xml:space="preserve">
     <value>Everything is in place. Press Play in Waypoint to start the game. Log in with your account: its name goes in the Email field. LocalExile has its own game settings, so your normal Path of Exile keeps its own.</value>
@@ -4157,6 +4193,12 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   </data>
   <data xml:space="preserve" name="Text_c2e0c347e274">
     <value>league</value>
+  </data>
+  <data name="Text_c3099cb7725f" xml:space="preserve">
+    <value>A plain folder name, without \ / : * ? " &lt; &gt; |.</value>
+  </data>
+  <data name="Text_c36d819e7bc6" xml:space="preserve">
+    <value>Use</value>
   </data>
   <data name="Text_c3812fc4acb8" xml:space="preserve">
     <value>Remove</value>
@@ -4712,6 +4754,9 @@ Dependencies: {2}
   <data name="Text_de2a5f6b153d" xml:space="preserve">
     <value>Create your first account to get started. Characters are created in the game.</value>
   </data>
+  <data name="Text_de357fde69bf" xml:space="preserve">
+    <value>This game client is shared with other LocalExile copies, so they will use {0} too.</value>
+  </data>
   <data name="Text_de8ce4325230" xml:space="preserve">
     <value>After the new copy has worked for you, ask before deleting the old one.</value>
   </data>
@@ -4760,6 +4805,9 @@ Dependencies: {2}
   <data name="Text_e11ed003f60a" xml:space="preserve">
     <value>build failed: GameServer.Host
 {0}</value>
+  </data>
+  <data name="Text_e138bdb90e32" xml:space="preserve">
+    <value>New folder:</value>
   </data>
   <data name="Text_e153a0e8e725" xml:space="preserve">
     <value>{0} missing. Install them from their download pages, then check again; there is no need to restart Waypoint.</value>
@@ -5030,6 +5078,9 @@ Dependencies: {2}
   </data>
   <data name="Text_ed059fe4e0d0" xml:space="preserve">
     <value>Mirrored</value>
+  </data>
+  <data name="Text_ed077f3d8125" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="Text_ed1a5a81b812" xml:space="preserve">
     <value>Magic</value>
@@ -5346,6 +5397,9 @@ Mods at backup: </value>
   </data>
   <data name="Text_fac215487bcb" xml:space="preserve">
     <value>Hide to tray</value>
+  </data>
+  <data name="Text_fac63f370862" xml:space="preserve">
+    <value>{0} has no game settings.</value>
   </data>
   <data name="Text_fad198a3ed81" xml:space="preserve">
     <value>Open Waypoint's data folder</value>

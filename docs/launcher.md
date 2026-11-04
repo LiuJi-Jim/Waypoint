@@ -174,6 +174,7 @@ Each field takes a typed path as well as **Browse…** (on Linux a picker may be
 | Waypoint's data | `%LOCALAPPDATA%\EmulatorWorkspaceLauncher` | operation logs, the adapter's scripts, capture and mod notes, and the backups unless they have their own folder |
 | Save backups | `backups` in the data folder | the save backups |
 | Wine prefix (Linux) | `WINEPREFIX`, else Waypoint's own | the prefix the client runs in; nothing is moved, the game sets up a new one there |
+| Game settings | the folder the client uses now | LocalExile's graphics, keys and saved login (below) |
 | Git, .NET SDK, Node.js, Python, PowerShell | found on PATH as before | the program for that tool |
 
 - **A new data or backups folder** must be empty or new: Waypoint copies everything there, checks every file's size, removes the
@@ -188,8 +189,15 @@ Each field takes a typed path as well as **Browse…** (on Linux a picker may be
 - The adapter is told the folders as `WAYPOINT_DATA` and `WAYPOINT_BACKUPS`, and falls back to the defaults without them.
   `WAYPOINT_HOME` moves Waypoint's own settings and saved items, the one folder Settings cannot choose since the choice is kept
   in it. The two variables can also be set by hand, as the folders' defaults.
-- LocalExile's own game settings (`Client\config.json`) are not here: the client reads that file name relative to its own
-  Documents folder, so the folder is the client's to decide.
+- **Game settings** (Windows) are folders right under `Documents\My Games\Path of Exile`, which `Client\config.json` names
+  (`ClientSettings.Profile`); the client reads those names relative to that folder, so a game settings folder is always one
+  plain folder there. The row shows the folder in use, selected in a list of the folders there that have a
+  `production_Config.ini`, and changes nothing until **Use** (only `config.json`'s two names change; the rest of it stays) or
+  **Create**: a new folder, a copy of the one in use as it is without its saved login, or of the normal settings with no login
+  and Predictive when none is in use, then used. Each folder keeps its own saved login. Only while the game is closed; a shared
+  (linked) client is asked about first, since every copy that uses it switches too. The normal `production_Config.ini` is only
+  read. On Linux the game settings are the Wine prefix's (`GameSettings`): the row shows that folder, and another prefix is
+  another set.
 
 ## Look
 

@@ -20,7 +20,7 @@ public static class ClientSettings
 {
     const string ConfigKey = "GGG_CONFIG_FILE_NAME", CredentialKey = "GGG_CREDENTIAL_FILE_NAME";
     const string SharedConfig = "production_Config.ini", OwnFolder = "LocalExile";
-    const string OwnConfig = OwnFolder + @"\" + SharedConfig, OwnCredential = OwnFolder + @"\production_login.credentials";
+    const string OwnConfig = OwnFolder + @"\" + SharedConfig;
     const string NetworkKey = "networking_type=", NetworkSection = "[NETWORKING]";
 
     public static string Documents => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Path of Exile");
@@ -139,8 +139,62 @@ public static class ClientSettings
         return [.. result];
     }
 
+    // ---- Game settings folders: one plain folder under Documents each, the form the client reads its config.json names in ----
+
+    /// <summary>A game settings folder's name: one plain folder, no path.</summary>
+    public static bool ValidProfile(string name) => name.Length is > 0 and <= 64 && name.Trim() == name && name is not ("." or "..")
+        && name.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 && name.IndexOfAny(['/', '\\']) < 0;
+
+    /// <summary>The game settings folders there are: those under Documents with a settings file, by name.</summary>
+    public static IReadOnlyList<string> Profiles(string? documents = null)
+    {
+        documents ??= Documents;
+        try
+        {
+            return [.. Directory.EnumerateDirectories(documents).Where(d => File.Exists(Path.Combine(d, SharedConfig)))
+                .Select(Path.GetFileName).OfType<string>().Order(StringComparer.OrdinalIgnoreCase)];
+        }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException) { return []; }
+    }
+
+    /// <summary>The game settings folder the client's config.json names, by name; null when it names none, or a file that is not
+    /// in one folder right under Documents.</summary>
+    public static string? Profile(string client, string? documents = null)
+    {
+        documents ??= Documents;
+        var state = Read(client, documents);
+        if (state.Kind != ClientSettingsKind.Separate || Path.GetDirectoryName(state.ConfigFile) is not { } folder) return null;
+        return string.Equals(Path.GetDirectoryName(folder), Path.TrimEndingDirectorySeparator(Path.GetFullPath(documents)), StringComparison.OrdinalIgnoreCase)
+            ? Path.GetFileName(folder) : null;
+    }
+
+    /// <summary>A new game settings folder. From <paramref name="from"/>, a copy of that folder's settings as they are, without the
+    /// saved login; from none, a copy of the player's normal settings as <see cref="UseOwn"/> makes one (no login, Predictive).
+    /// The saved login is never copied: the new folder has one of its own. The player's normal files are only read.</summary>
+    public static void CreateProfile(string name, string? from, string? documents = null)
+    {
+        if (!ValidProfile(name)) throw new ArgumentException(L.Text("\"{0}\" is not a folder name.", name));
+        documents ??= Documents;
+        string folder = Path.Combine(documents, name), settings = Path.Combine(folder, SharedConfig);
+        if (File.Exists(settings)) throw new IOException(L.Text("{0} already exists.", folder));
+        Directory.CreateDirectory(folder);
+        if (from is not null && File.Exists(Path.Combine(documents, from, SharedConfig)))
+            Replace(settings, string.Join(Environment.NewLine, WithoutLogin(File.ReadAllLines(Path.Combine(documents, from, SharedConfig)))) + Environment.NewLine, new UTF8Encoding(true));
+        else Seed(settings, Path.Combine(documents, SharedConfig));
+    }
+
+    /// <summary>Points the client at a game settings folder that has a settings file. Only config.json changes; what else it holds
+    /// stays.</summary>
+    public static void UseProfile(string client, string name, string? documents = null)
+    {
+        if (!ValidProfile(name)) throw new ArgumentException(L.Text("\"{0}\" is not a folder name.", name));
+        documents ??= Documents;
+        if (!File.Exists(Path.Combine(documents, name, SharedConfig))) throw new IOException(L.Text("{0} has no game settings.", Path.Combine(documents, name)));
+        Point(Path.Combine(client, "config.json"), name);
+    }
+
     /// <summary>Keeps what else the file holds. One that cannot be added to stays beside the new one.</summary>
-    static void Point(string file)
+    static void Point(string file, string folder = OwnFolder)
     {
         JsonObject config = [];
         if (File.Exists(file))
@@ -152,8 +206,8 @@ public static class ClientSettings
                 config = [];
             }
         }
-        config[ConfigKey] = OwnConfig;
-        config[CredentialKey] = OwnCredential;
+        config[ConfigKey] = folder + @"\" + SharedConfig;
+        config[CredentialKey] = folder + @"\production_login.credentials";
         Replace(file, config.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine, new UTF8Encoding(false));
     }
 

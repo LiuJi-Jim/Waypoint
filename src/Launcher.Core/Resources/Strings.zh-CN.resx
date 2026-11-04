@@ -324,6 +324,9 @@
   <data name="Text_0e8f55547359" xml:space="preserve">
     <value>使用方向键选择页面。Ctrl+1–9 切换页面；Ctrl+Tab 转到下一页。</value>
   </data>
+  <data name="Text_0e910da61165" xml:space="preserve">
+    <value>未做任何更改。指定它们的文件是 {0}。</value>
+  </data>
   <data name="Text_0e9161011702" xml:space="preserve">
     <value>刷新</value>
   </data>
@@ -579,6 +582,9 @@
   <data name="Text_1a6ff8f22cbb" xml:space="preserve">
     <value>准备好后即可开始。你可以随时停止，整个过程中游戏都可以保持关闭。</value>
   </data>
+  <data name="Text_1a8b0672f8cf" xml:space="preserve">
+    <value>文件夹没有创建</value>
+  </data>
   <data name="Text_1ac6734160c8" xml:space="preserve">
     <value>恢复存档…</value>
   </data>
@@ -702,6 +708,9 @@
   <data name="Text_20d28271bfa9" xml:space="preserve">
     <value>{0} 小时前</value>
   </data>
+  <data name="Text_21078c6e285e" xml:space="preserve">
+    <value>“{0}”不是文件夹名称。</value>
+  </data>
   <data name="Text_2125db5eddda" xml:space="preserve">
     <value>LocalExile 已就绪</value>
   </data>
@@ -773,6 +782,9 @@
   </data>
   <data name="Text_240f51c01b28" xml:space="preserve">
     <value>密码只能使用英文字母、数字和常用符号。</value>
+  </data>
+  <data name="Text_24532939f9d0" xml:space="preserve">
+    <value>请换一个名称</value>
   </data>
   <data name="Text_245c1078b5e7" xml:space="preserve">
     <value>模组详情</value>
@@ -1071,6 +1083,9 @@
   </data>
   <data name="Text_2fc55bd56efc" xml:space="preserve">
     <value>启动 Gateway 并进入可游玩区域以检查实时状态。需要 Python + Frida。</value>
+  </data>
+  <data name="Text_2fd09340d317" xml:space="preserve">
+    <value>要为所有副本切换吗？</value>
   </data>
   <data name="Text_2ff6b56154ab" xml:space="preserve">
     <value>完成安装以开始游戏</value>
@@ -1434,6 +1449,9 @@
   <data name="Text_419911a932d1" xml:space="preserve">
     <value>所选源码副本：</value>
   </data>
+  <data name="Text_41a905338c51" xml:space="preserve">
+    <value>位于 Wine 前缀中：{0}。其他 Wine 前缀有各自的设置。</value>
+  </data>
   <data name="Text_41ed52921661" xml:space="preserve">
     <value>Gateway</value>
   </data>
@@ -1481,6 +1499,9 @@
   </data>
   <data name="Text_442aded87a55" xml:space="preserve">
     <value>性能</value>
+  </data>
+  <data name="Text_4460058aec6a" xml:space="preserve">
+    <value>还没有游戏客户端：安装向导会添加。</value>
   </data>
   <data name="Text_449b92dc7163" xml:space="preserve">
     <value>GC 时间占比</value>
@@ -1571,6 +1592,9 @@
   </data>
   <data name="Text_49089f5749b2" xml:space="preserve">
     <value>复制已检查的报告</value>
+  </data>
+  <data name="Text_491051de7e93" xml:space="preserve">
+    <value>游戏在启动时读取设置。</value>
   </data>
   <data name="Text_491291cca723" xml:space="preserve">
     <value>重新加载所选</value>
@@ -2459,6 +2483,9 @@
   <data name="Text_71c4cf22a93b" xml:space="preserve">
     <value>跳过数据检查</value>
   </data>
+  <data name="Text_71d637842972" xml:space="preserve">
+    <value>游戏设置没有切换</value>
+  </data>
   <data name="Text_71e98f7b1e7a" xml:space="preserve">
     <value>采集设置完成。</value>
   </data>
@@ -3085,6 +3112,9 @@
   </data>
   <data name="Text_92c1cdfdf4cb" xml:space="preserve">
     <value>已启用</value>
+  </data>
+  <data name="Text_92ed295821cb" xml:space="preserve">
+    <value>这个游戏客户端与其他 LocalExile 副本共用：切换也会更改它们的设置。</value>
   </data>
   <data name="Text_92fef4d42c37" xml:space="preserve">
     <value>请构建此模组或安装其 DLL。</value>
@@ -4137,11 +4167,17 @@
   <data name="Text_c1ebc7817870" xml:space="preserve">
     <value>需要注意</value>
   </data>
+  <data name="Text_c201813d895d" xml:space="preserve">
+    <value>正在使用：你平常的 Path of Exile 设置（{0}）。选择或创建一个文件夹，让 LocalExile 使用自己的设置。</value>
+  </data>
   <data name="Text_c2423c59626b" xml:space="preserve">
     <value>停止服务并退出</value>
   </data>
   <data name="Text_c242571e0f75" xml:space="preserve">
     <value>{0}（副本）</value>
+  </data>
+  <data name="Text_c285bfca43e4" xml:space="preserve">
+    <value>{0} 已存在。</value>
   </data>
   <data name="Text_c29d9392b89a" xml:space="preserve">
     <value>一切就绪。在 Waypoint 中点击“开始游戏”即可启动游戏。使用你的账号登录：将账号名填入“电邮”（Email）字段。LocalExile 使用自己的游戏设置，因此你平时的流放之路会保留原有设置。</value>
@@ -4157,6 +4193,12 @@
   </data>
   <data name="Text_c2e0c347e274" xml:space="preserve">
     <value>联盟模组</value>
+  </data>
+  <data name="Text_c3099cb7725f" xml:space="preserve">
+    <value>请使用简单的文件夹名称，不含 \ / : * ? " &lt; &gt; |。</value>
+  </data>
+  <data name="Text_c36d819e7bc6" xml:space="preserve">
+    <value>使用</value>
   </data>
   <data name="Text_c3812fc4acb8" xml:space="preserve">
     <value>移除</value>
@@ -4712,6 +4754,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_de2a5f6b153d" xml:space="preserve">
     <value>创建第一个账号即可开始。角色需在游戏中创建。</value>
   </data>
+  <data name="Text_de357fde69bf" xml:space="preserve">
+    <value>这个游戏客户端与其他 LocalExile 副本共用，它们也会使用 {0}。</value>
+  </data>
   <data name="Text_de8ce4325230" xml:space="preserve">
     <value>新副本可以正常使用后，删除旧副本前先询问。</value>
   </data>
@@ -4760,6 +4805,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_e11ed003f60a" xml:space="preserve">
     <value>构建失败：GameServer.Host
 {0}</value>
+  </data>
+  <data name="Text_e138bdb90e32" xml:space="preserve">
+    <value>新文件夹：</value>
   </data>
   <data name="Text_e153a0e8e725" xml:space="preserve">
     <value>缺少 {0} 项。请从各自的下载页面安装，然后重新检查；无需重启 Waypoint。</value>
@@ -5030,6 +5078,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_ed059fe4e0d0" xml:space="preserve">
     <value>已复制</value>
+  </data>
+  <data name="Text_ed077f3d8125" xml:space="preserve">
+    <value>打开</value>
   </data>
   <data name="Text_ed1a5a81b812" xml:space="preserve">
     <value>魔法</value>
@@ -5346,6 +5397,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_fac215487bcb" xml:space="preserve">
     <value>隐藏到托盘</value>
+  </data>
+  <data name="Text_fac63f370862" xml:space="preserve">
+    <value>{0} 中没有游戏设置。</value>
   </data>
   <data name="Text_fad198a3ed81" xml:space="preserve">
     <value>打开 Waypoint 的数据文件夹</value>

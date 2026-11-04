@@ -12,7 +12,7 @@ namespace Waypoint;
 /// </summary>
 static class GameSettings
 {
-    const string Documents = "drive_c/users/steamuser/Documents/My Games/Path of Exile", Config = "production_Config.ini";
+    internal const string Documents = "drive_c/users/steamuser/Documents/My Games/Path of Exile", Config = "production_Config.ini";
 
     public static void Prepare(string install)
     {

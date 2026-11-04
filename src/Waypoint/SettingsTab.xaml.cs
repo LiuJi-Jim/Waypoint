@@ -190,7 +190,51 @@ public partial class SettingsTab : UserControl
         PathRows.Children.Clear();
         AddPathRow(PathKind.Data, null, L.Text("Waypoint's data"), S.DataFolder);
         AddPathRow(PathKind.Backups, null, L.Text("Save backups"), S.BackupsFolder);
+        AddGameSettingsRow();
         foreach (var (tool, label) in ToolLabels) AddPathRow(PathKind.Tool, tool, label, S.Tools.GetValueOrDefault(tool));
+    }
+
+    int Ask(DialogKind kind, string title, string message, string[] buttons) => Dialog.Show(Window.GetWindow(this), kind, title, message, null, buttons);
+
+    /// <summary>LocalExile's game settings: the folder in use under Documents\My Games\Path of Exile, the others there to switch to,
+    /// and a new one, a copy of the one in use without its saved login.</summary>
+    void AddGameSettingsRow()
+    {
+        bool client = Directory.Exists("Client");
+        string? current = PathChoices.GameSettingsFolder();
+        var list = new ComboBox { Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
+        foreach (string folder in ClientSettings.Profiles()) list.Items.Add(folder);
+        list.SelectedItem = current;
+        var use = new Button { Content = L.Text("Use"), Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
+        var open = new Button { Content = L.Text("Open"), Margin = new Thickness(0) };
+        var name = new TextBox { Margin = new Thickness(0, 0, 8, 0), IsEnabled = client };
+        var create = new Button { Content = L.Text("Create"), Margin = new Thickness(0), IsEnabled = client };
+        var detail = new TextBlock { Style = (Style)FindResource("Shell.Secondary"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 12),
+            Text = PathChoices.GameSettingsDetail() };
+        use.Click += (_, _) => { if (list.SelectedItem is string chosen && chosen != current && PathChoices.UseGameSettings(_shared, chosen, Ask)) ShowPaths(); };
+        open.Click += (_, _) =>
+        {
+            string folder = current is not null ? Path.Combine(ClientSettings.Documents, current) : ClientSettings.Documents;
+            if (Directory.Exists(folder)) OpenFolder(folder);
+        };
+        create.Click += (_, _) => { if (PathChoices.CreateGameSettings(_shared, name.Text, Ask)) ShowPaths(); };
+        var pick = new DockPanel();
+        DockPanel.SetDock(open, Dock.Right);
+        DockPanel.SetDock(use, Dock.Right);
+        pick.Children.Add(open);
+        pick.Children.Add(use);
+        pick.Children.Add(list);
+        var make = new DockPanel { Margin = new Thickness(0, 6, 0, 0) };
+        var makeLabel = new TextBlock { Text = L.Text("New folder:"), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) };
+        DockPanel.SetDock(makeLabel, Dock.Left);
+        DockPanel.SetDock(create, Dock.Right);
+        make.Children.Add(makeLabel);
+        make.Children.Add(create);
+        make.Children.Add(name);
+        PathRows.Children.Add(new TextBlock { Text = L.Text("Game settings"), FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        PathRows.Children.Add(pick);
+        PathRows.Children.Add(make);
+        PathRows.Children.Add(detail);
     }
 
     void AddPathRow(PathKind kind, string? tool, string label, string? value)

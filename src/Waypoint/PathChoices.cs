@@ -139,6 +139,69 @@ static class PathChoices
         return true;
     }
 
+    // ---- LocalExile's game settings (Windows): a folder under Documents\My Games\Path of Exile, named in Client\config.json ----
+
+    const string Client = "Client";
+
+    /// <summary>The game settings folder in use, by name (null when the client uses the normal settings, or has none yet).</summary>
+    public static string? GameSettingsFolder() => Directory.Exists(Client) ? ClientSettings.Profile(Client) : null;
+
+    /// <summary>What the Game settings row says: the folder in use, and what a switch reaches.</summary>
+    public static string GameSettingsDetail()
+    {
+        if (!Directory.Exists(Client)) return L.Text("No game client yet: the setup guide adds one.");
+        var state = ClientSettings.Read(Client);
+        string text = state.Kind == ClientSettingsKind.Separate
+            ? L.Text("In use: {0}", Path.GetDirectoryName(state.ConfigFile) ?? state.ConfigFile)
+            : L.Text("In use: your normal Path of Exile settings ({0}). Choose or create a folder to give LocalExile its own.", ClientSettings.Documents);
+        if (ClientSettings.IsLink(Client)) text += " " + L.Text("This game client is shared with other LocalExile copies: a switch changes theirs too.");
+        return text;
+    }
+
+    static bool Closed(Shared shared, Ask ask)
+    {
+        if (!shared.Monitor.Latest.Any(s => s.Service == Service.Client && s.Running)) return true;
+        ask(DialogKind.Info, L.Text("Close the game first"), L.Text("The game reads its settings when it starts."), [L.Text("OK")]);
+        return false;
+    }
+
+    /// <summary>The client pointed at another game settings folder; only its config.json changes. True when it did.</summary>
+    public static bool UseGameSettings(Shared shared, string name, Ask ask)
+    {
+        if (!Directory.Exists(Client) || !Closed(shared, ask)) return false;
+        if (ClientSettings.IsLink(Client) && ask(DialogKind.Warning, L.Text("Switch for every copy?"),
+                L.Text("This game client is shared with other LocalExile copies, so they will use {0} too.", name),
+                [L.Text("Switch"), L.Text("Cancel")]) != 0) return false;
+        try { ClientSettings.UseProfile(Client, name); return true; }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException)
+        {
+            ask(DialogKind.Error, L.Text("The game settings weren't switched"),
+                e.Message + "\n\n" + L.Text("Nothing was changed. The file that names them is {0}.", Path.GetFullPath(Path.Combine(Client, "config.json"))), [L.Text("OK")]);
+            return false;
+        }
+    }
+
+    /// <summary>A new game settings folder, a copy of the one in use (or of the normal settings) without the saved login, then
+    /// used. True when it was.</summary>
+    public static bool CreateGameSettings(Shared shared, string name, Ask ask)
+    {
+        name = name.Trim();
+        if (!ClientSettings.ValidProfile(name))
+        {
+            ask(DialogKind.Warning, L.Text("Choose another name"), L.Text("A plain folder name, without \\ / : * ? \" < > |."), [L.Text("OK")]);
+            return false;
+        }
+        if (!Directory.Exists(Client) || !Closed(shared, ask)) return false;
+        string? from = GameSettingsFolder();
+        try { ClientSettings.CreateProfile(name, from); }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException)
+        {
+            ask(DialogKind.Error, L.Text("The folder wasn't made"), e.Message, [L.Text("OK")]);
+            return false;
+        }
+        return UseGameSettings(shared, name, ask);
+    }
+
     /// <summary>What a row says under its field: the version and program in use, or why there is none.</summary>
     public static async Task<string> DescribeToolAsync(Settings settings, string tool)
     {
