@@ -5795,4 +5795,43 @@ This replaces the saved choices only. Mod DLLs and saves are not restored. The c
   <data name="Text_ffd7f7c8013d" xml:space="preserve">
     <value>{0} commit(s) ahead of LocalExile</value>
   </data>
+  <data name="Text_8876f4fff1c8" xml:space="preserve"><value>Map viewer</value></data>
+  <data name="Text_024dc204d7ba" xml:space="preserve"><value>Area</value></data>
+  <data name="Text_367ef06b8fbf" xml:space="preserve"><value>Seed</value></data>
+  <data name="Text_262be24adfee" xml:space="preserve"><value>Area level</value></data>
+  <data name="Text_f95b3eb4bed4" xml:space="preserve"><value>Generate map</value></data>
+  <data name="Text_4da22a362d38" xml:space="preserve"><value>Tiles</value></data>
+  <data name="Text_e21fcb6a2746" xml:space="preserve"><value>Objects and exits</value></data>
+  <data name="Text_9f872ed43d00" xml:space="preserve"><value>Fit</value></data>
+  <data name="Text_17705384c701" xml:space="preserve"><value>Starting map viewer …</value></data>
+  <data name="Text_a61d83f60984" xml:space="preserve"><value>Map viewer failed to start.</value></data>
+  <data name="Text_76d53e715312" xml:space="preserve"><value>Enter a valid seed and area level.</value></data>
+  <data name="Text_ce6e37f200be" xml:space="preserve"><value>Generating map …</value></data>
+  <data name="Text_a0b30cecbd04" xml:space="preserve"><value>Open map viewer</value></data>
+  <data name="Text_19376ffd346d" xml:space="preserve"><value>Inspect generated maps, tiles, walkability and points of interest.</value></data>
+  <data name="Text_1c96653d8b48" xml:space="preserve"><value>Walkability</value></data>
+  <data name="Text_0d7d12ac624c" xml:space="preserve"><value>Grid</value></data>
+  <data name="Text_4e8d1a726078" xml:space="preserve"><value>Markers</value></data>
+  <data name="Text_6eb2be9cdbcc" xml:space="preserve"><value>Entrance {0}</value></data>
+  <data name="Text_8a91c3ae834f" xml:space="preserve"><value>Random seed</value></data>
+  <data name="Text_62a6da8735c1" xml:space="preserve"><value>Object</value></data>
+  <data name="Text_f2d1dab08310" xml:space="preserve"><value>NPC</value></data>
+  <data name="Text_6a6ac8386005" xml:space="preserve"><value>Boss</value></data>
+  <data name="Text_81571a390103" xml:space="preserve"><value>Entrance and exit</value></data>
+  <data name="Text_7a72f4199ba7" xml:space="preserve"><value>Loading areas …</value></data>
+  <data name="Text_9bf1a4ccdf90" xml:space="preserve"><value>Select an area.</value></data>
+  <data name="Text_045923f3710f" xml:space="preserve"><value>Sort areas</value></data>
+  <data name="Text_7f8ae4a819fb" xml:space="preserve"><value>Area teleport</value></data>
+  <data name="Text_1f88699e6094" xml:space="preserve"><value>Previous map</value></data>
+  <data name="Text_7a2cc9a9efb4" xml:space="preserve"><value>Teleport links</value></data>
+  <data name="Text_3864a7129335" xml:space="preserve"><value>Open connected area</value></data>
+  <data name="Text_c45aa0aa9d4a" xml:space="preserve"><value>Target: {0}, {1}</value></data>
+  <data name="Text_b29966d03734" xml:space="preserve"><value>Arrival only</value></data>
+  <data name="Text_e855c484ad39" xml:space="preserve"><value>Coordinates: {0}, {1}</value></data>
+  <data name="Text_2007994f658d" xml:space="preserve"><value>Possible: {0}</value></data>
+  <data name="Text_d7cfab3c32d0" xml:space="preserve"><value>Waypoint</value></data>
+  <data name="Text_615f66d220ae" xml:space="preserve"><value>Crafting unlock</value></data>
+  <data name="Text_72ac0d580f8c" xml:space="preserve"><value>Copy ID</value></data>
+  <data name="Text_338e02304930" xml:space="preserve"><value>Seed {0} was replaced with {1}.</value></data>
+  <data name="Text_eef9456154d0" xml:space="preserve"><value>Could not copy to clipboard.</value></data>
 </root>

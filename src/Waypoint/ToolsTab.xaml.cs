@@ -8,6 +8,7 @@ public partial class ToolsTab : UserControl
 {
     Shared _shared = null!;
     ItemCrafterWindow? _crafter;
+    MapViewerWindow? _mapViewer;
 
     /// <summary>The player wants a copy of LocalExile that has the crafter.</summary>
     internal event Action? NewCopyRequested;
@@ -17,6 +18,7 @@ public partial class ToolsTab : UserControl
     internal void Attach(Shared shared)
     {
         _shared = shared;
+        MapButton.IsEnabled = !Repo.IsInstall && File.Exists(Path.Combine("scripts", "dev", "map-viewer", "MapViewer.csproj"));
         // Asking a Gateway for a mode it lacks starts it serving, so a release's is not asked.
         if (!Repo.IsInstall) return;
         CrafterButton.IsEnabled = false;
@@ -24,6 +26,14 @@ public partial class ToolsTab : UserControl
     }
 
     void GetCrafterClicked(object sender, RoutedEventArgs e) => NewCopyRequested?.Invoke();
+
+    void OpenMapViewer(object sender, RoutedEventArgs e)
+    {
+        if (_mapViewer is { IsLoaded: true }) { _mapViewer.Activate(); return; }
+        _mapViewer = new MapViewerWindow(_shared);
+        _mapViewer.Closed += (_, _) => _mapViewer = null;
+        _mapViewer.Show();
+    }
 
     /// <summary>The crafter's window, or the one already open brought forward.</summary>
     void OpenItemCrafter(object sender, RoutedEventArgs e)

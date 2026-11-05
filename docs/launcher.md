@@ -20,6 +20,18 @@ folder ([Folders and tools](#folders-and-tools)), so a self-update, which replac
 `Workspace.cs` is the app's side of it. The adapter still has its own start, stop and branch-switch actions, covered by its
 tests; the app does not use them.
 
+The Windows Tools section opens the map viewer when the selected source checkout supplies
+`scripts/dev/map-viewer/MapViewer.csproj`. It starts that checkout's read-only local map service, using its existing game
+data, and closes the service with the viewer. The area list loads first; generation starts only when requested. Search
+matches every space-separated term against the area name or ID; Enter selects the first match. The list can sort by name or
+natural ID order. The native view displays the generated tiles and walkability at 45 degrees, plus distinct markers for
+area transitions, internal teleports, bosses, NPCs and other known objects. Selecting a marker opens its details; known
+connected areas can be opened and the previous map restored. The walkability, grid, marker and teleport-link layer choices
+are remembered; optional dashed lines show resolved teleport destinations.
+Numbered boss points show their WorldAreas boss names and IDs when available; unnumbered points show candidates.
+The catalog and placement coverage depend on the server's generator; release installs and
+older checkouts without the hook do not offer this tool.
+
 ## Releases and updates
 
 A release is a git tag `v<major>.<minor>.<patch>` pushed to GitHub. The release workflow

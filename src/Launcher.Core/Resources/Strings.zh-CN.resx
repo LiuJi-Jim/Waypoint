@@ -5795,4 +5795,43 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_ffd7f7c8013d" xml:space="preserve">
     <value>领先 LocalExile {0} 个提交</value>
   </data>
+  <data name="Text_8876f4fff1c8" xml:space="preserve"><value>地图查看器</value></data>
+  <data name="Text_024dc204d7ba" xml:space="preserve"><value>区域</value></data>
+  <data name="Text_367ef06b8fbf" xml:space="preserve"><value>种子</value></data>
+  <data name="Text_262be24adfee" xml:space="preserve"><value>区域等级</value></data>
+  <data name="Text_f95b3eb4bed4" xml:space="preserve"><value>生成地图</value></data>
+  <data name="Text_4da22a362d38" xml:space="preserve"><value>图块</value></data>
+  <data name="Text_e21fcb6a2746" xml:space="preserve"><value>物体与出口</value></data>
+  <data name="Text_9f872ed43d00" xml:space="preserve"><value>适应</value></data>
+  <data name="Text_17705384c701" xml:space="preserve"><value>正在启动地图查看器 …</value></data>
+  <data name="Text_a61d83f60984" xml:space="preserve"><value>地图查看器启动失败。</value></data>
+  <data name="Text_76d53e715312" xml:space="preserve"><value>请输入有效的种子和区域等级。</value></data>
+  <data name="Text_ce6e37f200be" xml:space="preserve"><value>正在生成地图 …</value></data>
+  <data name="Text_a0b30cecbd04" xml:space="preserve"><value>打开地图查看器</value></data>
+  <data name="Text_19376ffd346d" xml:space="preserve"><value>查看生成的地图、图块、通行区域和重要位置。</value></data>
+  <data name="Text_1c96653d8b48" xml:space="preserve"><value>通行区域</value></data>
+  <data name="Text_0d7d12ac624c" xml:space="preserve"><value>网格</value></data>
+  <data name="Text_4e8d1a726078" xml:space="preserve"><value>标记</value></data>
+  <data name="Text_6eb2be9cdbcc" xml:space="preserve"><value>入口 {0}</value></data>
+  <data name="Text_8a91c3ae834f" xml:space="preserve"><value>随机种子</value></data>
+  <data name="Text_62a6da8735c1" xml:space="preserve"><value>物体</value></data>
+  <data name="Text_f2d1dab08310" xml:space="preserve"><value>NPC</value></data>
+  <data name="Text_6a6ac8386005" xml:space="preserve"><value>首领</value></data>
+  <data name="Text_81571a390103" xml:space="preserve"><value>出入口</value></data>
+  <data name="Text_7a72f4199ba7" xml:space="preserve"><value>正在加载区域 …</value></data>
+  <data name="Text_9bf1a4ccdf90" xml:space="preserve"><value>请选择区域。</value></data>
+  <data name="Text_045923f3710f" xml:space="preserve"><value>区域排序</value></data>
+  <data name="Text_7f8ae4a819fb" xml:space="preserve"><value>区域内传送</value></data>
+  <data name="Text_1f88699e6094" xml:space="preserve"><value>上一张地图</value></data>
+  <data name="Text_7a2cc9a9efb4" xml:space="preserve"><value>传送连接</value></data>
+  <data name="Text_3864a7129335" xml:space="preserve"><value>打开相邻区域</value></data>
+  <data name="Text_c45aa0aa9d4a" xml:space="preserve"><value>目标：{0}, {1}</value></data>
+  <data name="Text_b29966d03734" xml:space="preserve"><value>仅可到达</value></data>
+  <data name="Text_e855c484ad39" xml:space="preserve"><value>坐标：{0}, {1}</value></data>
+  <data name="Text_2007994f658d" xml:space="preserve"><value>可能的首领：{0}</value></data>
+  <data name="Text_d7cfab3c32d0" xml:space="preserve"><value>传送点</value></data>
+  <data name="Text_615f66d220ae" xml:space="preserve"><value>工艺解锁点</value></data>
+  <data name="Text_72ac0d580f8c" xml:space="preserve"><value>复制 ID</value></data>
+  <data name="Text_338e02304930" xml:space="preserve"><value>种子 {0} 已替换为 {1}。</value></data>
+  <data name="Text_eef9456154d0" xml:space="preserve"><value>无法复制到剪贴板。</value></data>
 </root>
