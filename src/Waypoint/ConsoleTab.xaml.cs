@@ -21,6 +21,7 @@ public partial class ConsoleTab : UserControl
     int _historyIndex;
     /// <summary>The last game:status, whose summary a language change writes again.</summary>
     JsonObject? _status;
+    bool _sending;
     const int OutputMax = 300_000;
 
     public ConsoleTab() => InitializeComponent();
@@ -186,7 +187,19 @@ public partial class ConsoleTab : UserControl
     async Task Send(string text)
     {
         text = text.Trim();
-        if (text.Length == 0) return;
+        if (text.Length == 0 || _sending) return;
+        _sending = true;
+        SendButton.IsEnabled = GameStatusButton.IsEnabled = false;
+        try
+        {
+            if (!Repo.IsInstall && !await FridaSetup.EnsureAsync(_shared, Window.GetWindow(this), L.Text("Console"), Append)) return;
+            await SendPrepared(text);
+        }
+        finally { _sending = false; SendButton.IsEnabled = GameStatusButton.IsEnabled = true; }
+    }
+
+    async Task SendPrepared(string text)
+    {
         _shared.Settings.Remember(text);
         _shared.Settings.Save();
         _historyIndex = _shared.Settings.History.Count;
@@ -227,8 +240,12 @@ public partial class ConsoleTab : UserControl
 
     async void GameStatus(object sender, RoutedEventArgs e)
     {
+        if (_sending) return;
+        _sending = true;
+        SendButton.IsEnabled = GameStatusButton.IsEnabled = false;
         try
         {
+            if (!await FridaSetup.EnsureAsync(_shared, Window.GetWindow(this), L.Text("Game status"), Append)) return;
             var result = await _shared.Bridge.StatusAsync();
             Append($"> game:status\n  {result["result"]?.ToJsonString() ?? result.ToJsonString()}");
             _status = result;
@@ -238,6 +255,7 @@ public partial class ConsoleTab : UserControl
         {
             Problem(ex.Message);
         }
+        finally { _sending = false; SendButton.IsEnabled = GameStatusButton.IsEnabled = true; }
     }
 
     /// <summary>game:status in a few words: not running, its screen, the character in game.</summary>

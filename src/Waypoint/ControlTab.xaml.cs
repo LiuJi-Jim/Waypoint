@@ -144,6 +144,7 @@ public partial class ControlTab : UserControl
             _live = running;
             Toolbar.IsEnabled = !running;
             ShowServices(_shared.Monitor.Latest);
+            if (!running) _ = RefreshSetup();
         });
         // The lamps and buttons take the new theme's colours at once.
         Theme.Changed += () => ShowServices(_shared.Monitor.Latest);
@@ -231,7 +232,7 @@ public partial class ControlTab : UserControl
         _ = RefreshSetup();
     }
 
-    Task<int?> Run(LiveRequest request) => Run(request, _shared.RunLiveAsync);
+    Task<int?> Run(LiveRequest request, bool fridaReady = false) => Run(request, _shared.RunLiveAsync, fridaReady);
 
     /// <summary>A run that starts a Gateway gets a backup of the saves first. Without one it goes on only if the player says
     /// so.</summary>
@@ -261,8 +262,9 @@ public partial class ControlTab : UserControl
     }
 
     /// <summary>The exit code of what ran; null when nothing did.</summary>
-    async Task<int?> Run(LiveRequest request, Func<LiveRequest, Action<string>, Task<int?>> run)
+    async Task<int?> Run(LiveRequest request, Func<LiveRequest, Action<string>, Task<int?>> run, bool fridaReady = false)
     {
+        if (!fridaReady && request.Arguments().Contains("-Walkmaps") && !await PrepareWalkmaps()) return null;
         if (!await PortsFree(request)) return null;
         if (!await BackUp(request)) return null;
         Append($"> {request.Describe()}");
@@ -281,6 +283,8 @@ public partial class ControlTab : UserControl
         return code;
     }
 
+    Task<bool> PrepareWalkmaps() => FridaSetup.EnsureAsync(_shared, Window.GetWindow(this), L.Text("Walk maps"), Append);
+
     async void Play(object sender, RoutedEventArgs e)
     {
         if (Repo.IsInstall) InstallPlayRequested?.Invoke();
@@ -291,6 +295,7 @@ public partial class ControlTab : UserControl
     /// null when none ran.</summary>
     internal async Task<int?> PlayAsync()
     {
+        if (Walkmaps.IsChecked == true && !await PrepareWalkmaps()) return null;
         if (!_lockstepChanged && PlaysOnlyTheGame(_shared.Monitor.Latest, Walkmaps.IsChecked == true, Repo.ClientOnlyTakesWalkmaps()))
         {
             // The servers stay as they are: only the game (again) against them.
@@ -301,10 +306,10 @@ public partial class ControlTab : UserControl
                 // live.ps1 -ClientOnly refuses a second client: this one has to be gone first.
                 if (!CloseClient()) return null;
             }
-            return await Run(ClientRequest());
+            return await Run(ClientRequest(), fridaReady: true);
         }
         if (ClientRunning && !Confirm(L.Text("Restart the game?"), L.Text("The client is running: Play closes it and starts it again."), L.Text("Restart the game"))) return null;
-        return await Run(Request(LiveMode.All));
+        return await Run(Request(LiveMode.All), fridaReady: true);
     }
 
     /// <summary>Play starts only the game when the three servers already listen: a full live.ps1 run would rebuild and

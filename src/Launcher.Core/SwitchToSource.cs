@@ -54,6 +54,19 @@ public static class SwitchToSource
             ? Directory.Exists(Path.Combine(copy, ".venv", "Lib", "site-packages", "frida"))
             : Directory.Exists(Path.Combine(copy, ".venv", "lib")) && Directory.EnumerateDirectories(Path.Combine(copy, ".venv", "lib"), "frida", SearchOption.AllDirectories).Any());
 
+    /// <summary>Probe the Python the checkout actually uses; a package folder alone does not prove its native library loads.</summary>
+    public static async Task<bool> FridaAvailableAsync(string copy)
+    {
+        string python = Platform.VenvPython(Path.GetFullPath(copy));
+        if (!File.Exists(python)) python = Platform.Python;
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        try
+        {
+            return await ToolProcess.RunAsync(python, ["-c", "import frida; assert callable(frida.attach)"], copy, _ => { }, timeout.Token) == 0;
+        }
+        catch (Exception e) when (e is System.ComponentModel.Win32Exception or IOException or OperationCanceledException) { return false; }
+    }
+
     /// <summary>Python with Frida in the checkout's own .venv, where the client control bridge looks. git ignores it.</summary>
     public static async Task InstallFridaAsync(string copy, Action<string> output, CancellationToken stop)
     {
@@ -62,6 +75,8 @@ public static class SwitchToSource
             throw new IOException(L.Text("Python could not make its environment in {0}.", copy));
         if (await ToolProcess.RunAsync(python, ["-m", "pip", "install", "--disable-pip-version-check", "frida"], copy, output, stop) != 0)
             throw new IOException(L.Text("Frida could not be installed. Check your connection and try again."));
+        if (await ToolProcess.RunAsync(python, ["-c", "import frida; assert callable(frida.attach)"], copy, output, stop) != 0)
+            throw new IOException(L.Text("Frida was installed but could not be loaded. Check the installation output and try again."));
     }
 
     /// <summary>The guide's "What will happen", from the choices as they stand.</summary>

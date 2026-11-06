@@ -43,7 +43,7 @@ sealed class ClientBridge : IDisposable
                 Stop();
                 // Frida is optional for playing, so this one is expected and has a way out.
                 if (error.Contains("No module named 'frida'", StringComparison.Ordinal))
-                    throw new FridaMissingException(L.Text("the bridge needs Python with frida, which is not installed: Give item in the item crafter sets it up"));
+                    throw new FridaMissingException(L.Text("This feature needs Frida. Frida is optional for normal play."));
                 throw new InvalidOperationException(L.Text("the bridge stopped: {0}", Tail(error)));
             }
             return JsonNode.Parse(line)?.AsObject() ?? throw new InvalidOperationException(L.Text("not a result: {0}", line));

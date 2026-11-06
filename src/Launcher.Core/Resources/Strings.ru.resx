@@ -144,6 +144,9 @@
   <data name="Text_06748f34221f" xml:space="preserve">
     <value>Сначала выберите аккаунт.</value>
   </data>
+  <data name="Text_069d94390a6c" xml:space="preserve">
+    <value>Проверить Frida</value>
+  </data>
   <data name="Text_070d63bf412e" xml:space="preserve">
     <value>Уже открыта другая сборка Waypoint. Закройте её окно обычным способом, прежде чем открывать эту сборку. Выполняемые операции и службы не были остановлены.</value>
   </data>
@@ -537,6 +540,9 @@
   <data xml:space="preserve" name="Text_17f32fa1f4b5">
     <value>Найдите репозиторий LocalExile</value>
   </data>
+  <data name="Text_180eee2fdf76" xml:space="preserve">
+    <value>Frida установлена (необязательные игровые инструменты)</value>
+  </data>
   <data xml:space="preserve" name="Text_1826368b30f4">
     <value>Вывод выбранного журнала</value>
   </data>
@@ -674,6 +680,9 @@
   </data>
   <data name="Text_1e6e04fa8a3c" xml:space="preserve">
     <value>Файлы не удалось перенести, ничего не изменено: {0}</value>
+  </data>
+  <data name="Text_1ecc776c6f65" xml:space="preserve">
+    <value>Waypoint предложит установить Frida при использовании функции, которой она нужна.</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>Оставить этот клиент как есть</value>
@@ -1135,6 +1144,9 @@
   <data name="Text_3064d79a295c" xml:space="preserve">
     <value>Переименовать</value>
   </data>
+  <data name="Text_30b596760dc1" xml:space="preserve">
+    <value>Frida установлена, но не загружается. Проверьте вывод установки и попробуйте снова.</value>
+  </data>
   <data xml:space="preserve" name="Text_30cc92d87a1e">
     <value>Монохромная</value>
   </data>
@@ -1312,6 +1324,9 @@
   </data>
   <data name="Text_390dc6e41d4f" xml:space="preserve">
     <value>Мастер настройки скачает новейшую версию LocalExile, соберёт её и может перенести ваших персонажей.</value>
+  </data>
+  <data name="Text_396bc690d5bd" xml:space="preserve">
+    <value>Frida готова к работе.</value>
   </data>
   <data xml:space="preserve" name="Text_39921a740bf2">
     <value>Перейти</value>
@@ -1733,6 +1748,9 @@
   </data>
   <data xml:space="preserve" name="Text_4bdd511d381b">
     <value>Инструкция</value>
+  </data>
+  <data name="Text_4beb40ac1b71" xml:space="preserve">
+    <value>Установить Frida?</value>
   </data>
   <data name="Text_4c49a6974e46" xml:space="preserve">
     <value>Перейти на старую версию</value>
@@ -2447,6 +2465,9 @@
   <data name="Text_6aadac2f2b7a" xml:space="preserve">
     <value>Вернуться</value>
   </data>
+  <data name="Text_6ad2de2f965c" xml:space="preserve">
+    <value>Не удалось настроить Frida</value>
+  </data>
   <data xml:space="preserve" name="Text_6ae2ae6a2f07">
     <value>Распаковщик</value>
   </data>
@@ -3074,11 +3095,17 @@
   <data xml:space="preserve" name="Text_898a809683dd">
     <value>Мод перезагружен.</value>
   </data>
+  <data name="Text_8994df2299a4" xml:space="preserve">
+    <value>Frida не обязательна; для её игровых инструментов нужен Python.</value>
+  </data>
   <data xml:space="preserve" name="Text_89d00e7dc413">
     <value>Нужен Content.ggpk отдельного клиента; установка Steam не поддерживается</value>
   </data>
   <data name="Text_89d29dccbe1f" xml:space="preserve">
     <value>Добавляет на боковую панель переключатель «Простой | Расширенный». В установленном выпуске расширенный режим добавляет строку состояния, производительность и время работы сервера; остальным разделам нужен исходный код.</value>
+  </data>
+  <data name="Text_89eeaab14d03" xml:space="preserve">
+    <value>Waypoint предложит установить её при отправке команд из консоли, выдаче предметов, управлении модами в игре или записи карт проходимости.</value>
   </data>
   <data name="Text_8a05d3c65b24" xml:space="preserve">
     <value>Дважды щёлкните команду, чтобы подставить её в строку.</value>
@@ -3424,6 +3451,9 @@
   </data>
   <data name="Text_989176ed75d6" xml:space="preserve">
     <value>Остановить запись</value>
+  </data>
+  <data name="Text_98a95c9d60d7" xml:space="preserve">
+    <value>Для функции «{0}» нужна Frida, чтобы взаимодействовать с запущенной игрой. Для обычной игры Frida не требуется. Установить её в эту папку LocalExile? Глобальные пакеты Python не изменятся.</value>
   </data>
   <data name="Text_990c09b02baf" xml:space="preserve">
     <value>Вышел LocalExile {0}; у вас {1}. Персонажи, ключи и клиент игры сохранятся.</value>
@@ -4269,6 +4299,9 @@
   <data xml:space="preserve" name="Text_bc74ef1e258a">
     <value> — вывод</value>
   </data>
+  <data name="Text_bc7b7aee59a2" xml:space="preserve">
+    <value>Для этой функции нужна Frida. Для обычной игры она не требуется.</value>
+  </data>
   <data name="Text_bca0785c9799" xml:space="preserve">
     <value>Настройки поведения окна сохранены.</value>
   </data>
@@ -4970,6 +5003,9 @@
   <data name="Text_dd0abeaace42" xml:space="preserve">
     <value>Ремесленный префикс</value>
   </data>
+  <data name="Text_dd543c81626e" xml:space="preserve">
+    <value>Frida не обязательна; её функции управления игрой пока не поддерживаются в Linux.</value>
+  </data>
   <data name="Text_ddbbe6445504" xml:space="preserve">
     <value>Перематывает {0} вперёд до версии LocalExile; отказывает, если в ветке есть свои коммиты</value>
   </data>
@@ -5187,6 +5223,9 @@
   <data name="Text_e75ba15efa68" xml:space="preserve">
     <value>Waypoint переносит свои файлы, только когда ничего не запущено. Нажмите «Закончить игру», затем попробуйте снова.</value>
   </data>
+  <data name="Text_e79eb8b4707f" xml:space="preserve">
+    <value>Frida не обязательна и не установлена; обычная игра доступна.</value>
+  </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>Вход и выбор персонажа</value>
   </data>
@@ -5393,6 +5432,9 @@
   </data>
   <data name="Text_ef9e6dd246cc" xml:space="preserve">
     <value>Выдать предмет</value>
+  </data>
+  <data name="Text_efb2c606a917" xml:space="preserve">
+    <value>Frida не обязательна; не удалось проверить её наличие.</value>
   </data>
   <data xml:space="preserve" name="Text_efb840bd2787">
     <value>Собрать моды из исходников</value>
