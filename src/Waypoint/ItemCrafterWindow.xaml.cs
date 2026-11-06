@@ -1095,6 +1095,11 @@ public partial class ItemCrafterWindow : FormWindow
         Status(L.Text("Giving {0} …", ItemName()));
         try
         {
+            if (!await FridaSetup.EnsureAsync(_shared, this, L.Text("Give item"), line => Status(line)))
+            {
+                Status(L.Text("Give item needs Frida."), error: true);
+                return;
+            }
             var (ok, lines) = ClientBridge.Replies(await _shared.Bridge.SendAsync(Command(), wait: 2));
             string reply = lines.Count > 0 ? string.Join(" ", lines) : L.Text("(no reply)");
             if (!ok && reply.Contains("not running", StringComparison.OrdinalIgnoreCase))
@@ -1102,31 +1107,11 @@ public partial class ItemCrafterWindow : FormWindow
             else Status(reply, error: !ok || !reply.StartsWith("Added", StringComparison.Ordinal));
             _shared.Logs.Write($"item crafter: /item_give {_base.Id}: {reply}", ok ? Severity.Info : Severity.Error);
         }
-        catch (FridaMissingException) { await OfferFridaAsync(); }
         catch (Exception ex) when (ex is InvalidOperationException or TimeoutException or IOException or System.Text.Json.JsonException)
         {
             Status(ex.Message, error: true);
         }
         finally { GiveButton.IsEnabled = _base is not null; }
-    }
-
-    /// <summary>The game's chat box is too short for an item, so Give item has no way round the bridge.</summary>
-    async Task OfferFridaAsync()
-    {
-        if (!Dialog.Ask(this, DialogKind.Question, L.Text("Set up Give item?"),
-                L.Text("Give item needs Frida, a tool that talks to the running game. Waypoint can install it into this LocalExile folder. It takes about 180 MB, and some antivirus programs flag it."),
-                L.Text("Install Frida")))
-        {
-            Status(L.Text("Give item needs Frida."), error: true);
-            return;
-        }
-        Status(L.Text("Installing Frida …"));
-        try
-        {
-            await SwitchToSource.InstallFridaAsync(Environment.CurrentDirectory, line => _shared.Logs.Write($"item crafter: {line}"), CancellationToken.None);
-            Status(L.Text("Frida is installed. Press Give item again."));
-        }
-        catch (Exception ex) when (ex is IOException or InvalidOperationException or System.ComponentModel.Win32Exception) { Status(ex.Message, error: true); }
     }
 
     void Status(string text, bool error = false)

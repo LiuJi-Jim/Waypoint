@@ -144,6 +144,9 @@
   <data name="Text_06748f34221f" xml:space="preserve">
     <value>请先选择一个账号。</value>
   </data>
+  <data name="Text_069d94390a6c" xml:space="preserve">
+    <value>检查 Frida</value>
+  </data>
   <data name="Text_070d63bf412e" xml:space="preserve">
     <value>另一个 Waypoint 构建已经打开。请先正常关闭那个窗口，再打开此构建。现有的操作和服务未被停止。</value>
   </data>
@@ -537,6 +540,9 @@
   <data name="Text_17f32fa1f4b5" xml:space="preserve">
     <value>查找你的 LocalExile 源码副本</value>
   </data>
+  <data name="Text_180eee2fdf76" xml:space="preserve">
+    <value>Frida 已安装（可选游戏工具）</value>
+  </data>
   <data name="Text_1826368b30f4" xml:space="preserve">
     <value>所选日志输出</value>
   </data>
@@ -674,6 +680,9 @@
   </data>
   <data name="Text_1e6e04fa8a3c" xml:space="preserve">
     <value>无法移动文件，未做任何更改：{0}</value>
+  </data>
+  <data name="Text_1ecc776c6f65" xml:space="preserve">
+    <value>使用需要 Frida 的功能时，Waypoint 会提示安装。</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>保持此客户端不变</value>
@@ -1135,6 +1144,9 @@
   <data name="Text_3064d79a295c" xml:space="preserve">
     <value>重命名</value>
   </data>
+  <data name="Text_30b596760dc1" xml:space="preserve">
+    <value>Frida 已安装，但无法加载。请检查安装输出并重试。</value>
+  </data>
   <data name="Text_30cc92d87a1e" xml:space="preserve">
     <value>单色</value>
   </data>
@@ -1312,6 +1324,9 @@
   </data>
   <data name="Text_390dc6e41d4f" xml:space="preserve">
     <value>安装向导会下载并构建 LocalExile 的最新版本，还可以迁移你的角色。</value>
+  </data>
+  <data name="Text_396bc690d5bd" xml:space="preserve">
+    <value>Frida 已就绪。</value>
   </data>
   <data name="Text_39921a740bf2" xml:space="preserve">
     <value>切换</value>
@@ -1733,6 +1748,9 @@
   </data>
   <data name="Text_4bdd511d381b" xml:space="preserve">
     <value>查看说明</value>
+  </data>
+  <data name="Text_4beb40ac1b71" xml:space="preserve">
+    <value>安装 Frida？</value>
   </data>
   <data name="Text_4c49a6974e46" xml:space="preserve">
     <value>切换到旧版本</value>
@@ -2447,6 +2465,9 @@
   <data name="Text_6aadac2f2b7a" xml:space="preserve">
     <value>回退</value>
   </data>
+  <data name="Text_6ad2de2f965c" xml:space="preserve">
+    <value>Frida 设置失败</value>
+  </data>
   <data name="Text_6ae2ae6a2f07" xml:space="preserve">
     <value>Bundle 解压器</value>
   </data>
@@ -3074,11 +3095,17 @@
   <data name="Text_898a809683dd" xml:space="preserve">
     <value>模组已重新加载。</value>
   </data>
+  <data name="Text_8994df2299a4" xml:space="preserve">
+    <value>Frida 是可选组件；其游戏工具需要 Python。</value>
+  </data>
   <data name="Text_89d00e7dc413" xml:space="preserve">
     <value>需要独立客户端的 Content.ggpk；不支持 Steam 版目录结构</value>
   </data>
   <data name="Text_89d29dccbe1f" xml:space="preserve">
     <value>在侧边栏添加“简易 | 高级”切换开关。在发行版安装中，高级模式会增加状态条、性能和服务器耗时；其他版块需要源码副本。</value>
+  </data>
+  <data name="Text_89eeaab14d03" xml:space="preserve">
+    <value>使用直接发送控制台命令、发放物品、实时模组控制或行走地图功能时，Waypoint 会提示安装。</value>
   </data>
   <data name="Text_8a05d3c65b24" xml:space="preserve">
     <value>双击命令可将其填入输入行。</value>
@@ -3424,6 +3451,9 @@
   </data>
   <data name="Text_989176ed75d6" xml:space="preserve">
     <value>停止采集</value>
+  </data>
+  <data name="Text_98a95c9d60d7" xml:space="preserve">
+    <value>“{0}”需要 Frida 才能与运行中的游戏交互。正常游戏不需要 Frida。要将其安装到此 LocalExile 文件夹中吗？不会更改全局 Python 软件包。</value>
   </data>
   <data name="Text_990c09b02baf" xml:space="preserve">
     <value>LocalExile {0} 已发布；当前为 {1}。你的角色、密钥和游戏客户端都会保留。</value>
@@ -4269,6 +4299,9 @@
   <data name="Text_bc74ef1e258a" xml:space="preserve">
     <value> 输出</value>
   </data>
+  <data name="Text_bc7b7aee59a2" xml:space="preserve">
+    <value>此功能需要 Frida。正常游戏不需要 Frida。</value>
+  </data>
   <data name="Text_bca0785c9799" xml:space="preserve">
     <value>窗口行为已保存。</value>
   </data>
@@ -4970,6 +5003,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_dd0abeaace42" xml:space="preserve">
     <value>工艺前缀</value>
   </data>
+  <data name="Text_dd543c81626e" xml:space="preserve">
+    <value>Frida 是可选组件；Linux 暂不支持其游戏控制功能。</value>
+  </data>
   <data name="Text_ddbbe6445504" xml:space="preserve">
     <value>将 {0} 快进到 LocalExile 的版本；如果它有自己的提交，则会拒绝</value>
   </data>
@@ -5187,6 +5223,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_e75ba15efa68" xml:space="preserve">
     <value>Waypoint 只会在没有运行任何内容时移动文件。请点击“停止游戏”，然后再试一次。</value>
   </data>
+  <data name="Text_e79eb8b4707f" xml:space="preserve">
+    <value>Frida 是可选组件，尚未安装；仍可正常游戏。</value>
+  </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>登录和角色选择</value>
   </data>
@@ -5393,6 +5432,9 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   </data>
   <data name="Text_ef9e6dd246cc" xml:space="preserve">
     <value>发放物品</value>
+  </data>
+  <data name="Text_efb2c606a917" xml:space="preserve">
+    <value>Frida 是可选组件；无法检查其是否可用。</value>
   </data>
   <data name="Text_efb840bd2787" xml:space="preserve">
     <value>构建源码模组</value>

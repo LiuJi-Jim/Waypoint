@@ -82,17 +82,23 @@ static class SetupChecks
 
     static SetupCheck Frida()
     {
+#if WINDOWS
         try
         {
-            var info = new ProcessStartInfo(Repo.Python, "-c \"import frida\"") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardError = true };
+            var info = new ProcessStartInfo(Repo.Python, "-c \"import frida; assert callable(frida.attach)\"") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardError = true };
             using var p = Process.Start(info)!;
-            if (!p.WaitForExit(10000)) { p.Kill(); return new(null, L.Text("Python/frida check timed out")); }
-            return p.ExitCode == 0 ? new(true, L.Text("Python with frida (walk maps, console)"))
-                : new(null, L.Text("frida missing: no walk maps, no console"), "python -m venv .venv; .venv\\Scripts\\python.exe -m pip install frida");
+            if (!p.WaitForExit(10000)) { p.Kill(); return new(null, L.Text("Frida is optional; its availability could not be checked.")); }
+            return p.ExitCode == 0 ? new(true, L.Text("Frida installed (optional game tools)"))
+                : new(null, L.Text("Frida is optional and not installed; normal play is available."),
+                    L.Text("Waypoint offers to install it when you use direct console commands, Give item, live mod controls or walk maps."));
         }
         catch (System.ComponentModel.Win32Exception)
         {
-            return new(null, L.Text("Python not found: no walk maps, no console"), L.Text("install Python 3.9+ from python.org (GettingStarted step 9)"));
+            return new(null, L.Text("Frida is optional; Python is needed for its game tools."),
+                L.Text("Waypoint offers to install Frida when you use a feature that needs it."));
         }
+#else
+        return new(true, L.Text("Frida is optional; its game-control features are not supported on Linux yet."));
+#endif
     }
 }

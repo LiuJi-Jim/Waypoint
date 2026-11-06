@@ -109,6 +109,13 @@ sealed class Workspace(Shared shared)
         string stage = name, logPath = "";
         bool ran = await shared.RunExclusiveAsync(name, async () =>
         {
+#if WINDOWS
+            bool needsFrida = !Repo.IsInstall && (action is "QueryMods" or "ReloadMod" or "ReloadData"
+                || (action is "EnableMod" or "DisableMod") && Latest?.Services.Any(s => s.Name == "Gateway" && s.IsRunning) == true
+                || (action is "BuildMod" or "BuildMods") && Latest is { GameRunning: true }
+                    && Latest.Services.Any(s => s.Name == "Gateway" && s.Status == "Ready"));
+            if (needsFrida && !await FridaSetup.PrepareAsync(shared, System.Windows.Application.Current.MainWindow, name, Write)) return;
+#endif
             LastFailure = null;
             Write($"> {name}");
             Stage?.Invoke(name, "");
@@ -127,9 +134,9 @@ sealed class Workspace(Shared shared)
             }
             if (result.Snapshot is not null) Latest = result.Snapshot;
         });
-        if (!ran) return null;
+        if (!ran || result is null) return null;
         Stage?.Invoke("", "");
-        if (result!.Ok) Write(result.Message);
+        if (result.Ok) Write(result.Message);
         else
         {
             LastFailure = result.Message;

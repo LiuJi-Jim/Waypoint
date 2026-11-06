@@ -144,6 +144,9 @@
   <data name="Text_06748f34221f" xml:space="preserve">
     <value>Select an account first.</value>
   </data>
+  <data name="Text_069d94390a6c" xml:space="preserve">
+    <value>Check Frida</value>
+  </data>
   <data name="Text_070d63bf412e" xml:space="preserve">
     <value>Another Waypoint build is already open. Close that window normally before opening this build. Existing operations and services have not been stopped.</value>
   </data>
@@ -537,6 +540,9 @@
   <data xml:space="preserve" name="Text_17f32fa1f4b5">
     <value>Find your LocalExile checkout</value>
   </data>
+  <data name="Text_180eee2fdf76" xml:space="preserve">
+    <value>Frida installed (optional game tools)</value>
+  </data>
   <data xml:space="preserve" name="Text_1826368b30f4">
     <value>Selected log output</value>
   </data>
@@ -674,6 +680,9 @@
   </data>
   <data name="Text_1e6e04fa8a3c" xml:space="preserve">
     <value>The files could not be moved, and nothing was changed: {0}</value>
+  </data>
+  <data name="Text_1ecc776c6f65" xml:space="preserve">
+    <value>Waypoint offers to install Frida when you use a feature that needs it.</value>
   </data>
   <data name="Text_1edce696fe4f" xml:space="preserve">
     <value>Leave this client as it is</value>
@@ -1135,6 +1144,9 @@ Change location above to choose somewhere else.</value>
   <data name="Text_3064d79a295c" xml:space="preserve">
     <value>Rename</value>
   </data>
+  <data name="Text_30b596760dc1" xml:space="preserve">
+    <value>Frida was installed but could not be loaded. Check the installation output and try again.</value>
+  </data>
   <data xml:space="preserve" name="Text_30cc92d87a1e">
     <value>Monochrome</value>
   </data>
@@ -1312,6 +1324,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data name="Text_390dc6e41d4f" xml:space="preserve">
     <value>The setup guide downloads LocalExile's newest version and builds it, and can bring your characters.</value>
+  </data>
+  <data name="Text_396bc690d5bd" xml:space="preserve">
+    <value>Frida is ready.</value>
   </data>
   <data xml:space="preserve" name="Text_39921a740bf2">
     <value>Switch</value>
@@ -1733,6 +1748,9 @@ This checkout has modified tracked files.</value>
   </data>
   <data xml:space="preserve" name="Text_4bdd511d381b">
     <value>View instructions</value>
+  </data>
+  <data name="Text_4beb40ac1b71" xml:space="preserve">
+    <value>Install Frida?</value>
   </data>
   <data name="Text_4c49a6974e46" xml:space="preserve">
     <value>Go to the older version</value>
@@ -2447,6 +2465,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data name="Text_6aadac2f2b7a" xml:space="preserve">
     <value>Go back</value>
   </data>
+  <data name="Text_6ad2de2f965c" xml:space="preserve">
+    <value>Frida setup failed</value>
+  </data>
   <data xml:space="preserve" name="Text_6ae2ae6a2f07">
     <value>Bundle decompressor</value>
   </data>
@@ -3074,11 +3095,17 @@ Switching to it builds and runs that code on this computer with your rights, liv
   <data xml:space="preserve" name="Text_898a809683dd">
     <value>ReloadMod completed.</value>
   </data>
+  <data name="Text_8994df2299a4" xml:space="preserve">
+    <value>Frida is optional; Python is needed for its game tools.</value>
+  </data>
   <data xml:space="preserve" name="Text_89d00e7dc413">
     <value>Standalone Content.ggpk is required; Steam layout is unsupported</value>
   </data>
   <data name="Text_89d29dccbe1f" xml:space="preserve">
     <value>Adds a Simple | Advanced switch to the sidebar. On a release install, Advanced adds the status strip, performance and server timings; the other sections need a source checkout.</value>
+  </data>
+  <data name="Text_89eeaab14d03" xml:space="preserve">
+    <value>Waypoint offers to install it when you use direct console commands, Give item, live mod controls or walk maps.</value>
   </data>
   <data name="Text_8a05d3c65b24" xml:space="preserve">
     <value>Double-click a command to put it in the line.</value>
@@ -3424,6 +3451,9 @@ Switching to it builds and runs that code on this computer with your rights, liv
   </data>
   <data name="Text_989176ed75d6" xml:space="preserve">
     <value>Stop capture</value>
+  </data>
+  <data name="Text_98a95c9d60d7" xml:space="preserve">
+    <value>{0} needs Frida to talk to the running game. Frida is optional for normal play. Install it in this LocalExile folder? No global Python packages will be changed.</value>
   </data>
   <data name="Text_990c09b02baf" xml:space="preserve">
     <value>LocalExile {0} is out; you have {1}. Your characters, keys and game client are kept.</value>
@@ -4269,6 +4299,9 @@ Owned servers will stop. Automatic backup is {2}. Source, client and login keys 
   <data xml:space="preserve" name="Text_bc74ef1e258a">
     <value> output</value>
   </data>
+  <data name="Text_bc7b7aee59a2" xml:space="preserve">
+    <value>This feature needs Frida. Frida is optional for normal play.</value>
+  </data>
   <data name="Text_bca0785c9799" xml:space="preserve">
     <value>Window behavior saved.</value>
   </data>
@@ -4970,6 +5003,9 @@ Dependencies: {2}
   <data name="Text_dd0abeaace42" xml:space="preserve">
     <value>Crafted prefix</value>
   </data>
+  <data name="Text_dd543c81626e" xml:space="preserve">
+    <value>Frida is optional; its game-control features are not supported on Linux yet.</value>
+  </data>
   <data name="Text_ddbbe6445504" xml:space="preserve">
     <value>Fast-forwards {0} to LocalExile's; refused when it has commits of its own</value>
   </data>
@@ -5187,6 +5223,9 @@ Dependencies: {2}
   <data name="Text_e75ba15efa68" xml:space="preserve">
     <value>Waypoint moves its files only while nothing runs. Press Stop playing, then try again.</value>
   </data>
+  <data name="Text_e79eb8b4707f" xml:space="preserve">
+    <value>Frida is optional and not installed; normal play is available.</value>
+  </data>
   <data name="Text_e7b8cd4e8858" xml:space="preserve">
     <value>Login and character selection</value>
   </data>
@@ -5393,6 +5432,9 @@ Dependencies: {2}
   </data>
   <data name="Text_ef9e6dd246cc" xml:space="preserve">
     <value>Give item</value>
+  </data>
+  <data name="Text_efb2c606a917" xml:space="preserve">
+    <value>Frida is optional; its availability could not be checked.</value>
   </data>
   <data xml:space="preserve" name="Text_efb840bd2787">
     <value>Build source mods</value>

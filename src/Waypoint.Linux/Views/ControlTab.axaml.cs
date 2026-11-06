@@ -153,6 +153,7 @@ partial class ControlTab : UserControl
             _live = running;
             Toolbar.IsEnabled = !running;
             ShowServices(_shared.Monitor.Latest);
+            if (!running) _ = RefreshSetup();
         });
         L.Current.PropertyChanged += (_, e) =>
         {
