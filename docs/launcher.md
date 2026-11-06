@@ -535,6 +535,12 @@ missing from the client copy and keeps what exists (keys, `Game.patched.exe`), a
 instructions first. The **Python** requirement runs the Python the extraction would use (the checkout's `.venv`, else the one on
 PATH) and wants a 3.9 or newer, so the Microsoft Store's python shortcut does not count.
 
+Frida is optional for ordinary play. On Windows, direct console commands and game status, Give item, walk maps, live mod
+controls and game-data reload offer **Install Frida** when their Python cannot load it. Declining leaves the requested action
+unstarted; Console keeps the unsent text. Installation uses the checkout's `.venv`, shows output in the requesting tool and
+Logs, and verifies that Frida loads before continuing. It shares the checkout lock with other operations and changes no global
+Python packages. Linux explains that its game-control integrations are unavailable and does not offer installation for them.
+
 ### Mods
 
 The list comes from the mods' manifests under `Mods/Binaries` and `Mods/Source`. A choice made with the Gateway stopped
@@ -622,8 +628,8 @@ write and gives it to the character in game.
   items. `ItemImport.cs`, `ItemImportWindow`.
 - **Give item** sends `/item_give <the item as JSON>` through the client control bridge, as the Console does, so the
   character must be in game; the item goes into the main inventory and the Gateway's reply shows in the status line.
-  Without Frida it offers to install it into the checkout's `.venv`. The copy button puts that command on the clipboard, but
-  the game's chat box stops at 175 characters and a rare's command is about 530, so it says so when the command is too long: the
+  When Frida is missing, it offers to install it into the checkout's `.venv` before sending. The copy button puts that command
+  on the clipboard, but the game's chat box stops at 175 characters and a rare's command is about 530, so it says so when the command is too long: the
   bridge sends the same message without that limit.
 - **Reset** starts over as the window opens: an empty item, every search and filter cleared, the Base page. It asks
   first when the item on screen has changes no save holds; saved items stay.

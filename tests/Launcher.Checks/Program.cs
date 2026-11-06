@@ -74,6 +74,8 @@ Directory.CreateDirectory(fixture);
 File.WriteAllText(Path.Combine(fixture, ".waypoint-test-fixture"), "disposable checks only");
 try
 {
+    await FridaChecks.RunAsync(fixture, Check);
+    if (args is ["--frida-checks"]) return 0;
     if (OperatingSystem.IsWindows()) await InstanceChecks.RunAsync(Check);
     ModChecks.Run(fixture, Check);
     LocalizationChecks.Run(Check);
