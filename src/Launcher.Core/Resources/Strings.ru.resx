@@ -5877,4 +5877,68 @@
   <data name="Text_338e02304930" xml:space="preserve"><value>Сид {0} заменён на {1}.</value></data>
   <data name="Text_eef9456154d0" xml:space="preserve"><value>Не удалось скопировать в буфер обмена.</value></data>
   <data name="Text_08834c1903a5" xml:space="preserve"><value>Уровень области может влиять на создание карты. Оставьте поле пустым для уровня по умолчанию.</value></data>
+  <data name="Text_1c2f5126ca58" xml:space="preserve">
+    <value>Для просмотра карт нужна исходная копия LocalExile с генератором локаций и извлечёнными игровыми данными.</value>
+  </data>
+  <data name="Text_934125e5bec1" xml:space="preserve">
+    <value>Не удалось подготовить просмотр карт.
+{0}</value>
+  </data>
+  <data name="Text_ea2772aa96dc" xml:space="preserve"><value>Уровень области: {0}</value></data>
+  <data name="Text_a540e34f130b" xml:space="preserve"><value>Область: {0} ({1})</value></data>
+  <data name="Text_0ee67faf52dd" xml:space="preserve"><value>Показаны только точки из комнат; реальные появления могут отличаться. Случайно размещённые монстры не показаны.</value></data>
+  <data name="Text_9fd8a334357b" xml:space="preserve"><value>Базовый размер группы: {0}–{1}</value></data>
+  <data name="Text_f4ba436410ce" xml:space="preserve"><value>Скверна</value></data>
+  <data name="Text_a637dd7dba81" xml:space="preserve"><value>Разлом</value></data>
+  <data name="Text_4854bd9995ea" xml:space="preserve"><value>Ревизия рабочей копии: {0}</value></data>
+  <data name="Text_2eb5f87b62ec" xml:space="preserve"><value>Выберите метку ({0})</value></data>
+  <data name="Text_79c2f38c55c2" xml:space="preserve"><value>Копировать сведения о карте</value></data>
+  <data name="Text_f4ed6bccdcb2" xml:space="preserve"><value>Делириум</value></data>
+  <data name="Text_34e108c0896d" xml:space="preserve"><value>Отображение</value></data>
+  <data name="Text_71fd53f4a18f" xml:space="preserve"><value>Событие</value></data>
+  <data name="Text_0e70993a9229" xml:space="preserve"><value>Точка события не гарантирует его появления.</value></data>
+  <data name="Text_536325061125" xml:space="preserve"><value>События</value></data>
+  <data name="Text_5b5f557d2188" xml:space="preserve"><value>Точек событий: {0}</value></data>
+  <data name="Text_e252d0b058d9" xml:space="preserve"><value>Сущность</value></data>
+  <data name="Text_6e3fcc16c2bb" xml:space="preserve"><value>Экспедиция</value></data>
+  <data name="Text_20e2cdc29506" xml:space="preserve"><value>Полный каталог плиток</value></data>
+  <data name="Text_e0bfbac4f14b" xml:space="preserve"><value>Предвестник</value></data>
+  <data name="Text_a4ebb3c81b2c" xml:space="preserve"><value>Показывать служебные объекты окружения, мелких животных и неиспользуемые выходы.</value></data>
+  <data name="Text_8a31165e1fc4" xml:space="preserve"><value>Включать в список неиспользуемые и пустые плитки.</value></data>
+  <data name="Text_b3919f6581ff" xml:space="preserve"><value>Служебные метки</value></data>
+  <data name="Text_2ae8aced0bae" xml:space="preserve"><value>Ориентиры</value></data>
+  <data name="Text_88aa5090fa37" xml:space="preserve"><value>Планировка: {0} × {1} плиток</value></data>
+  <data name="Text_8b99483221c4" xml:space="preserve"><value>Легион</value></data>
+  <data name="Text_ec42c86a9adb" xml:space="preserve"><value>Точка магической группы</value></data>
+  <data name="Text_a6d635a3b2fa" xml:space="preserve"><value>Сведения о карте скопированы.</value></data>
+  <data name="Text_eef2ab9b4334" xml:space="preserve"><value>Группа монстров</value></data>
+  <data name="Text_f90e7ce6613d" xml:space="preserve"><value>Данные групп монстров недоступны или неполны: {0}</value></data>
+  <data name="Text_ea044783b897" xml:space="preserve"><value>Группа монстров: {0}</value></data>
+  <data name="Text_2743551363a4" xml:space="preserve"><value>Группы монстров</value></data>
+  <data name="Text_6cc4fac6c312" xml:space="preserve"><value>Точек групп монстров: {0}</value></data>
+  <data name="Text_e6b997d9bc50" xml:space="preserve"><value>Для этой точки нет подходящих данных группы.</value></data>
+  <data name="Text_dc937b598926" xml:space="preserve"><value>Нет</value></data>
+  <data name="Text_45eb89ba5c93" xml:space="preserve"><value>Точка обычной группы</value></data>
+  <data name="Text_0e1336597d20" xml:space="preserve"><value>Объект события из планировки, а не текущее состояние сервера.</value></data>
+  <data name="Text_3cdb8050a820" xml:space="preserve"><value>Возможные монстры: {0}</value></data>
+  <data name="Text_722ddecd794e" xml:space="preserve"><value>Возможные лидеры группы: {0}</value></data>
+  <data name="Text_b86414f34662" xml:space="preserve"><value>Точка редкой группы</value></data>
+  <data name="Text_ef2063b60cb3" xml:space="preserve"><value>Запрошенный сид: {0}</value></data>
+  <data name="Text_da79ad6da3cf" xml:space="preserve"><value>Изгнанник-разбойник</value></data>
+  <data name="Text_e2db0b44df99" xml:space="preserve"><value>Точка из данных комнаты; реальные монстры и их позиции могут отличаться.</value></data>
+  <data name="Text_fb05bf5a9f8f" xml:space="preserve"><value>Сид: {0}</value></data>
+  <data name="Text_4ffa280fce8b" xml:space="preserve"><value>Показывать объекты событий и явно заданные точки в созданной планировке.</value></data>
+  <data name="Text_7f6f5ad78d7c" xml:space="preserve"><value>Показывать точки групп из данных комнат, а не позиции отдельных или случайно размещённых монстров.</value></data>
+  <data name="Text_f28b9ca197d4" xml:space="preserve"><value>Святилище</value></data>
+  <data name="Text_3c30154b1459" xml:space="preserve"><value>Ларец</value></data>
+  <data name="Text_8329588880a4" xml:space="preserve"><value>Истязаемый дух</value></data>
+  <data name="Text_ad050d3449ef" xml:space="preserve"><value>Отслеживаемые файлы изменены</value></data>
+  <data name="Text_bf0983d8b412" xml:space="preserve"><value>Отслеживаемые файлы не изменены</value></data>
+  <data name="Text_b764cdc0eab7" xml:space="preserve"><value>Неизвестно</value></data>
+  <data name="Text_e8545ec7e575" xml:space="preserve"><value>Точка неопределённой группы</value></data>
+  <data name="Text_66f77bd49259" xml:space="preserve"><value>Неиспользуемый выход</value></data>
+  <data name="Text_971bc2700a18" xml:space="preserve"><value>Предупреждения: {0}</value></data>
+  <data name="Text_8eebbaa1dbe0" xml:space="preserve"><value>Рабочие файлы: {0}</value></data>
+  <data name="Text_72f399f8decf" xml:space="preserve"><value>{0} (только прибытие)</value></data>
+  <data name="Text_0df1356837a1" xml:space="preserve"><value>{0} (отключено)</value></data>
 </root>

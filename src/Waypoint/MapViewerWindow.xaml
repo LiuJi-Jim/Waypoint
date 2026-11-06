@@ -19,13 +19,24 @@
             <DockPanel Margin="0,0,0,10">
                 <Button DockPanel.Dock="Right" Content="{l:Loc 'Fit'}" Margin="0" VerticalAlignment="Center" Click="FitClicked" PreviewMouseLeftButtonDown="FitMouseDown" PreviewKeyDown="FitKeyDown"/>
                 <Button x:Name="BackMap" DockPanel.Dock="Right" Style="{StaticResource Shell.IconButton}" VerticalAlignment="Center" Margin="0,0,4,0" IsEnabled="False" Click="BackMapClicked" ToolTip="{l:Loc 'Previous map'}"><md:PackIcon Kind="ArrowLeft" Width="18" Height="18"/></Button>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,0,10,0" VerticalAlignment="Center">
-                    <CheckBox x:Name="WalkLayer" Content="{l:Loc 'Walkability'}" IsChecked="True" Margin="0,0,10,0" VerticalAlignment="Center" Checked="LayersChanged" Unchecked="LayersChanged"/>
-                    <CheckBox x:Name="GridLayer" Content="{l:Loc 'Grid'}" IsChecked="True" Margin="0,0,10,0" VerticalAlignment="Center" Checked="LayersChanged" Unchecked="LayersChanged"/>
-                    <CheckBox x:Name="ObjectLayer" Content="{l:Loc 'Markers'}" IsChecked="True" Margin="0,0,10,0" VerticalAlignment="Center" Checked="LayersChanged" Unchecked="LayersChanged"/>
-                    <CheckBox x:Name="LinksLayer" Content="{l:Loc 'Teleport links'}" IsChecked="False" Margin="0,0,10,0" VerticalAlignment="Center" Checked="LayersChanged" Unchecked="LayersChanged"/>
-                </StackPanel>
-                <TextBlock x:Name="TitleText" FontSize="17" FontWeight="SemiBold"/>
+                <Button x:Name="CopyMapDetails" DockPanel.Dock="Right" IsEnabled="False" Style="{StaticResource Shell.IconButton}" VerticalAlignment="Center" Margin="0,0,8,0" Click="CopyMapDetailsClicked" ToolTip="{l:Loc 'Copy map details'}"><md:PackIcon Kind="ContentCopy" Width="17" Height="17"/></Button>
+                <Button x:Name="DisplayOptions" DockPanel.Dock="Right" Margin="0,0,8,0" VerticalAlignment="Center" Click="DisplayOptionsClicked" Content="{l:Loc 'Display'}">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="WalkLayer" Header="{l:Loc 'Walkability'}" IsCheckable="True" IsChecked="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <MenuItem x:Name="GridLayer" Header="{l:Loc 'Grid'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <MenuItem x:Name="ObjectLayer" Header="{l:Loc 'Landmarks'}" IsCheckable="True" IsChecked="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <MenuItem x:Name="LinksLayer" Header="{l:Loc 'Teleport links'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <Separator/>
+                            <MenuItem x:Name="MonsterLayer" Header="{l:Loc 'Monster packs'}" ToolTip="{l:Loc 'Show room-authored pack anchors, not individual or scattered monster positions.'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <MenuItem x:Name="EncounterLayer" Header="{l:Loc 'Encounters'}" ToolTip="{l:Loc 'Show encounter objects and explicit anchors in the generated layout.'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <Separator/>
+                            <MenuItem x:Name="InternalLayer" Header="{l:Loc 'Internal markers'}" ToolTip="{l:Loc 'Include environment helpers, critters and unused exits.'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                            <MenuItem x:Name="AllTiles" Header="{l:Loc 'Full tile catalog'}" ToolTip="{l:Loc 'Include unused and blank tiles in the list.'}" IsCheckable="True" StaysOpenOnClick="True" Checked="LayersChanged" Unchecked="LayersChanged"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <TextBlock x:Name="TitleText" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
             </DockPanel>
             <l:MapCanvas Grid.Row="1" x:Name="Map" ClipToBounds="True"/>
             <Border Grid.Row="1" x:Name="MarkerPanel" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="12" Padding="12" CornerRadius="4" Background="{DynamicResource Shell.Panel}" BorderBrush="{DynamicResource Shell.Border}" BorderThickness="1">
@@ -50,8 +61,10 @@
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0"><Border Width="18" Height="18" CornerRadius="9" BorderThickness="1" BorderBrush="{DynamicResource Shell.Good}"><md:PackIcon Kind="Account" Width="14" Height="14" Foreground="{DynamicResource Shell.Good}"/></Border><TextBlock Text="{l:Loc 'NPC'}" Margin="4,0,0,0"/></StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0"><md:PackIcon Kind="Skull" Width="16" Height="16" Foreground="{DynamicResource Shell.Error}"/><TextBlock Text="{l:Loc 'Boss'}" Margin="4,0,0,0"/></StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0"><md:PackIcon Kind="DoorOpen" Width="16" Height="16" Foreground="{DynamicResource Shell.Warning}"/><TextBlock Text="{l:Loc 'Entrance and exit'}" Margin="4,0,0,0"/></StackPanel>
-                <StackPanel Orientation="Horizontal"><md:PackIcon Kind="SwapHorizontal" Width="16" Height="16" Foreground="{DynamicResource Shell.Warning}"/><TextBlock Text="{l:Loc 'Area teleport'}" Margin="4,0,0,0"/></StackPanel>
-            </WrapPanel><TextBlock x:Name="SeedNotice" Visibility="Collapsed" Foreground="{DynamicResource Shell.Warning}" Margin="0,5,0,0" TextWrapping="Wrap"/><TextBlock x:Name="Status" Margin="0,5,0,0" TextWrapping="Wrap"/></StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,15,0"><md:PackIcon Kind="SwapHorizontal" Width="16" Height="16" Foreground="{DynamicResource Shell.Warning}"/><TextBlock Text="{l:Loc 'Area teleport'}" Margin="4,0,0,0"/></StackPanel>
+                <StackPanel x:Name="MonsterLegend" Visibility="Collapsed" Orientation="Horizontal" Margin="0,0,15,0"><md:PackIcon Kind="AccountGroup" Width="16" Height="16" Foreground="{DynamicResource Shell.Accent}"/><TextBlock Text="{l:Loc 'Monster pack'}" Margin="4,0,0,0"/></StackPanel>
+                <StackPanel x:Name="EncounterLegend" Visibility="Collapsed" Orientation="Horizontal"><md:PackIcon Kind="DiamondOutline" Width="16" Height="16" Foreground="{DynamicResource Shell.Good}"/><TextBlock Text="{l:Loc 'Encounter'}" Margin="4,0,0,0"/></StackPanel>
+            </WrapPanel><TextBlock x:Name="ContentNotice" Visibility="Collapsed" Margin="0,5,0,0" TextWrapping="Wrap" Foreground="{DynamicResource Shell.TextSecondary}"/><TextBlock x:Name="SeedNotice" Visibility="Collapsed" Foreground="{DynamicResource Shell.Warning}" Margin="0,5,0,0" TextWrapping="Wrap"/><TextBlock x:Name="Status" Margin="0,5,0,0" TextWrapping="Wrap"/></StackPanel>
         </Grid>
     </Grid>
 </l:FormWindow>

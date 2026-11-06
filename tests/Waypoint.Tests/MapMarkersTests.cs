@@ -18,14 +18,15 @@ public class MapMarkersTests
     }
 
     [Fact]
-    public void HitTestingUsesVisibleMarkersAndPicksTopmostWhenTheyOverlap()
+    public void HitTestingReturnsEveryOverlappingMarkerWithoutHidingNearbyNpcs()
     {
         var data = new Waypoint.MapData("Area", "test", 1, 1, 1, 1, [0], [], [],
             [new Waypoint.MapExit(23, 46, "Teleport", 1, null, null)], [],
-            [new Waypoint.MapObject(23, 46, "Metadata/NPC/Test"), new Waypoint.MapObject(69, 92, "Metadata/NPC/Other")],
+            [new Waypoint.MapObject(23, 46, "Metadata/NPC/Test"), new Waypoint.MapObject(69, 92, "Metadata/NPC/Other"), new Waypoint.MapObject(23, 46, "Metadata/MiscellaneousObjects/AreaTransition")],
             [new Waypoint.MapPoint(23, 46, "mapboss1")], []);
         var markers = Waypoint.MapMarkers.Create(data);
-        Assert.DoesNotContain(markers, m => m.Key == new Waypoint.MapMarkerKey("object", 0));
+        Assert.DoesNotContain(markers, m => m.Key == new Waypoint.MapMarkerKey("object", 2));
+        Assert.Equal(new[] { new Waypoint.MapMarkerKey("exit", 0), new Waypoint.MapMarkerKey("point", 0), new Waypoint.MapMarkerKey("object", 0) }, Waypoint.MapMarkers.FindAll(markers, 1, 2, .5).Select(m => m.Key));
         Assert.Equal(new Waypoint.MapMarkerKey("exit", 0), Waypoint.MapMarkers.Find(markers, 1, 2, .5)?.Key);
         Assert.Equal(new Waypoint.MapMarkerKey("object", 1), Waypoint.MapMarkers.Find(markers, 3, 4, .5)?.Key);
         Assert.Null(Waypoint.MapMarkers.Find(markers, 20, 20, .5));

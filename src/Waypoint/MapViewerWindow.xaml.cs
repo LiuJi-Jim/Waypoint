@@ -21,8 +21,9 @@ public partial class MapViewerWindow : FormWindow
     readonly HttpClient _http = new() { Timeout = TimeSpan.FromMinutes(2) };
     readonly CancellationTokenSource _stop = new();
     readonly DispatcherTimer _seedNoticeTimer = new() { Interval = TimeSpan.FromSeconds(5) };
-    readonly string _serviceOutput = Path.Combine("scripts", "dev", "map-viewer", "bin", "waypoint-" + Environment.ProcessId);
+    MapViewerHelper? _helper;
     Process? _process;
+    ContextMenu? _markerChoices;
     string _baseUrl = "";
     MapData? _data;
     List<MapArea> _areas = [];
@@ -46,6 +47,10 @@ public partial class MapViewerWindow : FormWindow
         GridLayer.IsChecked = layers.Grid;
         ObjectLayer.IsChecked = layers.Markers;
         LinksLayer.IsChecked = layers.TeleportLinks;
+        MonsterLayer.IsChecked = layers.MonsterPacks;
+        EncounterLayer.IsChecked = layers.Encounters;
+        InternalLayer.IsChecked = layers.InternalMarkers;
+        AllTiles.IsChecked = layers.AllTiles;
         _layersReady = true;
         ApplyLayers();
         Areas.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(AreaSearchChanged));
@@ -53,8 +58,9 @@ public partial class MapViewerWindow : FormWindow
         Map.Inspected += value => Status.Text = value;
         Map.TileSelected += SelectTile;
         Map.MarkerSelected += SelectMarker;
+        Map.MarkerChoicesRequested += ShowMarkerChoices;
         Loaded += async (_, _) => await LoadAreasAsync();
-        Closed += (_, _) => { _seedNoticeTimer.Stop(); _stop.Cancel(); var process = _process; _process = null; try { if (process is { HasExited: false }) { process.Kill(true); process.WaitForExit(2000); } } catch (InvalidOperationException) { } process?.Dispose(); _http.Dispose(); };
+        Closed += (_, _) => { if (_markerChoices is not null) _markerChoices.IsOpen = false; _seedNoticeTimer.Stop(); _stop.Cancel(); StopHelper(); _http.Dispose(); };
     }
 
     void SetBusy(bool busy, string message = "")
@@ -64,6 +70,10 @@ public partial class MapViewerWindow : FormWindow
         Areas.IsEnabled = !busy;
         AreaSort.IsEnabled = !busy;
         SeedInputs.IsEnabled = !busy;
+        Map.IsEnabled = !busy;
+        DisplayOptions.IsEnabled = !busy;
+        CopyMapDetails.IsEnabled = !busy && _data is not null;
+        if (busy && _markerChoices is not null) _markerChoices.IsOpen = false;
         BackMap.IsEnabled = !busy && _history.Count > 0;
         OpenDestination.IsEnabled = !busy && _destinationId is not null && _areas.Any(a => a.Id.Equals(_destinationId, StringComparison.OrdinalIgnoreCase));
     }
@@ -155,26 +165,33 @@ public partial class MapViewerWindow : FormWindow
 
     void RandomSeed(object sender, RoutedEventArgs e) => Seed.Text = RandomNumberGenerator.GetInt32(1, int.MaxValue).ToString();
 
+    void StopHelper()
+    {
+        var process = _process;
+        _process = null;
+        try
+        {
+            if (process is { HasExited: false }) { process.Kill(true); process.WaitForExit(2000); }
+        }
+        catch (Exception e) when (e is InvalidOperationException or System.ComponentModel.Win32Exception) { }
+        finally { process?.Dispose(); _helper?.Dispose(); _helper = null; }
+    }
+
     async Task StartAsync()
     {
         try
         {
             bool ran = await _shared.RunExclusiveAsync(L.Text("Map viewer"), async () =>
             {
-                var build = new ProcessStartInfo("dotnet") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-                foreach (var arg in new[] { "build", "scripts/dev/map-viewer/MapViewer.csproj", "-o", _serviceOutput, "-v", "quiet" }) build.ArgumentList.Add(arg);
-                using var p = Process.Start(build) ?? throw new InvalidOperationException("dotnet build");
-                var output = p.StandardOutput.ReadToEndAsync(); var errors = p.StandardError.ReadToEndAsync();
-                try { await p.WaitForExitAsync(_stop.Token); }
-                catch (OperationCanceledException) { if (!p.HasExited) p.Kill(true); await p.WaitForExitAsync(); throw; }
-                if (p.ExitCode != 0) throw new InvalidOperationException((await output) + (await errors));
+                StopHelper();
+                _helper = await MapViewerHelper.BuildAsync(Environment.CurrentDirectory, SettingsStore.DataDirectory, _stop.Token);
             });
             if (!ran) throw new InvalidOperationException(L.Text("Something else is using LocalExile. Try again when it is done."));
             _stop.Token.ThrowIfCancellationRequested();
             var listener = new TcpListener(IPAddress.Loopback, 0); listener.Start(); int port = ((IPEndPoint)listener.LocalEndpoint).Port; listener.Stop();
             _baseUrl = $"http://127.0.0.1:{port}";
             var start = new ProcessStartInfo("dotnet") { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Environment.CurrentDirectory };
-            start.ArgumentList.Add(Path.Combine(_serviceOutput, "MapViewer.dll")); start.Environment["MAP_VIEWER_PORT"] = port.ToString();
+            start.ArgumentList.Add(_helper!.AssemblyPath); start.Environment["MAP_VIEWER_PORT"] = port.ToString();
             _process = Process.Start(start) ?? throw new InvalidOperationException("map viewer process");
             bool ready = false;
             for (int i = 0; i < 100 && !ready; i++)
@@ -186,7 +203,7 @@ public partial class MapViewerWindow : FormWindow
             }
             if (!ready) throw new InvalidOperationException(L.Text("Map viewer failed to start."));
         }
-        catch { if (_process is { HasExited: false }) _process.Kill(true); _process?.Dispose(); _process = null; throw; }
+        catch { StopHelper(); throw; }
     }
 
     async void GenerateClicked(object sender, RoutedEventArgs e) => await GenerateAsync();
@@ -213,10 +230,11 @@ public partial class MapViewerWindow : FormWindow
             string body = await response.Content.ReadAsStringAsync(_stop.Token);
             if (!response.IsSuccessStatusCode) { using var error = JsonDocument.Parse(body); throw new InvalidOperationException(error.RootElement.GetProperty("error").GetString()); }
             _data = JsonSerializer.Deserialize<MapData>(body, _json) ?? throw new InvalidDataException();
+            _data = _data with { CheckoutHead = _helper?.CheckoutHead };
             uint actualSeed = _data.Seed ?? seed;
             Seed.Text = actualSeed.ToString();
             Map.SetMap(_data); TitleText.Text = $"{_data.Area} · {_data.Id} · {actualSeed}";
-            _currentRequest = request with { Seed = Seed.Text };
+            _currentRequest = request with { Seed = Seed.Text, Level = _data.Level?.ToString() ?? request.Level };
             if (!preserveHistory) _history.Clear();
             HideMarker();
             _seedNoticeTimer.Stop();
@@ -226,7 +244,7 @@ public partial class MapViewerWindow : FormWindow
                 SeedNotice.Text = L.Text("Seed {0} was replaced with {1}.", seed, actualSeed);
                 _seedNoticeTimer.Start();
             }
-            Status.Text = string.Join("; ", _data.Warnings); UpdateList();
+            Status.Text = string.Join("; ", _data.Warnings); UpdateContentNotice(); UpdateList();
             return true;
         }
         catch (OperationCanceledException) { }
@@ -240,9 +258,11 @@ public partial class MapViewerWindow : FormWindow
     {
         if (_data is null || Filter is null || Tabs is null || Entries is null) return;
         IEnumerable<MapListItem> entries = Tabs.SelectedIndex == 0
-            ? _data.Catalog.Select(t => new MapListItem($"{Path.GetFileName(t.Path)}  ({t.Count})", t.Path, null, null))
-            : MapMarkers.Create(_data).Select(m => new MapListItem(m.Key.Kind == "object" ? Path.GetFileName(m.Label) : m.Label, null, m.X, m.Y, m.Key));
+            ? _data.Catalog.Where(t => AllTiles.IsChecked || (t.Count > 0 && !MapContent.IsBlankTile(t.Path))).Select(t => new MapListItem($"{Path.GetFileName(t.Path)}  ({t.Count})", t.Path, null, null))
+            : Map.VisibleMarkers.Select(m => new MapListItem(MapMarkers.Caption(m), null, m.X, m.Y, m.Key));
         Entries.ItemsSource = entries.Where(x => x.Label.Contains(Filter.Text, StringComparison.OrdinalIgnoreCase) || (x.Path?.Contains(Filter.Text, StringComparison.OrdinalIgnoreCase) ?? false)).ToList();
+        if (Tabs.SelectedIndex == 1 && Map.SelectedMarker is { } key)
+            Entries.SelectedItem = Entries.Items.OfType<MapListItem>().FirstOrDefault(i => i.Marker == key);
     }
     void EntrySelected(object sender, SelectionChangedEventArgs e)
     {
@@ -253,6 +273,25 @@ public partial class MapViewerWindow : FormWindow
         if (!_selectingFromCanvas && item.X is int x && item.Y is int y) Map.CenterOn(x, y);
         Map.InvalidateVisual(); Status.Text = item.Path ?? $"{item.Label} ({item.X}, {item.Y})";
     }
+    void ShowMarkerChoices(IReadOnlyList<MapMarker> markers, Point at)
+    {
+        if (_markerChoices is not null) _markerChoices.IsOpen = false;
+        var menu = new ContextMenu { PlacementTarget = Map, Placement = PlacementMode.RelativePoint,
+            HorizontalOffset = at.X, VerticalOffset = at.Y, MaxHeight = 360 };
+        menu.Items.Add(new MenuItem { Header = L.Text("Choose a marker ({0})", markers.Count), IsEnabled = false });
+        foreach (var marker in markers)
+        {
+            var item = new MenuItem {
+                Header = new TextBlock { Text = MapMarkers.Caption(marker), MaxWidth = 330, TextWrapping = TextWrapping.Wrap },
+                ToolTip = $"{marker.Label} ({marker.X}, {marker.Y})"
+            };
+            item.Click += (_, _) => Map.SelectMarker(marker);
+            menu.Items.Add(item);
+        }
+        _markerChoices = menu;
+        menu.IsOpen = true;
+    }
+
     void SelectMarker(MapMarkerKey key)
     {
         ShowMarker(key);
@@ -295,19 +334,55 @@ public partial class MapViewerWindow : FormWindow
         if (_fitWithMouse) Keyboard.ClearFocus();
         _fitWithMouse = false;
     }
+    MapLayerSettings LayerChoices => new(WalkLayer.IsChecked, GridLayer.IsChecked, ObjectLayer.IsChecked, LinksLayer.IsChecked,
+        MonsterLayer.IsChecked, EncounterLayer.IsChecked, InternalLayer.IsChecked, AllTiles.IsChecked);
+
     void LayersChanged(object sender, RoutedEventArgs e)
     {
         if (!_layersReady) return;
         ApplyLayers();
-        _shared.Settings.MapLayers = new(WalkLayer.IsChecked == true, GridLayer.IsChecked == true,
-            ObjectLayer.IsChecked == true, LinksLayer.IsChecked == true);
+        _shared.Settings.MapLayers = LayerChoices;
         _shared.Settings.Save();
     }
 
     void ApplyLayers()
     {
-        Map.ShowWalk = WalkLayer.IsChecked == true; Map.ShowGrid = GridLayer.IsChecked == true;
-        Map.ShowMarkers = ObjectLayer.IsChecked == true; Map.ShowLinks = LinksLayer.IsChecked == true; Map.InvalidateVisual();
+        if (_markerChoices is not null) _markerChoices.IsOpen = false;
+        Map.SetLayers(LayerChoices);
+        if (Map.SelectedMarker is null) HideMarker();
+        else ShowMarker(Map.SelectedMarker.Value);
+        MonsterLegend.Visibility = MonsterLayer.IsChecked ? Visibility.Visible : Visibility.Collapsed;
+        EncounterLegend.Visibility = EncounterLayer.IsChecked ? Visibility.Visible : Visibility.Collapsed;
+        UpdateContentNotice(); UpdateList();
+    }
+
+    void UpdateContentNotice()
+    {
+        var messages = new List<string>();
+        if (_data is not null && (MonsterLayer.IsChecked || EncounterLayer.IsChecked))
+        {
+            if (MonsterLayer.IsChecked) messages.Add(L.Text("Monster pack anchors: {0}", _data.PackAnchors?.Count ?? 0));
+            if (EncounterLayer.IsChecked) messages.Add(L.Text("Encounter anchors: {0}", _data.Encounters?.Count ?? 0));
+            messages.Add(L.Text("Authored anchors only; actual spawns may differ. Scattered monsters are not shown."));
+            if (MonsterLayer.IsChecked && _data.PackWarnings is { Count: > 0 })
+                messages.Add(L.Text("Monster pack data unavailable or incomplete: {0}", string.Join("; ", _data.PackWarnings)));
+        }
+        ContentNotice.Text = string.Join(" · ", messages);
+        ContentNotice.Visibility = messages.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    void DisplayOptionsClicked(object sender, RoutedEventArgs e)
+    {
+        DisplayOptions.ContextMenu.PlacementTarget = DisplayOptions;
+        DisplayOptions.ContextMenu.Placement = PlacementMode.Bottom;
+        DisplayOptions.ContextMenu.IsOpen = true;
+    }
+
+    void CopyMapDetailsClicked(object sender, RoutedEventArgs e)
+    {
+        if (_data is null) return;
+        try { Clipboard.SetText(MapDetails.Format(_data)); Status.Text = L.Text("Map details copied."); }
+        catch (ExternalException) { Status.Text = L.Text("Could not copy to clipboard."); }
     }
 
     void HideMarker() { MarkerPanel.Visibility = Visibility.Collapsed; _destinationId = null; }
@@ -322,7 +397,7 @@ public partial class MapViewerWindow : FormWindow
     void ShowMarker(MapMarkerKey key)
     {
         if (_data is null) return;
-        var marker = MapMarkers.Create(_data).FirstOrDefault(m => m.Key == key);
+        var marker = Map.VisibleMarkers.FirstOrDefault(m => m.Key == key);
         if (marker is null) return;
         var details = new List<string>();
         _markerId = null;
@@ -344,6 +419,21 @@ public partial class MapViewerWindow : FormWindow
                 if (point.Display != point.Name) details.Add(point.Name);
                 if (point.Bosses is not null) details.AddRange(point.Bosses.Where(b => !string.IsNullOrWhiteSpace(b.Id)).Select(b => b.Id));
                 if (!string.IsNullOrWhiteSpace(point.Room)) details.Add(point.Room);
+                break;
+            case "pack":
+                var anchor = _data.PackAnchors![key.Index];
+                heading = MapPacks.Label(_data, anchor);
+                details.AddRange(MapPacks.Describe(_data, anchor, InternalLayer.IsChecked));
+                if (anchor.PackIds.Count == 1) _markerId = anchor.PackIds[0];
+                break;
+            case "encounter":
+                var encounter = _data.Encounters![key.Index];
+                heading = MapEncounters.Label(encounter.Kind);
+                details.Add(encounter.IsObject ? L.Text("Placed encounter object; this is not live server state.")
+                    : L.Text("Encounter anchor; this does not guarantee an encounter will spawn."));
+                if (encounter.IsObject) { _markerId = encounter.Name; details.Add(encounter.Name); }
+                else if (InternalLayer.IsChecked) details.Add(encounter.Name);
+                if (InternalLayer.IsChecked && !string.IsNullOrWhiteSpace(encounter.Room)) details.Add(encounter.Room);
                 break;
             case "exit":
                 var exit = _data.Exits[key.Index];
@@ -448,7 +538,9 @@ record MapPoint(int X, int Y, string Name, string? Room = null, IReadOnlyList<Ma
 }
 record MapData(string Area, string Id, int Width, int Height, int WalkWidth, int WalkHeight, byte[] Walk,
     List<MapTile> Tiles, List<MapCatalog> Catalog, List<MapExit> Exits, List<MapEntrance> Entrances, List<MapObject> Objects,
-    List<MapPoint> Points, List<string> Warnings, uint? Seed = null);
+    List<MapPoint> Points, List<string> Warnings, uint? Seed = null, uint? RequestedSeed = null, int? Level = null,
+    LocalRepositoryHead? CheckoutHead = null, List<MapPackAnchor>? PackAnchors = null, List<MapSpawnPack>? MonsterPacks = null,
+    List<MapEncounterAnchor>? Encounters = null, List<string>? PackWarnings = null);
 
 static class MapNavigation
 {

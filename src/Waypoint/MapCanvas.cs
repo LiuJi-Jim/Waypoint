@@ -17,10 +17,9 @@ public sealed class MapCanvas : FrameworkElement
     bool _moved;
     internal string? Highlight { get; set; }
     internal MapMarkerKey? SelectedMarker { get; set; }
-    internal bool ShowWalk { get; set; } = true;
-    internal bool ShowGrid { get; set; } = true;
-    internal bool ShowMarkers { get; set; } = true;
-    internal bool ShowLinks { get; set; }
+    MapLayerSettings _layers = new();
+    internal IReadOnlyList<MapMarker> VisibleMarkers => _markers;
+    internal event Action<IReadOnlyList<MapMarker>, Point>? MarkerChoicesRequested;
     internal event Action<string>? Inspected;
     internal event Action<string?>? TileSelected;
     internal event Action<MapMarkerKey>? MarkerSelected;
@@ -30,7 +29,7 @@ public sealed class MapCanvas : FrameworkElement
     internal void SetMap(MapData map)
     {
         _map = map; Highlight = null; SelectedMarker = null;
-        _markers = MapMarkers.Create(map);
+        RefreshMarkers();
         var pixels = new byte[map.Walk.Length * 4];
         var open = ((SolidColorBrush)Theme.Brush("Shell.Good")).Color;
         var blocked = ((SolidColorBrush)Theme.Brush("Shell.Panel")).Color;
@@ -41,6 +40,27 @@ public sealed class MapCanvas : FrameworkElement
         }
         _walk = BitmapSource.Create(map.WalkWidth, map.WalkHeight, 96, 96, PixelFormats.Bgra32, null, pixels, map.WalkWidth * 4);
         _walk.Freeze(); Fit();
+    }
+
+    internal void SetLayers(MapLayerSettings layers)
+    {
+        _layers = layers;
+        RefreshMarkers();
+        InvalidateVisual();
+    }
+
+    void RefreshMarkers()
+    {
+        _markers = _map is null ? [] : MapMarkers.Create(_map, _layers.InternalMarkers, _layers.MonsterPacks, _layers.Encounters, _layers.Markers);
+        if (SelectedMarker is { } key && !_markers.Any(m => m.Key == key)) SelectedMarker = null;
+    }
+
+    internal void SelectMarker(MapMarker marker)
+    {
+        Highlight = null; SelectedMarker = marker.Key;
+        MarkerSelected?.Invoke(marker.Key);
+        Inspected?.Invoke($"{marker.Label} ({marker.X}, {marker.Y})");
+        InvalidateVisual();
     }
 
     internal void Fit()
@@ -72,10 +92,10 @@ public sealed class MapCanvas : FrameworkElement
         if (_map is null || _walk is null) return;
         dc.PushTransform(new MatrixTransform(Projection()));
         RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.NearestNeighbor);
-        if (ShowWalk) dc.DrawImage(_walk, new Rect(0, 0, _map.Width, _map.Height));
+        if (_layers.Walkability) dc.DrawImage(_walk, new Rect(0, 0, _map.Width, _map.Height));
         else dc.DrawRectangle(Theme.Brush("Shell.Panel"), null, new Rect(0, 0, _map.Width, _map.Height));
         var grid = new Pen(Theme.Brush("Shell.Border"), 0.5 / _scale);
-        if (ShowGrid) {
+        if (_layers.Grid) {
             for (int x = 0; x <= _map.Width; x++) dc.DrawLine(grid, new Point(x, 0), new Point(x, _map.Height));
             for (int y = 0; y <= _map.Height; y++) dc.DrawLine(grid, new Point(0, y), new Point(_map.Width, y));
         }
@@ -83,7 +103,7 @@ public sealed class MapCanvas : FrameworkElement
             foreach (var tile in _map.Tiles.Where(t => t.Path == Highlight)) dc.DrawRectangle(Theme.Brush("Shell.Accent"), null, new Rect(tile.X, tile.Y, 1, 1));
         dc.Pop();
         var projection = Projection();
-        if (ShowLinks)
+        if (_layers.TeleportLinks)
         {
             var linkPen = new Pen(Theme.Brush("Shell.TextSecondary"), 1.5) { DashStyle = DashStyles.Dash };
             foreach (var link in MapNavigation.TeleportLinks(_map))
@@ -107,7 +127,7 @@ public sealed class MapCanvas : FrameworkElement
             dc.DrawGeometry(Theme.Brush(marker.Brush), null, geometry);
             dc.Pop(); dc.Pop();
         }
-        if (ShowMarkers) {
+        {
             foreach (var marker in _markers.Where(m => m.Key != SelectedMarker)) Mark(marker);
             if (SelectedMarker is { } selected && _markers.FirstOrDefault(m => m.Key == selected) is { } active) Mark(active);
         }
@@ -134,17 +154,12 @@ public sealed class MapCanvas : FrameworkElement
         ReleaseMouseCapture(); _drag = null; Cursor = Cursors.Arrow;
         if (_moved || _map is null) return;
         var inverse = Projection(); inverse.Invert(); var p = inverse.Transform(e.GetPosition(this));
-        if (ShowMarkers)
-        {
-            if (MapMarkers.Find(_markers.OrderBy(m => m.Key == SelectedMarker).ToArray(), p.X, p.Y, Math.Max(.4, 10 / _scale)) is { } marker)
-            {
-                Highlight = null; SelectedMarker = marker.Key;
-                MarkerSelected?.Invoke(marker.Key); Inspected?.Invoke($"{marker.Label} ({marker.X}, {marker.Y})"); InvalidateVisual(); return;
-            }
-        }
+        var choices = MapMarkers.FindAll(_markers.OrderBy(m => m.Key == SelectedMarker).ToArray(), p.X, p.Y, 12 / _scale);
+        if (choices.Count > 1) { MarkerChoicesRequested?.Invoke(choices, e.GetPosition(this)); return; }
+        if (choices.Count == 1) { SelectMarker(choices[0]); return; }
         SelectedMarker = null;
         var tile = _map.Tiles.FirstOrDefault(t => t.X == (int)Math.Floor(p.X) && t.Y == (int)Math.Floor(p.Y));
-        if (tile is null || Path.GetFileName(tile.Path).ToLowerInvariant() is "blank.tdt" or "forced_blank.tdt" or "black.tdt")
+        if (tile is null || MapContent.IsBlankTile(tile.Path))
         { Highlight = null; TileSelected?.Invoke(null); Inspected?.Invoke(""); InvalidateVisual(); return; }
         Highlight = tile.Path; TileSelected?.Invoke(tile.Path); Inspected?.Invoke($"{tile.Path} ({tile.X}, {tile.Y}) · {tile.Orientation} · {tile.Height}"); InvalidateVisual();
     }
@@ -152,40 +167,3 @@ public sealed class MapCanvas : FrameworkElement
 
 readonly record struct MapMarkerKey(string Kind, int Index);
 sealed record MapMarker(MapMarkerKey Key, int X, int Y, string Label, PackIconKind Icon, string Brush, bool Framed = false);
-
-static class MapMarkers
-{
-    public static MapMarker? Find(IReadOnlyList<MapMarker> markers, double x, double y, double radius) =>
-        markers.Reverse().Select(o => (Marker: o, Distance: Math.Sqrt(Math.Pow(o.X / 23.0 - x, 2) + Math.Pow(o.Y / 23.0 - y, 2))))
-            .Where(o => o.Distance <= radius).OrderBy(o => o.Distance).Select(o => o.Marker).FirstOrDefault();
-
-    public static List<MapMarker> Create(MapData map)
-    {
-        var markers = new List<MapMarker>();
-        for (int i = 0; i < map.Objects.Count; i++)
-        {
-            var o = map.Objects[i];
-            bool waypoint = o.Type.Equals("Metadata/MiscellaneousObjects/Waypoint", StringComparison.OrdinalIgnoreCase);
-            bool crafting = o.Type.Equals("Metadata/MiscellaneousObjects/CraftRecipeUnlockMarker", StringComparison.OrdinalIgnoreCase);
-            if (!waypoint && !crafting && map.Exits.Any(e => Math.Abs(e.X - o.X) <= 4 && Math.Abs(e.Y - o.Y) <= 4)) continue;
-            bool npc = o.Type.StartsWith("Metadata/NPC/", StringComparison.OrdinalIgnoreCase);
-            markers.Add(new(new("object", i), o.X, o.Y, o.Type, waypoint ? PackIconKind.MapMarker : crafting ? PackIconKind.BookOpenPageVariant : npc ? PackIconKind.Account : PackIconKind.CubeOutline, npc ? "Shell.Good" : waypoint ? "Shell.Warning" : "Shell.Accent", npc || waypoint || crafting));
-        }
-        for (int i = 0; i < map.Points.Count; i++)
-        {
-            var p = map.Points[i];
-            markers.Add(new(new("point", i), p.X, p.Y, p.Display, PackIconKind.Skull, "Shell.Error"));
-        }
-        for (int i = 0; i < map.Entrances.Count; i++)
-        {
-            var p = map.Entrances[i];
-            markers.Add(new(new("entrance", i), p.X, p.Y, L.Text("Entrance {0}", p.Number), PackIconKind.DoorOpen, "Shell.Warning"));
-        }
-        for (int i = 0; i < map.Exits.Count; i++)
-        {
-            var p = map.Exits[i];
-            markers.Add(new(new("exit", i), p.X, p.Y, $"{p.Kind} {p.Number} {p.Destination ?? p.Label}", p.Kind == "Teleport" ? PackIconKind.SwapHorizontal : PackIconKind.DoorOpen, "Shell.Warning"));
-        }
-        return markers;
-    }
-}

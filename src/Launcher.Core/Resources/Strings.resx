@@ -5877,4 +5877,68 @@ This replaces the saved choices only. Mod DLLs and saves are not restored. The c
   <data name="Text_338e02304930" xml:space="preserve"><value>Seed {0} was replaced with {1}.</value></data>
   <data name="Text_eef9456154d0" xml:space="preserve"><value>Could not copy to clipboard.</value></data>
   <data name="Text_08834c1903a5" xml:space="preserve"><value>Area level can affect map generation. Leave blank to use the default level.</value></data>
+  <data name="Text_1c2f5126ca58" xml:space="preserve">
+    <value>The map viewer needs a source checkout with the terrain generator and extracted game data.</value>
+  </data>
+  <data name="Text_934125e5bec1" xml:space="preserve">
+    <value>Could not prepare the map viewer.
+{0}</value>
+  </data>
+  <data name="Text_ea2772aa96dc" xml:space="preserve"><value>Area level: {0}</value></data>
+  <data name="Text_a540e34f130b" xml:space="preserve"><value>Area: {0} ({1})</value></data>
+  <data name="Text_0ee67faf52dd" xml:space="preserve"><value>Authored anchors only; actual spawns may differ. Scattered monsters are not shown.</value></data>
+  <data name="Text_9fd8a334357b" xml:space="preserve"><value>Base pack size: {0}–{1}</value></data>
+  <data name="Text_f4ba436410ce" xml:space="preserve"><value>Blight</value></data>
+  <data name="Text_a637dd7dba81" xml:space="preserve"><value>Breach</value></data>
+  <data name="Text_4854bd9995ea" xml:space="preserve"><value>Checkout revision: {0}</value></data>
+  <data name="Text_2eb5f87b62ec" xml:space="preserve"><value>Choose a marker ({0})</value></data>
+  <data name="Text_79c2f38c55c2" xml:space="preserve"><value>Copy map details</value></data>
+  <data name="Text_f4ed6bccdcb2" xml:space="preserve"><value>Delirium</value></data>
+  <data name="Text_34e108c0896d" xml:space="preserve"><value>Display</value></data>
+  <data name="Text_71fd53f4a18f" xml:space="preserve"><value>Encounter</value></data>
+  <data name="Text_0e70993a9229" xml:space="preserve"><value>Encounter anchor; this does not guarantee an encounter will spawn.</value></data>
+  <data name="Text_536325061125" xml:space="preserve"><value>Encounters</value></data>
+  <data name="Text_5b5f557d2188" xml:space="preserve"><value>Encounter anchors: {0}</value></data>
+  <data name="Text_e252d0b058d9" xml:space="preserve"><value>Essence</value></data>
+  <data name="Text_6e3fcc16c2bb" xml:space="preserve"><value>Expedition</value></data>
+  <data name="Text_20e2cdc29506" xml:space="preserve"><value>Full tile catalog</value></data>
+  <data name="Text_e0bfbac4f14b" xml:space="preserve"><value>Harbinger</value></data>
+  <data name="Text_a4ebb3c81b2c" xml:space="preserve"><value>Include environment helpers, critters and unused exits.</value></data>
+  <data name="Text_8a31165e1fc4" xml:space="preserve"><value>Include unused and blank tiles in the list.</value></data>
+  <data name="Text_b3919f6581ff" xml:space="preserve"><value>Internal markers</value></data>
+  <data name="Text_2ae8aced0bae" xml:space="preserve"><value>Landmarks</value></data>
+  <data name="Text_88aa5090fa37" xml:space="preserve"><value>Layout: {0} × {1} tiles</value></data>
+  <data name="Text_8b99483221c4" xml:space="preserve"><value>Legion</value></data>
+  <data name="Text_ec42c86a9adb" xml:space="preserve"><value>Magic pack anchor</value></data>
+  <data name="Text_a6d635a3b2fa" xml:space="preserve"><value>Map details copied.</value></data>
+  <data name="Text_eef2ab9b4334" xml:space="preserve"><value>Monster pack</value></data>
+  <data name="Text_f90e7ce6613d" xml:space="preserve"><value>Monster pack data unavailable or incomplete: {0}</value></data>
+  <data name="Text_ea044783b897" xml:space="preserve"><value>Monster pack: {0}</value></data>
+  <data name="Text_2743551363a4" xml:space="preserve"><value>Monster packs</value></data>
+  <data name="Text_6cc4fac6c312" xml:space="preserve"><value>Monster pack anchors: {0}</value></data>
+  <data name="Text_e6b997d9bc50" xml:space="preserve"><value>No matching pack data is available for this anchor.</value></data>
+  <data name="Text_dc937b598926" xml:space="preserve"><value>None</value></data>
+  <data name="Text_45eb89ba5c93" xml:space="preserve"><value>Normal pack anchor</value></data>
+  <data name="Text_0e1336597d20" xml:space="preserve"><value>Placed encounter object; this is not live server state.</value></data>
+  <data name="Text_3cdb8050a820" xml:space="preserve"><value>Possible monsters: {0}</value></data>
+  <data name="Text_722ddecd794e" xml:space="preserve"><value>Possible pack leaders: {0}</value></data>
+  <data name="Text_b86414f34662" xml:space="preserve"><value>Rare pack anchor</value></data>
+  <data name="Text_ef2063b60cb3" xml:space="preserve"><value>Requested seed: {0}</value></data>
+  <data name="Text_da79ad6da3cf" xml:space="preserve"><value>Rogue exile</value></data>
+  <data name="Text_e2db0b44df99" xml:space="preserve"><value>Room-authored anchor; actual monsters and positions may differ.</value></data>
+  <data name="Text_fb05bf5a9f8f" xml:space="preserve"><value>Seed: {0}</value></data>
+  <data name="Text_4ffa280fce8b" xml:space="preserve"><value>Show encounter objects and explicit anchors in the generated layout.</value></data>
+  <data name="Text_7f6f5ad78d7c" xml:space="preserve"><value>Show room-authored pack anchors, not individual or scattered monster positions.</value></data>
+  <data name="Text_f28b9ca197d4" xml:space="preserve"><value>Shrine</value></data>
+  <data name="Text_3c30154b1459" xml:space="preserve"><value>Strongbox</value></data>
+  <data name="Text_8329588880a4" xml:space="preserve"><value>Tormented spirit</value></data>
+  <data name="Text_ad050d3449ef" xml:space="preserve"><value>Tracked files modified</value></data>
+  <data name="Text_bf0983d8b412" xml:space="preserve"><value>Tracked files unchanged</value></data>
+  <data name="Text_b764cdc0eab7" xml:space="preserve"><value>Unknown</value></data>
+  <data name="Text_e8545ec7e575" xml:space="preserve"><value>Unresolved pack anchor</value></data>
+  <data name="Text_66f77bd49259" xml:space="preserve"><value>Unused exit</value></data>
+  <data name="Text_971bc2700a18" xml:space="preserve"><value>Warnings: {0}</value></data>
+  <data name="Text_8eebbaa1dbe0" xml:space="preserve"><value>Working files: {0}</value></data>
+  <data name="Text_72f399f8decf" xml:space="preserve"><value>{0} (arrival only)</value></data>
+  <data name="Text_0df1356837a1" xml:space="preserve"><value>{0} (disabled)</value></data>
 </root>

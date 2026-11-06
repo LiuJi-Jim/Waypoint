@@ -3,7 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Waypoint;
 
-sealed record MapLayerSettings(bool Walkability = true, bool Grid = true, bool Markers = true, bool TeleportLinks = false);
+sealed record MapLayerSettings(bool Walkability = true, bool Grid = false, bool Markers = true, bool TeleportLinks = false,
+    bool MonsterPacks = false, bool Encounters = false, bool InternalMarkers = false, bool AllTiles = false);
 
 /// <summary>Waypoint's own choices, per Windows user (%LOCALAPPDATA%\Waypoint\settings.json): never in the repository, and
 /// never game data or credentials. The first start takes over what LocalExile Launcher and earlier Waypoint builds kept.</summary>

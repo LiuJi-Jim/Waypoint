@@ -18,7 +18,9 @@ public partial class ToolsTab : UserControl
     internal void Attach(Shared shared)
     {
         _shared = shared;
-        MapButton.IsEnabled = !Repo.IsInstall && File.Exists(Path.Combine("scripts", "dev", "map-viewer", "MapViewer.csproj"));
+        MapButton.IsEnabled = !Repo.IsInstall && MapViewerHelper.IsAvailable(Environment.CurrentDirectory);
+        MapButton.ToolTip = MapButton.IsEnabled ? null : L.Text("The map viewer needs a source checkout with the terrain generator and extracted game data.");
+        ToolTipService.SetShowOnDisabled(MapButton, true);
         // Asking a Gateway for a mode it lacks starts it serving, so a release's is not asked.
         if (!Repo.IsInstall) return;
         CrafterButton.IsEnabled = false;
