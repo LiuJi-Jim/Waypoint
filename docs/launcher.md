@@ -31,6 +31,9 @@ are remembered; optional dashed lines show resolved teleport destinations.
 Numbered boss points show their WorldAreas boss names and IDs when available; unnumbered points show candidates.
 The catalog and placement coverage depend on the server's generator; release installs and
 older checkouts without the hook do not offer this tool.
+When generation substitutes a seed, the viewer briefly displays the original and actual seed without interrupting the map.
+The random seed button uses the server's normal instance seed range; manually entered seeds may use the full unsigned
+32-bit range. Area level can affect generation and defaults to the area's data when left blank.
 
 ## Releases and updates
 

@@ -5834,4 +5834,5 @@
   <data name="Text_72ac0d580f8c" xml:space="preserve"><value>Копировать ID</value></data>
   <data name="Text_338e02304930" xml:space="preserve"><value>Сид {0} заменён на {1}.</value></data>
   <data name="Text_eef9456154d0" xml:space="preserve"><value>Не удалось скопировать в буфер обмена.</value></data>
+  <data name="Text_08834c1903a5" xml:space="preserve"><value>Уровень области может влиять на создание карты. Оставьте поле пустым для уровня по умолчанию.</value></data>
 </root>

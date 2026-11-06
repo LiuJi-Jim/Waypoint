@@ -5834,4 +5834,5 @@ Gateway 最近报告的事件。打开 Gateway 输出查看详情。</value>
   <data name="Text_72ac0d580f8c" xml:space="preserve"><value>复制 ID</value></data>
   <data name="Text_338e02304930" xml:space="preserve"><value>种子 {0} 已替换为 {1}。</value></data>
   <data name="Text_eef9456154d0" xml:space="preserve"><value>无法复制到剪贴板。</value></data>
+  <data name="Text_08834c1903a5" xml:space="preserve"><value>区域等级可能影响地图生成。留空则使用默认等级。</value></data>
 </root>

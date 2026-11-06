@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using System.Collections;
 using System.Runtime.InteropServices;
 
@@ -19,6 +20,7 @@ public partial class MapViewerWindow : FormWindow
     readonly Shared _shared;
     readonly HttpClient _http = new() { Timeout = TimeSpan.FromMinutes(2) };
     readonly CancellationTokenSource _stop = new();
+    readonly DispatcherTimer _seedNoticeTimer = new() { Interval = TimeSpan.FromSeconds(5) };
     readonly string _serviceOutput = Path.Combine("scripts", "dev", "map-viewer", "bin", "waypoint-" + Environment.ProcessId);
     Process? _process;
     string _baseUrl = "";
@@ -38,6 +40,7 @@ public partial class MapViewerWindow : FormWindow
     internal MapViewerWindow(Shared shared)
     {
         InitializeComponent(); Standalone = true; _shared = shared;
+        _seedNoticeTimer.Tick += (_, _) => { _seedNoticeTimer.Stop(); SeedNotice.Visibility = Visibility.Collapsed; };
         var layers = _shared.Settings.MapLayers ?? new MapLayerSettings();
         WalkLayer.IsChecked = layers.Walkability;
         GridLayer.IsChecked = layers.Grid;
@@ -51,7 +54,7 @@ public partial class MapViewerWindow : FormWindow
         Map.TileSelected += SelectTile;
         Map.MarkerSelected += SelectMarker;
         Loaded += async (_, _) => await LoadAreasAsync();
-        Closed += (_, _) => { _stop.Cancel(); var process = _process; _process = null; try { if (process is { HasExited: false }) { process.Kill(true); process.WaitForExit(2000); } } catch (InvalidOperationException) { } process?.Dispose(); _http.Dispose(); };
+        Closed += (_, _) => { _seedNoticeTimer.Stop(); _stop.Cancel(); var process = _process; _process = null; try { if (process is { HasExited: false }) { process.Kill(true); process.WaitForExit(2000); } } catch (InvalidOperationException) { } process?.Dispose(); _http.Dispose(); };
     }
 
     void SetBusy(bool busy, string message = "")
@@ -147,7 +150,7 @@ public partial class MapViewerWindow : FormWindow
         _areaView.CustomSort = new MapAreaComparer(AreaSort.SelectedIndex == 1);
     }
 
-    void RandomSeed(object sender, RoutedEventArgs e) => Seed.Text = BitConverter.ToUInt32(RandomNumberGenerator.GetBytes(4)).ToString();
+    void RandomSeed(object sender, RoutedEventArgs e) => Seed.Text = RandomNumberGenerator.GetInt32(1, int.MaxValue).ToString();
 
     async Task StartAsync()
     {
@@ -213,7 +216,14 @@ public partial class MapViewerWindow : FormWindow
             _currentRequest = request with { Seed = Seed.Text };
             if (!preserveHistory) _history.Clear();
             HideMarker();
-            Status.Text = string.Join("; ", (actualSeed != seed ? new[] { L.Text("Seed {0} was replaced with {1}.", seed, actualSeed) } : []).Concat(_data.Warnings)); UpdateList();
+            _seedNoticeTimer.Stop();
+            SeedNotice.Visibility = actualSeed != seed ? Visibility.Visible : Visibility.Collapsed;
+            if (actualSeed != seed)
+            {
+                SeedNotice.Text = L.Text("Seed {0} was replaced with {1}.", seed, actualSeed);
+                _seedNoticeTimer.Start();
+            }
+            Status.Text = string.Join("; ", _data.Warnings); UpdateList();
             return true;
         }
         catch (OperationCanceledException) { }

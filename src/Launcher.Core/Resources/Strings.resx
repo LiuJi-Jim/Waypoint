@@ -5834,4 +5834,5 @@ This replaces the saved choices only. Mod DLLs and saves are not restored. The c
   <data name="Text_72ac0d580f8c" xml:space="preserve"><value>Copy ID</value></data>
   <data name="Text_338e02304930" xml:space="preserve"><value>Seed {0} was replaced with {1}.</value></data>
   <data name="Text_eef9456154d0" xml:space="preserve"><value>Could not copy to clipboard.</value></data>
+  <data name="Text_08834c1903a5" xml:space="preserve"><value>Area level can affect map generation. Leave blank to use the default level.</value></data>
 </root>
