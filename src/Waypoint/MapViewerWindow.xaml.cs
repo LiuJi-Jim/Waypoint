@@ -61,6 +61,9 @@ public partial class MapViewerWindow : FormWindow
     {
         Busy.Visibility = busy ? Visibility.Visible : Visibility.Collapsed;
         BusyText.Text = message;
+        Areas.IsEnabled = !busy;
+        AreaSort.IsEnabled = !busy;
+        SeedInputs.IsEnabled = !busy;
         BackMap.IsEnabled = !busy && _history.Count > 0;
         OpenDestination.IsEnabled = !busy && _destinationId is not null && _areas.Any(a => a.Id.Equals(_destinationId, StringComparison.OrdinalIgnoreCase));
     }
